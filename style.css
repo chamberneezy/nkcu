@@ -869,6 +869,120 @@ ul  { list-style: none; }
   background: rgba(204,0,0,.03);
 }
 
+/* ── Tabelle & Spielplan (manuell gepflegt) ────────────── */
+.ts-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.ts-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--gray-500);
+  font-size: .88rem;
+}
+.ts-empty p { margin-bottom: 12px; }
+.ts-empty a {
+  display: inline-flex;
+  font-family: var(--ff-head);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.ts-empty a:hover { color: var(--red-dark); }
+
+/* Standings table */
+.standings-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1.5px solid var(--gray-100);
+  overflow: hidden;
+}
+.standings-table-wrap { overflow-x: auto; }
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .82rem;
+  white-space: nowrap;
+}
+.standings-table th,
+.standings-table td {
+  padding: 10px 10px;
+  text-align: center;
+}
+.standings-table th {
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--ff-head);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.standings-table .st-team { text-align: left; white-space: normal; }
+.standings-table th.st-team { text-align: left; }
+.standings-table tbody tr { border-bottom: 1px solid var(--gray-100); }
+.standings-table tbody tr:last-child { border-bottom: none; }
+.standings-table tbody tr:nth-child(even) { background: var(--gray-50); }
+.standings-table .st-points {
+  font-family: var(--ff-head);
+  font-weight: 700;
+  color: var(--gray-700);
+}
+.standings-row--us {
+  background: rgba(204,0,0,.07) !important;
+  box-shadow: inset 3px 0 0 var(--red);
+}
+.standings-row--us .st-team,
+.standings-row--us .st-points { color: var(--red); font-weight: 700; }
+
+/* Fixtures & Resultate */
+.fixtures-list .match-card { margin-bottom: 14px; }
+.fixtures-subhead {
+  font-family: var(--ff-head);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 20px 0 12px;
+}
+.fixtures-subhead:first-child { margin-top: 0; }
+.fixtures-empty-note {
+  font-size: .85rem;
+  color: var(--gray-500);
+  padding: 8px 0 16px;
+}
+
+/* Nächstes Spiel (homepage, dynamisch befüllt) */
+.match-next-meta {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 20px 18px;
+  font-size: .8rem;
+  color: var(--gray-500);
+}
+.mol-vs {
+  font-family: var(--ff-head);
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.table-widget-note {
+  margin-top: 28px;
+  font-size: .82rem;
+  color: var(--gray-500);
+  text-align: center;
+}
+
 /* Trainer-Rolle Tag */
 .player-role-tag {
   font-family: var(--ff-head);
@@ -2402,6 +2516,9 @@ ul  { list-style: none; }
   .news-split { grid-template-columns: 1fr; gap: 32px; }
   .col-title  { font-size: .8rem; }
 
+  /* Tabelle & Spielplan: 2-Spalten → 1-Spalte */
+  .ts-grid { grid-template-columns: 1fr; gap: 32px; }
+
   /* Match card */
   .match-oneline { padding: 14px 16px; gap: 8px; }
   .mol-name { font-size: .78rem; }
@@ -2510,6 +2627,10 @@ ul  { list-style: none; }
 
   /* OFV link */
   .ofv-table-link { font-size: .78rem; padding: 10px 14px; }
+
+  /* Tabelle & Spielplan */
+  .standings-table { font-size: .74rem; }
+  .standings-table th, .standings-table td { padding: 8px 6px; }
 
   /* Match card */
   .mol-team-name { font-size: .75rem; }

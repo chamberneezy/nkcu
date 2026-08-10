@@ -47,6 +47,7 @@
       <nav class="nav" aria-label="Navigation">
         <ul role="list">
           <li><a href="#news"      class="nav-link" data-de="News"      data-hr="Novosti">News</a></li>
+          <li><a href="#tabelle-spiele" class="nav-link" data-de="Tabelle" data-hr="Ljestvica">Tabelle</a></li>
           <li><a href="#team"      class="nav-link" data-de="Team"      data-hr="Momčad">Team</a></li>
           <li><a href="#verein"    class="nav-link" data-de="Verein"    data-hr="Klub">Verein</a></li>
           <li><a href="#sponsoren" class="nav-link" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
@@ -66,6 +67,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul role="list">
         <li><a href="#news"      class="mm-link" data-de="News"      data-hr="Novosti">News</a></li>
+        <li><a href="#tabelle-spiele" class="mm-link" data-de="Tabelle" data-hr="Ljestvica">Tabelle</a></li>
         <li><a href="#team"      class="mm-link" data-de="Team"      data-hr="Momčad">Team</a></li>
         <li><a href="#verein"    class="mm-link" data-de="Verein"    data-hr="Klub">Verein</a></li>
         <li><a href="#sponsoren" class="mm-link" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
@@ -162,13 +164,13 @@
               </div>
               <div class="match-foot">
                 <span data-de="Saison 2025/26 abgeschlossen" data-hr="Sezona 2025/26 završena">Saison 2025/26 abgeschlossen</span>
-                <a href="https://matchcenter.ofv.swiss/default.aspx?oid=9&lng=1&s=2026&ln=13030&ls=24431&sg=67557&a=mag" target="_blank" rel="noopener" class="match-link">OFV →</a>
+                <a href="#tabelle-spiele" class="match-link" data-de="Spielplan →" data-hr="Raspored →">Spielplan →</a>
               </div>
             </div>
 
-            <a href="https://matchcenter.ofv.swiss/default.aspx?oid=9&lng=1&s=2026&ln=13030&ls=24431&sg=67557&a=mrr" target="_blank" rel="noopener" class="ofv-table-link">
+            <a href="#tabelle-spiele" class="ofv-table-link">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
-              <span data-de="Aktuelle Tabelle auf ofv.swiss →" data-hr="Aktualna Ljestvica na ofv.swiss →">Aktuelle Tabelle auf ofv.swiss →</span>
+              <span data-de="Tabelle &amp; Spielplan ansehen →" data-hr="Ljestvica &amp; Raspored →">Tabelle &amp; Spielplan ansehen →</span>
             </a>
           </div>
 
@@ -251,6 +253,64 @@
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- ═══════ TABELLE & SPIELPLAN ═══════ -->
+    <section class="section" id="tabelle-spiele">
+      <div class="container">
+        <div class="section-header">
+          <span class="label-tag" data-de="Saison 2026/27" data-hr="Sezona 2026./27.">Saison 2026/27</span>
+          <h2 data-de="Tabelle &amp; Spielplan" data-hr="Ljestvica &amp; Raspored">Tabelle &amp; Spielplan</h2>
+          <p class="section-desc" data-de="Alle Resultate, kommenden Spiele und die aktuelle Tabelle der 4. Liga, Gruppe 7 — direkt vom Ostschweizerischen Fussballverband (OFV)." data-hr="Svi rezultati, nadolazeće utakmice i aktualna ljestvica 4. lige, grupe 7 — izravno od Istočnošvicarskog nogometnog saveza (OFV).">Alle Resultate, kommenden Spiele und die aktuelle Tabelle der 4. Liga, Gruppe 7 — direkt vom Ostschweizerischen Fussballverband (OFV).</p>
+        </div>
+
+        <div class="ts-grid">
+
+          <!-- Tabelle -->
+          <div class="ts-col">
+            <h3 class="col-title" data-de="Tabelle" data-hr="Ljestvica">Tabelle</h3>
+            <div class="standings-card">
+              <div class="standings-table-wrap" id="standingsWrap" style="display:none;">
+                <table class="standings-table">
+                  <thead>
+                    <tr>
+                      <th data-de="#" data-hr="#">#</th>
+                      <th class="st-team" data-de="Team" data-hr="Momčad">Team</th>
+                      <th data-de="Sp" data-hr="Ut">Sp</th>
+                      <th data-de="S" data-hr="P">S</th>
+                      <th data-de="U" data-hr="N">U</th>
+                      <th data-de="N" data-hr="I">N</th>
+                      <th data-de="Tore" data-hr="Gol">Tore</th>
+                      <th data-de="Diff" data-hr="Raz">Diff</th>
+                      <th data-de="Pkt" data-hr="Bod">Pkt</th>
+                    </tr>
+                  </thead>
+                  <tbody id="standingsBody"></tbody>
+                </table>
+              </div>
+              <div class="ts-empty" id="standingsEmpty">
+                <p data-de="Tabelle für die Saison 2026/27 folgt zu Saisonbeginn." data-hr="Ljestvica za sezonu 2026./27. slijedi na početku sezone.">Tabelle für die Saison 2026/27 folgt zu Saisonbeginn.</p>
+                <a href="https://matchcenter.ofv.swiss/default.aspx?oid=9&amp;lng=1&amp;s=2026&amp;ln=13030&amp;ls=24431&amp;sg=67557&amp;a=mrr" target="_blank" rel="noopener" data-de="Tabelle auf ofv.swiss ansehen →" data-hr="Ljestvica na ofv.swiss →">Tabelle auf ofv.swiss ansehen →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spiele & Resultate -->
+          <div class="ts-col">
+            <h3 class="col-title" data-de="Spiele &amp; Resultate" data-hr="Utakmice i rezultati">Spiele &amp; Resultate</h3>
+            <div class="fixtures-card">
+              <div class="fixtures-list" id="fixturesList" style="display:none;"></div>
+              <div class="ts-empty" id="fixturesEmpty">
+                <p data-de="Spielplan für die Saison 2026/27 folgt zu Saisonbeginn." data-hr="Raspored za sezonu 2026./27. slijedi na početku sezone.">Spielplan für die Saison 2026/27 folgt zu Saisonbeginn.</p>
+                <a href="https://matchcenter.ofv.swiss/default.aspx?oid=9&amp;lng=1&amp;s=2026&amp;ln=13030&amp;ls=24431&amp;sg=67557&amp;a=mag" target="_blank" rel="noopener" data-de="Spielplan auf ofv.swiss ansehen →" data-hr="Raspored na ofv.swiss →">Spielplan auf ofv.swiss ansehen →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="table-widget-note" data-de="Tabelle &amp; Resultate werden von NK Croatia Uzwil nach jedem Spieltag aktualisiert." data-hr="Ljestvicu i rezultate ažurira NK Croatia Uzwil nakon svakog kola.">Tabelle &amp; Resultate werden von NK Croatia Uzwil nach jedem Spieltag aktualisiert.</p>
       </div>
     </section>
 
@@ -456,7 +516,7 @@
               <li data-de="Hallenturnier Sponsor" data-hr="Premium sponzor">Hallenturnier Premiumsponsor</li>
               <li data-de="Social Media Präsenz" data-hr="Prisutnost na društvenim mrežama">Social Media Präsenz</li>
               <li data-de="Logo auf Website (gross)" data-hr="Logo na web stranici (veliko)">Logo auf Website (gross)</li>
-              <li class="pkg-addon" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf Anfrage</li>
+              <li class="pkg-addon" data-de="Matchkleidung mit Logo: Preis auf Anfrage" data-hr="Logo na dresu: Cijena na upit">Preis auf Anfrage</li>
             </ul>
           </div>
           <div class="pkg pkg--silver">
@@ -467,7 +527,7 @@
               <li data-de="Hallenturnier Partner" data-hr="Partner dvoranskog turnira">Hallenturnier Partner</li>
               <li data-de="Social Media Präsenz" data-hr="Prisutnost na društvenim mrežama">Social Media Präsenz</li>
               <li data-de="Logo auf Website (mittel)" data-hr="Logo na web stranici (sredina)">Logo auf Website (mittel)</li>
-              <li class="pkg-addon" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf Anfrage</li>
+              <li class="pkg-addon" data-de="Matchkleidung mit Logo: Preis auf Anfrage" data-hr="Logo na dresu: Cijena na upit">Preis auf Anfrage</li>
             </ul>
           </div>
           <div class="pkg pkg--bronze">
@@ -702,6 +762,7 @@
       </div>
       <nav class="footer-nav">
         <a href="#news"      data-de="News"      data-hr="Novosti">News</a>
+        <a href="#tabelle-spiele" data-de="Tabelle" data-hr="Ljestvica">Tabelle</a>
         <a href="#team"      data-de="Team"      data-hr="Momčad">Team</a>
         <a href="#verein"    data-de="Verein"    data-hr="Klub">Verein</a>
         <a href="#sponsoren" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a>
@@ -923,6 +984,174 @@
       );
       window.location.href = 'mailto:info@croatia-uzwil.ch?subject=' + subject + '&body=' + body;
     });
+
+    /* ── Tabelle & Spielplan (manuell gepflegt) ───────────────
+       Wird nach jedem Spieltag per Chat an Claude durchgegeben,
+       nicht direkt im Code editiert. Neuer Eintrag = neues Objekt
+       im jeweiligen Array unten.
+    ── ──────────────────────────────────────────────────────── */
+    var standingsData = [
+      // { rank: 1, team: 'FC Henau', played: 22, won: 18, drawn: 3, lost: 1, gf: 70, ga: 20, points: 57 },
+    ];
+
+    var fixturesData = [
+      { date: '05.06.2026', time: '', home: 'FC Niederwil 2', away: 'NK Croatia Uzwil', homeScore: 3, awayScore: 4, venue: 'Schule Niederwil', league: '4. Liga · Gruppe 7' }
+      // { date: '20.08.2026', time: '19:30', home: 'NK Croatia Uzwil', away: 'FC Bischofszell 2', homeScore: null, awayScore: null, venue: 'Sportplatz Zil', league: '4. Liga · Gruppe 7' }
+    ];
+
+    function tsEscape(s) {
+      return String(s).replace(/[&<>"']/g, function(c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function tsIsUs(name) { return !!(name && /uzwil/i.test(name)); }
+
+    function tsRenderStandings() {
+      var wrap  = document.getElementById('standingsWrap');
+      var empty = document.getElementById('standingsEmpty');
+      if (!standingsData.length) { wrap.style.display = 'none'; empty.style.display = ''; return; }
+      var tbody = document.getElementById('standingsBody');
+      tbody.innerHTML = '';
+      standingsData.forEach(function(r) {
+        var tr = document.createElement('tr');
+        if (tsIsUs(r.team)) tr.className = 'standings-row--us';
+        var diff = r.gf - r.ga;
+        tr.innerHTML =
+          '<td>' + tsEscape(r.rank) + '</td>' +
+          '<td class="st-team">' + tsEscape(r.team) + '</td>' +
+          '<td>' + tsEscape(r.played) + '</td>' +
+          '<td>' + tsEscape(r.won) + '</td>' +
+          '<td>' + tsEscape(r.drawn) + '</td>' +
+          '<td>' + tsEscape(r.lost) + '</td>' +
+          '<td>' + tsEscape(r.gf + ':' + r.ga) + '</td>' +
+          '<td>' + (diff > 0 ? '+' : '') + tsEscape(diff) + '</td>' +
+          '<td class="st-points">' + tsEscape(r.points) + '</td>';
+        tbody.appendChild(tr);
+      });
+      wrap.style.display = '';
+      empty.style.display = 'none';
+    }
+
+    function tsRenderFixtureCard(f, played) {
+      var homeIsUs = tsIsUs(f.home);
+      var card = document.createElement('div');
+      card.className = 'match-card';
+      var scoreOrTime = played
+        ? (tsEscape(f.homeScore) + ' – ' + tsEscape(f.awayScore))
+        : tsEscape(f.time || '–');
+      card.innerHTML =
+        '<div class="match-card-top">' +
+          '<span class="match-badge">' + tsEscape(f.league || '4. Liga · Gruppe 7') + '</span>' +
+          '<span class="match-date">' + tsEscape(f.date) + (!played && f.time ? ' · ' + tsEscape(f.time) : '') + '</span>' +
+        '</div>' +
+        '<div class="match-oneline">' +
+          '<div class="mol-team"><span class="mol-name' + (homeIsUs ? ' mol-name--us' : '') + '">' + tsEscape(f.home) + '</span></div>' +
+          '<span class="mol-score">' + scoreOrTime + '</span>' +
+          '<div class="mol-team mol-team--right"><span class="mol-name' + (!homeIsUs ? ' mol-name--us' : '') + '">' + tsEscape(f.away) + '</span></div>' +
+        '</div>' +
+        (f.venue ? '<div class="match-foot"><span>📍 ' + tsEscape(f.venue) + '</span></div>' : '');
+      return card;
+    }
+
+    function tsPad(n) { n = String(n); return n.length < 2 ? '0' + n : n; }
+
+    function tsParseSwissDate(dateStr, timeStr) {
+      if (!dateStr) return null;
+      var m = String(dateStr).trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+      if (!m) return null;
+      var t = (timeStr && /^\d{1,2}:\d{2}/.test(String(timeStr).trim())) ? timeStr.trim() : '00:00';
+      var dt = new Date(m[3] + '-' + tsPad(m[2]) + '-' + tsPad(m[1]) + 'T' + t + ':00');
+      return isNaN(dt.getTime()) ? null : dt;
+    }
+
+    function tsRenderFixtures() {
+      var list  = document.getElementById('fixturesList');
+      var empty = document.getElementById('fixturesEmpty');
+      if (!fixturesData.length) { list.style.display = 'none'; empty.style.display = ''; return null; }
+
+      var withDates = fixturesData.map(function(f) { return { f: f, dt: tsParseSwissDate(f.date, f.time) }; });
+      var played   = withDates.filter(function(x) {
+        return x.f.homeScore !== null && x.f.homeScore !== undefined && x.f.awayScore !== null && x.f.awayScore !== undefined;
+      });
+      var upcoming = withDates.filter(function(x) { return played.indexOf(x) === -1; });
+
+      played.sort(function(a, b) { return (b.dt ? b.dt.getTime() : 0) - (a.dt ? a.dt.getTime() : 0); });
+      upcoming.sort(function(a, b) { return (a.dt ? a.dt.getTime() : Infinity) - (b.dt ? b.dt.getTime() : Infinity); });
+
+      list.innerHTML = '';
+
+      var upHead = document.createElement('h4');
+      upHead.className = 'fixtures-subhead';
+      upHead.setAttribute('data-de', 'Kommende Spiele');
+      upHead.setAttribute('data-hr', 'Nadolazeće utakmice');
+      upHead.textContent = 'Kommende Spiele';
+      list.appendChild(upHead);
+      if (upcoming.length) {
+        upcoming.forEach(function(x) { list.appendChild(tsRenderFixtureCard(x.f, false)); });
+      } else {
+        var noUp = document.createElement('p');
+        noUp.className = 'fixtures-empty-note';
+        noUp.setAttribute('data-de', 'Keine kommenden Spiele bekannt.');
+        noUp.setAttribute('data-hr', 'Nema poznatih nadolazećih utakmica.');
+        noUp.textContent = 'Keine kommenden Spiele bekannt.';
+        list.appendChild(noUp);
+      }
+
+      var pastHead = document.createElement('h4');
+      pastHead.className = 'fixtures-subhead';
+      pastHead.setAttribute('data-de', 'Resultate');
+      pastHead.setAttribute('data-hr', 'Rezultati');
+      pastHead.textContent = 'Resultate';
+      list.appendChild(pastHead);
+      if (played.length) {
+        played.forEach(function(x) { list.appendChild(tsRenderFixtureCard(x.f, true)); });
+      } else {
+        var noPast = document.createElement('p');
+        noPast.className = 'fixtures-empty-note';
+        noPast.setAttribute('data-de', 'Noch keine Resultate.');
+        noPast.setAttribute('data-hr', 'Još nema rezultata.');
+        noPast.textContent = 'Noch keine Resultate.';
+        list.appendChild(noPast);
+      }
+
+      list.style.display = '';
+      empty.style.display = 'none';
+
+      return upcoming.length ? upcoming[0].f : null;
+    }
+
+    function tsRenderNextMatchHome(next) {
+      var card = document.querySelector('.match-card--next');
+      if (!card || !next) return;
+      var placeholder = card.querySelector('.match-next-placeholder');
+      if (!placeholder) return;
+      var homeIsUs = tsIsUs(next.home);
+      placeholder.innerHTML =
+        '<div class="match-oneline">' +
+          '<div class="mol-team"><span class="mol-name' + (homeIsUs ? ' mol-name--us' : '') + '">' + tsEscape(next.home) + '</span></div>' +
+          '<span class="mol-vs">–</span>' +
+          '<div class="mol-team mol-team--right"><span class="mol-name' + (!homeIsUs ? ' mol-name--us' : '') + '">' + tsEscape(next.away) + '</span></div>' +
+        '</div>' +
+        '<div class="match-next-meta">' +
+          '<span>' + tsEscape(next.date) + (next.time ? ' · ' + tsEscape(next.time) : '') + '</span>' +
+          (next.venue ? '<span>📍 ' + tsEscape(next.venue) + '</span>' : '') +
+        '</div>';
+      var badge = card.querySelector('.match-card-top .match-badge');
+      if (badge && next.league) badge.textContent = next.league;
+      var topDate = card.querySelector('.match-card-top .match-date');
+      if (topDate) {
+        topDate.removeAttribute('data-de');
+        topDate.removeAttribute('data-hr');
+        topDate.textContent = next.date;
+      }
+      var staleNote = card.querySelector('.match-foot span[data-de]');
+      if (staleNote) staleNote.style.display = 'none';
+    }
+
+    tsRenderStandings();
+    var tsNextMatch = tsRenderFixtures();
+    if (tsNextMatch) tsRenderNextMatchHome(tsNextMatch);
 
   })();
   </script>
