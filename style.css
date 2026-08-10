@@ -285,6 +285,8 @@ ul  { list-style: none; }
 .burger {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   background: none;
   border: none;
@@ -2812,14 +2814,14 @@ ul  { list-style: none; }
 ══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root { --header-h: 72px; }
-  .header-inner { height: 72px; padding: 0 14px; }
+  .header-inner { height: 72px; padding: 0 10px; gap: 8px; }
   .header {
     background: var(--white);
     box-shadow: 0 2px 12px rgba(0,0,0,.1);
     border-bottom: 1px solid var(--gray-100);
     overflow: visible;
   }
-  .logo { position: relative; height: 100%; }
+  .logo { position: relative; height: 100%; min-width: 0; }
   .logo-img {
     position: absolute;
     left: 0;
@@ -2831,14 +2833,19 @@ ul  { list-style: none; }
     transition: transform .3s;
   }
   .logo:hover .logo-img { transform: translateY(-30%) scale(1.05); }
-  .logo-text-block { padding-left: 74px; }
-  .logo-name, .header.scrolled .logo-name { font-size: .88rem; color: var(--black); }
+  .logo-text-block { padding-left: 74px; min-width: 0; }
+  .logo-name, .header.scrolled .logo-name {
+    font-size: .78rem;
+    color: var(--black);
+    display: block;
+  }
+  .logo-name-break { display: block; }
   .nav-link { color: var(--gray-700); }
   .nav-link:hover { color: var(--black); background: var(--gray-50); }
   .nav-cta { color: var(--white) !important; background: var(--red) !important; }
   .lang-toggle {
-    font-size: .72rem;
-    padding: 4px 10px;
+    font-size: .68rem;
+    padding: 4px 8px;
     background: var(--gray-50);
     border-color: var(--gray-200);
   }
