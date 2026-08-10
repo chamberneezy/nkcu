@@ -56,6 +56,7 @@ Croatian flag palette: red / white / blue only. Avoid introducing other accent c
 - don't upload CLAUDE.md file
 - do not publish on the Plesk automatically, you will get instructions when to push the changes
 
+
 ## Assets
 
 - `logo.png` — club crest (transparent background); use class `mol-logo--transparent` or `footer-logo-img--transparent` where the background varies

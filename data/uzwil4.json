@@ -1,0 +1,188 @@
+{
+  "updated": "2026-08-10",
+  "league": "4. Liga · Gruppe 8",
+  "standings": [
+    {
+      "rank": 1,
+      "team": "FC Kirchberg 1",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 2,
+      "team": "FC Bazenheid 2",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 3,
+      "team": "FC Niederstetten 1",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 4,
+      "team": "FC Neckertal-Degersheim 1",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 5,
+      "team": "FC Frauenfeld 2b",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 6,
+      "team": "FC Flawil 2",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 7,
+      "team": "FC Pfyn 1b",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 8,
+      "team": "FC Uzwil 4",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 9,
+      "team": "FC Zuzwil 2",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "rank": 10,
+      "team": "FC Weinfelden-Bürglen 2b",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "penaltyPoints": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    }
+  ],
+  "fixtures": [
+    {
+      "date": "14.08.2026",
+      "time": "20:00",
+      "home": "FC Bazenheid 2",
+      "away": "FC Zuzwil 2",
+      "homeScore": null,
+      "awayScore": null,
+      "venue": "",
+      "league": "4. Liga · Gruppe 8"
+    },
+    {
+      "date": "15.08.2026",
+      "time": "17:30",
+      "home": "FC Pfyn 1b",
+      "away": "FC Flawil 2",
+      "homeScore": null,
+      "awayScore": null,
+      "venue": "",
+      "league": "4. Liga · Gruppe 8"
+    },
+    {
+      "date": "15.08.2026",
+      "time": "18:00",
+      "home": "FC Kirchberg 1",
+      "away": "FC Neckertal-Degersheim 1",
+      "homeScore": null,
+      "awayScore": null,
+      "venue": "",
+      "league": "4. Liga · Gruppe 8"
+    },
+    {
+      "date": "16.08.2026",
+      "time": "16:30",
+      "home": "FC Weinfelden-Bürglen 2b",
+      "away": "FC Niederstetten 1",
+      "homeScore": null,
+      "awayScore": null,
+      "venue": "",
+      "league": "4. Liga · Gruppe 8"
+    },
+    {
+      "date": "17.08.2026",
+      "time": "20:00",
+      "home": "FC Frauenfeld 2b",
+      "away": "FC Uzwil 4",
+      "homeScore": null,
+      "awayScore": null,
+      "venue": "",
+      "league": "4. Liga · Gruppe 8"
+    }
+  ]
+}

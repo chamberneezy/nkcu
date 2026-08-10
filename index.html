@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="de" data-lang="de">
+
 <head>
-<meta charset="UTF-8" />
-<link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
 
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 
-<link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#CC0000" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />  <meta name="apple-mobile-web-app-title" content="NK Croatia" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#CC0000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="NK Croatia" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NK Croatia Uzwil</title>
   <meta name="description" content="NK Croatia Uzwil – Kroatischer Fussballverein in Uzwil, St. Gallen. 4. Liga." />
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- ═══════ NEWS MODAL ═══════ -->
   <div class="news-modal-overlay" id="newsModalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="news-modal" id="newsModal">
       <button class="news-modal-close" id="newsModalClose" aria-label="Schliessen">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
       <div class="news-modal-body">
         <div class="news-modal-content">
@@ -40,19 +47,18 @@
       <a href="#" class="logo">
         <img src="logo.png" alt="NK Croatia Uzwil" class="logo-img" />
         <div class="logo-text-block">
-          <span class="logo-name">NK Croatia</span>
-          <span class="logo-sub">Uzwil</span>
+          <span class="logo-name">NK Croatia Uzwil</span>
         </div>
       </a>
       <nav class="nav" aria-label="Navigation">
         <ul role="list">
-          <li><a href="#news"      class="nav-link" data-de="News"      data-hr="Novosti">News</a></li>
+          <li><a href="#news" class="nav-link" data-de="News" data-hr="Novosti">News</a></li>
           <li><a href="#tabelle-spiele" class="nav-link" data-de="Tabelle" data-hr="Ljestvica">Tabelle</a></li>
-          <li><a href="#team"      class="nav-link" data-de="Team"      data-hr="Momčad">Team</a></li>
-          <li><a href="#verein"    class="nav-link" data-de="Verein"    data-hr="Klub">Verein</a></li>
+          <li><a href="#team" class="nav-link" data-de="Team" data-hr="Momčad">Team</a></li>
+          <li><a href="#verein" class="nav-link" data-de="Verein" data-hr="Klub">Verein</a></li>
           <li><a href="#sponsoren" class="nav-link" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
-          <li><a href="#shop"      class="nav-link" data-de="Shop"      data-hr="Shop">Shop</a></li>
-          <li><a href="#kontakt"   class="nav-link nav-cta" data-de="Kontakt" data-hr="Kontakt">Kontakt</a></li>
+          <li><a href="#shop" class="nav-link" data-de="Shop" data-hr="Shop">Shop</a></li>
+          <li><a href="#kontakt" class="nav-link nav-cta" data-de="Kontakt" data-hr="Kontakt">Kontakt</a></li>
         </ul>
       </nav>
       <button class="lang-toggle" id="langToggle" aria-label="Sprache wechseln / Promijeni jezik">
@@ -66,13 +72,13 @@
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <ul role="list">
-        <li><a href="#news"      class="mm-link" data-de="News"      data-hr="Novosti">News</a></li>
+        <li><a href="#news" class="mm-link" data-de="News" data-hr="Novosti">News</a></li>
         <li><a href="#tabelle-spiele" class="mm-link" data-de="Tabelle" data-hr="Ljestvica">Tabelle</a></li>
-        <li><a href="#team"      class="mm-link" data-de="Team"      data-hr="Momčad">Team</a></li>
-        <li><a href="#verein"    class="mm-link" data-de="Verein"    data-hr="Klub">Verein</a></li>
+        <li><a href="#team" class="mm-link" data-de="Team" data-hr="Momčad">Team</a></li>
+        <li><a href="#verein" class="mm-link" data-de="Verein" data-hr="Klub">Verein</a></li>
         <li><a href="#sponsoren" class="mm-link" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
-        <li><a href="#shop"      class="mm-link" data-de="Shop"      data-hr="Shop">Shop</a></li>
-        <li><a href="#kontakt"   class="mm-link" data-de="Kontakt"   data-hr="Kontakt">Kontakt</a></li>
+        <li><a href="#shop" class="mm-link" data-de="Shop" data-hr="Shop">Shop</a></li>
+        <li><a href="#kontakt" class="mm-link" data-de="Kontakt" data-hr="Kontakt">Kontakt</a></li>
       </ul>
     </div>
   </header>
@@ -98,8 +104,9 @@
           <em data-de="Identität." data-hr="Identitetom.">Identität.</em>
         </h1>
         <div class="hero-actions">
-          <a href="#news" class="btn btn--red"   data-de="News &amp; Spiele" data-hr="Novosti &amp; Utakmice">News &amp; Spiele</a>
-          <a href="#team" class="btn btn--ghost"  data-de="Zum Kader"        data-hr="Momčad">Zum Kader</a>
+          <a href="#news" class="btn btn--red" data-de="News &amp; Spiele" data-hr="Novosti &amp; Utakmice">News &amp;
+            Spiele</a>
+          <a href="#team" class="btn btn--ghost" data-de="Zum Kader" data-hr="Momčad">Zum Kader</a>
         </div>
       </div>
       <div class="hero-cut" aria-hidden="true"></div>
@@ -148,29 +155,42 @@
               </div>
               <div class="match-foot">
                 <span>📍 Schule Niederwil</span>
-                <a href="https://matchcenter.ofv.swiss/default.aspx?oid=9&lng=1&ln=&v=0&tg=4167845" target="_blank" rel="noopener" class="match-link" data-de="Details →" data-hr="Detalji →">Details →</a>
+                <a href="https://matchcenter.ofv.swiss/default.aspx?oid=9&lng=1&ln=&v=0&tg=4167845" target="_blank"
+                  rel="noopener" class="match-link" data-de="Details →" data-hr="Detalji →">Details →</a>
               </div>
             </div>
 
-            <h3 class="col-title" style="margin-top:28px;" data-de="Nächstes Spiel" data-hr="Sljedeća Utakmica">Nächstes Spiel</h3>
+            <h3 class="col-title" style="margin-top:28px;" data-de="Nächstes Spiel" data-hr="Sljedeća Utakmica">Nächstes
+              Spiel</h3>
             <div class="match-card match-card--next">
               <div class="match-card-top match-card-top--gray">
-                <span class="match-badge">4. Liga · Gruppe 7</span>
+                <span class="match-badge">4. Liga · Gruppe 8</span>
                 <span class="match-date" data-de="Saison 2026/27" data-hr="Sezona 2026/27">Saison 2026/27</span>
               </div>
               <div class="match-next-placeholder">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <p data-de="Spielplan 2026/27 noch nicht bekannt" data-hr="Raspored 2026/27 još nije poznat">Spielplan 2026/27 noch nicht bekannt</p>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  opacity="0.3">
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <p data-de="Nächstes Spiel noch nicht bekannt" data-hr="Sljedeća utakmica još nije poznata">Nächstes
+                  Spiel noch nicht bekannt</p>
               </div>
               <div class="match-foot">
-                <span data-de="Saison 2025/26 abgeschlossen" data-hr="Sezona 2025/26 završena">Saison 2025/26 abgeschlossen</span>
-                <a href="#tabelle-spiele" class="match-link" data-de="Spielplan →" data-hr="Raspored →">Spielplan →</a>
+                <span data-de="Saison 2025/26 abgeschlossen" data-hr="Sezona 2025/26 završena">Saison 2025/26
+                  abgeschlossen</span>
+                <a href="#tabelle-spiele" class="match-link" data-de="Tabelle →" data-hr="Ljestvica →">Tabelle →</a>
               </div>
             </div>
 
             <a href="#tabelle-spiele" class="ofv-table-link">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
-              <span data-de="Tabelle &amp; Spielplan ansehen →" data-hr="Ljestvica &amp; Raspored →">Tabelle &amp; Spielplan ansehen →</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18M3 15h18M9 3v18" />
+              </svg>
+              <span data-de="Tabelle ansehen →" data-hr="Ljestvica →">Tabelle ansehen →</span>
             </a>
           </div>
 
@@ -179,73 +199,93 @@
             <h3 class="col-title" data-de="News &amp; Anlässe" data-hr="Novosti &amp; Događaji">News &amp; Anlässe</h3>
             <div class="news-cards">
 
-              <button class="news-card"
-                data-de-tag="Saison" data-hr-tag="Sezona"
-                data-de-title="Platz 2 — Starke Saison!"
-                data-hr-title="2. mjesto — Izvrsna sezona!"
+              <button class="news-card" data-de-tag="Saison" data-hr-tag="Sezona"
+                data-de-title="Platz 2 — Starke Saison!" data-hr-title="2. mjesto — Izvrsna sezona!"
                 data-date="Jun 2026"
                 data-de-text="&lt;p&gt;NK Croatia Uzwil beendet die Saison 2025/26 auf Platz 2 mit 43 Punkten — punktgleich mit FC Henau, die dank des besseren Fair-Play-Scores und Torverhältnisses auf Platz 1 bleiben sollte. Eine herausragende Rückrunde mit 9 Siegen aus 9 Spielen.&lt;/p&gt;"
                 data-hr-text="&lt;p&gt;NK Croatia Uzwil završava sezonu 2025/26 na &lt;strong&gt;2. mjestu&lt;/strong&gt; s 43 boda — izjednačeno s FC Henauom, zahvaljujući boljem fair-playu i gol-razlici.&lt;/p&gt;&lt;p&gt;Posebno impresivno: cijelo proljeće s &lt;strong&gt;9 pobjeda iz 9 utakmica&lt;/strong&gt; — bez ijednog izgubljenog boda. Izniman učinak koji pokazuje karakter i jedinstvo naše momčadi.&lt;/p&gt;">
                 <div class="nc-left">
                   <span class="news-tag" data-de="Saison" data-hr="Sezona">Saison</span>
-                  <h4 class="nc-title" data-de="Platz 2 — Starke Saison!" data-hr="2. mjesto — Izvrsna sezona!">Platz 2 — Starke Saison!</h4>
-                  <p class="nc-excerpt" data-de="9/9 Siege in der Rückrunde, punktgleich mit Platz 1." data-hr="9/9 pobjeda u proljeću, izjednačeno s 1. mjestom.">9/9 Siege in der Rückrunde, punktgleich mit Platz 1.</p>
+                  <h4 class="nc-title" data-de="Platz 2 — Starke Saison!" data-hr="2. mjesto — Izvrsna sezona!">Platz 2
+                    — Starke Saison!</h4>
+                  <p class="nc-excerpt" data-de="9/9 Siege in der Rückrunde, punktgleich mit Platz 1."
+                    data-hr="9/9 pobjeda u proljeću, izjednačeno s 1. mjestom.">9/9 Siege in der Rückrunde, punktgleich
+                    mit Platz 1.</p>
                 </div>
                 <div class="nc-right">
                   <span class="news-date">Jun 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
                 </div>
               </button>
 
-              <button class="news-card"
-                data-de-tag="Trainingslager" data-hr-tag="Pripreme"
-                data-de-title="Trainingslager Lissabon 2026"
-                data-hr-title="Pripremni kamp Lisabon 2026"
+              <button class="news-card" data-de-tag="Trainingslager" data-hr-tag="Pripreme"
+                data-de-title="Trainingslager Lissabon 2026" data-hr-title="Pripremni kamp Lisabon 2026"
                 data-date="25.–29.03.2026"
                 data-de-text="&lt;p&gt;NK Croatia Uzwil reiste für ein intensives Trainingslager nach &lt;strong&gt;Lissabon, Portugal&lt;/strong&gt; — Unterkunft im Hotel Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Hinflug und Einchecken im Hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Zwei Trainingseinheiten + Freundschaftsspiel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Zwei Trainingseinheiten&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trainingseinheit + Stadium Tour Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Entspannter Abschlusstag&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;"
                 data-hr-text="&lt;p&gt;NK Croatia Uzwil otputovao je na intenzivan pripremni kamp u &lt;strong&gt;Lisabon, Portugal&lt;/strong&gt; — smještaj u hotelu Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Let i prijava u hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Dva treninga + prijateljska utakmica&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Dva treninga&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trening + obilazak stadiona Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Opušteni završni dan&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;">
                 <div class="nc-left">
                   <span class="news-tag" data-de="Trainingslager" data-hr="Pripreme">Trainingslager</span>
-                  <h4 class="nc-title" data-de="Trainingslager Lissabon 2026" data-hr="Pripremni kamp Lisabon 2026">Trainingslager Lissabon 2026</h4>
-                  <p class="nc-excerpt" data-de="5 Tage Lissabon — Hotel Ikonik Lisboa***." data-hr="5 dana Lisabon — Hotel Ikonik Lisboa***.">5 Tage Lissabon — Hotel Ikonik Lisboa***.</p>
+                  <h4 class="nc-title" data-de="Trainingslager Lissabon 2026" data-hr="Pripremni kamp Lisabon 2026">
+                    Trainingslager Lissabon 2026</h4>
+                  <p class="nc-excerpt" data-de="5 Tage Lissabon — Hotel Ikonik Lisboa***."
+                    data-hr="5 dana Lisabon — Hotel Ikonik Lisboa***.">5 Tage Lissabon — Hotel Ikonik Lisboa***.</p>
                 </div>
                 <div class="nc-right">
                   <span class="news-date">25.–29.03.2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
                 </div>
               </button>
 
-              <button class="news-card"
-                data-de-tag="Hallenturnier" data-hr-tag="Dvoranski turnir"
+              <button class="news-card" data-de-tag="Hallenturnier" data-hr-tag="Dvoranski turnir"
                 data-de-title="Hallenturnier 2026 — NK Croatia Uzwil als Organisator"
-                data-hr-title="Dvoranski turnir 2026 — NK Croatia Uzwil kao organizator"
-                data-date="14.02.2026"
+                data-hr-title="Dvoranski turnir 2026 — NK Croatia Uzwil kao organizator" data-date="14.02.2026"
                 data-de-text="&lt;p&gt;NK Croatia Uzwil hat das &lt;strong&gt;Hallenturnier 2026&lt;/strong&gt; wie jedes Jahr erfolgreich organisiert. Der Anlass war ein voller Erfolg mit zahlreichen teilnehmenden Mannschaften.&lt;/p&gt;&lt;p&gt;Alle Infos, Resultate und Details auf &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;"
                 data-hr-text="&lt;p&gt;NK Croatia Uzwil je kao svake godine uspješno organizirao &lt;strong&gt;dvoranski turnir 2026&lt;/strong&gt;. Događaj je bio pravi uspjeh s velikim brojem sudjelujućih momčadi.&lt;/p&gt;&lt;p&gt;Sve informacije, rezultati i detalji na &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;">
                 <div class="nc-left">
                   <span class="news-tag">Hallenturnier</span>
-                  <h4 class="nc-title" data-de="Hallenturnier 2026 — Wir waren Organisator" data-hr="Dvoranski turnir 2026 — Mi smo bili organizator">Hallenturnier 2026 — Wir waren Organisator</h4>
-                  <p class="nc-excerpt" data-de="Erfolgreicher Anlass mit vielen Mannschaften." data-hr="Uspješan događaj s mnogim momčadima.">Erfolgreicher Anlass mit vielen Mannschaften.</p>
+                  <h4 class="nc-title" data-de="Hallenturnier 2026 — Wir waren Organisator"
+                    data-hr="Dvoranski turnir 2026 — Mi smo bili organizator">Hallenturnier 2026 — Wir waren Organisator
+                  </h4>
+                  <p class="nc-excerpt" data-de="Erfolgreicher Anlass mit vielen Mannschaften."
+                    data-hr="Uspješan događaj s mnogim momčadima.">Erfolgreicher Anlass mit vielen Mannschaften.</p>
                 </div>
                 <div class="nc-right">
                   <span class="news-date">14.02.2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
                 </div>
               </button>
 
             </div>
 
             <!-- Nächstes Event -->
-            <h3 class="col-title col-title--red" style="margin-top:28px;" data-de="Nächstes Event" data-hr="Sljedeći događaj">Nächstes Event</h3>
+            <h3 class="col-title col-title--red" style="margin-top:28px;" data-de="Nächstes Event"
+              data-hr="Sljedeći događaj">Nächstes Event</h3>
             <div class="next-event-box">
               <div class="nev-card">
                 <div class="nev-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
                 </div>
                 <div class="nev-info">
-                  <span class="nev-date" data-de="Training ab 16.06.2026" data-hr="Trening od 16.06.2026.">Training ab 16.06.2026</span>
-                  <strong class="nev-title" data-de="Trainingsstart Saison 2026/27" data-hr="Početak treninga Sezona 2026./27.">Trainingsstart Saison 2026/27</strong>
-                  <span class="nev-sub" data-de="Jeweils Dienstag &amp; Freitag" data-hr="Svaki utorak i petak">Jeweils Dienstag &amp; Freitag</span>
+                  <span class="nev-date" data-de="Training ab 16.06.2026" data-hr="Trening od 16.06.2026.">Training ab
+                    16.06.2026</span>
+                  <strong class="nev-title" data-de="Trainingsstart Saison 2026/27"
+                    data-hr="Početak treninga Sezona 2026./27.">Trainingsstart Saison 2026/27</strong>
+                  <span class="nev-sub" data-de="Jeweils Dienstag &amp; Freitag" data-hr="Svaki utorak i petak">Jeweils
+                    Dienstag &amp; Freitag</span>
                 </div>
               </div>
             </div>
@@ -261,19 +301,51 @@
       <div class="container">
         <div class="section-header">
           <span class="label-tag" data-de="Saison 2026/27" data-hr="Sezona 2026./27.">Saison 2026/27</span>
-          <h2 data-de="Tabelle &amp; Spielplan" data-hr="Ljestvica &amp; Raspored">Tabelle &amp; Spielplan</h2>
-          <p class="section-desc" data-de="Alle Resultate, kommenden Spiele und die aktuelle Tabelle der 4. Liga, Gruppe 7 — live vom Schweizerischen Fussballverband (SFV)." data-hr="Svi rezultati, nadolazeće utakmice i aktualna ljestvica 4. lige, grupe 7 — uživo od Švicarskog nogometnog saveza (SFV).">Alle Resultate, kommenden Spiele und die aktuelle Tabelle der 4. Liga, Gruppe 7 — live vom Schweizerischen Fussballverband (SFV).</p>
+          <h2 data-de="Tabelle" data-hr="Ljestvica">Tabelle</h2>
+          <p class="section-desc" data-de="Die aktuelle Tabelle der 4. Liga, Gruppe 8."
+            data-hr="Aktualna ljestvica 4. lige, grupe 8.">Die aktuelle Tabelle der 4. Liga, Gruppe 8.</p>
         </div>
 
-        <div class="sfv-widget-card">
-          <iframe class="sfvFullHeight" title="Tabelle &amp; Spielplan NK Croatia Uzwil" frameborder="0" scrolling="no"
-              src="https://widget.football.ch/Widgets.aspx/v-1751/t-45818/a-trr/"></iframe>
+        <div class="ts-grid ts-grid--single">
+
+          <!-- Tabelle -->
+          <div class="ts-col">
+            <div class="standings-card">
+              <div class="standings-table-wrap" id="standingsWrap" style="display:none;">
+                <table class="standings-table">
+                  <thead>
+                    <tr>
+                      <th data-de="#" data-hr="#">#</th>
+                      <th class="st-team" data-de="Team" data-hr="Momčad">Team</th>
+                      <th data-de="Sp" data-hr="Ut">Sp</th>
+                      <th data-de="S" data-hr="P">S</th>
+                      <th data-de="U" data-hr="N">U</th>
+                      <th data-de="N" data-hr="I">N</th>
+                      <th data-de="Tore" data-hr="Gol">Tore</th>
+                      <th data-de="Diff" data-hr="Raz">Diff</th>
+                      <th data-de="Pkt" data-hr="Bod">Pkt</th>
+                    </tr>
+                  </thead>
+                  <tbody id="standingsBody"></tbody>
+                </table>
+              </div>
+              <div class="ts-empty" id="standingsEmpty">
+                <p data-de="Tabelle folgt in Kürze." data-hr="Ljestvica uskoro slijedi.">Tabelle folgt in Kürze.</p>
+              </div>
+              <div class="ts-empty" id="standingsError" style="display:none;">
+                <p data-de="Tabelle konnte nicht geladen werden." data-hr="Ljestvicu nije bilo moguće učitati.">Tabelle
+                  konnte nicht geladen werden.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <p class="table-widget-note" data-de="Tabelle &amp; Resultate werden live vom Schweizerischen Fussballverband (SFV) übernommen." data-hr="Ljestvicu i rezultate uživo preuzima Švicarski nogometni savez (SFV).">Tabelle &amp; Resultate werden live vom Schweizerischen Fussballverband (SFV) übernommen.</p>
+        <p class="table-widget-note" data-de="Tabelle wird von NK Croatia Uzwil nach jedem Spieltag aktualisiert."
+          data-hr="Ljestvicu ažurira NK Croatia Uzwil nakon svakog kola.">Tabelle wird von NK Croatia Uzwil nach jedem
+          Spieltag aktualisiert.</p>
       </div>
     </section>
-    <script src="https://widget.football.ch/portaldata/30/scripts/sfvVereinWidget.js"></script>
 
     <!-- ═══════ KADER ═══════ -->
     <section class="section section--gray" id="team">
@@ -300,7 +372,8 @@
             <div class="player-card">
               <div class="player-photo"><img src="players/dario-martic.jpg" alt="Dario Martić" /></div>
               <span class="player-name">Dario Martić</span>
-              <span class="player-role-tag" data-de="Trainer / Spieler" data-hr="Trener / Igrač">Trainer / Spieler</span>
+              <span class="player-role-tag" data-de="Trainer / Spieler" data-hr="Trener / Igrač">Trainer /
+                Spieler</span>
             </div>
             <div class="player-card">
               <div class="player-photo"><img src="players/tomislav-misura.jpg" alt="Tomislav Mišura" /></div>
@@ -314,9 +387,18 @@
         <div class="team-block">
           <h3 class="team-role-title" data-de="Torwart" data-hr="Vratar">Torwart</h3>
           <div class="player-cards">
-            <div class="player-card"><div class="player-photo"><img src="players/alessio-specchia.jpg" alt="Alessio Specchia" /></div><span class="player-name">Alessio Specchia</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/robert-vicic.jpg" alt="Robert Vičić" /></div><span class="player-name">Robert Vičić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/damjan-brkljaca.jpg" alt="Damijan Brkljača" /></div><span class="player-name">Damijan Brkljača</span></div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/alessio-specchia.jpg" alt="Alessio Specchia" /></div><span
+                class="player-name">Alessio Specchia</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/robert-vicic.jpg" alt="Robert Vičić" /></div><span
+                class="player-name">Robert Vičić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/damjan-brkljaca.jpg" alt="Damijan Brkljača" /></div><span
+                class="player-name">Damijan Brkljača</span>
+            </div>
           </div>
         </div>
 
@@ -324,18 +406,63 @@
         <div class="team-block">
           <h3 class="team-role-title" data-de="Verteidiger" data-hr="Obrana">Verteidiger</h3>
           <div class="player-cards">
-            <div class="player-card"><div class="player-photo"><img src="players/denis-palamar.jpg" alt="Denis Palamar" /></div><span class="player-name">Denis Palamar</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/anis-din-ramdedovic.jpg" alt="Anis Din Ramdedović" /></div><span class="player-name">Anis Din Ramdedović</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/luka-gojevic.jpg" alt="Luka Gojević" /></div><span class="player-name">Luka Gojević</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/gabrijel-jozic.jpg" alt="Gabrijel Jozić" /></div><span class="player-name">Gabrijel Jozić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/kristijan-katicic.jpg" alt="Kristijan Katičić" /></div><span class="player-name">Kristijan Katičić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/martin-breljak.jpg" alt="Martin Breljak" /></div><span class="player-name">Martin Breljak</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/filip-saric.jpg" alt="Filip Šarić" /></div><span class="player-name">Filip Šarić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/ivan-begic.jpg" alt="Ivan Begić" /></div><span class="player-name">Ivan Begić</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Antonio Marić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/denis-ajrizi.jpg" alt="Denis Ajrizi" /></div><span class="player-name">Denis Ajrizi</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Bruno Pelivani</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Adel Rozhajac</span></div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/denis-palamar.jpg" alt="Denis Palamar" /></div><span
+                class="player-name">Denis Palamar</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/anis-din-ramdedovic.jpg" alt="Anis Din Ramdedović" /></div>
+              <span class="player-name">Anis Din Ramdedović</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/luka-gojevic.jpg" alt="Luka Gojević" /></div><span
+                class="player-name">Luka Gojević</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/gabrijel-jozic.jpg" alt="Gabrijel Jozić" /></div><span
+                class="player-name">Gabrijel Jozić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/kristijan-katicic.jpg" alt="Kristijan Katičić" /></div><span
+                class="player-name">Kristijan Katičić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/martin-breljak.jpg" alt="Martin Breljak" /></div><span
+                class="player-name">Martin Breljak</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/filip-saric.jpg" alt="Filip Šarić" /></div><span
+                class="player-name">Filip Šarić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/ivan-begic.jpg" alt="Ivan Begić" /></div><span
+                class="player-name">Ivan Begić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Antonio Marić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/denis-ajrizi.jpg" alt="Denis Ajrizi" /></div><span
+                class="player-name">Denis Ajrizi</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Bruno Pelivani</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Adel Rozhajac</span>
+            </div>
           </div>
         </div>
 
@@ -343,20 +470,80 @@
         <div class="team-block">
           <h3 class="team-role-title" data-de="Mittelfeld" data-hr="Vezni red">Mittelfeld</h3>
           <div class="player-cards">
-            <div class="player-card"><div class="player-photo"><img src="players/noel-gonzalez.jpg" alt="Noel Gonzalez" /></div><span class="player-name">Noel Gonzalez</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/henok-haileselassie.jpg" alt="Henok Haileselassie" /></div><span class="player-name">Henok Haileselassie</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/matej-gojevic.jpg" alt="Matej Gojević" /></div><span class="player-name">Matej Gojević <span class="captain-badge">(C)</span></span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Mateo Matić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/adrian-bahoric.jpg" alt="Adrian Bahorić" /></div><span class="player-name">Adrian Bahorić</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Janis Baumann</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Ivan Schwab</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Stanko Culanić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/armando-kumria.jpg" alt="Armando Kumria" /></div><span class="player-name">Armando Kumria</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/danijel-jozic.jpg" alt="Danijel Jozić" /></div><span class="player-name">Danijel Jozić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/silvio-bahoric.jpg" alt="Silvio Bahorić" /></div><span class="player-name">Silvio Bahorić</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Davor Radoš</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/dionis-uka.jpg" alt="Dionis Uka" /></div><span class="player-name">Dionis Uka</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Ivan Martić</span></div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/noel-gonzalez.jpg" alt="Noel Gonzalez" /></div><span
+                class="player-name">Noel Gonzalez</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/henok-haileselassie.jpg" alt="Henok Haileselassie" /></div>
+              <span class="player-name">Henok Haileselassie</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/matej-gojevic.jpg" alt="Matej Gojević" /></div><span
+                class="player-name">Matej Gojević <span class="captain-badge">(C)</span></span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Mateo Matić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/adrian-bahoric.jpg" alt="Adrian Bahorić" /></div><span
+                class="player-name">Adrian Bahorić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Janis Baumann</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Ivan Schwab</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Stanko Culanić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/armando-kumria.jpg" alt="Armando Kumria" /></div><span
+                class="player-name">Armando Kumria</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/danijel-jozic.jpg" alt="Danijel Jozić" /></div><span
+                class="player-name">Danijel Jozić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/silvio-bahoric.jpg" alt="Silvio Bahorić" /></div><span
+                class="player-name">Silvio Bahorić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Davor Radoš</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/dionis-uka.jpg" alt="Dionis Uka" /></div><span
+                class="player-name">Dionis Uka</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Ivan Martić</span>
+            </div>
           </div>
         </div>
 
@@ -364,12 +551,36 @@
         <div class="team-block">
           <h3 class="team-role-title" data-de="Sturm" data-hr="Napad">Sturm</h3>
           <div class="player-cards">
-            <div class="player-card"><div class="player-photo"><img src="players/robertino-bulic.jpg" alt="Robertino Bulić" /></div><span class="player-name">Robertino Bulić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/philip-bulic.jpg" alt="Philip Bulić" /></div><span class="player-name">Philip Bulić</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Franjo Perić</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/kristijan-peric.jpg" alt="Kristijan Perić" /></div><span class="player-name">Kristijan Perić</span></div>
-            <div class="player-card"><div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="player-name">Bejtu Ahmedi</span></div>
-            <div class="player-card"><div class="player-photo"><img src="players/stefan-ivankovic.jpg" alt="Stefan Ivanković" /></div><span class="player-name">Stefan Ivanković</span></div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/robertino-bulic.jpg" alt="Robertino Bulić" /></div><span
+                class="player-name">Robertino Bulić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/philip-bulic.jpg" alt="Philip Bulić" /></div><span
+                class="player-name">Philip Bulić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Franjo Perić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/kristijan-peric.jpg" alt="Kristijan Perić" /></div><span
+                class="player-name">Kristijan Perić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg></div><span class="player-name">Bejtu Ahmedi</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/stefan-ivankovic.jpg" alt="Stefan Ivanković" /></div><span
+                class="player-name">Stefan Ivanković</span>
+            </div>
           </div>
         </div>
 
@@ -384,13 +595,25 @@
           <div class="verein-text">
             <span class="label-tag" data-de="Der Verein" data-hr="Klub">Der Verein</span>
             <h2 data-de="NK Croatia Uzwil" data-hr="NK Croatia Uzwil">NK Croatia Uzwil</h2>
-            <p data-de="NK Croatia Uzwil wurde 1971 unter dem Namen «Slaven» im Hotel Schweizerhof in Uzwil gegründet — aus dem Wunsch kroatischer Fussballbegeisterter heraus, ihre Leidenschaft in der neuen Heimat weiterzuleben. Nach einer Neuorganisation ist der Verein seit 2011 als eigenständige Sektion Teil des FC Uzwil." data-hr="NK Croatia Uzwil osnovan je 1971. godine pod imenom «Slaven» u hotelu Schweizerhof u Uzwilu — iz želje hrvatskih ljubitelja nogometa da svoju strast nastave živjeti u novoj domovini. Nakon reorganizacije, klub je od 2011. godine samostalna sekcija FC Uzwila.">NK Croatia Uzwil wurde 1971 unter dem Namen «Slaven» im Hotel Schweizerhof in Uzwil gegründet — aus dem Wunsch kroatischer Fussballbegeisterter heraus, ihre Leidenschaft in der neuen Heimat weiterzuleben. Nach einer Neuorganisation ist der Verein seit 2011 als eigenständige Sektion Teil des FC Uzwil.</p>
-            <p data-de="Wir verbinden Menschen mit derselben Leidenschaft: Fussball, Gemeinschaft und kroatische Vereinskultur. Wir stehen für Energie, Stolz und Präsenz — auf und neben dem Platz. Offen für alle, die Fussball lieben." data-hr="Spajamo ljude iste strasti: nogomet, zajednicu i hrvatsku klubsku kulturu. Zastupamo energiju, ponos i prisutnost — na i izvan terena. Otvoreni za sve koji vole nogomet.">Wir verbinden Menschen mit derselben Leidenschaft: Fussball, Gemeinschaft und kroatische Vereinskultur. Wir stehen für Energie, Stolz und Präsenz — auf und neben dem Platz. Offen für alle, die Fussball lieben.</p>
+            <p data-de="NK Croatia Uzwil wurde 1971 unter dem Namen «Slaven» im Hotel Schweizerhof in Uzwil gegründet — aus dem Wunsch kroatischer Fussballbegeisterter heraus, ihre Leidenschaft in der neuen Heimat weiterzuleben. Nach einer Neuorganisation ist der Verein seit 2011 als eigenständige Sektion Teil des FC Uzwil."
+              data-hr="NK Croatia Uzwil osnovan je 1971. godine pod imenom «Slaven» u hotelu Schweizerhof u Uzwilu — iz želje hrvatskih ljubitelja nogometa da svoju strast nastave živjeti u novoj domovini. Nakon reorganizacije, klub je od 2011. godine samostalna sekcija FC Uzwila.">
+              NK Croatia Uzwil wurde 1971 unter dem Namen «Slaven» im Hotel Schweizerhof in Uzwil gegründet — aus dem
+              Wunsch kroatischer Fussballbegeisterter heraus, ihre Leidenschaft in der neuen Heimat weiterzuleben. Nach
+              einer Neuorganisation ist der Verein seit 2011 als eigenständige Sektion Teil des FC Uzwil.</p>
+            <p data-de="Wir verbinden Menschen mit derselben Leidenschaft: Fussball, Gemeinschaft und kroatische Vereinskultur. Wir stehen für Energie, Stolz und Präsenz — auf und neben dem Platz. Offen für alle, die Fussball lieben."
+              data-hr="Spajamo ljude iste strasti: nogomet, zajednicu i hrvatsku klubsku kulturu. Zastupamo energiju, ponos i prisutnost — na i izvan terena. Otvoreni za sve koji vole nogomet.">
+              Wir verbinden Menschen mit derselben Leidenschaft: Fussball, Gemeinschaft und kroatische Vereinskultur.
+              Wir stehen für Energie, Stolz und Präsenz — auf und neben dem Platz. Offen für alle, die Fussball lieben.
+            </p>
             <div class="verein-facts">
-              <div class="fact"><span class="fact-val">1971</span><span class="fact-key" data-de="Gegründet" data-hr="Osnovano">Gegründet</span></div>
-              <div class="fact"><span class="fact-val">4.</span><span class="fact-key" data-de="Liga OFV" data-hr="Liga OFV">Liga OFV</span></div>
-              <div class="fact"><span class="fact-val">1</span><span class="fact-key" data-de="Mannschaft" data-hr="Momčad">Mannschaft</span></div>
-              <div class="fact"><span class="fact-val">2011</span><span class="fact-key" data-de="Bei FC Uzwil seit" data-hr="Pri FC Uzwilu od">Bei FC Uzwil seit</span></div>
+              <div class="fact"><span class="fact-val">1971</span><span class="fact-key" data-de="Gegründet"
+                  data-hr="Osnovano">Gegründet</span></div>
+              <div class="fact"><span class="fact-val">4.</span><span class="fact-key" data-de="Liga OFV"
+                  data-hr="Liga OFV">Liga OFV</span></div>
+              <div class="fact"><span class="fact-val">1</span><span class="fact-key" data-de="Mannschaft"
+                  data-hr="Momčad">Mannschaft</span></div>
+              <div class="fact"><span class="fact-val">2011</span><span class="fact-key" data-de="Bei FC Uzwil seit"
+                  data-hr="Pri FC Uzwilu od">Bei FC Uzwil seit</span></div>
             </div>
           </div>
           <div class="verein-visual" aria-hidden="true">
@@ -401,8 +624,11 @@
         <!-- FC Uzwil Partnerschaft -->
         <div class="fcuzwil-partner">
           <span class="fcuzwil-label" data-de="Mitglied von" data-hr="Član kluba">Mitglied von</span>
-          <a href="https://fcuzwil.ch/" target="_blank" rel="noopener" class="fcuzwil-link" aria-label="FC Uzwil Website">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/FC_Uzwil_Logo.svg/330px-FC_Uzwil_Logo.svg.png" alt="FC Uzwil" class="fcuzwil-logo" />
+          <a href="https://fcuzwil.ch/" target="_blank" rel="noopener" class="fcuzwil-link"
+            aria-label="FC Uzwil Website">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/FC_Uzwil_Logo.svg/330px-FC_Uzwil_Logo.svg.png"
+              alt="FC Uzwil" class="fcuzwil-logo" />
             <span class="fcuzwil-name">FC Uzwil</span>
           </a>
         </div>
@@ -416,7 +642,9 @@
         <div class="section-header">
           <span class="label-tag" data-de="Partner" data-hr="Partneri">Partner</span>
           <h2 data-de="Sponsoren &amp; Gönner" data-hr="Sponzori &amp; Donatori">Sponsoren &amp; Gönner</h2>
-          <p class="section-desc" data-de="NK Croatia Uzwil dankt allen Unterstützern herzlich für ihr Engagement." data-hr="NK Croatia Uzwil srdačno zahvaljuje svim donatorima na podršci.">NK Croatia Uzwil dankt allen Unterstützern herzlich für ihr Engagement.</p>
+          <p class="section-desc" data-de="NK Croatia Uzwil dankt allen Unterstützern herzlich für ihr Engagement."
+            data-hr="NK Croatia Uzwil srdačno zahvaljuje svim donatorima na podršci.">NK Croatia Uzwil dankt allen
+            Unterstützern herzlich für ihr Engagement.</p>
         </div>
 
         <!-- Sponsor Karussell -->
@@ -470,29 +698,42 @@
 
         <div class="sponsor-packages">
           <div class="pkg pkg--gold">
-            <div class="pkg-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span data-de="Gold" data-hr="Zlato">Gold</span></div>
+            <div class="pkg-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg><span data-de="Gold" data-hr="Zlato">Gold</span></div>
             <div class="pkg-price" data-de="ab CHF 2'000 / Jahr" data-hr="od CHF 2'000 / god.">ab CHF 2'000 / Jahr</div>
             <ul class="pkg-list">
               <li data-de="Trikotdruck " data-hr="Tisak dresa sprijeda i straga">Trikotdruck vorne &amp; hinten</li>
               <li data-de="Hallenturnier Sponsor" data-hr="Premium sponzor">Hallenturnier Premiumsponsor</li>
               <li data-de="Social Media Präsenz" data-hr="Prisutnost na društvenim mrežama">Social Media Präsenz</li>
-              <li data-de="Logo auf Website (gross)" data-hr="Logo na web stranici (veliko)">Logo auf Website (gross)</li>
-              <li class="pkg-addon" data-de="Matchkleidung mit Logo: Preis auf Anfrage" data-hr="Logo na dresu: Cijena na upit">Preis auf Anfrage</li>
+              <li data-de="Logo auf Website (gross)" data-hr="Logo na web stranici (veliko)">Logo auf Website (gross)
+              </li>
+              <li class="pkg-addon" data-de="Matchkleidung mit Logo: Preis auf Anfrage"
+                data-hr="Logo na dresu: Cijena na upit">Preis auf Anfrage</li>
             </ul>
           </div>
           <div class="pkg pkg--silver">
-            <div class="pkg-header"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span data-de="Silver" data-hr="Srebro">Silver</span></div>
+            <div class="pkg-header"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg><span data-de="Silver" data-hr="Srebro">Silver</span></div>
             <div class="pkg-price" data-de="ab CHF 1'000 / Jahr" data-hr="od CHF 1'000 / god.">ab CHF 1'000 / Jahr</div>
             <ul class="pkg-list">
               <li data-de="Banner-/Bandenpräsenz" data-hr="Prisutnost vašeg branda">Banner-/Bandenpräsenz</li>
               <li data-de="Hallenturnier Partner" data-hr="Partner dvoranskog turnira">Hallenturnier Partner</li>
               <li data-de="Social Media Präsenz" data-hr="Prisutnost na društvenim mrežama">Social Media Präsenz</li>
-              <li data-de="Logo auf Website (mittel)" data-hr="Logo na web stranici (sredina)">Logo auf Website (mittel)</li>
-              <li class="pkg-addon" data-de="Matchkleidung mit Logo: Preis auf Anfrage" data-hr="Logo na dresu: Cijena na upit">Preis auf Anfrage</li>
+              <li data-de="Logo auf Website (mittel)" data-hr="Logo na web stranici (sredina)">Logo auf Website (mittel)
+              </li>
+              <li class="pkg-addon" data-de="Matchkleidung mit Logo: Preis auf Anfrage"
+                data-hr="Logo na dresu: Cijena na upit">Preis auf Anfrage</li>
             </ul>
           </div>
           <div class="pkg pkg--bronze">
-            <div class="pkg-header"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span data-de="Bronze" data-hr="Bronca">Bronze</span></div>
+            <div class="pkg-header"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg><span data-de="Bronze" data-hr="Bronca">Bronze</span></div>
             <div class="pkg-price" data-de="ab CHF 500 / Jahr" data-hr="od CHF 500 / god.">ab CHF 500 / Jahr</div>
             <ul class="pkg-list">
               <li data-de="Social Media Präsenz" data-hr="Prisutnost na društvenim mrežama">Social Media Präsenz</li>
@@ -500,18 +741,26 @@
             </ul>
           </div>
           <div class="pkg pkg--gonner">
-            <div class="pkg-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-de="Gönner" data-hr="Donator">Gönner</span></div>
+            <div class="pkg-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg><span data-de="Gönner" data-hr="Donator">Gönner</span></div>
             <div class="pkg-price" data-de="ab CHF 50 / Jahr" data-hr="od CHF 50 / god.">ab CHF 50 / Jahr</div>
             <ul class="pkg-list">
               <li data-de="Unterstütze deinen Verein" data-hr="Podržite svoj klub">Unterstütze deinen Verein</li>
-              <li class="pkg-addon pkg-addon--gift" data-de="🎁 Kleines Dankeschön inklusive" data-hr="🎁 Mali poklon uključen">🎁 Kleines Dankeschön inklusive</li>
+              <li class="pkg-addon pkg-addon--gift" data-de="🎁 Kleines Dankeschön inklusive"
+                data-hr="🎁 Mali poklon uključen">🎁 Kleines Dankeschön inklusive</li>
             </ul>
           </div>
         </div>
 
         <div class="sponsor-cta">
-          <p data-de="Interesse an einer Partnerschaft? Wir freuen uns auf deine Anfrage." data-hr="Zainteresirani za partnerstvo? Veseli nas vaš upit.">Interesse an einer Partnerschaft? Wir freuen uns auf deine Anfrage.</p>
-          <a href="#kontakt" class="btn btn--red" data-de="Sponsor / Gönner werden" data-hr="Postani sponzor / donator">Sponsor / Gönner werden</a>
+          <p data-de="Interesse an einer Partnerschaft? Wir freuen uns auf deine Anfrage."
+            data-hr="Zainteresirani za partnerstvo? Veseli nas vaš upit.">Interesse an einer Partnerschaft? Wir freuen
+            uns auf deine Anfrage.</p>
+          <a href="#kontakt" class="btn btn--red" data-de="Sponsor / Gönner werden"
+            data-hr="Postani sponzor / donator">Sponsor / Gönner werden</a>
         </div>
       </div>
     </section>
@@ -522,27 +771,106 @@
         <div class="section-header">
           <span class="label-tag" data-de="Vereinsshop" data-hr="Klub Shop">Vereinsshop</span>
           <h2 data-de="Shop" data-hr="Shop">Shop</h2>
-          <p class="section-desc" data-de="Ausrüstung direkt bei 11teamsports bestellen — Fanartikel per Anfrage." data-hr="Opremu naruči direktno na 11teamsports — navijačke artikle na upit.">Ausrüstung direkt bei 11teamsports bestellen — Fanartikel per Anfrage.</p>
+          <p class="section-desc" data-de="Ausrüstung direkt bei 11teamsports bestellen — Fanartikel per Anfrage."
+            data-hr="Opremu naruči direktno na 11teamsports — navijačke artikle na upit.">Ausrüstung direkt bei
+            11teamsports bestellen — Fanartikel per Anfrage.</p>
         </div>
 
         <h3 class="shop-section-title" data-de="Vereinsausrüstung" data-hr="Klupska oprema">Vereinsausrüstung</h3>
-        <p class="shop-section-sub" data-de="Alle Artikel im offiziellen JAKO-Clubshop — direkt bei 11teamsports bestellen." data-hr="Svi artikli u službenom JAKO-clubshopu — naruči direktno na 11teamsports.">Alle Artikel im offiziellen JAKO-Clubshop — direkt bei 11teamsports bestellen.</p>
+        <p class="shop-section-sub"
+          data-de="Alle Artikel im offiziellen JAKO-Clubshop — direkt bei 11teamsports bestellen."
+          data-hr="Svi artikli u službenom JAKO-clubshopu — naruči direktno na 11teamsports.">Alle Artikel im
+          offiziellen JAKO-Clubshop — direkt bei 11teamsports bestellen.</p>
 
         <div class="shop-grid">
-          <div class="shop-card"><div class="shop-card-img"><img src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/8c/36/1c/1757489826/jako-hoc-nk-croatia-uzwil-power-trikot-rot-weiss-f100-ad90c52b7a0840128870a21dcbb38ab9-front.png" alt="JAKO Power Trikot" loading="lazy" /></div><div class="shop-card-body"><span class="shop-brand">JAKO</span><h4 class="shop-name" data-de="Power Trikot Rot/Weiss" data-hr="Power Dres Crvena/Bijela">Power Trikot Rot/Weiss</h4><span class="shop-price">CHF 25.15</span></div><a href="https://www.11teamsports.com/ch-de/p/jako-power-trikot-rot-weiss-f100-team-21390" target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a></div>
-          <div class="shop-card"><div class="shop-card-img"><img src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/77/09/3e/1757489874/jako-hoc-nk-croatia-uzwil-power-poloshirt-rot-weiss-f100-515b13fd917c44d9b96bdcf764f3aafa-front.png" alt="JAKO Power Poloshirt" loading="lazy" /></div><div class="shop-card-body"><span class="shop-brand">JAKO</span><h4 class="shop-name" data-de="Power Poloshirt Rot/Weiss" data-hr="Power Polo Crvena/Bijela">Power Poloshirt Rot/Weiss</h4><span class="shop-price">CHF 36.20</span></div><a href="https://www.11teamsports.com/ch-de/p/jako-power-poloshirt-rot-weiss-f100-team-21382" target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a></div>
-          <div class="shop-card"><div class="shop-card-img"><img src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/7c/a8/50/1757489766/jako-hoc-nk-croatia-uzwil-power-sweatshirt-rot-weiss-f100-ee694696a4fa470e9aa208ff763b84f3-front.png" alt="JAKO Power Sweatshirt" loading="lazy" /></div><div class="shop-card-body"><span class="shop-brand">JAKO</span><h4 class="shop-name" data-de="Power Sweatshirt Rot/Weiss" data-hr="Power Sweatshirt Crvena/Bijela">Power Sweatshirt Rot/Weiss</h4><span class="shop-price">CHF 39.45</span></div><a href="https://www.11teamsports.com/ch-de/p/jako-power-sweatshirt-rot-weiss-f100-team-21409" target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a></div>
-          <div class="shop-card"><div class="shop-card-img"><img src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/c2/8e/cd/1757489797/jako-hoc-nk-croatia-uzwil-jako-active-trainingshose-schwarz-weiss-f08-8f94a732e91f408d895135109590c89f-front.png" alt="JAKO Active Trainingshose" loading="lazy" /></div><div class="shop-card-body"><span class="shop-brand">JAKO</span><h4 class="shop-name" data-de="Active Trainingshose Schwarz/Weiss" data-hr="Active Trenirka Crna/Bijela">Active Trainingshose Schwarz/Weiss</h4><span class="shop-price">CHF 29.20</span></div><a href="https://www.11teamsports.com/ch-de/p/jako-active-trainingshose-schwarz-weiss-f08-team-21402" target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a></div>
-          <div class="shop-card"><div class="shop-card-img"><img src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/d9/9a/19/1757489993/jako-hoc-nk-croatia-uzwil-jako-classico-kapuzenjacke-rot-f01-76a7cc3bf67c47d983bcbe0d3e167553-front.png" alt="JAKO Classico Kapuzenjacke" loading="lazy" /></div><div class="shop-card-body"><span class="shop-brand">JAKO</span><h4 class="shop-name" data-de="Classico Kapuzenjacke Rot" data-hr="Classico Hoodie Crvena">Classico Kapuzenjacke Rot</h4><span class="shop-price">CHF 52.45</span></div><a href="https://www.11teamsports.com/ch-de/p/jako-classico-kapuzenjacke-rot-f01-team-21374" target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a></div>
-          <div class="shop-card"><div class="shop-card-img"><img src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/db/0e/6c/1757489960/jako-hoc-nk-croatia-uzwil-jako-striker-rucksack-rot-f01-e405708b97ca4de0b790ff0c4fd31d3d-front.png" alt="JAKO Striker Rucksack" loading="lazy" /></div><div class="shop-card-body"><span class="shop-brand">JAKO</span><h4 class="shop-name" data-de="Striker Rucksack Rot" data-hr="Striker Ruksak Crvena">Striker Rucksack Rot</h4><span class="shop-price">CHF 26.45</span></div><a href="https://www.11teamsports.com/ch-de/p/jako-striker-rucksack-rot-f01-team-21359" target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a></div>
-          <div class="shop-card"><div class="shop-card-img"><img src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/e6/bd/b1/1684345318/jako-roma-stutzenstrumpf-strumpfstutzen-socks-stutzen-vereine-teamwear-mannschaften-schwarz-weiss-f08-3808.png" alt="JAKO Roma Stutzenstrumpf" loading="lazy" /></div><div class="shop-card-body"><span class="shop-brand">JAKO</span><h4 class="shop-name" data-de="Roma Stutzenstrumpf Schwarz/Weiss" data-hr="Roma Štucne Crna/Bijela">Roma Stutzenstrumpf Schwarz/Weiss</h4><span class="shop-price"><span class="shop-price-sale">CHF 8.90</span> <span class="shop-price-old">CHF 11.95</span></span></div><a href="https://www.11teamsports.com/ch-de/p/jako-roma-stutzenstrumpf-schwarz-weiss-f08-10053272" target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a></div>
-          <div class="shop-card shop-card--all"><div class="shop-all-inner"><img src="logo.png" alt="NK Croatia Uzwil" class="shop-all-logo" /><p data-de="Ganzer Clubshop auf 11teamsports" data-hr="Cijeli clubshop na 11teamsports">Ganzer Clubshop auf 11teamsports</p><a href="https://www.11teamsports.com/ch-de/clubshop/nk-croatia-uzwil/" target="_blank" rel="noopener" class="btn btn--red" data-de="Zum Clubshop →" data-hr="Na Clubshop →">Zum Clubshop →</a></div></div>
+          <div class="shop-card">
+            <div class="shop-card-img"><img
+                src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/8c/36/1c/1757489826/jako-hoc-nk-croatia-uzwil-power-trikot-rot-weiss-f100-ad90c52b7a0840128870a21dcbb38ab9-front.png"
+                alt="JAKO Power Trikot" loading="lazy" /></div>
+            <div class="shop-card-body"><span class="shop-brand">JAKO</span>
+              <h4 class="shop-name" data-de="Power Trikot Rot/Weiss" data-hr="Power Dres Crvena/Bijela">Power Trikot
+                Rot/Weiss</h4><span class="shop-price">CHF 25.15</span>
+            </div><a href="https://www.11teamsports.com/ch-de/p/jako-power-trikot-rot-weiss-f100-team-21390"
+              target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a>
+          </div>
+          <div class="shop-card">
+            <div class="shop-card-img"><img
+                src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/77/09/3e/1757489874/jako-hoc-nk-croatia-uzwil-power-poloshirt-rot-weiss-f100-515b13fd917c44d9b96bdcf764f3aafa-front.png"
+                alt="JAKO Power Poloshirt" loading="lazy" /></div>
+            <div class="shop-card-body"><span class="shop-brand">JAKO</span>
+              <h4 class="shop-name" data-de="Power Poloshirt Rot/Weiss" data-hr="Power Polo Crvena/Bijela">Power
+                Poloshirt Rot/Weiss</h4><span class="shop-price">CHF 36.20</span>
+            </div><a href="https://www.11teamsports.com/ch-de/p/jako-power-poloshirt-rot-weiss-f100-team-21382"
+              target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a>
+          </div>
+          <div class="shop-card">
+            <div class="shop-card-img"><img
+                src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/7c/a8/50/1757489766/jako-hoc-nk-croatia-uzwil-power-sweatshirt-rot-weiss-f100-ee694696a4fa470e9aa208ff763b84f3-front.png"
+                alt="JAKO Power Sweatshirt" loading="lazy" /></div>
+            <div class="shop-card-body"><span class="shop-brand">JAKO</span>
+              <h4 class="shop-name" data-de="Power Sweatshirt Rot/Weiss" data-hr="Power Sweatshirt Crvena/Bijela">Power
+                Sweatshirt Rot/Weiss</h4><span class="shop-price">CHF 39.45</span>
+            </div><a href="https://www.11teamsports.com/ch-de/p/jako-power-sweatshirt-rot-weiss-f100-team-21409"
+              target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a>
+          </div>
+          <div class="shop-card">
+            <div class="shop-card-img"><img
+                src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/c2/8e/cd/1757489797/jako-hoc-nk-croatia-uzwil-jako-active-trainingshose-schwarz-weiss-f08-8f94a732e91f408d895135109590c89f-front.png"
+                alt="JAKO Active Trainingshose" loading="lazy" /></div>
+            <div class="shop-card-body"><span class="shop-brand">JAKO</span>
+              <h4 class="shop-name" data-de="Active Trainingshose Schwarz/Weiss" data-hr="Active Trenirka Crna/Bijela">
+                Active Trainingshose Schwarz/Weiss</h4><span class="shop-price">CHF 29.20</span>
+            </div><a href="https://www.11teamsports.com/ch-de/p/jako-active-trainingshose-schwarz-weiss-f08-team-21402"
+              target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a>
+          </div>
+          <div class="shop-card">
+            <div class="shop-card-img"><img
+                src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/d9/9a/19/1757489993/jako-hoc-nk-croatia-uzwil-jako-classico-kapuzenjacke-rot-f01-76a7cc3bf67c47d983bcbe0d3e167553-front.png"
+                alt="JAKO Classico Kapuzenjacke" loading="lazy" /></div>
+            <div class="shop-card-body"><span class="shop-brand">JAKO</span>
+              <h4 class="shop-name" data-de="Classico Kapuzenjacke Rot" data-hr="Classico Hoodie Crvena">Classico
+                Kapuzenjacke Rot</h4><span class="shop-price">CHF 52.45</span>
+            </div><a href="https://www.11teamsports.com/ch-de/p/jako-classico-kapuzenjacke-rot-f01-team-21374"
+              target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a>
+          </div>
+          <div class="shop-card">
+            <div class="shop-card-img"><img
+                src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/db/0e/6c/1757489960/jako-hoc-nk-croatia-uzwil-jako-striker-rucksack-rot-f01-e405708b97ca4de0b790ff0c4fd31d3d-front.png"
+                alt="JAKO Striker Rucksack" loading="lazy" /></div>
+            <div class="shop-card-body"><span class="shop-brand">JAKO</span>
+              <h4 class="shop-name" data-de="Striker Rucksack Rot" data-hr="Striker Ruksak Crvena">Striker Rucksack Rot
+              </h4><span class="shop-price">CHF 26.45</span>
+            </div><a href="https://www.11teamsports.com/ch-de/p/jako-striker-rucksack-rot-f01-team-21359"
+              target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a>
+          </div>
+          <div class="shop-card">
+            <div class="shop-card-img"><img
+                src="https://www.11teamsports.com/cdn-cgi/image/format=webp,width=284/ch-de/media/e6/bd/b1/1684345318/jako-roma-stutzenstrumpf-strumpfstutzen-socks-stutzen-vereine-teamwear-mannschaften-schwarz-weiss-f08-3808.png"
+                alt="JAKO Roma Stutzenstrumpf" loading="lazy" /></div>
+            <div class="shop-card-body"><span class="shop-brand">JAKO</span>
+              <h4 class="shop-name" data-de="Roma Stutzenstrumpf Schwarz/Weiss" data-hr="Roma Štucne Crna/Bijela">Roma
+                Stutzenstrumpf Schwarz/Weiss</h4><span class="shop-price"><span class="shop-price-sale">CHF 8.90</span>
+                <span class="shop-price-old">CHF 11.95</span></span>
+            </div><a href="https://www.11teamsports.com/ch-de/p/jako-roma-stutzenstrumpf-schwarz-weiss-f08-10053272"
+              target="_blank" rel="noopener" class="shop-btn" data-de="Bestellen →" data-hr="Naruči →">Bestellen →</a>
+          </div>
+          <div class="shop-card shop-card--all">
+            <div class="shop-all-inner"><img src="logo.png" alt="NK Croatia Uzwil" class="shop-all-logo" />
+              <p data-de="Ganzer Clubshop auf 11teamsports" data-hr="Cijeli clubshop na 11teamsports">Ganzer Clubshop
+                auf 11teamsports</p><a href="https://www.11teamsports.com/ch-de/clubshop/nk-croatia-uzwil/"
+                target="_blank" rel="noopener" class="btn btn--red" data-de="Zum Clubshop →" data-hr="Na Clubshop →">Zum
+                Clubshop →</a>
+            </div>
+          </div>
         </div>
 
         <!-- Fanartikel -->
         <div class="fan-section">
-          <h3 class="shop-section-title" data-de="Fanartikel - Coming Soon" data-hr="Navijački artikli - Uskoro">Fanartikel - Coming Soon</h3>
-          <p class="shop-section-sub" data-de="Wähle deine Artikel und Mengen — wir melden uns schnellstmöglich." data-hr="Odaberi artikle i količine — javit ćemo se što prije.">Wähle deine Artikel und Mengen — wir melden uns schnellstmöglich.</p>
+          <h3 class="shop-section-title" data-de="Fanartikel - Coming Soon" data-hr="Navijački artikli - Uskoro">
+            Fanartikel - Coming Soon</h3>
+          <p class="shop-section-sub" data-de="Wähle deine Artikel und Mengen — wir melden uns schnellstmöglich."
+            data-hr="Odaberi artikle i količine — javit ćemo se što prije.">Wähle deine Artikel und Mengen — wir melden
+            uns schnellstmöglich.</p>
 
           <div class="fan-layout">
             <div class="fan-items" id="fanItems">
@@ -550,12 +878,17 @@
               <div class="fan-item" data-item="Wimpel">
                 <div class="fan-item-img">
                   <div class="fan-item-img-placeholder">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.4"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
+                      opacity="0.4">
+                      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                      <line x1="4" y1="22" x2="4" y2="15" />
+                    </svg>
                   </div>
                 </div>
                 <div class="fan-item-info">
                   <span class="fan-item-name" data-de="Wimpel" data-hr="Zastavica">Wimpel</span>
-                  <span class="fan-item-price" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf Anfrage</span>
+                  <span class="fan-item-price" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf
+                    Anfrage</span>
                 </div>
                 <div class="fan-qty">
                   <button type="button" class="fan-qty-btn fan-qty-minus" aria-label="Weniger">−</button>
@@ -567,12 +900,18 @@
               <div class="fan-item" data-item="Kugelschreiber">
                 <div class="fan-item-img">
                   <div class="fan-item-img-placeholder">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.4"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
+                      opacity="0.4">
+                      <path d="M12 20h9" />
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
                   </div>
                 </div>
                 <div class="fan-item-info">
-                  <span class="fan-item-name" data-de="Kugel&shy;schreiber" data-hr="Kemijska olovka">Kugel&shy;schreiber</span>
-                  <span class="fan-item-price" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf Anfrage</span>
+                  <span class="fan-item-name" data-de="Kugel&shy;schreiber"
+                    data-hr="Kemijska olovka">Kugel&shy;schreiber</span>
+                  <span class="fan-item-price" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf
+                    Anfrage</span>
                 </div>
                 <div class="fan-qty">
                   <button type="button" class="fan-qty-btn fan-qty-minus" aria-label="Weniger">−</button>
@@ -584,12 +923,17 @@
               <div class="fan-item" data-item="Feuerzeug">
                 <div class="fan-item-img">
                   <div class="fan-item-img-placeholder">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.4"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
+                      opacity="0.4">
+                      <path
+                        d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                    </svg>
                   </div>
                 </div>
                 <div class="fan-item-info">
                   <span class="fan-item-name" data-de="Feuerzeug" data-hr="Upaljač">Feuerzeug</span>
-                  <span class="fan-item-price" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf Anfrage</span>
+                  <span class="fan-item-price" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf
+                    Anfrage</span>
                 </div>
                 <div class="fan-qty">
                   <button type="button" class="fan-qty-btn fan-qty-minus" aria-label="Weniger">−</button>
@@ -600,12 +944,19 @@
               <div class="fan-item" data-item="Schlüsselanhänger">
                 <div class="fan-item-img">
                   <div class="fan-item-img-placeholder">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="4"/><path d="M11 7h2l5 10-2 1-1-2-1 2-2-1 2-4h-3"/><path d="M7 11v8"/></svg>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.4">
+                      <circle cx="7" cy="7" r="4" />
+                      <path d="M11 7h2l5 10-2 1-1-2-1 2-2-1 2-4h-3" />
+                      <path d="M7 11v8" />
+                    </svg>
                   </div>
                 </div>
                 <div class="fan-item-info">
-                  <span class="fan-item-name" data-de="Schlüssel&shy;anhänger" data-hr="Privjesak za ključeve">Schlüssel&shy;anhänger</span>
-                  <span class="fan-item-price" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf Anfrage</span>
+                  <span class="fan-item-name" data-de="Schlüssel&shy;anhänger"
+                    data-hr="Privjesak za ključeve">Schlüssel&shy;anhänger</span>
+                  <span class="fan-item-price" data-de="Preis auf Anfrage" data-hr="Cijena na upit">Preis auf
+                    Anfrage</span>
                 </div>
                 <div class="fan-qty">
                   <button type="button" class="fan-qty-btn fan-qty-minus" aria-label="Weniger">−</button>
@@ -628,19 +979,23 @@
                 </div>
                 <div class="fan-form-group">
                   <label for="fan-email" data-de="E-Mail" data-hr="E-pošta">E-Mail</label>
-                  <input type="email" id="fan-email" name="email" placeholder="deine@email.ch" required autocomplete="email" />
+                  <input type="email" id="fan-email" name="email" placeholder="deine@email.ch" required
+                    autocomplete="email" />
                 </div>
               </div>
               <div class="fan-form-row fan-form-row--2">
                 <div class="fan-form-group">
                   <label for="fan-strasse" data-de="Strasse &amp; Nr." data-hr="Ulica i br.">Strasse &amp; Nr.</label>
-                  <input type="text" id="fan-strasse" name="strasse" placeholder="Musterstrasse 12" required autocomplete="street-address" />
+                  <input type="text" id="fan-strasse" name="strasse" placeholder="Musterstrasse 12" required
+                    autocomplete="street-address" />
                 </div>
                 <div class="fan-form-group">
                   <label for="fan-plz" data-de="PLZ / Ort" data-hr="Poštanski broj / Mjesto">PLZ / Ort</label>
-                  <input type="text" id="fan-plz" name="plz_ort" placeholder="9240 Uzwil" required autocomplete="postal-code" />
+                  <input type="text" id="fan-plz" name="plz_ort" placeholder="9240 Uzwil" required
+                    autocomplete="postal-code" />
                 </div>
-                <button type="submit" class="btn btn--red" data-de="Anfrage senden →" data-hr="Pošalji upit →">Anfrage senden →</button>
+                <button type="submit" class="btn btn--red" data-de="Anfrage senden →" data-hr="Pošalji upit →">Anfrage
+                  senden →</button>
               </div>
             </form>
           </div>
@@ -655,18 +1010,31 @@
           <div class="contact-left">
             <span class="label-tag label-tag--white" data-de="Kontakt" data-hr="Kontakt">Kontakt</span>
             <h2 data-de="Schreib uns." data-hr="Kontaktiraj nas.">Schreib uns.</h2>
-            <p data-de="Fragen zum Verein, Sponsoring, Training oder Spielertransfer — wir melden uns." data-hr="Pitanja o klubu, sponzorstvu, treningu ili transferu igrača — javit ćemo se.">Fragen zum Verein, Sponsoring, Training oder Spielertransfer — wir melden uns.</p>
+            <p data-de="Fragen zum Verein, Sponsoring, Training oder Spielertransfer — wir melden uns."
+              data-hr="Pitanja o klubu, sponzorstvu, treningu ili transferu igrača — javit ćemo se.">Fragen zum Verein,
+              Sponsoring, Training oder Spielertransfer — wir melden uns.</p>
             <div class="contact-details">
               <a href="mailto:info@croatia-uzwil.ch" class="contact-item">
-                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg></div>
                 <span>info@croatia-uzwil.ch</span>
               </a>
               <div class="contact-item">
-                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg></div>
                 <span>Rüti / Flawilerstrasse, Uzwil SG</span>
               </div>
               <a href="https://www.facebook.com/NKCroatiaUzwil/" target="_blank" rel="noopener" class="contact-item">
-                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg></div>
                 <span>NK Croatia Uzwil</span>
               </a>
             </div>
@@ -679,16 +1047,20 @@
               </div>
               <div class="cf-group">
                 <label for="cf-email" data-de="E-Mail" data-hr="E-pošta">E-Mail</label>
-                <input id="cf-email" type="email" name="email" placeholder="deine@email.ch" required autocomplete="email" />
+                <input id="cf-email" type="email" name="email" placeholder="deine@email.ch" required
+                  autocomplete="email" />
               </div>
             </div>
             <div class="cf-row">
               <div class="cf-group">
-                <label for="cf-company" data-de="Firmenname (optional)" data-hr="Naziv tvrtke (neobavezno)">Firmenname (optional)</label>
-                <input id="cf-company" type="text" name="company" placeholder="Dein Unternehmen" autocomplete="organization" />
+                <label for="cf-company" data-de="Firmenname (optional)" data-hr="Naziv tvrtke (neobavezno)">Firmenname
+                  (optional)</label>
+                <input id="cf-company" type="text" name="company" placeholder="Dein Unternehmen"
+                  autocomplete="organization" />
               </div>
               <div class="cf-group">
-                <label for="cf-reason" data-de="Grund der Kontaktaufnahme" data-hr="Razlog kontakta">Grund der Kontaktaufnahme</label>
+                <label for="cf-reason" data-de="Grund der Kontaktaufnahme" data-hr="Razlog kontakta">Grund der
+                  Kontaktaufnahme</label>
                 <select id="cf-reason" name="reason" required>
                   <option value="" disabled selected>Bitte wählen...</option>
                   <option value="Allgemein">Allgemein</option>
@@ -702,7 +1074,8 @@
               <label for="cf-msg" data-de="Nachricht" data-hr="Poruka">Nachricht</label>
               <textarea id="cf-msg" name="body" rows="4" placeholder="Deine Nachricht..."></textarea>
             </div>
-            <button type="submit" class="btn btn--red btn--full" data-de="Senden →" data-hr="Pošalji →">Senden →</button>
+            <button type="submit" class="btn btn--red btn--full" data-de="Senden →" data-hr="Pošalji →">Senden
+              →</button>
           </form>
         </div>
       </div>
@@ -712,241 +1085,376 @@
 
   <!-- ═══════ FOOTER ═══════ -->
   <footer class="footer">
-    <div class="footer-checkerboard" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="12" preserveAspectRatio="none"><defs><pattern id="chk" x="0" y="0" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="6" fill="#CC0000"/><rect x="12" width="12" height="6" fill="#FFFFFF"/><rect y="6" width="12" height="6" fill="#FFFFFF"/><rect x="12" y="6" width="12" height="6" fill="#CC0000"/></pattern></defs><rect width="100%" height="12" fill="url(#chk)"/></svg></div>
+    <div class="footer-checkerboard" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="12"
+        preserveAspectRatio="none">
+        <defs>
+          <pattern id="chk" x="0" y="0" width="24" height="12" patternUnits="userSpaceOnUse">
+            <rect width="12" height="6" fill="#CC0000" />
+            <rect x="12" width="12" height="6" fill="#FFFFFF" />
+            <rect y="6" width="12" height="6" fill="#FFFFFF" />
+            <rect x="12" y="6" width="12" height="6" fill="#CC0000" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="12" fill="url(#chk)" />
+      </svg></div>
     <div class="container footer-inner">
       <div class="footer-brand">
         <img src="logo.png" alt="NK Croatia Uzwil" class="footer-logo-img footer-logo-img--transparent" />
         <div>
           <span class="footer-name">NK Croatia Uzwil</span>
-          <span class="footer-sub" data-de="Untersektion FC Uzwil · 4. Liga · OFV" data-hr="Podsekcija FC Uzwil · 4. Liga · OFV">Untersektion FC Uzwil · 4. Liga · OFV</span>
+          <span class="footer-sub" data-de="Untersektion FC Uzwil · 4. Liga · OFV"
+            data-hr="Podsekcija FC Uzwil · 4. Liga · OFV">Untersektion FC Uzwil · 4. Liga · OFV</span>
         </div>
       </div>
       <nav class="footer-nav">
-        <a href="#news"      data-de="News"      data-hr="Novosti">News</a>
+        <a href="#news" data-de="News" data-hr="Novosti">News</a>
         <a href="#tabelle-spiele" data-de="Tabelle" data-hr="Ljestvica">Tabelle</a>
-        <a href="#team"      data-de="Team"      data-hr="Momčad">Team</a>
-        <a href="#verein"    data-de="Verein"    data-hr="Klub">Verein</a>
+        <a href="#team" data-de="Team" data-hr="Momčad">Team</a>
+        <a href="#verein" data-de="Verein" data-hr="Klub">Verein</a>
         <a href="#sponsoren" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a>
-        <a href="#shop"      data-de="Shop"      data-hr="Shop">Shop</a>
-        <a href="#kontakt"   data-de="Kontakt"   data-hr="Kontakt">Kontakt</a>
+        <a href="#shop" data-de="Shop" data-hr="Shop">Shop</a>
+        <a href="#kontakt" data-de="Kontakt" data-hr="Kontakt">Kontakt</a>
       </nav>
-      <p class="footer-copy"><a href="#impressum" class="datenschutz-link" data-de="Impressum" data-hr="Impressum">Impressum</a> · <a href="#datenschutz" class="datenschutz-link" data-de="Datenschutz" data-hr="Zaštita podataka">Datenschutz</a> · © 2026 NK Croatia Uzwil · <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
+      <p class="footer-copy"><a href="#impressum" class="datenschutz-link" data-de="Impressum"
+          data-hr="Impressum">Impressum</a> · <a href="#datenschutz" class="datenschutz-link" data-de="Datenschutz"
+          data-hr="Zaštita podataka">Datenschutz</a> · © 2026 NK Croatia Uzwil · <a
+          href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
     </div>
   </footer>
 
   <script>
-  (function() {
-    /* ── Language ──────────────────────────────────────── */
-    var currentLang = 'de';
+    (function () {
+      /* ── Language ──────────────────────────────────────── */
+      var currentLang = 'de';
 
-    function applyLang(lang) {
-      currentLang = lang;
-      document.documentElement.setAttribute('data-lang', lang);
-      document.getElementById('langDe').classList.toggle('active', lang === 'de');
-      document.getElementById('langHr').classList.toggle('active', lang === 'hr');
+      function applyLang(lang) {
+        currentLang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
+        document.getElementById('langDe').classList.toggle('active', lang === 'de');
+        document.getElementById('langHr').classList.toggle('active', lang === 'hr');
 
-      document.querySelectorAll('[data-de][data-hr]').forEach(function(el) {
-        var txt = el.getAttribute('data-' + lang);
-        if (txt === null) return;
-        // Only update leaf text nodes or anchors without child elements that need preserving
-        if (el.children.length === 0) {
-          el.textContent = txt;
-        } else if (el.tagName === 'A' && el.querySelectorAll('svg').length === 0) {
-          el.textContent = txt;
+        document.querySelectorAll('[data-de][data-hr]').forEach(function (el) {
+          var txt = el.getAttribute('data-' + lang);
+          if (txt === null) return;
+          // Only update leaf text nodes or anchors without child elements that need preserving
+          if (el.children.length === 0) {
+            el.textContent = txt;
+          } else if (el.tagName === 'A' && el.querySelectorAll('svg').length === 0) {
+            el.textContent = txt;
+          }
+        });
+
+        // Placeholders
+        var cfName = document.getElementById('cf-name');
+        var cfMsg = document.getElementById('cf-msg');
+        var fanName = document.getElementById('fan-name');
+        var fanEmail = document.getElementById('fan-email');
+        var cfCompany = document.getElementById('cf-company');
+
+        if (cfName) cfName.placeholder = lang === 'hr' ? 'Tvoje ime' : 'Dein Name';
+        if (cfMsg) cfMsg.placeholder = lang === 'hr' ? 'Tvoja poruka...' : 'Deine Nachricht...';
+        if (fanName) fanName.placeholder = lang === 'hr' ? 'Tvoje ime' : 'Dein Name';
+        if (fanEmail) fanEmail.placeholder = lang === 'hr' ? 'tvoja@email.ch' : 'deine@email.ch';
+        if (cfCompany) cfCompany.placeholder = lang === 'hr' ? 'Vaša tvrtka' : 'Dein Unternehmen';
+
+        // Dropdown
+        var cfReason = document.getElementById('cf-reason');
+        if (cfReason && cfReason.options.length >= 5) {
+          if (lang === 'hr') {
+            cfReason.options[0].text = 'Molimo odaberite...';
+
+            cfReason.options[1].text = 'Općenito';
+            cfReason.options[1].value = 'Općenito';
+
+            cfReason.options[2].text = 'Sponzorstvo';
+            cfReason.options[2].value = 'Sponzorstvo';
+
+            cfReason.options[3].text = 'Donatori';
+            cfReason.options[3].value = 'Donatori';
+
+            cfReason.options[4].text = 'Webshop';
+            cfReason.options[4].value = 'Webshop';
+          } else {
+            cfReason.options[0].text = 'Bitte wählen...';
+
+            cfReason.options[1].text = 'Allgemein';
+            cfReason.options[1].value = 'Allgemein';
+
+            cfReason.options[2].text = 'Sponsoring';
+            cfReason.options[2].value = 'Sponsoring';
+
+            cfReason.options[3].text = 'Gönner';
+            cfReason.options[3].value = 'Gönner';
+
+            cfReason.options[4].text = 'Webshop';
+            cfReason.options[4].value = 'Webshop';
+          }
         }
-      });
 
-      // Placeholders
-	var cfName     = document.getElementById('cf-name');
-	var cfMsg      = document.getElementById('cf-msg');
-	var fanName    = document.getElementById('fan-name');
-	var fanEmail   = document.getElementById('fan-email');
-	var cfCompany  = document.getElementById('cf-company');
-
-	if (cfName)    cfName.placeholder    = lang === 'hr' ? 'Tvoje ime'       : 'Dein Name';
-	if (cfMsg)     cfMsg.placeholder     = lang === 'hr' ? 'Tvoja poruka...' : 'Deine Nachricht...';
-	if (fanName)   fanName.placeholder   = lang === 'hr' ? 'Tvoje ime'       : 'Dein Name';
-	if (fanEmail)  fanEmail.placeholder  = lang === 'hr' ? 'tvoja@email.ch'  : 'deine@email.ch';
-	if (cfCompany) cfCompany.placeholder = lang === 'hr' ? 'Vaša tvrtka'     : 'Dein Unternehmen';
-
-	// Dropdown
-	var cfReason = document.getElementById('cf-reason');
-	if (cfReason && cfReason.options.length >= 5) {
-	  if (lang === 'hr') {
-		cfReason.options[0].text = 'Molimo odaberite...';
-
-		cfReason.options[1].text = 'Općenito';
-		cfReason.options[1].value = 'Općenito';
-
-		cfReason.options[2].text = 'Sponzorstvo';
-		cfReason.options[2].value = 'Sponzorstvo';
-
-		cfReason.options[3].text = 'Donatori';
-		cfReason.options[3].value = 'Donatori';
-
-		cfReason.options[4].text = 'Webshop';
-		cfReason.options[4].value = 'Webshop';
-	  } else {
-		cfReason.options[0].text = 'Bitte wählen...';
-
-		cfReason.options[1].text = 'Allgemein';
-		cfReason.options[1].value = 'Allgemein';
-
-		cfReason.options[2].text = 'Sponsoring';
-		cfReason.options[2].value = 'Sponsoring';
-
-		cfReason.options[3].text = 'Gönner';
-		cfReason.options[3].value = 'Gönner';
-
-		cfReason.options[4].text = 'Webshop';
-		cfReason.options[4].value = 'Webshop';
-	  }
-	}
-
-      updateFanDisplay();
-    }
-
-    document.getElementById('langToggle').addEventListener('click', function() {
-      applyLang(currentLang === 'de' ? 'hr' : 'de');
-    });
-    applyLang('de');
-
-    /* ── Burger ────────────────────────────────────────── */
-    var burger = document.getElementById('burger');
-    var mm     = document.getElementById('mobileMenu');
-    burger.addEventListener('click', function() {
-      var open = mm.classList.toggle('open');
-      burger.classList.toggle('open', open);
-      burger.setAttribute('aria-expanded', String(open));
-    });
-    document.querySelectorAll('.mm-link').forEach(function(l) {
-      l.addEventListener('click', function() {
-        mm.classList.remove('open');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    /* ── Scroll header ─────────────────────────────────── */
-    window.addEventListener('scroll', function() {
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
-
-    /* ── News Modal ────────────────────────────────────── */
-    var overlay    = document.getElementById('newsModalOverlay');
-    var modalClose = document.getElementById('newsModalClose');
-    var modalMeta  = document.getElementById('modalMeta');
-    var modalTitle = document.getElementById('modalTitle');
-    var modalText  = document.getElementById('modalText');
-
-    function openModal(card) {
-      var lang  = currentLang;
-      var tag   = card.getAttribute('data-' + lang + '-tag')   || '';
-      var title = card.getAttribute('data-' + lang + '-title') || '';
-      var date  = card.getAttribute('data-date')               || '';
-      var text  = card.getAttribute('data-' + lang + '-text')  || '';
-
-      modalMeta.innerHTML  = '<span class="nm-tag">' + tag + '</span><span class="nm-date">' + date + '</span>';
-      modalTitle.textContent = title;
-      modalText.innerHTML  = text;
-
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('.news-card').forEach(function(card) {
-      card.addEventListener('click', function() { openModal(card); });
-    });
-    modalClose.addEventListener('click', closeModal);
-    overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
-
-    /* ── Fan qty ───────────────────────────────────────── */
-    function updateFanDisplay() {
-      var items = [];
-      document.querySelectorAll('#fanItems .fan-item').forEach(function(item) {
-        var input = item.querySelector('.fan-qty-input');
-        var qty   = parseInt(input.value, 10) || 0;
-        if (qty > 0) {
-          var nameEl = item.querySelector('.fan-item-name');
-          var name   = nameEl ? (nameEl.getAttribute('data-' + currentLang) || nameEl.textContent) : item.getAttribute('data-item');
-          items.push(qty + '\u00d7 ' + name);
-        }
-      });
-      var display = document.getElementById('fanSelectedItems');
-      if (!display) return;
-      display.textContent = items.length ? items.join(', ') : '—';
-    }
-
-    document.querySelectorAll('.fan-qty-plus').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var input = btn.previousElementSibling;
-        input.value = Math.min(999, (parseInt(input.value, 10) || 0) + 1);
         updateFanDisplay();
-      });
-    });
-    document.querySelectorAll('.fan-qty-minus').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var input = btn.nextElementSibling;
-        input.value = Math.max(0, (parseInt(input.value, 10) || 0) - 1);
-        updateFanDisplay();
-      });
-    });
-    document.querySelectorAll('.fan-qty-input').forEach(function(input) {
-      input.addEventListener('input', updateFanDisplay);
-    });
+      }
 
-    /* ── Contact form submit ──────────────────────────── */
-    var contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
+      document.getElementById('langToggle').addEventListener('click', function () {
+        applyLang(currentLang === 'de' ? 'hr' : 'de');
+      });
+      applyLang('de');
+
+      /* ── Burger ────────────────────────────────────────── */
+      var burger = document.getElementById('burger');
+      var mm = document.getElementById('mobileMenu');
+      burger.addEventListener('click', function () {
+        var open = mm.classList.toggle('open');
+        burger.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', String(open));
+      });
+      document.querySelectorAll('.mm-link').forEach(function (l) {
+        l.addEventListener('click', function () {
+          mm.classList.remove('open');
+          burger.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      /* ── Scroll header ─────────────────────────────────── */
+      window.addEventListener('scroll', function () {
+        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
+      }, { passive: true });
+
+      /* ── News Modal ────────────────────────────────────── */
+      var overlay = document.getElementById('newsModalOverlay');
+      var modalClose = document.getElementById('newsModalClose');
+      var modalMeta = document.getElementById('modalMeta');
+      var modalTitle = document.getElementById('modalTitle');
+      var modalText = document.getElementById('modalText');
+
+      function openModal(card) {
+        var lang = currentLang;
+        var tag = card.getAttribute('data-' + lang + '-tag') || '';
+        var title = card.getAttribute('data-' + lang + '-title') || '';
+        var date = card.getAttribute('data-date') || '';
+        var text = card.getAttribute('data-' + lang + '-text') || '';
+
+        modalMeta.innerHTML = '<span class="nm-tag">' + tag + '</span><span class="nm-date">' + date + '</span>';
+        modalTitle.textContent = title;
+        modalText.innerHTML = text;
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.news-card').forEach(function (card) {
+        card.addEventListener('click', function () { openModal(card); });
+      });
+      modalClose.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+      /* ── Fan qty ───────────────────────────────────────── */
+      function updateFanDisplay() {
+        var items = [];
+        document.querySelectorAll('#fanItems .fan-item').forEach(function (item) {
+          var input = item.querySelector('.fan-qty-input');
+          var qty = parseInt(input.value, 10) || 0;
+          if (qty > 0) {
+            var nameEl = item.querySelector('.fan-item-name');
+            var name = nameEl ? (nameEl.getAttribute('data-' + currentLang) || nameEl.textContent) : item.getAttribute('data-item');
+            items.push(qty + '\u00d7 ' + name);
+          }
+        });
+        var display = document.getElementById('fanSelectedItems');
+        if (!display) return;
+        display.textContent = items.length ? items.join(', ') : '—';
+      }
+
+      document.querySelectorAll('.fan-qty-plus').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var input = btn.previousElementSibling;
+          input.value = Math.min(999, (parseInt(input.value, 10) || 0) + 1);
+          updateFanDisplay();
+        });
+      });
+      document.querySelectorAll('.fan-qty-minus').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var input = btn.nextElementSibling;
+          input.value = Math.max(0, (parseInt(input.value, 10) || 0) - 1);
+          updateFanDisplay();
+        });
+      });
+      document.querySelectorAll('.fan-qty-input').forEach(function (input) {
+        input.addEventListener('input', updateFanDisplay);
+      });
+
+      /* ── Contact form submit ──────────────────────────── */
+      var contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var name = document.getElementById('cf-name').value.trim();
+          var email = document.getElementById('cf-email').value.trim();
+          var company = document.getElementById('cf-company') ? document.getElementById('cf-company').value.trim() : '';
+          var reason = document.getElementById('cf-reason').value || 'Allgemein';
+          var msg = document.getElementById('cf-msg').value.trim();
+          var subject = encodeURIComponent('[NK Croatia Uzwil] ' + reason);
+          var bodyLines = ['Name: ' + name, 'E-Mail: ' + email];
+          if (company) bodyLines.push('Firma: ' + company);
+          bodyLines.push('Grund: ' + reason, '', msg);
+          var body = encodeURIComponent(bodyLines.join('\n'));
+          window.location.href = 'mailto:info@croatia-uzwil.ch?subject=' + subject + '&body=' + body;
+        });
+      }
+
+      /* ── Fan form submit ───────────────────────────────── */
+      document.getElementById('fanForm').addEventListener('submit', function (e) {
         e.preventDefault();
-        var name    = document.getElementById('cf-name').value.trim();
-        var email   = document.getElementById('cf-email').value.trim();
-        var company = document.getElementById('cf-company') ? document.getElementById('cf-company').value.trim() : '';
-        var reason  = document.getElementById('cf-reason').value || 'Allgemein';
-        var msg     = document.getElementById('cf-msg').value.trim();
-        var subject = encodeURIComponent('[NK Croatia Uzwil] ' + reason);
-        var bodyLines = ['Name: ' + name, 'E-Mail: ' + email];
-        if (company) bodyLines.push('Firma: ' + company);
-        bodyLines.push('Grund: ' + reason, '', msg);
-        var body = encodeURIComponent(bodyLines.join('\n'));
+        var items = [];
+        document.querySelectorAll('#fanItems .fan-item').forEach(function (item) {
+          var qty = parseInt(item.querySelector('.fan-qty-input').value, 10) || 0;
+          if (qty > 0) items.push(qty + 'x ' + item.getAttribute('data-item'));
+        });
+        if (!items.length) {
+          alert(currentLang === 'hr' ? 'Molimo odaberite barem jedan artikl.' : 'Bitte mindestens einen Artikel auswählen.');
+          return;
+        }
+        var name = document.getElementById('fan-name').value;
+        var email = document.getElementById('fan-email').value;
+        var strasse = document.getElementById('fan-strasse').value;
+        var plz = document.getElementById('fan-plz').value;
+        var subject = encodeURIComponent('Fanartikel-Anfrage NK Croatia Uzwil');
+        var body = encodeURIComponent(
+          'Hallo NK Croatia Uzwil,\n\nIch möchte folgende Fanartikel bestellen:\n\n' +
+          items.join('\n') + '\n\nName: ' + name + '\nE-Mail: ' + email +
+          '\nAdresse: ' + strasse + ', ' + plz +
+          '\n\nBitte meldet euch bei mir.\n\nFreundliche Grüsse'
+        );
         window.location.href = 'mailto:info@croatia-uzwil.ch?subject=' + subject + '&body=' + body;
       });
-    }
 
-    /* ── Fan form submit ───────────────────────────────── */
-    document.getElementById('fanForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var items = [];
-      document.querySelectorAll('#fanItems .fan-item').forEach(function(item) {
-        var qty = parseInt(item.querySelector('.fan-qty-input').value, 10) || 0;
-        if (qty > 0) items.push(qty + 'x ' + item.getAttribute('data-item'));
-      });
-      if (!items.length) {
-        alert(currentLang === 'hr' ? 'Molimo odaberite barem jedan artikl.' : 'Bitte mindestens einen Artikel auswählen.');
-        return;
+      /* ── Tabelle & Spielplan (aus data/uzwil4.json, manuell gepflegt) ──
+         Die Datei data/uzwil4.json wird nach jedem Spieltag von Hand
+         aktualisiert (neue Zeile in "standings", neuer Eintrag in
+         "fixtures"). Kein automatischer Abruf von Drittanbietern.
+      ── ──────────────────────────────────────────────────────────────── */
+      function tsEscape(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
       }
-      var name    = document.getElementById('fan-name').value;
-      var email   = document.getElementById('fan-email').value;
-      var strasse = document.getElementById('fan-strasse').value;
-      var plz     = document.getElementById('fan-plz').value;
-      var subject = encodeURIComponent('Fanartikel-Anfrage NK Croatia Uzwil');
-      var body    = encodeURIComponent(
-        'Hallo NK Croatia Uzwil,\n\nIch möchte folgende Fanartikel bestellen:\n\n' +
-        items.join('\n') + '\n\nName: ' + name + '\nE-Mail: ' + email +
-        '\nAdresse: ' + strasse + ', ' + plz +
-        '\n\nBitte meldet euch bei mir.\n\nFreundliche Grüsse'
-      );
-      window.location.href = 'mailto:info@croatia-uzwil.ch?subject=' + subject + '&body=' + body;
-    });
 
-  })();
+      function tsIsUs(name) { return !!(name && /\buzwil\b/i.test(name)); }
+      function tsDisplayName(name) { return tsIsUs(name) ? 'NK Croatia Uzwil' : name; }
+
+      function tsRenderStandings(standings) {
+        var wrap = document.getElementById('standingsWrap');
+        var empty = document.getElementById('standingsEmpty');
+        if (!standings || !standings.length) { wrap.style.display = 'none'; empty.style.display = ''; return; }
+        var tbody = document.getElementById('standingsBody');
+        tbody.innerHTML = '';
+        standings.forEach(function (r) {
+          var tr = document.createElement('tr');
+          if (tsIsUs(r.team)) tr.className = 'standings-row--us';
+          var diff = r.goalDifference !== undefined ? r.goalDifference : (r.goalsFor - r.goalsAgainst);
+          tr.innerHTML =
+            '<td>' + tsEscape(r.rank) + '</td>' +
+            '<td class="st-team">' + tsEscape(tsDisplayName(r.team)) + '</td>' +
+            '<td>' + tsEscape(r.played) + '</td>' +
+            '<td>' + tsEscape(r.wins) + '</td>' +
+            '<td>' + tsEscape(r.draws) + '</td>' +
+            '<td>' + tsEscape(r.losses) + '</td>' +
+            '<td>' + tsEscape(r.goalsFor + ':' + r.goalsAgainst) + '</td>' +
+            '<td>' + (diff > 0 ? '+' : '') + tsEscape(diff) + '</td>' +
+            '<td class="st-points">' + tsEscape(r.points) + '</td>';
+          tbody.appendChild(tr);
+        });
+        wrap.style.display = '';
+        empty.style.display = 'none';
+      }
+
+      function tsPad(n) { n = String(n); return n.length < 2 ? '0' + n : n; }
+
+      function tsParseSwissDate(dateStr, timeStr) {
+        if (!dateStr) return null;
+        var m = String(dateStr).trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+        if (!m) return null;
+        var t = (timeStr && /^\d{1,2}:\d{2}/.test(String(timeStr).trim())) ? timeStr.trim() : '00:00';
+        var dt = new Date(m[3] + '-' + tsPad(m[2]) + '-' + tsPad(m[1]) + 'T' + t + ':00');
+        return isNaN(dt.getTime()) ? null : dt;
+      }
+
+      function tsFindNextMatch(fixtures) {
+        if (!fixtures || !fixtures.length) return null;
+        var upcoming = fixtures
+          .filter(function (f) { return f.homeScore === null || f.homeScore === undefined; })
+          .filter(function (f) { return tsIsUs(f.home) || tsIsUs(f.away); })
+          .map(function (f) { return { f: f, dt: tsParseSwissDate(f.date, f.time) }; });
+        upcoming.sort(function (a, b) { return (a.dt ? a.dt.getTime() : Infinity) - (b.dt ? b.dt.getTime() : Infinity); });
+        return upcoming.length ? upcoming[0].f : null;
+      }
+
+      function tsTeamHtml(name, isUs, isRight) {
+        var nameHtml = '<span class="mol-name' + (isUs ? ' mol-name--us' : '') + '">' + tsEscape(tsDisplayName(name)) + '</span>';
+        var logoHtml = isUs ? '<img src="logo.png" alt="NK Croatia Uzwil" class="mol-logo mol-logo--img mol-logo--transparent" />' : '';
+        var inner = isRight ? (nameHtml + logoHtml) : (logoHtml + nameHtml);
+        return '<div class="mol-team' + (isRight ? ' mol-team--right' : '') + '">' + inner + '</div>';
+      }
+
+      function tsRenderNextMatchHome(next) {
+        var card = document.querySelector('.match-card--next');
+        if (!card || !next) return;
+        card.classList.remove('match-card--next');
+        var topBar = card.querySelector('.match-card-top');
+        if (topBar) topBar.classList.remove('match-card-top--gray');
+
+        var homeIsUs = tsIsUs(next.home);
+        var awayIsUs = tsIsUs(next.away);
+        var oneline = document.createElement('div');
+        oneline.className = 'match-oneline';
+        oneline.innerHTML =
+          tsTeamHtml(next.home, homeIsUs, false) +
+          '<span class="mol-score">' + tsEscape(next.time || '–') + '</span>' +
+          tsTeamHtml(next.away, awayIsUs, true);
+        var placeholder = card.querySelector('.match-next-placeholder');
+        if (placeholder) placeholder.replaceWith(oneline);
+
+        var badge = card.querySelector('.match-card-top .match-badge');
+        if (badge && next.league) badge.textContent = next.league;
+        var topDate = card.querySelector('.match-card-top .match-date');
+        if (topDate) {
+          topDate.removeAttribute('data-de');
+          topDate.removeAttribute('data-hr');
+          topDate.textContent = next.date;
+        }
+        var footNote = card.querySelector('.match-foot span[data-de]');
+        if (footNote) {
+          footNote.removeAttribute('data-de');
+          footNote.removeAttribute('data-hr');
+          if (next.venue) {
+            footNote.textContent = '📍 ' + next.venue;
+            footNote.style.display = '';
+          } else {
+            footNote.style.display = 'none';
+          }
+        }
+      }
+
+      fetch('./data/uzwil4.json')
+        .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+        .then(function (data) {
+          tsRenderStandings(data.standings);
+          var tsNextMatch = tsFindNextMatch(data.fixtures);
+          if (tsNextMatch) tsRenderNextMatchHome(tsNextMatch);
+        })
+        .catch(function (err) {
+          console.error('Tabelle konnte nicht geladen werden:', err);
+          document.getElementById('standingsEmpty').style.display = 'none';
+          document.getElementById('standingsError').style.display = '';
+        });
+
+    })();
   </script>
 
   <!-- ═══════ DATENSCHUTZ MODAL ═══════ -->
@@ -956,28 +1464,39 @@
       <button class="ds-close" aria-label="Schliessen">✕</button>
       <h2 id="ds-title" data-de="Datenschutzerklärung" data-hr="Izjava o zaštiti podataka">Datenschutzerklärung</h2>
       <div class="ds-body">
-        <p>Gestützt auf das revidierte Schweizer Datenschutzgesetz (revDSG) sowie die europäische Datenschutzgrundverordnung (DSGVO), soweit anwendbar, ist jede Person berechtigt, Auskunft über die Verarbeitung ihrer Personendaten zu verlangen.</p>
+        <p>Gestützt auf das revidierte Schweizer Datenschutzgesetz (revDSG) sowie die europäische
+          Datenschutzgrundverordnung (DSGVO), soweit anwendbar, ist jede Person berechtigt, Auskunft über die
+          Verarbeitung ihrer Personendaten zu verlangen.</p>
 
         <h3>1. Verantwortliche Stelle</h3>
-        <p>NK Croatia Uzwil<br/>Untersektion FC Uzwil<br/>Sportanlage Rüti, 9240 Uzwil, Schweiz<br/>E-Mail: info@croatia-uzwil.ch</p>
+        <p>NK Croatia Uzwil<br />Untersektion FC Uzwil<br />Sportanlage Rüti, 9240 Uzwil, Schweiz<br />E-Mail:
+          info@croatia-uzwil.ch</p>
 
         <h3>2. Allgemeines zur Datenbearbeitung</h3>
-        <p>Wir bearbeiten Personendaten in Übereinstimmung mit dem Schweizer Datenschutzrecht. Wir bearbeiten Personendaten nur, soweit dies erforderlich ist, um unsere Vereinstätigkeit auszuführen und unsere Webseite zu betreiben.</p>
+        <p>Wir bearbeiten Personendaten in Übereinstimmung mit dem Schweizer Datenschutzrecht. Wir bearbeiten
+          Personendaten nur, soweit dies erforderlich ist, um unsere Vereinstätigkeit auszuführen und unsere Webseite zu
+          betreiben.</p>
 
         <h3>3. Server-Logfiles</h3>
-        <p>Beim Aufruf unserer Website werden automatisch Informationen erfasst (Browsertyp, Betriebssystem, Zeitpunkt des Zugriffs, IP-Adresse). Diese Daten werden ausschliesslich zum Zweck der technischen Bereitstellung und Sicherheit unserer Website verarbeitet.</p>
+        <p>Beim Aufruf unserer Website werden automatisch Informationen erfasst (Browsertyp, Betriebssystem, Zeitpunkt
+          des Zugriffs, IP-Adresse). Diese Daten werden ausschliesslich zum Zweck der technischen Bereitstellung und
+          Sicherheit unserer Website verarbeitet.</p>
 
         <h3>4. Cookies</h3>
-        <p>Unsere Webseite verwendet nur technisch notwendige Cookies sowie lokal gespeicherte Einstellungen (z. B. die gewählte Sprache). Es werden keine Marketing- oder Tracking-Cookies eingesetzt.</p>
+        <p>Unsere Webseite verwendet nur technisch notwendige Cookies sowie lokal gespeicherte Einstellungen (z. B. die
+          gewählte Sprache). Es werden keine Marketing- oder Tracking-Cookies eingesetzt.</p>
 
         <h3>5. Kontaktaufnahme</h3>
-        <p>Wenn Sie uns per E-Mail oder über das Kontaktformular kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage verarbeitet. Die Daten werden nicht ohne Ihre Einwilligung weitergegeben.</p>
+        <p>Wenn Sie uns per E-Mail oder über das Kontaktformular kontaktieren, werden Ihre Angaben zur Bearbeitung der
+          Anfrage verarbeitet. Die Daten werden nicht ohne Ihre Einwilligung weitergegeben.</p>
 
         <h3>6. Rechte der betroffenen Person</h3>
-        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten Personendaten sowie auf Berichtigung, Sperrung oder Löschung dieser Daten. Bitte wenden Sie sich an: info@croatia-uzwil.ch</p>
+        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten Personendaten sowie auf
+          Berichtigung, Sperrung oder Löschung dieser Daten. Bitte wenden Sie sich an: info@croatia-uzwil.ch</p>
 
         <h3>7. Änderungen</h3>
-        <p>Wir können diese Datenschutzerklärung jederzeit anpassen. Es gilt die jeweils aktuelle Version auf unserer Website.</p>
+        <p>Wir können diese Datenschutzerklärung jederzeit anpassen. Es gilt die jeweils aktuelle Version auf unserer
+          Website.</p>
       </div>
     </div>
   </div>
@@ -990,120 +1509,148 @@
       <h2 id="imp-title">Impressum</h2>
       <div class="ds-body">
         <h3>Verantwortlich für den Inhalt</h3>
-        <p>NK Croatia Uzwil<br/>Untersektion FC Uzwil<br/>Sportanlage Rüti<br/>9240 Uzwil, Schweiz</p>
+        <p>NK Croatia Uzwil<br />Untersektion FC Uzwil<br />Sportanlage Rüti<br />9240 Uzwil, Schweiz</p>
 
         <h3>Kontakt</h3>
         <p>E-Mail: <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
 
         <h3>Haftungsausschluss</h3>
-        <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen entstanden sind, werden ausgeschlossen.</p>
+        <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität,
+          Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden
+          materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der
+          veröffentlichten Informationen entstanden sind, werden ausgeschlossen.</p>
 
         <h3>Haftung für Links</h3>
-        <p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche Verantwortung für solche Webseiten abgelehnt.</p>
+        <p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche
+          Verantwortung für solche Webseiten abgelehnt.</p>
 
         <h3>Urheberrechte</h3>
-        <p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf dieser Website gehören ausschliesslich NK Croatia Uzwil oder den speziell genannten Rechteinhabern. Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.</p>
+        <p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf dieser Website
+          gehören ausschliesslich NK Croatia Uzwil oder den speziell genannten Rechteinhabern. Für die Reproduktion
+          jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.</p>
       </div>
     </div>
   </div>
 
   <!-- ═══════ COOKIE BANNER ═══════ -->
   <div id="cookie-banner" class="cookie-banner" role="region" aria-label="Cookie-Hinweis">
-    <p class="ck-text" data-de="Diese Website verwendet ausschliesslich technisch notwendige Cookies." data-hr="Ova web-stranica koristi samo tehnički neophodne kolači&#263;e.">Diese Website verwendet ausschliesslich technisch notwendige Cookies.</p>
+    <p class="ck-text" data-de="Diese Website verwendet ausschliesslich technisch notwendige Cookies."
+      data-hr="Ova web-stranica koristi samo tehnički neophodne kolači&#263;e.">Diese Website verwendet ausschliesslich
+      technisch notwendige Cookies.</p>
     <button id="cookie-accept" class="btn btn--red ck-btn" data-de="Akzeptieren" data-hr="Prihvati">Akzeptieren</button>
   </div>
 
   <!-- ═══════ BOTTOM NAV (Mobile) ═══════ -->
   <nav class="bottom-nav" aria-label="Mobile Navigation">
     <a href="#news" class="bn-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M4 6h16M4 12h16M4 18h10" />
+      </svg>
       <span data-de="News" data-hr="Vijesti">News</span>
     </a>
     <a href="#team" class="bn-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
       <span data-de="Team" data-hr="Tim">Team</span>
     </a>
     <a href="#verein" class="bn-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
       <span data-de="Verein" data-hr="Klub">Verein</span>
     </a>
     <a href="#sponsoren" class="bn-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="2" y="7" width="20" height="14" rx="2" />
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+      </svg>
       <span data-de="Sponsor" data-hr="Sponzor">Sponsor</span>
     </a>
     <a href="#shop" class="bn-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
       <span data-de="Shop" data-hr="Shop">Shop</span>
     </a>
     <a href="#kontakt" class="bn-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
       <span data-de="Kontakt" data-hr="Kontakt">Kontakt</span>
     </a>
   </nav>
 
   <script>
     // Bottom Nav active state on scroll
-    (function(){
+    (function () {
       const items = document.querySelectorAll('.bn-item');
-      const sections = ['news','team','verein','sponsoren','shop','kontakt'];
-      function updateActive(){
+      const sections = ['news', 'team', 'verein', 'sponsoren', 'shop', 'kontakt'];
+      function updateActive() {
         let current = sections[0];
-        sections.forEach(id=>{
+        sections.forEach(id => {
           const el = document.getElementById(id);
-          if(el && window.scrollY >= el.offsetTop - 120) current = id;
+          if (el && window.scrollY >= el.offsetTop - 120) current = id;
         });
-        items.forEach(a=>{
-          a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+        items.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + current);
         });
       }
-      window.addEventListener('scroll', updateActive, {passive:true});
+      window.addEventListener('scroll', updateActive, { passive: true });
       updateActive();
     })();
   </script>
   <script>
-  /* Datenschutz + Impressum + Cookie — runs after modals are in DOM */
-  (function() {
-    /* DS Modal */
-    var dsModal   = document.getElementById('datenschutz-modal');
-    var dsOverlay = dsModal ? dsModal.querySelector('.ds-overlay') : null;
-    var dsClose   = dsModal ? dsModal.querySelector('.ds-close')   : null;
-    function openDS()  { if (dsModal) { dsModal.hidden = false; document.body.style.overflow = 'hidden'; } }
-    function closeDS() { if (dsModal) { dsModal.hidden = true;  document.body.style.overflow = ''; } }
-    document.querySelectorAll('a[href="#datenschutz"]').forEach(function(a) {
-      a.addEventListener('click', function(e) { e.preventDefault(); openDS(); });
-    });
-    if (dsClose)   dsClose.addEventListener('click', closeDS);
-    if (dsOverlay) dsOverlay.addEventListener('click', closeDS);
-
-    /* Impressum Modal */
-    var impModal   = document.getElementById('impressum-modal');
-    var impOverlay = impModal ? impModal.querySelector('.ds-overlay') : null;
-    var impClose   = impModal ? impModal.querySelector('.ds-close')   : null;
-    function openImp()  { if (impModal) { impModal.hidden = false; document.body.style.overflow = 'hidden'; } }
-    function closeImp() { if (impModal) { impModal.hidden = true;  document.body.style.overflow = ''; } }
-    document.querySelectorAll('a[href="#impressum"]').forEach(function(a) {
-      a.addEventListener('click', function(e) { e.preventDefault(); openImp(); });
-    });
-    if (impClose)   impClose.addEventListener('click', closeImp);
-    if (impOverlay) impOverlay.addEventListener('click', closeImp);
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') { closeDS(); closeImp(); }
-    });
-
-    /* Cookie Banner */
-    var cookieBanner = document.getElementById('cookie-banner');
-    if (cookieBanner && !localStorage.getItem('ck_ok')) {
-      cookieBanner.classList.add('visible');
-    }
-    var ckBtn = document.getElementById('cookie-accept');
-    if (ckBtn) {
-      ckBtn.addEventListener('click', function() {
-        localStorage.setItem('ck_ok', '1');
-        if (cookieBanner) cookieBanner.classList.remove('visible');
+    /* Datenschutz + Impressum + Cookie — runs after modals are in DOM */
+    (function () {
+      /* DS Modal */
+      var dsModal = document.getElementById('datenschutz-modal');
+      var dsOverlay = dsModal ? dsModal.querySelector('.ds-overlay') : null;
+      var dsClose = dsModal ? dsModal.querySelector('.ds-close') : null;
+      function openDS() { if (dsModal) { dsModal.hidden = false; document.body.style.overflow = 'hidden'; } }
+      function closeDS() { if (dsModal) { dsModal.hidden = true; document.body.style.overflow = ''; } }
+      document.querySelectorAll('a[href="#datenschutz"]').forEach(function (a) {
+        a.addEventListener('click', function (e) { e.preventDefault(); openDS(); });
       });
-    }
-  })();
+      if (dsClose) dsClose.addEventListener('click', closeDS);
+      if (dsOverlay) dsOverlay.addEventListener('click', closeDS);
+
+      /* Impressum Modal */
+      var impModal = document.getElementById('impressum-modal');
+      var impOverlay = impModal ? impModal.querySelector('.ds-overlay') : null;
+      var impClose = impModal ? impModal.querySelector('.ds-close') : null;
+      function openImp() { if (impModal) { impModal.hidden = false; document.body.style.overflow = 'hidden'; } }
+      function closeImp() { if (impModal) { impModal.hidden = true; document.body.style.overflow = ''; } }
+      document.querySelectorAll('a[href="#impressum"]').forEach(function (a) {
+        a.addEventListener('click', function (e) { e.preventDefault(); openImp(); });
+      });
+      if (impClose) impClose.addEventListener('click', closeImp);
+      if (impOverlay) impOverlay.addEventListener('click', closeImp);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { closeDS(); closeImp(); }
+      });
+
+      /* Cookie Banner */
+      var cookieBanner = document.getElementById('cookie-banner');
+      if (cookieBanner && !localStorage.getItem('ck_ok')) {
+        cookieBanner.classList.add('visible');
+      }
+      var ckBtn = document.getElementById('cookie-accept');
+      if (ckBtn) {
+        ckBtn.addEventListener('click', function () {
+          localStorage.setItem('ck_ok', '1');
+          if (cookieBanner) cookieBanner.classList.remove('visible');
+        });
+      }
+    })();
   </script>
   <script>
     document.querySelectorAll('.spc-track').forEach(function (track) {
@@ -1111,10 +1658,10 @@
       if (!items.length) return;
 
       // Clone enough copies to fill 3× the container — guarantees no empty space
-      var container  = track.closest('.sponsor-carousel');
+      var container = track.closest('.sponsor-carousel');
       var containerW = container ? container.offsetWidth : window.innerWidth;
       var approxSetW = track.getBoundingClientRect().width || 1;
-      var copies     = Math.max(4, Math.ceil(containerW * 3 / approxSetW));
+      var copies = Math.max(4, Math.ceil(containerW * 3 / approxSetW));
       for (var i = 0; i < copies; i++) {
         items.forEach(function (item) {
           var clone = item.cloneNode(true);
@@ -1126,7 +1673,7 @@
 
       // Exact pixel distance to the first clone — no math, no guessing
       var setWidth = track.children[items.length].getBoundingClientRect().left
-                   - track.getBoundingClientRect().left;
+        - track.getBoundingClientRect().left;
 
       var id = 'spc' + Math.random().toString(36).slice(2, 7);
       var sheet = document.createElement('style');
@@ -1139,9 +1686,10 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
+        navigator.serviceWorker.register('/sw.js').catch(() => { });
       });
     }
   </script>
 </body>
+
 </html>
