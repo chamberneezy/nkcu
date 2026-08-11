@@ -117,7 +117,7 @@
       <div class="container">
         <div class="section-header">
           <span class="label-tag" data-de="Aktuelles" data-hr="Aktualno">Aktuelles</span>
-          <h2 data-de="News &amp; Resultate" data-hr="Novosti &amp; Rezultati">News &amp; Resultate</h2>
+          <h2 data-de="Resultate &amp; News" data-hr="Novosti &amp; Rezultati">Resultate &amp; News</h2>
         </div>
 
         <div class="news-split">
@@ -264,30 +264,6 @@
                 </div>
               </button>
 
-            </div>
-
-            <!-- Nächstes Event -->
-            <h3 class="col-title col-title--red" style="margin-top:28px;" data-de="Nächstes Event"
-              data-hr="Sljedeći događaj">Nächstes Event</h3>
-            <div class="next-event-box">
-              <div class="nev-card">
-                <div class="nev-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                  </svg>
-                </div>
-                <div class="nev-info">
-                  <span class="nev-date" data-de="Training ab 16.06.2026" data-hr="Trening od 16.06.2026.">Training ab
-                    16.06.2026</span>
-                  <strong class="nev-title" data-de="Trainingsstart Saison 2026/27"
-                    data-hr="Početak treninga Sezona 2026./27.">Trainingsstart Saison 2026/27</strong>
-                  <span class="nev-sub" data-de="Jeweils Dienstag &amp; Freitag" data-hr="Svaki utorak i petak">Jeweils
-                    Dienstag &amp; Freitag</span>
-                </div>
-              </div>
             </div>
 
           </div>
@@ -1459,6 +1435,27 @@
           document.getElementById('standingsEmpty').style.display = 'none';
           document.getElementById('standingsError').style.display = '';
         });
+
+      /* ── Mobile Reihenfolge: Letztes Spiel, Nächstes Spiel, Tabelle, News & Anlässe ──
+         Auf Mobile wird die Spalte "News & Anlässe" hinter die Tabelle verschoben.
+         Auf Desktop bleibt die ursprüngliche 2-Spalten-Anordnung erhalten. ── */
+      (function () {
+        var newsArticlesCol = document.querySelectorAll('#news .news-col')[1];
+        var tabelleContainer = document.querySelector('#tabelle-spiele .container');
+        if (!newsArticlesCol || !tabelleContainer) return;
+        var originalParent = newsArticlesCol.parentNode;
+        var originalNext = newsArticlesCol.nextSibling;
+        var mq = window.matchMedia('(max-width: 800px)');
+        function apply(isMobile) {
+          if (isMobile) {
+            tabelleContainer.appendChild(newsArticlesCol);
+          } else if (newsArticlesCol.parentNode !== originalParent) {
+            originalParent.insertBefore(newsArticlesCol, originalNext);
+          }
+        }
+        apply(mq.matches);
+        mq.addEventListener('change', function (e) { apply(e.matches); });
+      })();
 
     })();
   </script>
