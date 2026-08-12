@@ -3668,15 +3668,28 @@ ul {
 
   .mol-name--us {
     font-weight: 700;
+    white-space: nowrap;
+    font-size: clamp(.6rem, 3.4vw, .8rem);
+  }
+
+  .mol-team {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .mol-logo {
+    width: 26px;
+    height: 26px;
+    border-radius: 5px;
   }
 
   .mol-score {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     flex-shrink: 0;
   }
 
   .match-oneline {
-    gap: 10px;
+    gap: 8px;
   }
 }
 
