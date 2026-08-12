@@ -3659,11 +3659,11 @@ ul {
 ══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   .mol-name {
-    white-space: normal;
+    white-space: nowrap;
     overflow: visible;
     text-overflow: unset;
     max-width: none;
-    font-size: .8rem;
+    font-size: clamp(.68rem, 3.2vw, .8rem);
     line-height: 1.25;
   }
 
@@ -3673,15 +3673,27 @@ ul {
 
   .mol-name-break {
     display: block;
+    white-space: nowrap;
+  }
+
+  .mol-team {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .mol-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
   }
 
   .mol-score {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     flex-shrink: 0;
   }
 
   .match-oneline {
-    gap: 10px;
+    gap: 8px;
   }
 }
 
