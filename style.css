@@ -3664,10 +3664,15 @@ ul {
     text-overflow: unset;
     max-width: none;
     font-size: .8rem;
+    line-height: 1.25;
   }
 
   .mol-name--us {
     font-weight: 700;
+  }
+
+  .mol-name-break {
+    display: block;
   }
 
   .mol-score {
