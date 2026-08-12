@@ -3833,11 +3833,16 @@ ul {
     width: auto;
     transform: translateY(-30%);
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .25));
-    transition: transform .3s;
+    transition: transform .3s, height .3s, opacity .3s;
   }
 
   .logo:hover .logo-img {
     transform: translateY(-30%) scale(1.05);
+  }
+
+  .header.scrolled .logo-img {
+    height: 63.75px;
+    opacity: .92;
   }
 
   .logo-text-block {
