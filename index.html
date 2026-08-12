@@ -132,11 +132,11 @@
               </div>
               <div class="match-oneline">
                 <div class="mol-team">
-                  <span class="mol-name">FC Niederwil 2</span>
+                  <span class="mol-name">FC <span class="mol-name-break">Niederwil 2</span></span>
                 </div>
                 <span class="mol-score">3 – 4</span>
                 <div class="mol-team mol-team--right">
-                  <span class="mol-name mol-name--us">NK&nbsp;Croatia Uzwil</span>
+                  <span class="mol-name mol-name--us">NK <span class="mol-name-break">Croatia Uzwil</span></span>
                   <img src="logo.png" alt="NK Croatia Uzwil" class="mol-logo mol-logo--img mol-logo--transparent" />
                 </div>
               </div>
@@ -1351,7 +1351,14 @@
       }
 
       function tsIsUs(name) { return !!(name && /\buzwil\b/i.test(name)); }
-      function tsDisplayName(name) { return tsIsUs(name) ? 'NK Croatia Uzwil' : name; }
+      function tsDisplayName(name) { return tsIsUs(name) ? 'NK Croatia Uzwil' : name; }
+
+      function tsNameHtml(name) {
+        var esc = tsEscape(name);
+        var idx = esc.indexOf(' ');
+        if (idx === -1) return esc;
+        return esc.slice(0, idx) + ' <span class="mol-name-break">' + esc.slice(idx + 1) + '</span>';
+      }
 
       function tsRenderStandings(standings) {
         var wrap = document.getElementById('standingsWrap');
@@ -1401,7 +1408,7 @@
       }
 
       function tsTeamHtml(name, isUs, isRight) {
-        var nameHtml = '<span class="mol-name' + (isUs ? ' mol-name--us' : '') + '">' + tsEscape(tsDisplayName(name)) + '</span>';
+        var nameHtml = '<span class="mol-name' + (isUs ? ' mol-name--us' : '') + '">' + tsNameHtml(tsDisplayName(name)) + '</span>';
         var logoHtml = isUs ? '<img src="logo.png" alt="NK Croatia Uzwil" class="mol-logo mol-logo--img mol-logo--transparent" />' : '';
         var inner = isRight ? (nameHtml + logoHtml) : (logoHtml + nameHtml);
         return '<div class="mol-team' + (isRight ? ' mol-team--right' : '') + '">' + inner + '</div>';
