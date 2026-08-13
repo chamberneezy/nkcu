@@ -1078,7 +1078,8 @@
             </div>
             <div class="cf-group">
               <label for="cf-msg" data-de="Nachricht" data-hr="Poruka">Nachricht</label>
-              <textarea id="cf-msg" name="body" rows="4" placeholder="Deine Nachricht..."></textarea>
+              <textarea id="cf-msg" name="body" rows="4"
+                placeholder="Deine Nachricht mit vollständiger Adresse....."></textarea>
             </div>
             <button type="submit" class="btn btn--red btn--full" data-de="Senden →" data-hr="Pošalji →">Senden
               →</button>
@@ -1158,7 +1159,7 @@
         var cfCompany = document.getElementById('cf-company');
 
         if (cfName) cfName.placeholder = lang === 'hr' ? 'Tvoje ime' : 'Dein Name';
-        if (cfMsg) cfMsg.placeholder = lang === 'hr' ? 'Tvoja poruka...' : 'Deine Nachricht...';
+        if (cfMsg) cfMsg.placeholder = lang === 'hr' ? 'Tvoja poruka s punom adresom......' : 'Deine Nachricht mit vollständiger Adresse.....';
         if (fanName) fanName.placeholder = lang === 'hr' ? 'Tvoje ime' : 'Dein Name';
         if (fanEmail) fanEmail.placeholder = lang === 'hr' ? 'tvoja@email.ch' : 'deine@email.ch';
         if (cfCompany) cfCompany.placeholder = lang === 'hr' ? 'Vaša tvrtka' : 'Dein Unternehmen';
