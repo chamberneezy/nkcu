@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#CC0000" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>NK Croatia Uzwil — Wartungsarbeiten</title>
+  <meta name="description" content="Die Website von NK Croatia Uzwil wird gerade aktualisiert." />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Maintenance page — standalone, no header/nav/footer-nav ── */
+    body {
+      background: var(--black);
+    }
+
+    .maint-page {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .maint-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(204, 0, 0, .35) 0%, rgba(10, 10, 10, 0) 55%),
+        linear-gradient(to bottom, rgba(0, 0, 0, .2) 0%, rgba(100, 0, 0, .35) 60%, rgba(160, 0, 0, .55) 100%),
+        var(--black);
+    }
+
+    .maint-checkerboard {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 12px;
+      line-height: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .maint-checkerboard--top {
+      top: 0;
+    }
+
+    .maint-checkerboard--bottom {
+      bottom: 0;
+    }
+
+    .maint-checkerboard svg {
+      display: block;
+    }
+
+    .maint-content {
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .maint-logo {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      margin-bottom: 28px;
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .4));
+    }
+
+    .maint-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--ff-head);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+    }
+
+    .maint-badge::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, .85);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .maint-title {
+      font-family: var(--ff-head);
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .maint-title em {
+      font-style: normal;
+      color: var(--red-light);
+      text-shadow:
+        0 0 24px rgba(255, 40, 40, .7),
+        0 0 60px rgba(255, 40, 40, .35),
+        0 0 120px rgba(255, 40, 40, .15);
+    }
+
+    .maint-text {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, .82);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .maint-contact {
+      font-size: .95rem;
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .maint-contact a {
+      color: var(--white);
+      border-bottom: 1.5px solid rgba(255, 255, 255, .4);
+      transition: border-color .18s, color .18s;
+    }
+
+    .maint-contact a:hover {
+      color: var(--red-light);
+      border-color: var(--red-light);
+    }
+
+    .maint-lang {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 3;
+    }
+
+    .maint-copy {
+      position: absolute;
+      bottom: 28px;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      text-align: center;
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .4);
+    }
+
+    @media (max-width: 640px) {
+      .maint-lang {
+        top: 16px;
+        right: 16px;
+      }
+
+      .maint-logo {
+        width: 76px;
+        height: 76px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="maint-page">
+    <div class="maint-bg" aria-hidden="true"></div>
+    <div class="maint-checkerboard maint-checkerboard--top" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"
+        width="100%" height="12" preserveAspectRatio="none">
+        <defs>
+          <pattern id="chkTop" x="0" y="0" width="24" height="12" patternUnits="userSpaceOnUse">
+            <rect width="12" height="6" fill="#CC0000" />
+            <rect x="12" width="12" height="6" fill="#FFFFFF" />
+            <rect y="6" width="12" height="6" fill="#FFFFFF" />
+            <rect x="12" y="6" width="12" height="6" fill="#CC0000" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="12" fill="url(#chkTop)" />
+      </svg></div>
+    <div class="maint-checkerboard maint-checkerboard--bottom" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="12" preserveAspectRatio="none">
+        <defs>
+          <pattern id="chkBottom" x="0" y="0" width="24" height="12" patternUnits="userSpaceOnUse">
+            <rect width="12" height="6" fill="#CC0000" />
+            <rect x="12" width="12" height="6" fill="#FFFFFF" />
+            <rect y="6" width="12" height="6" fill="#FFFFFF" />
+            <rect x="12" y="6" width="12" height="6" fill="#CC0000" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="12" fill="url(#chkBottom)" />
+      </svg>
+    </div>
+
+    <button class="lang-toggle maint-lang" id="langToggle" aria-label="Sprache wechseln / Promijeni jezik">
+      <span class="lang-opt" id="langDe">DE</span>
+      <span class="lang-sep">/</span>
+      <span class="lang-opt" id="langHr">HR</span>
+    </button>
+
+    <div class="maint-content">
+      <img src="logo.png" alt="NK Croatia Uzwil" class="maint-logo" />
+
+      <span class="maint-badge">
+        <span data-de="Wartungsarbeiten" data-hr="Radovi u tijeku">Wartungsarbeiten</span>
+      </span>
+
+      <h1 class="maint-title">
+        <span data-de="Wir sind" data-hr="Uskoro smo">Wir sind</span>
+        <em data-de="bald" data-hr="opet">bald</em>
+        <span data-de="wieder da." data-hr="tu.">wieder da.</span>
+      </h1>
+
+      <p class="maint-text" data-de="Wir arbeiten gerade an unserer Website und sind in Kürze wieder für euch da. Vielen Dank für eure Geduld."
+        data-hr="Trenutačno radimo na našoj web stranici i uskoro ćemo opet biti tu za vas. Hvala vam na strpljenju.">
+        Wir arbeiten gerade an unserer Website und sind in Kürze wieder für euch da. Vielen Dank für eure Geduld.
+      </p>
+
+      <p class="maint-contact">
+        <span data-de="Bei dringenden Anliegen:" data-hr="Za hitne upite:">Bei dringenden Anliegen:</span>
+        <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a>
+      </p>
+    </div>
+
+    <p class="maint-copy">© 2026 NK Croatia Uzwil</p>
+  </div>
+
+  <script>
+    (function () {
+      var currentLang = 'de';
+
+      function applyLang(lang) {
+        currentLang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
+        document.getElementById('langDe').classList.toggle('active', lang === 'de');
+        document.getElementById('langHr').classList.toggle('active', lang === 'hr');
+
+        document.querySelectorAll('[data-de][data-hr]').forEach(function (el) {
+          var txt = el.getAttribute('data-' + lang);
+          if (txt === null) return;
+          el.textContent = txt;
+        });
+      }
+
+      document.getElementById('langToggle').addEventListener('click', function () {
+        applyLang(currentLang === 'de' ? 'hr' : 'de');
+      });
+
+      applyLang('de');
+    })();
+  </script>
+
+</body>
+
+</html>
