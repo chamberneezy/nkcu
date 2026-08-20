@@ -73,6 +73,7 @@ Croatian flag palette: red / white / blue only. Avoid introducing other accent c
 - `players/` — player headshots (named `firstname-lastname.jpg`)
 - `sponsors/` — sponsor logos, referenced from the sponsors section
 - `data/uzwil4.json` — standings + fixtures, manually updated (see Tabelle & Spielplan above)
+- `data/nkcu_spiele.json` — fixtures only for the NK Croatia Uzwil
 - `hero-video.mp4` / `hero-team.png` — hero background (video with image fallback)
 - `manifest.json`, `sw.js`, `apple-touch-icon.png`, `favicon.ico` — PWA manifest/icons + service worker
 
