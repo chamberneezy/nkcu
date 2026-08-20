@@ -41,6 +41,37 @@
     </div>
   </div>
 
+  <!-- ═══════ NEXT MATCH MODAL ═══════ -->
+  <div class="news-modal-overlay" id="nextMatchModalOverlay" role="dialog" aria-modal="true"
+    aria-labelledby="nextMatchModalLabel">
+    <div class="news-modal" id="nextMatchModal">
+      <button class="news-modal-close" id="nextMatchModalClose" aria-label="Schliessen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="news-modal-body">
+        <div class="news-modal-content">
+          <div class="news-modal-meta" style="margin-bottom:18px;">
+            <span class="nm-tag" id="nextMatchModalLabel" data-de="Nächstes Spiel" data-hr="Sljedeća utakmica">Nächstes
+              Spiel</span>
+          </div>
+          <div class="match-card" id="nextMatchModalCard" style="margin-bottom:0;">
+            <div class="match-card-top">
+              <span class="match-badge" id="nmmBadge"></span>
+              <span class="match-date" id="nmmDate"></span>
+            </div>
+            <div class="match-oneline" id="nmmOneline"></div>
+            <div class="match-foot" id="nmmFoot"></div>
+          </div>
+          <img id="nmmLineupImg" src="graphics/lineup.png" alt="Aufstellung NK Croatia Uzwil"
+            class="nmm-lineup-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════ HEADER ═══════ -->
   <header class="header" id="header">
     <div class="header-inner">
@@ -164,7 +195,7 @@
 
             <h3 class="col-title" style="margin-top:28px;" data-de="Nächstes Spiel" data-hr="Sljedeća Utakmica">Nächstes
               Spiel</h3>
-            <div class="match-card match-card--next">
+            <div class="match-card match-card--next" id="nextMatchCard">
               <div class="match-card-top match-card-top--gray">
                 <span class="match-badge">4. Liga · Gruppe 8</span>
                 <span class="match-date" data-de="Saison 2026/27" data-hr="Sezona 2026/27">Saison 2026/27</span>
@@ -184,8 +215,8 @@
                 <span data-de="Saison 2025/26 abgeschlossen" data-hr="Sezona 2025/26 završena">Saison 2025/26
                   abgeschlossen</span>
                 <a href="https://matchcenter.ofv.swiss/default.aspx?oid=9&lng=1&v=1751&t=45818&sg=70419&ls=25868&tg=4331204"
-                  target="_blank" rel="noopener" class="match-link" data-de="Details →" data-hr="Detalji →">Detalji
-                  →</a>
+                  target="_blank" rel="noopener" class="match-link" id="nextMatchDetailsLink" data-de="Details →"
+                  data-hr="Detalji →">Detalji →</a>
               </div>
             </div>
 
@@ -1448,8 +1479,45 @@
         return '<div class="mol-team' + (isRight ? ' mol-team--right' : '') + '">' + inner + '</div>';
       }
 
+      function tsOpenNextMatchModal(next) {
+        var overlay = document.getElementById('nextMatchModalOverlay');
+        if (!overlay || !next) return;
+        var homeIsUs = tsIsUs(next.home);
+        var awayIsUs = tsIsUs(next.away);
+
+        document.getElementById('nmmBadge').textContent = next.league || '';
+        document.getElementById('nmmDate').textContent = next.date || '';
+
+        document.getElementById('nmmOneline').innerHTML =
+          tsTeamHtml(next.home, homeIsUs, false) +
+          '<span class="mol-score">' + tsEscape(next.time || '–') + '</span>' +
+          tsTeamHtml(next.away, awayIsUs, true);
+
+        var foot = document.getElementById('nmmFoot');
+        foot.innerHTML = next.venue ? '<span>📍 ' + tsEscape(next.venue) + '</span>' : '';
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function tsCloseNextMatchModal() {
+        var overlay = document.getElementById('nextMatchModalOverlay');
+        if (!overlay) return;
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      (function () {
+        var nmmOverlay = document.getElementById('nextMatchModalOverlay');
+        var nmmClose = document.getElementById('nextMatchModalClose');
+        if (!nmmOverlay || !nmmClose) return;
+        nmmClose.addEventListener('click', tsCloseNextMatchModal);
+        nmmOverlay.addEventListener('click', function (e) { if (e.target === nmmOverlay) tsCloseNextMatchModal(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') tsCloseNextMatchModal(); });
+      })();
+
       function tsRenderNextMatchHome(next) {
-        var card = document.querySelector('.match-card--next');
+        var card = document.getElementById('nextMatchCard');
         if (!card || !next) return;
         card.classList.remove('match-card--next');
         var topBar = card.querySelector('.match-card-top');
@@ -1484,6 +1552,14 @@
           } else {
             footNote.style.display = 'none';
           }
+        }
+
+        var detailsLink = card.querySelector('#nextMatchDetailsLink');
+        if (detailsLink) {
+          detailsLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            tsOpenNextMatchModal(next);
+          });
         }
       }
 

@@ -2723,6 +2723,16 @@ ul {
   color: var(--white);
 }
 
+#nextMatchModal .news-modal-close {
+  width: 25px;
+  height: 25px;
+}
+
+#nextMatchModal .news-modal-close svg {
+  width: 13px;
+  height: 13px;
+}
+
 .news-modal-body {
   display: flex;
   flex-direction: column;
@@ -2796,6 +2806,15 @@ ul {
 .news-modal-text strong {
   color: var(--black);
   font-weight: 700;
+}
+
+.nmm-lineup-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 20px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--gray-100);
 }
 
 .news-modal-text ul {
@@ -3355,14 +3374,34 @@ ul {
   }
 
   /* News Modal */
+  .news-modal-overlay {
+    padding: 10px;
+  }
+
   .news-modal {
-    margin: 12px;
-    width: calc(100% - 24px);
-    max-height: 90svh;
+    margin: 0;
+    width: 100%;
+    max-height: 96svh;
   }
 
   .news-modal-content {
-    padding: 24px 18px 28px;
+    padding: 20px 14px 24px;
+  }
+
+  #nextMatchModal .mol-name {
+    font-size: clamp(.6rem, 2.6vw, .72rem);
+  }
+
+  #nextMatchModal .mol-score {
+    font-size: 1.05rem;
+  }
+
+  #nextMatchModal .match-card-top {
+    padding: 10px 14px;
+  }
+
+  #nextMatchModal .match-oneline {
+    padding: 16px 14px;
   }
 }
 
