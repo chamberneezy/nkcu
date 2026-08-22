@@ -2091,10 +2091,6 @@ ul {
     gap: 40px;
   }
 
-  .news-cards {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .news-featured-banner {
     flex-direction: column;
     align-items: flex-start;
@@ -3010,24 +3006,23 @@ ul {
 }
 
 /* ══════════════════════════════════════════════════════
-   NEWS CARDS (Grid aus einzelnen Karten)
+   NEWS CARDS (eine Zeile pro Post, untereinander)
 ══════════════════════════════════════════════════════ */
 .news-cards {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .news-card {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  padding: 20px;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
   background: var(--white);
   border: 1.5px solid var(--gray-100);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   text-align: left;
@@ -3035,7 +3030,7 @@ ul {
 }
 
 .news-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: var(--shadow-md);
   border-color: var(--gray-200);
 }
@@ -3050,38 +3045,31 @@ ul {
 
 .nc-left {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 12px;
   flex: 1;
   min-width: 0;
 }
 
 .news-tag {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-shrink: 0;
+  display: inline-block;
   font-family: var(--ff-head);
-  font-size: .7rem;
+  font-size: .66rem;
   font-weight: 700;
-  letter-spacing: .14em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--blue);
-  background: none;
-  padding: 0;
-  border-radius: 0;
-  margin-bottom: 2px;
-}
-
-.news-tag::after {
-  content: '';
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(to right, var(--blue), transparent);
+  background: rgba(0, 53, 128, .08);
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
 .nc-title {
+  flex: 1;
+  min-width: 0;
   font-family: var(--ff-head);
-  font-size: .95rem;
+  font-size: .88rem;
   font-weight: 700;
   color: var(--black);
   text-transform: uppercase;
@@ -3092,24 +3080,18 @@ ul {
   text-overflow: ellipsis;
 }
 
+/* Excerpt stays in the data for the modal; hidden from the compact
+   one-line list view. */
 .nc-excerpt {
-  font-size: .82rem;
-  color: var(--gray-600);
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: none;
 }
 
 .nc-right {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  gap: 6px;
+  gap: 10px;
   flex-shrink: 0;
-  margin-top: auto;
-  padding-top: 4px;
 }
 
 .nc-arrow {
