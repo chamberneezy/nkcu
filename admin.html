@@ -501,6 +501,43 @@
       cursor: not-allowed;
     }
 
+    .p-line-picker {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .p-line-btn {
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      color: var(--gray-600);
+      font-family: var(--ff-head);
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      padding: 3px 6px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .p-card.selected .p-line-btn {
+      border-color: rgba(255, 255, 255, .5);
+      color: var(--white);
+    }
+
+    .p-line-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+
+    .p-line-btn.disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
     .save-bar {
       position: sticky;
       bottom: 0;
@@ -1029,16 +1066,20 @@
     var ADMIN_PASSWORD = 'croatia1971';
 
     /* ── Roster ─────────────────────────────────────────
-       Active players only, grouped by line. No coaches.
+       Active players only, grouped by home section for browsing.
+       Grouping is organizational only — any player can be assigned
+       to any line (see renderRoster / p-line-picker). No coaches.
     ── ──────────────────────────────────────────────── */
     var ROSTER = {
-      GK: ['A. SPECCHIA', 'R. VIČIĆ', 'D. BRKLJAČA'],
-      DEF: ['D. PALAMAR', 'A. RAMDEDOVIĆ', 'L. GOJEVIĆ', 'G. JOZIĆ', 'K. KATIČIĆ', 'M. BRELJAK', 'F. ŠARIĆ',
-        'I. BEGIĆ', 'A. MARIĆ', 'D. AJRIZI', 'B. PELIVANI', 'A. ROZAJAC', 'X. HASALLARI'],
-      MID: ['N. GONZALEZ', 'H. HAILESELASSIE', 'M. GOJEVIĆ', 'M. MATIĆ', 'A. BAHORIĆ', 'J. BAUMANN', 'I. SCHWAB',
-        'S. CULANIĆ', 'D. JOZIĆ', 'S. BAHORIĆ', 'D. UKA', 'I. MARTIĆ', 'S. CUCINELLI', 'I. BEKA'],
-      ATT: ['R. BULIĆ', 'K. PERIĆ', 'B. AHMEDI', 'S. IVANKOVIĆ', 'D. RADOŠ', 'H. HYSENAJ']
+      GK: ['A. Specchia', 'R. Vičić', 'D. Brkljača'],
+      DEF: ['A. Ramdedović', 'L. Gojević', 'G. Jozić', 'K. Katičić', 'M. Breljak', 'D. Martić',
+        'I. Begić', 'A. Marić', 'D. Ajrizi', 'B. Pelivani', 'A. Rozajac', 'X. Hasallari'],
+      MID: ['N. Gonzalez', 'H. Haileselassie', 'M. Gojević', 'M. Matić', 'A. Bahorić', 'J. Baumann', 'I. Schwab',
+        'S. Culanić', 'D. Jozić', 'S. Bahorić', 'D. Uka', 'I. Martić', 'S. Cucinelli', 'I. Beka'],
+      ATT: ['R. Bulić', 'K. Perić', 'S. Ivanković', 'D. Radoš', 'H. Hysenaj']
     };
+
+    var ROSTER_ALL = [].concat(ROSTER.GK, ROSTER.DEF, ROSTER.MID, ROSTER.ATT);
 
     var FORMATIONS = {
       '4-4-2': {
@@ -1190,7 +1231,7 @@
         Object.keys(saved.lineup).forEach(function (slot) {
           var name = saved.lineup[slot];
           var line = slot === 'GK' ? 'GK' : (/^ST/.test(slot) ? 'ATT' : (/^(CB|LB|RB|LWB|RWB)/.test(slot) ? 'DEF' : 'MID'));
-          if (name && ROSTER[line] && ROSTER[line].indexOf(name) !== -1 && state.selected[line].indexOf(name) === -1) {
+          if (name && ROSTER_ALL.indexOf(name) !== -1 && state.selected[line].indexOf(name) === -1) {
             state.selected[line].push(name);
           }
         });
@@ -1248,28 +1289,56 @@
       });
     }
 
+    /* Player is not locked to their home group — this finds whichever
+       line (if any) they're currently assigned to, regardless of which
+       grid section their card is displayed under. */
+    function findPlayerLine(name) {
+      var lines = ['GK', 'DEF', 'MID', 'ATT'];
+      for (var i = 0; i < lines.length; i++) {
+        if (state.selected[lines[i]].indexOf(name) !== -1) return lines[i];
+      }
+      return null;
+    }
+
+    function assignPlayerToLine(name, targetLine) {
+      var currentLine = findPlayerLine(name);
+      if (currentLine === targetLine) {
+        state.selected[targetLine].splice(state.selected[targetLine].indexOf(name), 1);
+        return;
+      }
+      var cap = FORMATIONS[state.formation][targetLine].length;
+      if (state.selected[targetLine].length >= cap) return;
+      if (currentLine) {
+        state.selected[currentLine].splice(state.selected[currentLine].indexOf(name), 1);
+      }
+      state.selected[targetLine].push(name);
+    }
+
     function renderRoster() {
       ['GK', 'DEF', 'MID', 'ATT'].forEach(function (line) {
         var grid = document.getElementById('grid' + line);
-        var cap = FORMATIONS[state.formation][line].length;
         grid.innerHTML = '';
         ROSTER[line].forEach(function (name) {
-          var isSelected = state.selected[line].indexOf(name) !== -1;
-          var atCap = state.selected[line].length >= cap;
+          var assignedLine = findPlayerLine(name);
           var card = document.createElement('div');
-          card.className = 'p-card' + (isSelected ? ' selected' : '') + (!isSelected && atCap ? ' disabled' : '');
-          var slotLabel = isSelected ? FORMATIONS[state.formation][line][state.selected[line].indexOf(name)] : '';
-          card.innerHTML = esc(name) + (slotLabel ? '<span class="p-slot">' + slotLabel + '</span>' : '');
-          card.addEventListener('click', function () {
-            var idx = state.selected[line].indexOf(name);
-            if (idx !== -1) {
-              state.selected[line].splice(idx, 1);
-            } else {
-              if (state.selected[line].length >= cap) return;
-              state.selected[line].push(name);
-            }
-            renderRoster();
-            renderLineCounter();
+          card.className = 'p-card' + (assignedLine ? ' selected' : '');
+          var slotLabel = assignedLine ? FORMATIONS[state.formation][assignedLine][state.selected[assignedLine].indexOf(name)] : '';
+          card.innerHTML = esc(name) +
+            (slotLabel ? '<span class="p-slot">' + LINE_LABELS[assignedLine] + ' · ' + slotLabel + '</span>' : '') +
+            '<div class="p-line-picker">' +
+            ['GK', 'DEF', 'MID', 'ATT'].map(function (targetLine) {
+              var active = assignedLine === targetLine;
+              var atCap = !active && state.selected[targetLine].length >= FORMATIONS[state.formation][targetLine].length;
+              return '<button type="button" class="p-line-btn' + (active ? ' active' : '') + (atCap ? ' disabled' : '') +
+                '" data-line="' + targetLine + '">' + targetLine + '</button>';
+            }).join('') +
+            '</div>';
+          card.querySelectorAll('.p-line-btn').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+              e.stopPropagation();
+              assignPlayerToLine(name, btn.getAttribute('data-line'));
+              renderRoster();
+            });
           });
           grid.appendChild(card);
         });
@@ -1542,6 +1611,9 @@
 
       document.getElementById('scorerSelect').hidden = !sideIsUs;
       document.getElementById('goalScorerText').hidden = sideIsUs;
+      if (!sideIsUs) {
+        document.getElementById('goalScorerText').value = 'Gegner';
+      }
     }
 
     document.getElementById('btnAddGoal').addEventListener('click', openGoalModal);
@@ -1566,7 +1638,7 @@
       var minute = parseInt(document.getElementById('goalMinuteInput').value, 10);
       var scorer = sideIsUs
         ? document.getElementById('scorerSelect').value
-        : document.getElementById('goalScorerText').value.trim();
+        : (document.getElementById('goalScorerText').value.trim() || 'Gegner');
 
       saveGoal(goalModalSide, minute, scorer, closeGoalModal);
     });

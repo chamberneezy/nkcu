@@ -4689,6 +4689,10 @@ body.has-live-banner .cookie-banner {
   display: block;
 }
 
+.spc-item--dark {
+  background: #000;
+}
+
 .spc-item--empty {
   border-style: dashed;
   border-color: var(--gray-200);
