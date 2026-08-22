@@ -151,17 +151,17 @@
       <div class="hero-cut" aria-hidden="true"></div>
     </section>
 
-    <!-- ═══════ NEWS & RESULTATE ═══════ -->
-    <section class="section" id="news">
+    <!-- ═══════ SPIELE ═══════ -->
+    <section class="section" id="spiele">
       <div class="container">
         <div class="section-header">
-          <span class="label-tag" data-de="Aktuelles" data-hr="Aktualno">Aktuelles</span>
-          <h2 data-de="Resultate &amp; News" data-hr="Novosti &amp; Rezultati">Resultate &amp; News</h2>
+          <span class="label-tag" data-de="Saison 2026/27" data-hr="Sezona 2026./27.">Saison 2026/27</span>
+          <h2 data-de="Spiele" data-hr="Utakmice">Spiele</h2>
         </div>
 
-        <div class="news-split">
+        <div class="spiele-grid">
 
-          <!-- Linke Spalte: Spiele -->
+          <!-- Letztes Spiel -->
           <div class="news-col">
             <h3 class="col-title" data-de="Letztes Spiel" data-hr="Posljednja Utakmica">Letztes Spiel</h3>
             <div class="match-card">
@@ -188,10 +188,10 @@
               <div class="match-scorers">
                 <span class="scorers-label" data-de="Torschützen" data-hr="Strijelci">Torschützen</span>
                 <div class="scorers-list">
-                  <span class="scorer">9' R. Bulić</span>
-                  <span class="scorer">16' D. Radoš</span>
-                  <span class="scorer">66' S. Culanić</span>
-                  <span class="scorer">79' S. Cucinelli</span>
+                  <span class="scorer">9' Robertino</span>
+                  <span class="scorer">16' Davor</span>
+                  <span class="scorer">66' Stanko</span>
+                  <span class="scorer">79' Saverio</span>
                 </div>
               </div>
               <div class="match-foot">
@@ -200,9 +200,11 @@
                   rel="noopener" class="match-link" data-de="Details →" data-hr="Detalji →">Details →</a>
               </div>
             </div>
+          </div>
 
-            <h3 class="col-title" style="margin-top:28px;" data-de="Nächstes Spiel" data-hr="Sljedeća Utakmica">Nächstes
-              Spiel</h3>
+          <!-- Nächstes Spiel -->
+          <div class="news-col">
+            <h3 class="col-title" data-de="Nächstes Spiel" data-hr="Sljedeća Utakmica">Nächstes Spiel</h3>
             <div class="match-card match-card--next" id="nextMatchCard">
               <div class="match-card-top match-card-top--gray">
                 <span class="match-badge">4. Liga · Gruppe 8</span>
@@ -219,6 +221,7 @@
                 <p data-de="Nächstes Spiel noch nicht bekannt" data-hr="Sljedeća utakmica još nije poznata">Nächstes
                   Spiel noch nicht bekannt</p>
               </div>
+              <div class="match-date-boxes" id="nextMatchDateBoxes" hidden></div>
               <div class="match-scorers match-scorers--split" id="nextMatchScorers" hidden></div>
               <div class="match-foot">
                 <span data-de="Saison 2025/26 abgeschlossen" data-hr="Sezona 2025/26 završena">Saison 2025/26
@@ -228,111 +231,6 @@
                   data-hr="Detalji →">Detalji →</a>
               </div>
             </div>
-
-            <a href="#tabelle-spiele" class="ofv-table-link">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M3 9h18M3 15h18M9 3v18" />
-              </svg>
-              <span data-de="Tabelle ansehen →" data-hr="Ljestvica →">Tabelle ansehen →</span>
-            </a>
-          </div>
-
-          <!-- Rechte Spalte: News Cards -->
-          <div class="news-col">
-            <h3 class="col-title" data-de="News &amp; Anlässe" data-hr="Novosti &amp; Događaji">News &amp; Anlässe</h3>
-            <div class="news-cards">
-
-              <button class="news-card" data-de-tag="Transfers" data-hr-tag="Transferi"
-                data-de-title="Sommertransfers 2026/27 – Neue Gesichter, grosser Dank"
-                data-hr-title="Ljetni transferi 2026./27. – Nova lica, veliko hvala" data-date="Aug 2026"
-                data-de-text="&lt;p&gt;Der Sommer bringt Bewegung ins Team von NK Croatia Uzwil. Wir heissen &lt;strong&gt;Saverio Cucinelli&lt;/strong&gt;, &lt;strong&gt;Xhevat Hasallari&lt;/strong&gt;, &lt;strong&gt;Davor Radoš&lt;/strong&gt; und &lt;strong&gt;Isak Beka&lt;/strong&gt; herzlich willkommen und freuen uns, sie ab sofort in unseren Reihen zu wissen.&lt;/p&gt;&lt;p&gt;Gleichzeitig heisst es Abschied nehmen: Wir danken &lt;strong&gt;Armando Kumria&lt;/strong&gt;, &lt;strong&gt;Franjo Perić&lt;/strong&gt;, &lt;strong&gt;Phil Bulić&lt;/strong&gt;, &lt;strong&gt;Denis Palamar&lt;/strong&gt; und &lt;strong&gt;Filip Šarić&lt;/strong&gt; von Herzen für ihren langjährigen Einsatz im Trikot von NK Croatia Uzwil – ihr Engagement bleibt unvergessen. Wir wünschen euch alles Gute für die Zukunft!&lt;/p&gt;&lt;p&gt;Wir blicken mit grosser Vorfreude auf die Saison 2026/27!&lt;/p&gt;"
-                data-hr-text="&lt;p&gt;Ljeto donosi promjene u momčadi NK Croatia Uzwil. Srdačno pozdravljamo nove igrače &lt;strong&gt;Saveria Cucinellija&lt;/strong&gt;, &lt;strong&gt;Xhevata Hasallarija&lt;/strong&gt;, &lt;strong&gt;Davora Radoša&lt;/strong&gt; i &lt;strong&gt;Isaka Beku&lt;/strong&gt; te se veselimo što su od sada dio naših redova.&lt;/p&gt;&lt;p&gt;Istovremeno, vrijeme je za oproštaj: od srca zahvaljujemo &lt;strong&gt;Armandu Kumriji&lt;/strong&gt;, &lt;strong&gt;Franji Periću&lt;/strong&gt;, &lt;strong&gt;Philu Buliću&lt;/strong&gt;, &lt;strong&gt;Denisu Palamaru&lt;/strong&gt; i &lt;strong&gt;Filipu Šariću&lt;/strong&gt; na dugogodišnjem angažmanu u dresu NK Croatia Uzwil – njihov trud ostaje nezaboravan. Želimo vam sve najbolje u budućnosti!&lt;/p&gt;&lt;p&gt;S velikim veseljem iščekujemo sezonu 2026./27.!&lt;/p&gt;">
-                <div class="nc-left">
-                  <span class="news-tag" data-de="Transfers" data-hr="Transferi">Transfers</span>
-                  <h4 class="nc-title" data-de="Sommertransfers 2026/27 – Neue Gesichter, grosser Dank"
-                    data-hr="Ljetni transferi 2026./27. – Nova lica, veliko hvala">Sommertransfers 2026/27 – Neue
-                    Gesichter, grosser Dank</h4>
-                  <p class="nc-excerpt" data-de="4 Neuzugänge, 5 Abgänge – der Kader für 2026/27 nimmt Form an."
-                    data-hr="4 nova igrača, 5 odlazaka – momčad za 2026./27. poprima svoj oblik.">4 Neuzugänge, 5
-                    Abgänge – der Kader für 2026/27 nimmt Form an.</p>
-                </div>
-                <div class="nc-right">
-                  <span class="news-date">Aug 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </button>
-
-              <button class="news-card" data-de-tag="Saison" data-hr-tag="Sezona"
-                data-de-title="Platz 2 — Starke Saison!" data-hr-title="2. mjesto — Izvrsna sezona!"
-                data-date="Jun 2026"
-                data-de-text="&lt;p&gt;NK Croatia Uzwil beendet die Saison 2025/26 auf Platz 2 mit 43 Punkten — punktgleich mit FC Henau, die dank des besseren Fair-Play-Scores und Torverhältnisses auf Platz 1 bleiben sollte. Eine herausragende Rückrunde mit 9 Siegen aus 9 Spielen.&lt;/p&gt;"
-                data-hr-text="&lt;p&gt;NK Croatia Uzwil završava sezonu 2025/26 na &lt;strong&gt;2. mjestu&lt;/strong&gt; s 43 boda — izjednačeno s FC Henauom, zahvaljujući boljem fair-playu i gol-razlici.&lt;/p&gt;&lt;p&gt;Posebno impresivno: cijelo proljeće s &lt;strong&gt;9 pobjeda iz 9 utakmica&lt;/strong&gt; — bez ijednog izgubljenog boda. Izniman učinak koji pokazuje karakter i jedinstvo naše momčadi.&lt;/p&gt;">
-                <div class="nc-left">
-                  <span class="news-tag" data-de="Saison" data-hr="Sezona">Saison</span>
-                  <h4 class="nc-title" data-de="Platz 2 — Starke Saison!" data-hr="2. mjesto — Izvrsna sezona!">Platz 2
-                    — Starke Saison!</h4>
-                  <p class="nc-excerpt" data-de="9/9 Siege in der Rückrunde, punktgleich mit Platz 1."
-                    data-hr="9/9 pobjeda u proljeću, izjednačeno s 1. mjestom.">9/9 Siege in der Rückrunde, punktgleich
-                    mit Platz 1.</p>
-                </div>
-                <div class="nc-right">
-                  <span class="news-date">Jun 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </button>
-
-              <button class="news-card" data-de-tag="Trainingslager" data-hr-tag="Pripreme"
-                data-de-title="Trainingslager Lissabon 2026" data-hr-title="Pripremni kamp Lisabon 2026"
-                data-date="Mär 2026"
-                data-de-text="&lt;p&gt;NK Croatia Uzwil reiste für ein intensives Trainingslager nach &lt;strong&gt;Lissabon, Portugal&lt;/strong&gt; — Unterkunft im Hotel Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Hinflug und Einchecken im Hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Zwei Trainingseinheiten + Freundschaftsspiel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Zwei Trainingseinheiten&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trainingseinheit + Stadium Tour Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Entspannter Abschlusstag&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;"
-                data-hr-text="&lt;p&gt;NK Croatia Uzwil otputovao je na intenzivan pripremni kamp u &lt;strong&gt;Lisabon, Portugal&lt;/strong&gt; — smještaj u hotelu Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Let i prijava u hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Dva treninga + prijateljska utakmica&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Dva treninga&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trening + obilazak stadiona Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Opušteni završni dan&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;">
-                <div class="nc-left">
-                  <span class="news-tag" data-de="Trainingslager" data-hr="Pripreme">Trainingslager</span>
-                  <h4 class="nc-title" data-de="Trainingslager Lissabon 2026" data-hr="Pripremni kamp Lisabon 2026">
-                    Trainingslager Lissabon 2026</h4>
-                  <p class="nc-excerpt" data-de="5 Tage Lissabon — Hotel Ikonik Lisboa***."
-                    data-hr="5 dana Lisabon — Hotel Ikonik Lisboa***.">5 Tage Lissabon — Hotel Ikonik Lisboa***.</p>
-                </div>
-                <div class="nc-right">
-                  <span class="news-date">Mär 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </button>
-
-              <button class="news-card" data-de-tag="Hallenturnier" data-hr-tag="Dvoranski turnir"
-                data-de-title="Hallenturnier 2026 — NK Croatia Uzwil als Organisator"
-                data-hr-title="Dvoranski turnir 2026 — NK Croatia Uzwil kao organizator" data-date="Feb 2026"
-                data-de-text="&lt;p&gt;NK Croatia Uzwil hat das &lt;strong&gt;Hallenturnier 2026&lt;/strong&gt; wie jedes Jahr erfolgreich organisiert. Der Anlass war ein voller Erfolg mit zahlreichen teilnehmenden Mannschaften.&lt;/p&gt;&lt;p&gt;Alle Infos, Resultate und Details auf &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;"
-                data-hr-text="&lt;p&gt;NK Croatia Uzwil je kao svake godine uspješno organizirao &lt;strong&gt;dvoranski turnir 2026&lt;/strong&gt;. Događaj je bio pravi uspjeh s velikim brojem sudjelujućih momčadi.&lt;/p&gt;&lt;p&gt;Sve informacije, rezultati i detalji na &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;">
-                <div class="nc-left">
-                  <span class="news-tag">Hallenturnier</span>
-                  <h4 class="nc-title" data-de="Hallenturnier 2026 — Wir waren Organisator"
-                    data-hr="Dvoranski turnir 2026 — Mi smo bili organizator">Hallenturnier 2026 — Wir waren Organisator
-                  </h4>
-                  <p class="nc-excerpt" data-de="Erfolgreicher Anlass mit vielen Mannschaften."
-                    data-hr="Uspješan događaj s mnogim momčadima.">Erfolgreicher Anlass mit vielen Mannschaften.</p>
-                </div>
-                <div class="nc-right">
-                  <span class="news-date">Feb 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </button>
-
-            </div>
-
           </div>
 
         </div>
@@ -387,6 +285,129 @@
         <p class="table-widget-note" data-de="Tabelle wird von NK Croatia Uzwil nach jedem Spieltag aktualisiert."
           data-hr="Ljestvicu ažurira NK Croatia Uzwil nakon svakog kola.">Tabelle wird von NK Croatia Uzwil nach jedem
           Spieltag aktualisiert.</p>
+      </div>
+    </section>
+
+    <!-- ═══════ NEWS & ANLÄSSE ═══════ -->
+    <section class="section" id="news">
+      <div class="container">
+        <div class="section-header">
+          <span class="label-tag" data-de="Aktuelles" data-hr="Aktualno">Aktuelles</span>
+          <h2 data-de="News &amp; Anlässe" data-hr="Novosti &amp; Događaji">News &amp; Anlässe</h2>
+        </div>
+
+        <!-- Vorankündigung: statisch, bewusst nicht klickbar -->
+        <div class="news-featured-banner">
+          <div class="nfb-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </div>
+          <div class="nfb-body">
+            <span class="nfb-tag" data-de="Vorankündigung" data-hr="Najava">Vorankündigung</span>
+            <h4 class="nfb-title" data-de="Vorankündigung: Hallenturnier 2027"
+              data-hr="Najava: Dvoranski turnir 2027.">Vorankündigung: Hallenturnier 2027</h4>
+            <p class="nfb-sub" data-de="Nächstes Hallenturnier in Planung. Details folgen."
+              data-hr="Sljedeći dvoranski turnir u pripremi. Detalji slijede.">Nächstes Hallenturnier in Planung.
+              Details folgen.</p>
+          </div>
+          <span class="nfb-date" data-de="Februar 2027" data-hr="Veljača 2027.">Februar 2027</span>
+        </div>
+
+        <div class="news-cards">
+
+          <button class="news-card" data-de-tag="Transfers" data-hr-tag="Transferi"
+            data-de-title="Sommertransfers 2026/27 – Neue Gesichter, grosser Dank"
+            data-hr-title="Ljetni transferi 2026./27. – Nova lica, veliko hvala" data-date="Aug 2026"
+            data-de-text="&lt;p&gt;Der Sommer bringt Bewegung ins Team von NK Croatia Uzwil. Wir heissen &lt;strong&gt;Saverio Cucinelli&lt;/strong&gt;, &lt;strong&gt;Xhevat Hasallari&lt;/strong&gt;, &lt;strong&gt;Davor Radoš&lt;/strong&gt; und &lt;strong&gt;Isak Beka&lt;/strong&gt; herzlich willkommen und freuen uns, sie ab sofort in unseren Reihen zu wissen.&lt;/p&gt;&lt;p&gt;Gleichzeitig heisst es Abschied nehmen: Wir danken &lt;strong&gt;Armando Kumria&lt;/strong&gt;, &lt;strong&gt;Franjo Perić&lt;/strong&gt;, &lt;strong&gt;Phil Bulić&lt;/strong&gt;, &lt;strong&gt;Denis Palamar&lt;/strong&gt; und &lt;strong&gt;Filip Šarić&lt;/strong&gt; von Herzen für ihren langjährigen Einsatz im Trikot von NK Croatia Uzwil – ihr Engagement bleibt unvergessen. Wir wünschen euch alles Gute für die Zukunft!&lt;/p&gt;&lt;p&gt;Wir blicken mit grosser Vorfreude auf die Saison 2026/27!&lt;/p&gt;"
+            data-hr-text="&lt;p&gt;Ljeto donosi promjene u momčadi NK Croatia Uzwil. Srdačno pozdravljamo nove igrače &lt;strong&gt;Saveria Cucinellija&lt;/strong&gt;, &lt;strong&gt;Xhevata Hasallarija&lt;/strong&gt;, &lt;strong&gt;Davora Radoša&lt;/strong&gt; i &lt;strong&gt;Isaka Beku&lt;/strong&gt; te se veselimo što su od sada dio naših redova.&lt;/p&gt;&lt;p&gt;Istovremeno, vrijeme je za oproštaj: od srca zahvaljujemo &lt;strong&gt;Armandu Kumriji&lt;/strong&gt;, &lt;strong&gt;Franji Periću&lt;/strong&gt;, &lt;strong&gt;Philu Buliću&lt;/strong&gt;, &lt;strong&gt;Denisu Palamaru&lt;/strong&gt; i &lt;strong&gt;Filipu Šariću&lt;/strong&gt; na dugogodišnjem angažmanu u dresu NK Croatia Uzwil – njihov trud ostaje nezaboravan. Želimo vam sve najbolje u budućnosti!&lt;/p&gt;&lt;p&gt;S velikim veseljem iščekujemo sezonu 2026./27.!&lt;/p&gt;">
+            <div class="nc-left">
+              <span class="news-tag" data-de="Transfers" data-hr="Transferi">Transfers</span>
+              <h4 class="nc-title" data-de="Sommertransfers 2026/27 – Neue Gesichter, grosser Dank"
+                data-hr="Ljetni transferi 2026./27. – Nova lica, veliko hvala">Sommertransfers 2026/27 – Neue
+                Gesichter, grosser Dank</h4>
+              <p class="nc-excerpt" data-de="4 Neuzugänge, 5 Abgänge – der Kader für 2026/27 nimmt Form an."
+                data-hr="4 nova igrača, 5 odlazaka – momčad za 2026./27. poprima svoj oblik.">4 Neuzugänge, 5
+                Abgänge – der Kader für 2026/27 nimmt Form an.</p>
+            </div>
+            <div class="nc-right">
+              <span class="news-date">Aug 2026</span>
+              <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+
+          <button class="news-card" data-de-tag="Saison" data-hr-tag="Sezona"
+            data-de-title="Platz 2 — Starke Saison!" data-hr-title="2. mjesto — Izvrsna sezona!"
+            data-date="Jun 2026"
+            data-de-text="&lt;p&gt;NK Croatia Uzwil beendet die Saison 2025/26 auf Platz 2 mit 43 Punkten — punktgleich mit FC Henau, die dank des besseren Fair-Play-Scores und Torverhältnisses auf Platz 1 bleiben sollte. Eine herausragende Rückrunde mit 9 Siegen aus 9 Spielen.&lt;/p&gt;"
+            data-hr-text="&lt;p&gt;NK Croatia Uzwil završava sezonu 2025/26 na &lt;strong&gt;2. mjestu&lt;/strong&gt; s 43 boda — izjednačeno s FC Henauom, zahvaljujući boljem fair-playu i gol-razlici.&lt;/p&gt;&lt;p&gt;Posebno impresivno: cijelo proljeće s &lt;strong&gt;9 pobjeda iz 9 utakmica&lt;/strong&gt; — bez ijednog izgubljenog boda. Izniman učinak koji pokazuje karakter i jedinstvo naše momčadi.&lt;/p&gt;">
+            <div class="nc-left">
+              <span class="news-tag" data-de="Saison" data-hr="Sezona">Saison</span>
+              <h4 class="nc-title" data-de="Platz 2 — Starke Saison!" data-hr="2. mjesto — Izvrsna sezona!">Platz 2
+                — Starke Saison!</h4>
+              <p class="nc-excerpt" data-de="9/9 Siege in der Rückrunde, punktgleich mit Platz 1."
+                data-hr="9/9 pobjeda u proljeću, izjednačeno s 1. mjestom.">9/9 Siege in der Rückrunde, punktgleich
+                mit Platz 1.</p>
+            </div>
+            <div class="nc-right">
+              <span class="news-date">Jun 2026</span>
+              <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+
+          <button class="news-card" data-de-tag="Trainingslager" data-hr-tag="Pripreme"
+            data-de-title="Trainingslager Lissabon 2026" data-hr-title="Pripremni kamp Lisabon 2026"
+            data-date="Mär 2026"
+            data-de-text="&lt;p&gt;NK Croatia Uzwil reiste für ein intensives Trainingslager nach &lt;strong&gt;Lissabon, Portugal&lt;/strong&gt; — Unterkunft im Hotel Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Hinflug und Einchecken im Hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Zwei Trainingseinheiten + Freundschaftsspiel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Zwei Trainingseinheiten&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trainingseinheit + Stadium Tour Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Entspannter Abschlusstag&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;"
+            data-hr-text="&lt;p&gt;NK Croatia Uzwil otputovao je na intenzivan pripremni kamp u &lt;strong&gt;Lisabon, Portugal&lt;/strong&gt; — smještaj u hotelu Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Let i prijava u hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Dva treninga + prijateljska utakmica&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Dva treninga&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trening + obilazak stadiona Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Opušteni završni dan&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;">
+            <div class="nc-left">
+              <span class="news-tag" data-de="Trainingslager" data-hr="Pripreme">Trainingslager</span>
+              <h4 class="nc-title" data-de="Trainingslager Lissabon 2026" data-hr="Pripremni kamp Lisabon 2026">
+                Trainingslager Lissabon 2026</h4>
+              <p class="nc-excerpt" data-de="5 Tage Lissabon — Hotel Ikonik Lisboa***."
+                data-hr="5 dana Lisabon — Hotel Ikonik Lisboa***.">5 Tage Lissabon — Hotel Ikonik Lisboa***.</p>
+            </div>
+            <div class="nc-right">
+              <span class="news-date">Mär 2026</span>
+              <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+
+          <button class="news-card" data-de-tag="Hallenturnier" data-hr-tag="Dvoranski turnir"
+            data-de-title="Hallenturnier 2026 — NK Croatia Uzwil als Organisator"
+            data-hr-title="Dvoranski turnir 2026 — NK Croatia Uzwil kao organizator" data-date="Feb 2026"
+            data-de-text="&lt;p&gt;NK Croatia Uzwil hat das &lt;strong&gt;Hallenturnier 2026&lt;/strong&gt; wie jedes Jahr erfolgreich organisiert. Der Anlass war ein voller Erfolg mit zahlreichen teilnehmenden Mannschaften.&lt;/p&gt;&lt;p&gt;Alle Infos, Resultate und Details auf &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;"
+            data-hr-text="&lt;p&gt;NK Croatia Uzwil je kao svake godine uspješno organizirao &lt;strong&gt;dvoranski turnir 2026&lt;/strong&gt;. Događaj je bio pravi uspjeh s velikim brojem sudjelujućih momčadi.&lt;/p&gt;&lt;p&gt;Sve informacije, rezultati i detalji na &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;">
+            <div class="nc-left">
+              <span class="news-tag">Hallenturnier</span>
+              <h4 class="nc-title" data-de="Hallenturnier 2026 — Wir waren Organisator"
+                data-hr="Dvoranski turnir 2026 — Mi smo bili organizator">Hallenturnier 2026 — Wir waren Organisator
+              </h4>
+              <p class="nc-excerpt" data-de="Erfolgreicher Anlass mit vielen Mannschaften."
+                data-hr="Uspješan događaj s mnogim momčadima.">Erfolgreicher Anlass mit vielen Mannschaften.</p>
+            </div>
+            <div class="nc-right">
+              <span class="news-date">Feb 2026</span>
+              <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+
+        </div>
       </div>
     </section>
 
@@ -472,6 +493,10 @@
             <div class="player-card">
               <div class="player-photo"><img src="players/ivan-begic.jpg" alt="Ivan Begić" /></div><span
                 class="player-name">Ivan Begić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/dario-martic.jpg" alt="Dario Martić" /></div><span
+                class="player-name">Dario Martić</span>
             </div>
             <div class="player-card">
               <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
@@ -1076,6 +1101,20 @@
                   </svg></div>
                 <span>NK Croatia Uzwil</span>
               </a>
+              <a href="https://www.instagram.com/nkcroatiauzwil" target="_blank" rel="noopener" class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg></div>
+                <span>@nkcroatiauzwil</span>
+              </a>
+              <a href="https://whatsapp.com/channel/0029Vb8hbEXIHph8coczaj0A" target="_blank" rel="noopener" class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg></div>
+                <span data-de="WhatsApp Kanal" data-hr="WhatsApp kanal">WhatsApp Kanal</span>
+              </a>
             </div>
           </div>
           <form class="contact-form" id="contact-form">
@@ -1551,7 +1590,23 @@
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') tsCloseNextMatchModal(); });
       })();
 
-      function tsRenderNextMatchHome(next, entry) {
+      /* Wochentag/Tag/Monat für die drei Datums-Boxen der "Nächstes Spiel"-
+         Karte — rein aus next.date abgeleitet, keine neue Datenquelle. */
+      function tsDateParts(dateStr) {
+        var m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})/.exec(String(dateStr || '').trim());
+        if (!m) return null;
+        var d = new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+        if (isNaN(d.getTime())) return null;
+        return {
+          weekdayDe: d.toLocaleDateString('de-CH', { weekday: 'long' }),
+          weekdayHr: d.toLocaleDateString('hr-HR', { weekday: 'long' }),
+          day: d.getDate(),
+          monthDe: d.toLocaleDateString('de-CH', { month: 'long' }),
+          monthHr: d.toLocaleDateString('hr-HR', { month: 'long' })
+        };
+      }
+
+      function tsRenderNextMatchHome(next, entry, matchIndex) {
         var card = document.getElementById('nextMatchCard');
         if (!card || !next) return;
         card.classList.remove('match-card--next');
@@ -1577,6 +1632,21 @@
         } else {
           var existingOneline = card.querySelector('.match-oneline');
           if (existingOneline) existingOneline.replaceWith(oneline);
+        }
+
+        var dateBoxes = card.querySelector('#nextMatchDateBoxes');
+        if (dateBoxes) {
+          var parts = !hasScore ? tsDateParts(next.date) : null;
+          if (parts) {
+            dateBoxes.innerHTML =
+              '<div class="mdb-box"><span data-de="' + tsEscape(parts.weekdayDe) + '" data-hr="' + tsEscape(parts.weekdayHr) + '">' + tsEscape(parts.weekdayDe) + '</span></div>' +
+              '<div class="mdb-box">' + tsEscape(parts.day) + '.</div>' +
+              '<div class="mdb-box"><span data-de="' + tsEscape(parts.monthDe) + '" data-hr="' + tsEscape(parts.monthHr) + '">' + tsEscape(parts.monthDe) + '</span></div>';
+            dateBoxes.hidden = false;
+          } else {
+            dateBoxes.hidden = true;
+            dateBoxes.innerHTML = '';
+          }
         }
 
         var scorersBox = card.querySelector('#nextMatchScorers');
@@ -1609,9 +1679,17 @@
         if (badge && next.league) badge.textContent = next.league;
         var topDate = card.querySelector('.match-card-top .match-date');
         if (topDate) {
-          topDate.removeAttribute('data-de');
-          topDate.removeAttribute('data-hr');
-          topDate.textContent = next.date;
+          if (matchIndex) {
+            var deSpieltag = matchIndex + '. Spieltag';
+            var hrSpieltag = matchIndex + '. kolo';
+            topDate.setAttribute('data-de', deSpieltag);
+            topDate.setAttribute('data-hr', hrSpieltag);
+            topDate.textContent = currentLang === 'hr' ? hrSpieltag : deSpieltag;
+          } else {
+            topDate.removeAttribute('data-de');
+            topDate.removeAttribute('data-hr');
+            topDate.textContent = next.date;
+          }
         }
         var footNote = card.querySelector('.match-foot span[data-de]');
         if (footNote) {
@@ -1663,44 +1741,26 @@
         });
 
       /* Nächstes Spiel: aus data/spiele.json — rollt automatisch einen Tag
-         nach dem Spieltag auf das nächste Spiel weiter (siehe tsFindNextMatch). */
+         nach dem Spieltag auf das nächste Spiel weiter (siehe tsFindNextMatch).
+         Die Spieltag-Nummer ist die 1-basierte Position des Spiels in dieser
+         (Uzwil-eigenen) Fixture-Liste. */
       fetch('./data/spiele.json')
         .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
         .then(function (data) {
           var tsNextMatch = tsFindNextMatch(data.fixtures);
           if (!tsNextMatch) return;
+          var tsMatchIndex = (data.fixtures || []).indexOf(tsNextMatch) + 1;
           if (window.lsMatchId && window.lsLoadSavedSquads) {
             window.lsLoadSavedSquads()
-              .then(function (saved) { tsRenderNextMatchHome(tsNextMatch, saved[window.lsMatchId(tsNextMatch)]); })
-              .catch(function () { tsRenderNextMatchHome(tsNextMatch); });
+              .then(function (saved) { tsRenderNextMatchHome(tsNextMatch, saved[window.lsMatchId(tsNextMatch)], tsMatchIndex); })
+              .catch(function () { tsRenderNextMatchHome(tsNextMatch, null, tsMatchIndex); });
           } else {
-            tsRenderNextMatchHome(tsNextMatch);
+            tsRenderNextMatchHome(tsNextMatch, null, tsMatchIndex);
           }
         })
         .catch(function (err) {
           console.error('Nächstes Spiel konnte nicht geladen werden:', err);
         });
-
-      /* ── Mobile Reihenfolge: Letztes Spiel, Nächstes Spiel, Tabelle, News & Anlässe ──
-         Auf Mobile wird die Spalte "News & Anlässe" hinter die Tabelle verschoben.
-         Auf Desktop bleibt die ursprüngliche 2-Spalten-Anordnung erhalten. ── */
-      (function () {
-        var newsArticlesCol = document.querySelectorAll('#news .news-col')[1];
-        var tabelleContainer = document.querySelector('#tabelle-spiele .container');
-        if (!newsArticlesCol || !tabelleContainer) return;
-        var originalParent = newsArticlesCol.parentNode;
-        var originalNext = newsArticlesCol.nextSibling;
-        var mq = window.matchMedia('(max-width: 800px)');
-        function apply(isMobile) {
-          if (isMobile) {
-            tabelleContainer.appendChild(newsArticlesCol);
-          } else if (newsArticlesCol.parentNode !== originalParent) {
-            originalParent.insertBefore(newsArticlesCol, originalNext);
-          }
-        }
-        apply(mq.matches);
-        mq.addEventListener('change', function (e) { apply(e.matches); });
-      })();
 
     })();
   </script>
@@ -2095,14 +2155,29 @@
           .then(function (data) { return (data && data.matches) || {}; });
       }
 
+      /* Strikers stand closer together than a full back/mid line, and a
+         back three (3-5-2) stands a bit closer than a back four — a
+         narrower left/right band keeps them from spreading out to the
+         touchlines. Keyed by line + player count, since DEF is 4-wide
+         in 4-4-2 but only 3-wide (with wing-backs covering the flanks
+         in MID instead) in 3-5-2. */
+      var LINE_SPREAD = {
+        GK: { 1: [50, 50] },
+        DEF: { 3: [18, 82], 4: [12, 88] },
+        MID: { 4: [12, 88], 5: [12, 88] },
+        ATT: { 2: [34, 66] }
+      };
+
       function lsRenderToken(name, line, index, total) {
-        var x = total <= 1 ? 50 : 12 + index * (76 / (total - 1));
+        var spread = (LINE_SPREAD[line] && LINE_SPREAD[line][total]) || [12, 88];
+        var x = total <= 1 ? 50 : spread[0] + index * ((spread[1] - spread[0]) / (total - 1));
         var slug = PHOTO_SLUG.hasOwnProperty(name) ? PHOTO_SLUG[name] : undefined;
         var visual = slug
           ? '<img src="players/squad/' + slug + '.png" alt="' + lsEsc(name) + '" />'
           : JERSEY_SVG;
         return '<div class="lsp-token" style="left:' + x + '%; top:' + LINE_Y[line] + '%;">' +
-          visual + '<span class="lsp-name">' + lsEsc(name) + '</span></div>';
+          '<div class="lsp-visual">' + visual + '</div>' +
+          '<span class="lsp-name">' + lsEsc(name) + '</span></div>';
       }
 
       function lsRenderPitch(entry, pitchId, emptyId) {

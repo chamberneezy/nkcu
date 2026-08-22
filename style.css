@@ -640,7 +640,7 @@ ul {
 /* ══════════════════════════════════════════════════════
    NEWS & NÄCHSTES SPIEL
 ══════════════════════════════════════════════════════ */
-.news-split {
+.spiele-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 48px;
@@ -653,7 +653,7 @@ ul {
   font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--blue);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -664,7 +664,7 @@ ul {
   content: '';
   flex: 1;
   height: 2px;
-  background: linear-gradient(to right, var(--red), transparent);
+  background: linear-gradient(to right, var(--blue), transparent);
 }
 
 /* Match Card */
@@ -1422,8 +1422,8 @@ ul {
 
 .scorers-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 12px;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .scorer {
@@ -1447,6 +1447,29 @@ ul {
 
 .match-scorers--split[hidden] {
   display: none;
+}
+
+/* Nächstes Spiel: Wochentag / Tag / Monat als drei Boxen */
+.match-date-boxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 0 20px 18px;
+}
+
+.match-date-boxes[hidden] {
+  display: none;
+}
+
+.mdb-box {
+  background: rgba(0, 53, 128, .06);
+  color: var(--blue);
+  font-family: var(--ff-head);
+  font-size: .82rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: var(--radius);
 }
 
 .ms-col {
@@ -2063,14 +2086,23 @@ ul {
     padding-bottom: 120px;
   }
 
-  .news-split {
+  .spiele-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
-  /* Mobile: "News & Anlässe" wird per JS hinter die Tabelle verschoben */
-  #tabelle-spiele .news-col {
-    margin-top: 40px;
+  .news-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .news-featured-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .nfb-date {
+    margin-top: 4px;
   }
 
   .contact-layout {
@@ -2905,40 +2937,107 @@ ul {
 }
 
 /* ══════════════════════════════════════════════════════
-   NEWS CARDS (ersetzt Accordion)
+   NEWS-VORANKÜNDIGUNG (statischer Banner, bewusst nicht klickbar)
+══════════════════════════════════════════════════════ */
+.news-featured-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--white);
+  border: 1.5px solid var(--gray-100);
+  border-left: 4px solid var(--red);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 18px 22px;
+  margin-bottom: 20px;
+}
+
+.nfb-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: var(--red);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nfb-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.nfb-tag {
+  display: inline-block;
+  font-family: var(--ff-head);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--red);
+  background: rgba(204, 0, 0, .08);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.nfb-title {
+  font-family: var(--ff-head);
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.nfb-sub {
+  font-size: .84rem;
+  color: var(--gray-600);
+  line-height: 1.4;
+}
+
+.nfb-date {
+  flex-shrink: 0;
+  font-family: var(--ff-head);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--red);
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════════════
+   NEWS CARDS (Grid aus einzelnen Karten)
 ══════════════════════════════════════════════════════ */
 .news-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1.5px solid var(--gray-100);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--white);
-  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .news-card {
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 18px 20px;
-  background: none;
-  border: none;
-  border-bottom: 1px solid var(--gray-100);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 20px;
+  background: var(--white);
+  border: 1.5px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
   text-align: left;
-  transition: background .15s;
-}
-
-.news-card:last-child {
-  border-bottom: none;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
 }
 
 .news-card:hover {
-  background: var(--gray-50);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--gray-200);
 }
 
 .news-card--featured {
@@ -2955,6 +3054,29 @@ ul {
   gap: 6px;
   flex: 1;
   min-width: 0;
+}
+
+.news-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--ff-head);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  margin-bottom: 2px;
+}
+
+.news-tag::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, var(--blue), transparent);
 }
 
 .nc-title {
@@ -2981,10 +3103,13 @@ ul {
 
 .nc-right {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   gap: 6px;
   flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 4px;
 }
 
 .nc-arrow {
@@ -3293,7 +3418,7 @@ ul {
   }
 
   /* News + Spiele: 2-Spalten → 1-Spalte */
-  .news-split {
+  .spiele-grid {
     grid-template-columns: 1fr;
     gap: 32px;
   }
@@ -3702,7 +3827,7 @@ ul {
   .section,
   .header,
   .footer,
-  .news-split,
+  .spiele-grid,
   .news-col,
   .match-col,
   .player-cards,
@@ -4052,6 +4177,17 @@ body.has-live-banner {
   width: 18%;
 }
 
+/* Fixed-ratio box (matches the squad photo crop) so a photo and the
+   placeholder jersey both sit on the same "ground line" and line up
+   with the rest of the row, whichever one a given token uses. */
+.lsp-visual {
+  width: 100%;
+  aspect-ratio: 1066 / 911;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .lsp-token img,
 .lsp-token .lsp-jersey {
   width: 100%;
@@ -4061,7 +4197,7 @@ body.has-live-banner {
 }
 
 .lsp-token .lsp-jersey {
-  padding: 6%;
+  width: 62%;
 }
 
 .lsp-name {
@@ -4851,7 +4987,7 @@ body.has-live-banner .cookie-banner {
 ══════════════════════════════════════════════════════ */
 
 /* News-split: beide Spalten gleich hoch */
-.news-split {
+.spiele-grid {
   align-items: stretch !important;
 }
 

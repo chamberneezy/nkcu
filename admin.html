@@ -501,43 +501,6 @@
       cursor: not-allowed;
     }
 
-    .p-line-picker {
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      margin-top: 8px;
-    }
-
-    .p-line-btn {
-      border: 1.5px solid var(--gray-200);
-      background: var(--white);
-      color: var(--gray-600);
-      font-family: var(--ff-head);
-      font-size: .62rem;
-      font-weight: 700;
-      letter-spacing: .02em;
-      padding: 3px 6px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all .15s;
-    }
-
-    .p-card.selected .p-line-btn {
-      border-color: rgba(255, 255, 255, .5);
-      color: var(--white);
-    }
-
-    .p-line-btn.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: var(--white);
-    }
-
-    .p-line-btn.disabled {
-      opacity: .35;
-      cursor: not-allowed;
-    }
-
     .save-bar {
       position: sticky;
       bottom: 0;
@@ -1013,16 +976,8 @@
           <div class="player-grid" id="gridGK"></div>
         </div>
         <div class="roster-section">
-          <h3>Abwehr</h3>
-          <div class="player-grid" id="gridDEF"></div>
-        </div>
-        <div class="roster-section">
-          <h3>Mittelfeld</h3>
-          <div class="player-grid" id="gridMID"></div>
-        </div>
-        <div class="roster-section">
-          <h3>Sturm</h3>
-          <div class="player-grid" id="gridATT"></div>
+          <h3>Feldspieler</h3>
+          <div class="player-grid" id="gridOutfield"></div>
         </div>
 
         <div class="save-bar">
@@ -1066,9 +1021,12 @@
     var ADMIN_PASSWORD = 'croatia1971';
 
     /* ── Roster ─────────────────────────────────────────
-       Active players only, grouped by home section for browsing.
-       Grouping is organizational only — any player can be assigned
-       to any line (see renderRoster / p-line-picker). No coaches.
+       Active players only. Torhüter (GK) has its own small grid/pool.
+       Abwehr/Mittelfeld/Sturm are shown as a single "Feldspieler" list
+       (OUTFIELD_ROSTER below) — no player is listed more than once.
+       Clicking a player fills the next open slot in formation order
+       (Abwehr → Mittelfeld → Sturm), so any of them can end up in any
+       of those three lines. No coaches.
     ── ──────────────────────────────────────────────── */
     var ROSTER = {
       GK: ['A. Specchia', 'R. Vičić', 'D. Brkljača'],
@@ -1079,7 +1037,8 @@
       ATT: ['R. Bulić', 'K. Perić', 'S. Ivanković', 'D. Radoš', 'H. Hysenaj']
     };
 
-    var ROSTER_ALL = [].concat(ROSTER.GK, ROSTER.DEF, ROSTER.MID, ROSTER.ATT);
+    var OUTFIELD_LINES = ['DEF', 'MID', 'ATT'];
+    var OUTFIELD_ROSTER = [].concat(ROSTER.DEF, ROSTER.MID, ROSTER.ATT);
 
     var FORMATIONS = {
       '4-4-2': {
@@ -1231,7 +1190,8 @@
         Object.keys(saved.lineup).forEach(function (slot) {
           var name = saved.lineup[slot];
           var line = slot === 'GK' ? 'GK' : (/^ST/.test(slot) ? 'ATT' : (/^(CB|LB|RB|LWB|RWB)/.test(slot) ? 'DEF' : 'MID'));
-          if (name && ROSTER_ALL.indexOf(name) !== -1 && state.selected[line].indexOf(name) === -1) {
+          var pool = line === 'GK' ? ROSTER.GK : OUTFIELD_ROSTER;
+          if (name && pool.indexOf(name) !== -1 && state.selected[line].indexOf(name) === -1) {
             state.selected[line].push(name);
           }
         });
@@ -1289,60 +1249,77 @@
       });
     }
 
-    /* Player is not locked to their home group — this finds whichever
-       line (if any) they're currently assigned to, regardless of which
-       grid section their card is displayed under. */
-    function findPlayerLine(name) {
-      var lines = ['GK', 'DEF', 'MID', 'ATT'];
-      for (var i = 0; i < lines.length; i++) {
-        if (state.selected[lines[i]].indexOf(name) !== -1) return lines[i];
+    /* Which outfield line (if any) a player currently occupies. */
+    function findOutfieldLine(name) {
+      for (var i = 0; i < OUTFIELD_LINES.length; i++) {
+        if (state.selected[OUTFIELD_LINES[i]].indexOf(name) !== -1) return OUTFIELD_LINES[i];
       }
       return null;
     }
 
-    function assignPlayerToLine(name, targetLine) {
-      var currentLine = findPlayerLine(name);
-      if (currentLine === targetLine) {
-        state.selected[targetLine].splice(state.selected[targetLine].indexOf(name), 1);
-        return;
+    /* The next open outfield slot, in formation order: Abwehr fills
+       first, then Mittelfeld, then Sturm. */
+    function nextOutfieldLine() {
+      for (var i = 0; i < OUTFIELD_LINES.length; i++) {
+        var line = OUTFIELD_LINES[i];
+        if (state.selected[line].length < FORMATIONS[state.formation][line].length) return line;
       }
-      var cap = FORMATIONS[state.formation][targetLine].length;
-      if (state.selected[targetLine].length >= cap) return;
-      if (currentLine) {
-        state.selected[currentLine].splice(state.selected[currentLine].indexOf(name), 1);
-      }
-      state.selected[targetLine].push(name);
+      return null;
     }
 
     function renderRoster() {
-      ['GK', 'DEF', 'MID', 'ATT'].forEach(function (line) {
-        var grid = document.getElementById('grid' + line);
-        grid.innerHTML = '';
-        ROSTER[line].forEach(function (name) {
-          var assignedLine = findPlayerLine(name);
-          var card = document.createElement('div');
-          card.className = 'p-card' + (assignedLine ? ' selected' : '');
-          var slotLabel = assignedLine ? FORMATIONS[state.formation][assignedLine][state.selected[assignedLine].indexOf(name)] : '';
-          card.innerHTML = esc(name) +
-            (slotLabel ? '<span class="p-slot">' + LINE_LABELS[assignedLine] + ' · ' + slotLabel + '</span>' : '') +
-            '<div class="p-line-picker">' +
-            ['GK', 'DEF', 'MID', 'ATT'].map(function (targetLine) {
-              var active = assignedLine === targetLine;
-              var atCap = !active && state.selected[targetLine].length >= FORMATIONS[state.formation][targetLine].length;
-              return '<button type="button" class="p-line-btn' + (active ? ' active' : '') + (atCap ? ' disabled' : '') +
-                '" data-line="' + targetLine + '">' + targetLine + '</button>';
-            }).join('') +
-            '</div>';
-          card.querySelectorAll('.p-line-btn').forEach(function (btn) {
-            btn.addEventListener('click', function (e) {
-              e.stopPropagation();
-              assignPlayerToLine(name, btn.getAttribute('data-line'));
-              renderRoster();
-            });
-          });
-          grid.appendChild(card);
+      // Torhüter — its own small pool, one grid, one cap.
+      var gkGrid = document.getElementById('gridGK');
+      var gkCap = FORMATIONS[state.formation].GK.length;
+      gkGrid.innerHTML = '';
+      ROSTER.GK.forEach(function (name) {
+        var isSelected = state.selected.GK.indexOf(name) !== -1;
+        var atCap = state.selected.GK.length >= gkCap;
+        var card = document.createElement('div');
+        card.className = 'p-card' + (isSelected ? ' selected' : '') + (!isSelected && atCap ? ' disabled' : '');
+        var slotLabel = isSelected ? FORMATIONS[state.formation].GK[state.selected.GK.indexOf(name)] : '';
+        card.innerHTML = esc(name) + (slotLabel ? '<span class="p-slot">' + slotLabel + '</span>' : '');
+        card.addEventListener('click', function () {
+          var idx = state.selected.GK.indexOf(name);
+          if (idx !== -1) {
+            state.selected.GK.splice(idx, 1);
+          } else {
+            if (state.selected.GK.length >= gkCap) return;
+            state.selected.GK.push(name);
+          }
+          renderRoster();
         });
+        gkGrid.appendChild(card);
       });
+
+      // Feldspieler — one shared list, no per-position sections. Clicking
+      // a player fills the next open slot in formation order (Abwehr →
+      // Mittelfeld → Sturm), so any player can end up in any line.
+      var outGrid = document.getElementById('gridOutfield');
+      outGrid.innerHTML = '';
+      OUTFIELD_ROSTER.forEach(function (name) {
+        var line = findOutfieldLine(name);
+        var isSelected = line !== null;
+        var disabled = !isSelected && nextOutfieldLine() === null;
+        var card = document.createElement('div');
+        card.className = 'p-card' + (isSelected ? ' selected' : '') + (disabled ? ' disabled' : '');
+        var slotLabel = isSelected
+          ? LINE_LABELS[line] + ' · ' + FORMATIONS[state.formation][line][state.selected[line].indexOf(name)]
+          : '';
+        card.innerHTML = esc(name) + (slotLabel ? '<span class="p-slot">' + slotLabel + '</span>' : '');
+        card.addEventListener('click', function () {
+          if (isSelected) {
+            state.selected[line].splice(state.selected[line].indexOf(name), 1);
+          } else {
+            var target = nextOutfieldLine();
+            if (!target) return;
+            state.selected[target].push(name);
+          }
+          renderRoster();
+        });
+        outGrid.appendChild(card);
+      });
+
       renderLineCounter();
     }
 
