@@ -1,0 +1,27 @@
+{
+    "matches": {
+        "20-08-2026-FC-Uzwil-4-HNK-Hajduk": {
+            "matchId": "20-08-2026-FC-Uzwil-4-HNK-Hajduk",
+            "date": "20.08.2026",
+            "home": "FC Uzwil 4",
+            "away": "HNK Hajduk",
+            "formation": "4-4-2",
+            "lineup": {
+                "GK": "A. Specchia",
+                "LB": "L. Gojević",
+                "CB1": "G. Jozić",
+                "CB2": "K. Katičić",
+                "RB": "M. Breljak",
+                "LM": "M. Gojević",
+                "CM1": "M. Matić",
+                "CM2": "A. Bahorić",
+                "RM": "J. Baumann",
+                "ST1": "D. Radoš",
+                "ST2": "S. Ivanković"
+            },
+            "updated": "2026-08-20T16:44:21Z",
+            "goals": [],
+            "live": true
+        }
+    }
+}

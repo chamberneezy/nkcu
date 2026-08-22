@@ -41,6 +41,42 @@
     </div>
   </div>
 
+  <!-- ═══════ NEXT MATCH MODAL ═══════ -->
+  <div class="news-modal-overlay" id="nextMatchModalOverlay" role="dialog" aria-modal="true"
+    aria-labelledby="nextMatchModalLabel">
+    <div class="news-modal" id="nextMatchModal">
+      <button class="news-modal-close" id="nextMatchModalClose" aria-label="Schliessen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="news-modal-body">
+        <div class="news-modal-content">
+          <div class="news-modal-meta" style="margin-bottom:18px;">
+            <span class="nm-tag" id="nextMatchModalLabel" data-de="Nächstes Spiel" data-hr="Sljedeća utakmica">Nächstes
+              Spiel</span>
+          </div>
+          <div class="match-card" id="nextMatchModalCard" style="margin-bottom:0;">
+            <div class="match-card-top">
+              <span class="match-badge" id="nmmBadge"></span>
+              <span class="match-date" id="nmmDate"></span>
+            </div>
+            <div class="match-oneline" id="nmmOneline"></div>
+            <div class="match-foot" id="nmmFoot"></div>
+          </div>
+          <div class="live-squad-scorers" id="nmmScorers"></div>
+          <h3 class="col-title live-squad-section-title" data-de="Aufstellung" data-hr="Sastav">Aufstellung</h3>
+          <div class="live-squad-pitch" id="nmmPitch"></div>
+          <div class="live-squad-empty" id="nmmEmpty">
+            <p data-de="Die Aufstellung wurde noch nicht veröffentlicht." data-hr="Sastav još nije objavljen.">Die
+              Aufstellung wurde noch nicht veröffentlicht.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════ HEADER ═══════ -->
   <header class="header" id="header">
     <div class="header-inner">
@@ -104,25 +140,28 @@
           <em data-de="Identität." data-hr="Identitetom.">Identität.</em>
         </h1>
         <div class="hero-actions">
-          <a href="#news" class="btn btn--red" data-de="News &amp; Spiele" data-hr="Novosti &amp; Utakmice">News &amp;
-            Spiele</a>
+          <a href="#news" class="btn btn--red" id="heroPrimaryBtn">
+            <span id="heroPrimaryLabel" data-de="News &amp; Spiele" data-hr="Novosti &amp; Utakmice">News &amp;
+              Spiele</span>
+            <span class="hero-live-dot" id="heroLiveDot" hidden></span>
+          </a>
           <a href="#team" class="btn btn--ghost" data-de="Zum Kader" data-hr="Momčad">Zum Kader</a>
         </div>
       </div>
       <div class="hero-cut" aria-hidden="true"></div>
     </section>
 
-    <!-- ═══════ NEWS & RESULTATE ═══════ -->
-    <section class="section" id="news">
+    <!-- ═══════ SPIELE ═══════ -->
+    <section class="section" id="spiele">
       <div class="container">
         <div class="section-header">
-          <span class="label-tag" data-de="Aktuelles" data-hr="Aktualno">Aktuelles</span>
-          <h2 data-de="Resultate &amp; News" data-hr="Novosti &amp; Rezultati">Resultate &amp; News</h2>
+          <span class="label-tag" data-de="Saison 2026/27" data-hr="Sezona 2026./27.">Saison 2026/27</span>
+          <h2 data-de="Spiele" data-hr="Utakmice">Spiele</h2>
         </div>
 
-        <div class="news-split">
+        <div class="spiele-grid">
 
-          <!-- Linke Spalte: Spiele -->
+          <!-- Letztes Spiel -->
           <div class="news-col">
             <h3 class="col-title" data-de="Letztes Spiel" data-hr="Posljednja Utakmica">Letztes Spiel</h3>
             <div class="match-card">
@@ -149,10 +188,10 @@
               <div class="match-scorers">
                 <span class="scorers-label" data-de="Torschützen" data-hr="Strijelci">Torschützen</span>
                 <div class="scorers-list">
-                  <span class="scorer">9' R. Bulić</span>
-                  <span class="scorer">16' D. Radoš</span>
-                  <span class="scorer">66' S. Culanić</span>
-                  <span class="scorer">79' S. Cucinelli</span>
+                  <span class="scorer">9' Robertino</span>
+                  <span class="scorer">16' Davor</span>
+                  <span class="scorer">66' Stanko</span>
+                  <span class="scorer">79' Saverio</span>
                 </div>
               </div>
               <div class="match-foot">
@@ -161,10 +200,12 @@
                   rel="noopener" class="match-link" data-de="Details →" data-hr="Detalji →">Details →</a>
               </div>
             </div>
+          </div>
 
-            <h3 class="col-title" style="margin-top:28px;" data-de="Nächstes Spiel" data-hr="Sljedeća Utakmica">Nächstes
-              Spiel</h3>
-            <div class="match-card match-card--next">
+          <!-- Nächstes Spiel -->
+          <div class="news-col">
+            <h3 class="col-title" data-de="Nächstes Spiel" data-hr="Sljedeća Utakmica">Nächstes Spiel</h3>
+            <div class="match-card match-card--next" id="nextMatchCard">
               <div class="match-card-top match-card-top--gray">
                 <span class="match-badge">4. Liga · Gruppe 8</span>
                 <span class="match-date" data-de="Saison 2026/27" data-hr="Sezona 2026/27">Saison 2026/27</span>
@@ -180,119 +221,16 @@
                 <p data-de="Nächstes Spiel noch nicht bekannt" data-hr="Sljedeća utakmica još nije poznata">Nächstes
                   Spiel noch nicht bekannt</p>
               </div>
+              <div class="match-date-boxes" id="nextMatchDateBoxes" hidden></div>
+              <div class="match-scorers match-scorers--split" id="nextMatchScorers" hidden></div>
               <div class="match-foot">
                 <span data-de="Saison 2025/26 abgeschlossen" data-hr="Sezona 2025/26 završena">Saison 2025/26
                   abgeschlossen</span>
                 <a href="https://matchcenter.ofv.swiss/default.aspx?oid=9&lng=1&v=1751&t=45818&sg=70419&ls=25868&tg=4331204"
-                  target="_blank" rel="noopener" class="match-link" data-de="Details →" data-hr="Detalji →">Detalji
-                  →</a>
+                  target="_blank" rel="noopener" class="match-link" id="nextMatchDetailsLink" data-de="Details →"
+                  data-hr="Detalji →">Detalji →</a>
               </div>
             </div>
-
-            <a href="#tabelle-spiele" class="ofv-table-link">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M3 9h18M3 15h18M9 3v18" />
-              </svg>
-              <span data-de="Tabelle ansehen →" data-hr="Ljestvica →">Tabelle ansehen →</span>
-            </a>
-          </div>
-
-          <!-- Rechte Spalte: News Cards -->
-          <div class="news-col">
-            <h3 class="col-title" data-de="News &amp; Anlässe" data-hr="Novosti &amp; Događaji">News &amp; Anlässe</h3>
-            <div class="news-cards">
-
-              <button class="news-card" data-de-tag="Transfers" data-hr-tag="Transferi"
-                data-de-title="Sommertransfers 2026/27 – Neue Gesichter, grosser Dank"
-                data-hr-title="Ljetni transferi 2026./27. – Nova lica, veliko hvala" data-date="Aug 2026"
-                data-de-text="&lt;p&gt;Der Sommer bringt Bewegung ins Team von NK Croatia Uzwil. Wir heissen &lt;strong&gt;Saverio Cucinelli&lt;/strong&gt;, &lt;strong&gt;Xhevat Hasallari&lt;/strong&gt;, &lt;strong&gt;Davor Radoš&lt;/strong&gt; und &lt;strong&gt;Isak Beka&lt;/strong&gt; herzlich willkommen und freuen uns, sie ab sofort in unseren Reihen zu wissen.&lt;/p&gt;&lt;p&gt;Gleichzeitig heisst es Abschied nehmen: Wir danken &lt;strong&gt;Armando Kumria&lt;/strong&gt;, &lt;strong&gt;Franjo Perić&lt;/strong&gt; und &lt;strong&gt;Phil Bulić&lt;/strong&gt; von Herzen für ihren langjährigen Einsatz im Trikot von NK Croatia Uzwil – ihr Engagement bleibt unvergessen. Wir wünschen euch alles Gute für die Zukunft!&lt;/p&gt;&lt;p&gt;Wir blicken mit grosser Vorfreude auf die Saison 2026/27!&lt;/p&gt;"
-                data-hr-text="&lt;p&gt;Ljeto donosi promjene u momčadi NK Croatia Uzwil. Srdačno pozdravljamo nove igrače &lt;strong&gt;Saveria Cucinellija&lt;/strong&gt;, &lt;strong&gt;Xhevata Hasallarija&lt;/strong&gt;, &lt;strong&gt;Davora Radoša&lt;/strong&gt; i &lt;strong&gt;Isaka Beku&lt;/strong&gt; te se veselimo što su od sada dio naših redova.&lt;/p&gt;&lt;p&gt;Istovremeno, vrijeme je za oproštaj: od srca zahvaljujemo &lt;strong&gt;Armandu Kumriji&lt;/strong&gt;, &lt;strong&gt;Franji Periću&lt;/strong&gt; i &lt;strong&gt;Philu Buliću&lt;/strong&gt; na dugogodišnjem angažmanu u dresu NK Croatia Uzwil – njihov trud ostaje nezaboravan. Želimo vam sve najbolje u budućnosti!&lt;/p&gt;&lt;p&gt;S velikim veseljem iščekujemo sezonu 2026./27.!&lt;/p&gt;">
-                <div class="nc-left">
-                  <span class="news-tag" data-de="Transfers" data-hr="Transferi">Transfers</span>
-                  <h4 class="nc-title" data-de="Sommertransfers 2026/27 – Neue Gesichter, grosser Dank"
-                    data-hr="Ljetni transferi 2026./27. – Nova lica, veliko hvala">Sommertransfers 2026/27 – Neue
-                    Gesichter, grosser Dank</h4>
-                  <p class="nc-excerpt" data-de="4 Neuzugänge, 3 Abgänge – der Kader für 2026/27 nimmt Form an."
-                    data-hr="4 nova igrača, 3 odlaska – momčad za 2026./27. poprima svoj oblik.">4 Neuzugänge, 3
-                    Abgänge – der Kader für 2026/27 nimmt Form an.</p>
-                </div>
-                <div class="nc-right">
-                  <span class="news-date">Aug 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </button>
-
-              <button class="news-card" data-de-tag="Saison" data-hr-tag="Sezona"
-                data-de-title="Platz 2 — Starke Saison!" data-hr-title="2. mjesto — Izvrsna sezona!"
-                data-date="Jun 2026"
-                data-de-text="&lt;p&gt;NK Croatia Uzwil beendet die Saison 2025/26 auf Platz 2 mit 43 Punkten — punktgleich mit FC Henau, die dank des besseren Fair-Play-Scores und Torverhältnisses auf Platz 1 bleiben sollte. Eine herausragende Rückrunde mit 9 Siegen aus 9 Spielen.&lt;/p&gt;"
-                data-hr-text="&lt;p&gt;NK Croatia Uzwil završava sezonu 2025/26 na &lt;strong&gt;2. mjestu&lt;/strong&gt; s 43 boda — izjednačeno s FC Henauom, zahvaljujući boljem fair-playu i gol-razlici.&lt;/p&gt;&lt;p&gt;Posebno impresivno: cijelo proljeće s &lt;strong&gt;9 pobjeda iz 9 utakmica&lt;/strong&gt; — bez ijednog izgubljenog boda. Izniman učinak koji pokazuje karakter i jedinstvo naše momčadi.&lt;/p&gt;">
-                <div class="nc-left">
-                  <span class="news-tag" data-de="Saison" data-hr="Sezona">Saison</span>
-                  <h4 class="nc-title" data-de="Platz 2 — Starke Saison!" data-hr="2. mjesto — Izvrsna sezona!">Platz 2
-                    — Starke Saison!</h4>
-                  <p class="nc-excerpt" data-de="9/9 Siege in der Rückrunde, punktgleich mit Platz 1."
-                    data-hr="9/9 pobjeda u proljeću, izjednačeno s 1. mjestom.">9/9 Siege in der Rückrunde, punktgleich
-                    mit Platz 1.</p>
-                </div>
-                <div class="nc-right">
-                  <span class="news-date">Jun 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </button>
-
-              <button class="news-card" data-de-tag="Trainingslager" data-hr-tag="Pripreme"
-                data-de-title="Trainingslager Lissabon 2026" data-hr-title="Pripremni kamp Lisabon 2026"
-                data-date="Mär 2026"
-                data-de-text="&lt;p&gt;NK Croatia Uzwil reiste für ein intensives Trainingslager nach &lt;strong&gt;Lissabon, Portugal&lt;/strong&gt; — Unterkunft im Hotel Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Hinflug und Einchecken im Hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Zwei Trainingseinheiten + Freundschaftsspiel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Zwei Trainingseinheiten&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trainingseinheit + Stadium Tour Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Entspannter Abschlusstag&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;"
-                data-hr-text="&lt;p&gt;NK Croatia Uzwil otputovao je na intenzivan pripremni kamp u &lt;strong&gt;Lisabon, Portugal&lt;/strong&gt; — smještaj u hotelu Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Let i prijava u hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Dva treninga + prijateljska utakmica&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Dva treninga&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trening + obilazak stadiona Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Opušteni završni dan&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;">
-                <div class="nc-left">
-                  <span class="news-tag" data-de="Trainingslager" data-hr="Pripreme">Trainingslager</span>
-                  <h4 class="nc-title" data-de="Trainingslager Lissabon 2026" data-hr="Pripremni kamp Lisabon 2026">
-                    Trainingslager Lissabon 2026</h4>
-                  <p class="nc-excerpt" data-de="5 Tage Lissabon — Hotel Ikonik Lisboa***."
-                    data-hr="5 dana Lisabon — Hotel Ikonik Lisboa***.">5 Tage Lissabon — Hotel Ikonik Lisboa***.</p>
-                </div>
-                <div class="nc-right">
-                  <span class="news-date">Mär 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </button>
-
-              <button class="news-card" data-de-tag="Hallenturnier" data-hr-tag="Dvoranski turnir"
-                data-de-title="Hallenturnier 2026 — NK Croatia Uzwil als Organisator"
-                data-hr-title="Dvoranski turnir 2026 — NK Croatia Uzwil kao organizator" data-date="Feb 2026"
-                data-de-text="&lt;p&gt;NK Croatia Uzwil hat das &lt;strong&gt;Hallenturnier 2026&lt;/strong&gt; wie jedes Jahr erfolgreich organisiert. Der Anlass war ein voller Erfolg mit zahlreichen teilnehmenden Mannschaften.&lt;/p&gt;&lt;p&gt;Alle Infos, Resultate und Details auf &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;"
-                data-hr-text="&lt;p&gt;NK Croatia Uzwil je kao svake godine uspješno organizirao &lt;strong&gt;dvoranski turnir 2026&lt;/strong&gt;. Događaj je bio pravi uspjeh s velikim brojem sudjelujućih momčadi.&lt;/p&gt;&lt;p&gt;Sve informacije, rezultati i detalji na &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;">
-                <div class="nc-left">
-                  <span class="news-tag">Hallenturnier</span>
-                  <h4 class="nc-title" data-de="Hallenturnier 2026 — Wir waren Organisator"
-                    data-hr="Dvoranski turnir 2026 — Mi smo bili organizator">Hallenturnier 2026 — Wir waren Organisator
-                  </h4>
-                  <p class="nc-excerpt" data-de="Erfolgreicher Anlass mit vielen Mannschaften."
-                    data-hr="Uspješan događaj s mnogim momčadima.">Erfolgreicher Anlass mit vielen Mannschaften.</p>
-                </div>
-                <div class="nc-right">
-                  <span class="news-date">Feb 2026</span>
-                  <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </button>
-
-            </div>
-
           </div>
 
         </div>
@@ -347,6 +285,129 @@
         <p class="table-widget-note" data-de="Tabelle wird von NK Croatia Uzwil nach jedem Spieltag aktualisiert."
           data-hr="Ljestvicu ažurira NK Croatia Uzwil nakon svakog kola.">Tabelle wird von NK Croatia Uzwil nach jedem
           Spieltag aktualisiert.</p>
+      </div>
+    </section>
+
+    <!-- ═══════ NEWS & ANLÄSSE ═══════ -->
+    <section class="section" id="news">
+      <div class="container">
+        <div class="section-header">
+          <span class="label-tag" data-de="Aktuelles" data-hr="Aktualno">Aktuelles</span>
+          <h2 data-de="News &amp; Anlässe" data-hr="Novosti &amp; Događaji">News &amp; Anlässe</h2>
+        </div>
+
+        <!-- Vorankündigung: statisch, bewusst nicht klickbar -->
+        <div class="news-featured-banner">
+          <div class="nfb-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </div>
+          <div class="nfb-body">
+            <span class="nfb-tag" data-de="Vorankündigung" data-hr="Najava">Vorankündigung</span>
+            <h4 class="nfb-title" data-de="Vorankündigung: Hallenturnier 2027"
+              data-hr="Najava: Dvoranski turnir 2027.">Vorankündigung: Hallenturnier 2027</h4>
+            <p class="nfb-sub" data-de="Nächstes Hallenturnier in Planung. Details folgen."
+              data-hr="Sljedeći dvoranski turnir u pripremi. Detalji slijede.">Nächstes Hallenturnier in Planung.
+              Details folgen.</p>
+          </div>
+          <span class="nfb-date" data-de="Februar 2027" data-hr="Veljača 2027.">Februar 2027</span>
+        </div>
+
+        <div class="news-cards">
+
+          <button class="news-card" data-de-tag="Transfers" data-hr-tag="Transferi"
+            data-de-title="Sommertransfers 2026/27 – Neue Gesichter, grosser Dank"
+            data-hr-title="Ljetni transferi 2026./27. – Nova lica, veliko hvala" data-date="Aug 2026"
+            data-de-text="&lt;p&gt;Der Sommer bringt Bewegung ins Team von NK Croatia Uzwil. Wir heissen &lt;strong&gt;Saverio Cucinelli&lt;/strong&gt;, &lt;strong&gt;Xhevat Hasallari&lt;/strong&gt;, &lt;strong&gt;Davor Radoš&lt;/strong&gt; und &lt;strong&gt;Isak Beka&lt;/strong&gt; herzlich willkommen und freuen uns, sie ab sofort in unseren Reihen zu wissen.&lt;/p&gt;&lt;p&gt;Gleichzeitig heisst es Abschied nehmen: Wir danken &lt;strong&gt;Armando Kumria&lt;/strong&gt;, &lt;strong&gt;Franjo Perić&lt;/strong&gt;, &lt;strong&gt;Phil Bulić&lt;/strong&gt;, &lt;strong&gt;Denis Palamar&lt;/strong&gt; und &lt;strong&gt;Filip Šarić&lt;/strong&gt; von Herzen für ihren langjährigen Einsatz im Trikot von NK Croatia Uzwil – ihr Engagement bleibt unvergessen. Wir wünschen euch alles Gute für die Zukunft!&lt;/p&gt;&lt;p&gt;Wir blicken mit grosser Vorfreude auf die Saison 2026/27!&lt;/p&gt;"
+            data-hr-text="&lt;p&gt;Ljeto donosi promjene u momčadi NK Croatia Uzwil. Srdačno pozdravljamo nove igrače &lt;strong&gt;Saveria Cucinellija&lt;/strong&gt;, &lt;strong&gt;Xhevata Hasallarija&lt;/strong&gt;, &lt;strong&gt;Davora Radoša&lt;/strong&gt; i &lt;strong&gt;Isaka Beku&lt;/strong&gt; te se veselimo što su od sada dio naših redova.&lt;/p&gt;&lt;p&gt;Istovremeno, vrijeme je za oproštaj: od srca zahvaljujemo &lt;strong&gt;Armandu Kumriji&lt;/strong&gt;, &lt;strong&gt;Franji Periću&lt;/strong&gt;, &lt;strong&gt;Philu Buliću&lt;/strong&gt;, &lt;strong&gt;Denisu Palamaru&lt;/strong&gt; i &lt;strong&gt;Filipu Šariću&lt;/strong&gt; na dugogodišnjem angažmanu u dresu NK Croatia Uzwil – njihov trud ostaje nezaboravan. Želimo vam sve najbolje u budućnosti!&lt;/p&gt;&lt;p&gt;S velikim veseljem iščekujemo sezonu 2026./27.!&lt;/p&gt;">
+            <div class="nc-left">
+              <span class="news-tag" data-de="Transfers" data-hr="Transferi">Transfers</span>
+              <h4 class="nc-title" data-de="Sommertransfers 2026/27 – Neue Gesichter, grosser Dank"
+                data-hr="Ljetni transferi 2026./27. – Nova lica, veliko hvala">Sommertransfers 2026/27 – Neue
+                Gesichter, grosser Dank</h4>
+              <p class="nc-excerpt" data-de="4 Neuzugänge, 5 Abgänge – der Kader für 2026/27 nimmt Form an."
+                data-hr="4 nova igrača, 5 odlazaka – momčad za 2026./27. poprima svoj oblik.">4 Neuzugänge, 5
+                Abgänge – der Kader für 2026/27 nimmt Form an.</p>
+            </div>
+            <div class="nc-right">
+              <span class="news-date">Aug 2026</span>
+              <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+
+          <button class="news-card" data-de-tag="Saison" data-hr-tag="Sezona"
+            data-de-title="Platz 2 — Starke Saison!" data-hr-title="2. mjesto — Izvrsna sezona!"
+            data-date="Jun 2026"
+            data-de-text="&lt;p&gt;NK Croatia Uzwil beendet die Saison 2025/26 auf Platz 2 mit 43 Punkten — punktgleich mit FC Henau, die dank des besseren Fair-Play-Scores und Torverhältnisses auf Platz 1 bleiben sollte. Eine herausragende Rückrunde mit 9 Siegen aus 9 Spielen.&lt;/p&gt;"
+            data-hr-text="&lt;p&gt;NK Croatia Uzwil završava sezonu 2025/26 na &lt;strong&gt;2. mjestu&lt;/strong&gt; s 43 boda — izjednačeno s FC Henauom, zahvaljujući boljem fair-playu i gol-razlici.&lt;/p&gt;&lt;p&gt;Posebno impresivno: cijelo proljeće s &lt;strong&gt;9 pobjeda iz 9 utakmica&lt;/strong&gt; — bez ijednog izgubljenog boda. Izniman učinak koji pokazuje karakter i jedinstvo naše momčadi.&lt;/p&gt;">
+            <div class="nc-left">
+              <span class="news-tag" data-de="Saison" data-hr="Sezona">Saison</span>
+              <h4 class="nc-title" data-de="Platz 2 — Starke Saison!" data-hr="2. mjesto — Izvrsna sezona!">Platz 2
+                — Starke Saison!</h4>
+              <p class="nc-excerpt" data-de="9/9 Siege in der Rückrunde, punktgleich mit Platz 1."
+                data-hr="9/9 pobjeda u proljeću, izjednačeno s 1. mjestom.">9/9 Siege in der Rückrunde, punktgleich
+                mit Platz 1.</p>
+            </div>
+            <div class="nc-right">
+              <span class="news-date">Jun 2026</span>
+              <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+
+          <button class="news-card" data-de-tag="Trainingslager" data-hr-tag="Pripreme"
+            data-de-title="Trainingslager Lissabon 2026" data-hr-title="Pripremni kamp Lisabon 2026"
+            data-date="Mär 2026"
+            data-de-text="&lt;p&gt;NK Croatia Uzwil reiste für ein intensives Trainingslager nach &lt;strong&gt;Lissabon, Portugal&lt;/strong&gt; — Unterkunft im Hotel Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Hinflug und Einchecken im Hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Zwei Trainingseinheiten + Freundschaftsspiel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Zwei Trainingseinheiten&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trainingseinheit + Stadium Tour Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Entspannter Abschlusstag&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;"
+            data-hr-text="&lt;p&gt;NK Croatia Uzwil otputovao je na intenzivan pripremni kamp u &lt;strong&gt;Lisabon, Portugal&lt;/strong&gt; — smještaj u hotelu Ikonik Lisboa***.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;25.3.&lt;/strong&gt; Let i prijava u hotel&lt;/li&gt;&lt;li&gt;&lt;strong&gt;26.3.&lt;/strong&gt; Dva treninga + prijateljska utakmica&lt;/li&gt;&lt;li&gt;&lt;strong&gt;27.3.&lt;/strong&gt; Dva treninga&lt;/li&gt;&lt;li&gt;&lt;strong&gt;28.3.&lt;/strong&gt; Trening + obilazak stadiona Estadio de Luz (Benfica)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;29.3.&lt;/strong&gt; Opušteni završni dan&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid0VNGjsBSmT6uKqX3ZgbYtMWi5vzfid8TiKwxRvsLCKkfNUD3jyMaDW2Tg3r1hmvERl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 1&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;https://www.facebook.com/NKCroatiaUzwil/posts/pfbid026sD9t5Tp1CDvys54zP1eSmbRJ92bs13DoM4mzcnUUeG4PMMxcFzGyJdRJhsrRzBGl&quot; target=&quot;_blank&quot;&gt;📸 Facebook Post 2&lt;/a&gt;&lt;/p&gt;">
+            <div class="nc-left">
+              <span class="news-tag" data-de="Trainingslager" data-hr="Pripreme">Trainingslager</span>
+              <h4 class="nc-title" data-de="Trainingslager Lissabon 2026" data-hr="Pripremni kamp Lisabon 2026">
+                Trainingslager Lissabon 2026</h4>
+              <p class="nc-excerpt" data-de="5 Tage Lissabon — Hotel Ikonik Lisboa***."
+                data-hr="5 dana Lisabon — Hotel Ikonik Lisboa***.">5 Tage Lissabon — Hotel Ikonik Lisboa***.</p>
+            </div>
+            <div class="nc-right">
+              <span class="news-date">Mär 2026</span>
+              <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+
+          <button class="news-card" data-de-tag="Hallenturnier" data-hr-tag="Dvoranski turnir"
+            data-de-title="Hallenturnier 2026 — NK Croatia Uzwil als Organisator"
+            data-hr-title="Dvoranski turnir 2026 — NK Croatia Uzwil kao organizator" data-date="Feb 2026"
+            data-de-text="&lt;p&gt;NK Croatia Uzwil hat das &lt;strong&gt;Hallenturnier 2026&lt;/strong&gt; wie jedes Jahr erfolgreich organisiert. Der Anlass war ein voller Erfolg mit zahlreichen teilnehmenden Mannschaften.&lt;/p&gt;&lt;p&gt;Alle Infos, Resultate und Details auf &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;"
+            data-hr-text="&lt;p&gt;NK Croatia Uzwil je kao svake godine uspješno organizirao &lt;strong&gt;dvoranski turnir 2026&lt;/strong&gt;. Događaj je bio pravi uspjeh s velikim brojem sudjelujućih momčadi.&lt;/p&gt;&lt;p&gt;Sve informacije, rezultati i detalji na &lt;a href='https://www.hallenturnier.ch' target='_blank' rel='noopener'&gt;hallenturnier.ch&lt;/a&gt;.&lt;/p&gt;">
+            <div class="nc-left">
+              <span class="news-tag">Hallenturnier</span>
+              <h4 class="nc-title" data-de="Hallenturnier 2026 — Wir waren Organisator"
+                data-hr="Dvoranski turnir 2026 — Mi smo bili organizator">Hallenturnier 2026 — Wir waren Organisator
+              </h4>
+              <p class="nc-excerpt" data-de="Erfolgreicher Anlass mit vielen Mannschaften."
+                data-hr="Uspješan događaj s mnogim momčadima.">Erfolgreicher Anlass mit vielen Mannschaften.</p>
+            </div>
+            <div class="nc-right">
+              <span class="news-date">Feb 2026</span>
+              <svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+
+        </div>
       </div>
     </section>
 
@@ -410,10 +471,6 @@
           <h3 class="team-role-title" data-de="Verteidiger" data-hr="Obrana">Verteidiger</h3>
           <div class="player-cards">
             <div class="player-card">
-              <div class="player-photo"><img src="players/denis-palamar.jpg" alt="Denis Palamar" /></div><span
-                class="player-name">Denis Palamar</span>
-            </div>
-            <div class="player-card">
               <div class="player-photo"><img src="players/anis-din-ramdedovic.jpg" alt="Anis Din Ramdedović" /></div>
               <span class="player-name">Anis Din Ramdedović</span>
             </div>
@@ -434,12 +491,12 @@
                 class="player-name">Martin Breljak</span>
             </div>
             <div class="player-card">
-              <div class="player-photo"><img src="players/filip-saric.jpg" alt="Filip Šarić" /></div><span
-                class="player-name">Filip Šarić</span>
-            </div>
-            <div class="player-card">
               <div class="player-photo"><img src="players/ivan-begic.jpg" alt="Ivan Begić" /></div><span
                 class="player-name">Ivan Begić</span>
+            </div>
+            <div class="player-card">
+              <div class="player-photo"><img src="players/dario-martic.jpg" alt="Dario Martić" /></div><span
+                class="player-name">Dario Martić</span>
             </div>
             <div class="player-card">
               <div class="player-photo player-photo--placeholder"><svg width="36" height="36" viewBox="0 0 24 24"
@@ -665,7 +722,7 @@
               <a href="#kontakt" class="spc-item spc-item--logo" title="SFK">
                 <img src="sponsors/sfk.jpg" alt="SFK" class="spc-logo" />
               </a>
-              <a href="#kontakt" class="spc-item spc-item--logo" title="AkkordTech">
+              <a href="#kontakt" class="spc-item spc-item--logo spc-item--dark" title="AkkordTech">
                 <img src="sponsors/AkkordTech.png" alt="AkkordTech" class="spc-logo" />
               </a>
               <a href="#kontakt" class="spc-item spc-item--logo" title="Koller Morger">
@@ -1044,6 +1101,20 @@
                   </svg></div>
                 <span>NK Croatia Uzwil</span>
               </a>
+              <a href="https://www.instagram.com/nkcroatiauzwil" target="_blank" rel="noopener" class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg></div>
+                <span>@nkcroatiauzwil</span>
+              </a>
+              <a href="https://whatsapp.com/channel/0029Vb8hbEXIHph8coczaj0A" target="_blank" rel="noopener" class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg></div>
+                <span data-de="WhatsApp Kanal" data-hr="WhatsApp kanal">WhatsApp Kanal</span>
+              </a>
             </div>
           </div>
           <form class="contact-form" id="contact-form">
@@ -1201,6 +1272,7 @@
 
         updateFanDisplay();
         ncClampNewsText();
+        if (window.lsRefreshLiveLabels) window.lsRefreshLiveLabels();
       }
 
       /* ── News-Titel/Excerpt – nur ganze Wörter zeigen, nie ein Wort mitten
@@ -1271,11 +1343,13 @@
 
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open');
       }
 
       function closeModal() {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
+        document.body.classList.remove('modal-open');
       }
 
       document.querySelectorAll('.news-card').forEach(function (card) {
@@ -1422,22 +1496,42 @@
 
       function tsPad(n) { n = String(n); return n.length < 2 ? '0' + n : n; }
 
-      function tsParseSwissDate(dateStr, timeStr) {
-        if (!dateStr) return null;
-        var m = String(dateStr).trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+      /* All "now" comparisons are anchored to Europe/Zurich (the club plays
+         in Switzerland) rather than the visitor's own browser timezone, so
+         a visitor abroad doesn't see the wrong day/score-vs-time state. */
+      function tsZurichNowKey() {
+        return new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Zurich', hour12: false }).slice(0, 16);
+      }
+
+      function tsFixtureDateKey(dateStr) {
+        var m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})/.exec(String(dateStr || '').trim());
         if (!m) return null;
+        return m[3] + '-' + tsPad(m[2]) + '-' + tsPad(m[1]);
+      }
+
+      function tsFixtureDateTimeKey(dateStr, timeStr) {
+        var dateKey = tsFixtureDateKey(dateStr);
+        if (!dateKey) return null;
         var t = (timeStr && /^\d{1,2}:\d{2}/.test(String(timeStr).trim())) ? timeStr.trim() : '00:00';
-        var dt = new Date(m[3] + '-' + tsPad(m[2]) + '-' + tsPad(m[1]) + 'T' + t + ':00');
-        return isNaN(dt.getTime()) ? null : dt;
+        return dateKey + ' ' + t;
+      }
+
+      function tsHasKickedOff(dateStr, timeStr) {
+        var key = tsFixtureDateTimeKey(dateStr, timeStr);
+        return !!key && tsZurichNowKey() >= key;
       }
 
       function tsFindNextMatch(fixtures) {
         if (!fixtures || !fixtures.length) return null;
+        var todayKey = tsZurichNowKey().slice(0, 10);
         var upcoming = fixtures
-          .filter(function (f) { return f.homeScore === null || f.homeScore === undefined; })
           .filter(function (f) { return tsIsUs(f.home) || tsIsUs(f.away); })
-          .map(function (f) { return { f: f, dt: tsParseSwissDate(f.date, f.time) }; });
-        upcoming.sort(function (a, b) { return (a.dt ? a.dt.getTime() : Infinity) - (b.dt ? b.dt.getTime() : Infinity); });
+          .map(function (f) { return { f: f, key: tsFixtureDateKey(f.date) }; })
+          // A match stays "next" through its own match day; the day after, it
+          // rolls over to whatever's next on the schedule — independent of
+          // whether a final score has been entered.
+          .filter(function (x) { return x.key && x.key >= todayKey; });
+        upcoming.sort(function (a, b) { return a.key < b.key ? -1 : (a.key > b.key ? 1 : 0); });
         return upcoming.length ? upcoming[0].f : null;
       }
 
@@ -1448,8 +1542,72 @@
         return '<div class="mol-team' + (isRight ? ' mol-team--right' : '') + '">' + inner + '</div>';
       }
 
-      function tsRenderNextMatchHome(next) {
-        var card = document.querySelector('.match-card--next');
+      function tsOpenNextMatchModal(next, entry) {
+        var overlay = document.getElementById('nextMatchModalOverlay');
+        if (!overlay || !next) return;
+
+        if (window.lsRenderCard) {
+          window.lsRenderCard(next, entry, {
+            badge: 'nmmBadge', date: 'nmmDate', oneline: 'nmmOneline', foot: 'nmmFoot', scorers: 'nmmScorers'
+          });
+        } else {
+          // Fallback if the live-squad script hasn't loaded yet.
+          var homeIsUs = tsIsUs(next.home);
+          var awayIsUs = tsIsUs(next.away);
+          document.getElementById('nmmBadge').textContent = next.league || '';
+          document.getElementById('nmmDate').textContent = next.date || '';
+          document.getElementById('nmmOneline').innerHTML =
+            tsTeamHtml(next.home, homeIsUs, false) +
+            '<span class="mol-score">' + tsEscape(next.time || '–') + '</span>' +
+            tsTeamHtml(next.away, awayIsUs, true);
+          var foot = document.getElementById('nmmFoot');
+          foot.innerHTML = next.venue ? '<span>📍 ' + tsEscape(next.venue) + '</span>' : '';
+        }
+
+        if (window.lsRenderPitch) {
+          window.lsRenderPitch(entry, 'nmmPitch', 'nmmEmpty');
+        }
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open');
+      }
+
+      function tsCloseNextMatchModal() {
+        var overlay = document.getElementById('nextMatchModalOverlay');
+        if (!overlay) return;
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        document.body.classList.remove('modal-open');
+      }
+
+      (function () {
+        var nmmOverlay = document.getElementById('nextMatchModalOverlay');
+        var nmmClose = document.getElementById('nextMatchModalClose');
+        if (!nmmOverlay || !nmmClose) return;
+        nmmClose.addEventListener('click', tsCloseNextMatchModal);
+        nmmOverlay.addEventListener('click', function (e) { if (e.target === nmmOverlay) tsCloseNextMatchModal(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') tsCloseNextMatchModal(); });
+      })();
+
+      /* Wochentag/Tag/Monat für die drei Datums-Boxen der "Nächstes Spiel"-
+         Karte — rein aus next.date abgeleitet, keine neue Datenquelle. */
+      function tsDateParts(dateStr) {
+        var m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})/.exec(String(dateStr || '').trim());
+        if (!m) return null;
+        var d = new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+        if (isNaN(d.getTime())) return null;
+        return {
+          weekdayDe: d.toLocaleDateString('de-CH', { weekday: 'long' }),
+          weekdayHr: d.toLocaleDateString('hr-HR', { weekday: 'long' }),
+          day: d.getDate(),
+          monthDe: d.toLocaleDateString('de-CH', { month: 'long' }),
+          monthHr: d.toLocaleDateString('hr-HR', { month: 'long' })
+        };
+      }
+
+      function tsRenderNextMatchHome(next, entry, matchIndex) {
+        var card = document.getElementById('nextMatchCard');
         if (!card || !next) return;
         card.classList.remove('match-card--next');
         var topBar = card.querySelector('.match-card-top');
@@ -1457,22 +1615,81 @@
 
         var homeIsUs = tsIsUs(next.home);
         var awayIsUs = tsIsUs(next.away);
+        var hasScore = tsHasKickedOff(next.date, next.time) ||
+          (entry && (entry.homeScore !== undefined || entry.awayScore !== undefined));
+        var scoreOrTime = hasScore
+          ? (tsEscape((entry && entry.homeScore) || 0) + ' – ' + tsEscape((entry && entry.awayScore) || 0))
+          : tsEscape(next.time || '–');
         var oneline = document.createElement('div');
         oneline.className = 'match-oneline';
         oneline.innerHTML =
           tsTeamHtml(next.home, homeIsUs, false) +
-          '<span class="mol-score">' + tsEscape(next.time || '–') + '</span>' +
+          '<span class="mol-score">' + scoreOrTime + '</span>' +
           tsTeamHtml(next.away, awayIsUs, true);
         var placeholder = card.querySelector('.match-next-placeholder');
-        if (placeholder) placeholder.replaceWith(oneline);
+        if (placeholder) {
+          placeholder.replaceWith(oneline);
+        } else {
+          var existingOneline = card.querySelector('.match-oneline');
+          if (existingOneline) existingOneline.replaceWith(oneline);
+        }
+
+        var dateBoxes = card.querySelector('#nextMatchDateBoxes');
+        if (dateBoxes) {
+          var parts = !hasScore ? tsDateParts(next.date) : null;
+          if (parts) {
+            dateBoxes.innerHTML =
+              '<div class="mdb-box"><span data-de="' + tsEscape(parts.weekdayDe) + '" data-hr="' + tsEscape(parts.weekdayHr) + '">' + tsEscape(parts.weekdayDe) + '</span></div>' +
+              '<div class="mdb-box">' + tsEscape(parts.day) + '.</div>' +
+              '<div class="mdb-box"><span data-de="' + tsEscape(parts.monthDe) + '" data-hr="' + tsEscape(parts.monthHr) + '">' + tsEscape(parts.monthDe) + '</span></div>';
+            dateBoxes.hidden = false;
+          } else {
+            dateBoxes.hidden = true;
+            dateBoxes.innerHTML = '';
+          }
+        }
+
+        var scorersBox = card.querySelector('#nextMatchScorers');
+        var goals = (entry && entry.goals) || [];
+        if (scorersBox && goals.length) {
+          var homeGoals = goals.filter(function (g) { return g.side === 'home'; })
+            .sort(function (a, b) { return (a.minute || 0) - (b.minute || 0); });
+          var awayGoals = goals.filter(function (g) { return g.side === 'away'; })
+            .sort(function (a, b) { return (a.minute || 0) - (b.minute || 0); });
+          var colHtml = function (list) {
+            return list.map(function (g) {
+              return '<span class="scorer">' + tsEscape(g.minute) + '\' ' + tsEscape(g.scorer) + '</span>';
+            }).join('');
+          };
+          scorersBox.innerHTML =
+            '<div class="ms-col ms-col--home">' +
+            '<span class="scorers-label" data-de="Torschützen" data-hr="Strijelci">Torschützen</span>' +
+            '<div class="scorers-list">' + colHtml(homeGoals) + '</div></div>' +
+            '<div class="ms-divider"></div>' +
+            '<div class="ms-col ms-col--away">' +
+            '<span class="scorers-label" data-de="Torschützen" data-hr="Strijelci">Torschützen</span>' +
+            '<div class="scorers-list">' + colHtml(awayGoals) + '</div></div>';
+          scorersBox.hidden = false;
+        } else if (scorersBox) {
+          scorersBox.hidden = true;
+          scorersBox.innerHTML = '';
+        }
 
         var badge = card.querySelector('.match-card-top .match-badge');
         if (badge && next.league) badge.textContent = next.league;
         var topDate = card.querySelector('.match-card-top .match-date');
         if (topDate) {
-          topDate.removeAttribute('data-de');
-          topDate.removeAttribute('data-hr');
-          topDate.textContent = next.date;
+          if (matchIndex) {
+            var deSpieltag = matchIndex + '. Spieltag';
+            var hrSpieltag = matchIndex + '. kolo';
+            topDate.setAttribute('data-de', deSpieltag);
+            topDate.setAttribute('data-hr', hrSpieltag);
+            topDate.textContent = currentLang === 'hr' ? hrSpieltag : deSpieltag;
+          } else {
+            topDate.removeAttribute('data-de');
+            topDate.removeAttribute('data-hr');
+            topDate.textContent = next.date;
+          }
         }
         var footNote = card.querySelector('.match-foot span[data-de]');
         if (footNote) {
@@ -1485,14 +1702,37 @@
             footNote.style.display = 'none';
           }
         }
+
+        var detailsLink = card.querySelector('#nextMatchDetailsLink');
+        if (detailsLink) {
+          detailsLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            // If the admin has flipped this match to "live", show the same
+            // live pitch/score/scorers view as the live banner. Otherwise
+            // show the same match info with the same dynamic pitch, just
+            // without score/scorers (nothing to show pre-match).
+            if (window.lsMatchId && window.lsLoadSavedSquads && window.lsOpenOverlay) {
+              window.lsLoadSavedSquads()
+                .then(function (saved) {
+                  var entry = saved[window.lsMatchId(next)];
+                  if (entry && entry.live) {
+                    window.lsOpenOverlay();
+                  } else {
+                    tsOpenNextMatchModal(next, entry);
+                  }
+                })
+                .catch(function () { tsOpenNextMatchModal(next); });
+            } else {
+              tsOpenNextMatchModal(next);
+            }
+          });
+        }
       }
 
       fetch('./data/uzwil4.json')
         .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
         .then(function (data) {
           tsRenderStandings(data.standings);
-          var tsNextMatch = tsFindNextMatch(data.fixtures);
-          if (tsNextMatch) tsRenderNextMatchHome(tsNextMatch);
         })
         .catch(function (err) {
           console.error('Tabelle konnte nicht geladen werden:', err);
@@ -1500,26 +1740,27 @@
           document.getElementById('standingsError').style.display = '';
         });
 
-      /* ── Mobile Reihenfolge: Letztes Spiel, Nächstes Spiel, Tabelle, News & Anlässe ──
-         Auf Mobile wird die Spalte "News & Anlässe" hinter die Tabelle verschoben.
-         Auf Desktop bleibt die ursprüngliche 2-Spalten-Anordnung erhalten. ── */
-      (function () {
-        var newsArticlesCol = document.querySelectorAll('#news .news-col')[1];
-        var tabelleContainer = document.querySelector('#tabelle-spiele .container');
-        if (!newsArticlesCol || !tabelleContainer) return;
-        var originalParent = newsArticlesCol.parentNode;
-        var originalNext = newsArticlesCol.nextSibling;
-        var mq = window.matchMedia('(max-width: 800px)');
-        function apply(isMobile) {
-          if (isMobile) {
-            tabelleContainer.appendChild(newsArticlesCol);
-          } else if (newsArticlesCol.parentNode !== originalParent) {
-            originalParent.insertBefore(newsArticlesCol, originalNext);
+      /* Nächstes Spiel: aus data/spiele.json — rollt automatisch einen Tag
+         nach dem Spieltag auf das nächste Spiel weiter (siehe tsFindNextMatch).
+         Die Spieltag-Nummer ist die 1-basierte Position des Spiels in dieser
+         (Uzwil-eigenen) Fixture-Liste. */
+      fetch('./data/spiele.json')
+        .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+        .then(function (data) {
+          var tsNextMatch = tsFindNextMatch(data.fixtures);
+          if (!tsNextMatch) return;
+          var tsMatchIndex = (data.fixtures || []).indexOf(tsNextMatch) + 1;
+          if (window.lsMatchId && window.lsLoadSavedSquads) {
+            window.lsLoadSavedSquads()
+              .then(function (saved) { tsRenderNextMatchHome(tsNextMatch, saved[window.lsMatchId(tsNextMatch)], tsMatchIndex); })
+              .catch(function () { tsRenderNextMatchHome(tsNextMatch, null, tsMatchIndex); });
+          } else {
+            tsRenderNextMatchHome(tsNextMatch, null, tsMatchIndex);
           }
-        }
-        apply(mq.matches);
-        mq.addEventListener('change', function (e) { apply(e.matches); });
-      })();
+        })
+        .catch(function (err) {
+          console.error('Nächstes Spiel konnte nicht geladen werden:', err);
+        });
 
     })();
   </script>
@@ -1607,6 +1848,48 @@
     <button id="cookie-accept" class="btn btn--red ck-btn" data-de="Akzeptieren" data-hr="Prihvati">Akzeptieren</button>
   </div>
 
+  <!-- ═══════ LIVE SQUAD BANNER (shown only while a match is live) ═══════ -->
+  <button class="live-squad-banner" id="liveSquadBanner" type="button">
+    <span class="lsb-dot"></span>
+    <span class="lsb-text" id="liveSquadBannerText"></span>
+    <span class="lsb-arrow">↑</span>
+  </button>
+
+  <!-- ═══════ LIVE SQUAD OVERLAY ═══════ -->
+  <div class="news-modal-overlay" id="liveSquadOverlay" role="dialog" aria-modal="true">
+    <div class="news-modal live-squad-modal" id="liveSquadModal">
+      <button class="news-modal-close" id="liveSquadClose" aria-label="Schliessen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="news-modal-body">
+        <div class="news-modal-content">
+          <div class="news-modal-meta">
+            <span class="nm-tag" data-de="Live" data-hr="Uživo">Live</span>
+          </div>
+          <div class="match-card" id="liveSquadCard" style="margin-bottom:0;">
+            <div class="match-card-top">
+              <span class="match-badge" id="lsqBadge"></span>
+              <span class="match-date" id="lsqDate"></span>
+            </div>
+            <div class="match-oneline" id="lsqOneline"></div>
+            <div class="match-foot" id="lsqFoot"></div>
+          </div>
+          <div class="live-squad-scorers" id="liveSquadScorers"></div>
+
+          <h3 class="col-title live-squad-section-title" data-de="Aufstellung" data-hr="Sastav">Aufstellung</h3>
+          <div class="live-squad-pitch" id="liveSquadPitch"></div>
+          <div class="live-squad-empty" id="liveSquadEmpty">
+            <p data-de="Die Aufstellung wurde noch nicht veröffentlicht." data-hr="Sastav još nije objavljen.">Die
+              Aufstellung wurde noch nicht veröffentlicht.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════ BOTTOM NAV (Mobile) ═══════ -->
   <nav class="bottom-nav" aria-label="Mobile Navigation">
     <a href="#news" class="bn-item">
@@ -1681,8 +1964,8 @@
       var dsModal = document.getElementById('datenschutz-modal');
       var dsOverlay = dsModal ? dsModal.querySelector('.ds-overlay') : null;
       var dsClose = dsModal ? dsModal.querySelector('.ds-close') : null;
-      function openDS() { if (dsModal) { dsModal.hidden = false; document.body.style.overflow = 'hidden'; } }
-      function closeDS() { if (dsModal) { dsModal.hidden = true; document.body.style.overflow = ''; } }
+      function openDS() { if (dsModal) { dsModal.hidden = false; document.body.style.overflow = 'hidden'; document.body.classList.add('modal-open'); } }
+      function closeDS() { if (dsModal) { dsModal.hidden = true; document.body.style.overflow = ''; document.body.classList.remove('modal-open'); } }
       document.querySelectorAll('a[href="#datenschutz"]').forEach(function (a) {
         a.addEventListener('click', function (e) { e.preventDefault(); openDS(); });
       });
@@ -1693,8 +1976,8 @@
       var impModal = document.getElementById('impressum-modal');
       var impOverlay = impModal ? impModal.querySelector('.ds-overlay') : null;
       var impClose = impModal ? impModal.querySelector('.ds-close') : null;
-      function openImp() { if (impModal) { impModal.hidden = false; document.body.style.overflow = 'hidden'; } }
-      function closeImp() { if (impModal) { impModal.hidden = true; document.body.style.overflow = ''; } }
+      function openImp() { if (impModal) { impModal.hidden = false; document.body.style.overflow = 'hidden'; document.body.classList.add('modal-open'); } }
+      function closeImp() { if (impModal) { impModal.hidden = true; document.body.style.overflow = ''; document.body.classList.remove('modal-open'); } }
       document.querySelectorAll('a[href="#impressum"]').forEach(function (a) {
         a.addEventListener('click', function (e) { e.preventDefault(); openImp(); });
       });
@@ -1748,6 +2031,347 @@
       document.head.appendChild(sheet);
       track.style.animation = id + ' ' + (setWidth / 40).toFixed(1) + 's linear infinite';
     });
+  </script>
+
+  <!-- ═══════ LIVE SQUAD (Kader-Tool → live_squad.json) ═══════ -->
+  <script>
+    (function () {
+      var FORMATIONS = {
+        '4-4-2': {
+          GK: ['GK'],
+          DEF: ['LB', 'CB1', 'CB2', 'RB'],
+          MID: ['LM', 'CM1', 'CM2', 'RM'],
+          ATT: ['ST1', 'ST2']
+        },
+        '3-5-2': {
+          GK: ['GK'],
+          DEF: ['CB1', 'CB2', 'CB3'],
+          MID: ['LWB', 'DM', 'CM1', 'CM2', 'RWB'],
+          ATT: ['ST1', 'ST2']
+        }
+      };
+
+      var LINE_Y = { ATT: 14, MID: 40, DEF: 65, GK: 88 };
+
+      /* Short-name ("N. Surname") → transparent squad photo. null = no photo yet. */
+      var PHOTO_SLUG = {
+        'A. Specchia': 'alessio-specchia', 'R. Vičić': 'robert-vicic', 'D. Brkljača': 'damjan-brkljaca',
+        'A. Ramdedović': 'anis-din-ramdedovic', 'L. Gojević': 'luka-gojevic',
+        'G. Jozić': 'gabrijel-jozic', 'K. Katičić': 'kristijan-katicic', 'M. Breljak': 'martin-breljak',
+        'D. Martić': 'dario-martic',
+        'I. Begić': 'ivan-begic', 'A. Marić': null, 'D. Ajrizi': 'denis-ajrizi',
+        'B. Pelivani': null, 'A. Rozajac': null, 'X. Hasallari': null,
+        'N. Gonzalez': 'noel-gonzalez', 'H. Haileselassie': 'henok-haileselassie', 'M. Gojević': 'matej-gojevic',
+        'M. Matić': null, 'A. Bahorić': 'adrian-bahoric', 'J. Baumann': null, 'I. Schwab': null,
+        'S. Culanić': 'stanko-culanic', 'D. Jozić': 'danijel-jozic', 'S. Bahorić': 'silvio-bahoric',
+        'D. Uka': 'dionis-uka', 'I. Martić': null, 'S. Cucinelli': 'saverio-cucinelli', 'I. Beka': null,
+        'R. Bulić': 'robertino-bulic', 'K. Perić': 'kristijan-peric',
+        'S. Ivanković': 'stefan-ivankovic', 'D. Radoš': null, 'H. Hysenaj': 'hazir-hysenaj'
+      };
+
+      var JERSEY_SVG = '<svg class="lsp-jersey" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+        '<defs><pattern id="lspCheckers" width="20" height="20" patternUnits="userSpaceOnUse">' +
+        '<rect width="20" height="20" fill="#0055d4"/><rect width="10" height="10" fill="#111111"/>' +
+        '<rect x="10" y="10" width="10" height="10" fill="#111111"/></pattern>' +
+        '<clipPath id="lspClip"><path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z"/></clipPath></defs>' +
+        '<path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z" fill="url(#lspCheckers)"/>' +
+        '<g clip-path="url(#lspClip)"><path d="M 30,18 L 14,28 L 22,44 L 32,36 Z" fill="#111111"/>' +
+        '<path d="M 70,18 L 86,28 L 78,44 L 68,36 Z" fill="#111111"/></g>' +
+        '<path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 Q 60,22 50,22 Q 40,22 30,18 Z" fill="#0055d4"/></svg>';
+
+      function lsEsc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+
+      function lsMatchId(f) {
+        return (f.date + '__' + f.home + '__' + f.away).replace(/[^a-zA-Z0-9]+/g, '-');
+      }
+
+      function lsIsUs(name) { return !!(name && /\buzwil\b/i.test(name)); }
+      function lsDisplayName(name) { return lsIsUs(name) ? 'NK Croatia Uzwil' : name; }
+
+      function lsTeamLogoSrc(name) {
+        if (lsIsUs(name)) return 'logo.png';
+        var base = String(name).trim().replace(/\s+\d+[a-z]?$/i, '');
+        return 'logos/' + encodeURIComponent(base) + '.gif';
+      }
+
+      function lsNameHtml(name) {
+        var esc = lsEsc(name);
+        var idx = esc.indexOf(' ');
+        if (idx === -1) return esc;
+        return esc.slice(0, idx) + ' <span class="mol-name-break">' + esc.slice(idx + 1) + '</span>';
+      }
+
+      function lsTeamHtml(name, isRight) {
+        var isUs = lsIsUs(name);
+        var nameHtml = '<span class="mol-name' + (isUs ? ' mol-name--us' : '') + '">' + lsNameHtml(lsDisplayName(name)) + '</span>';
+        var logoHtml = '<img src="' + lsTeamLogoSrc(name) + '" alt="' + lsEsc(lsDisplayName(name)) + '" class="mol-logo mol-logo--img mol-logo--transparent" onerror="this.style.display=\'none\'" />';
+        var inner = isRight ? (nameHtml + logoHtml) : (logoHtml + nameHtml);
+        return '<div class="mol-team' + (isRight ? ' mol-team--right' : '') + '">' + inner + '</div>';
+      }
+
+      function lsPad(n) { n = String(n); return n.length < 2 ? '0' + n : n; }
+
+      /* Anchored to Europe/Zurich, not the visitor's own browser timezone. */
+      function lsZurichNowKey() {
+        return new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Zurich', hour12: false }).slice(0, 16);
+      }
+
+      function lsFixtureDateKey(dateStr) {
+        var m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})/.exec(String(dateStr || '').trim());
+        if (!m) return null;
+        return m[3] + '-' + lsPad(m[2]) + '-' + lsPad(m[1]);
+      }
+
+      function lsFixtureDateTimeKey(dateStr, timeStr) {
+        var dateKey = lsFixtureDateKey(dateStr);
+        if (!dateKey) return null;
+        var t = (timeStr && /^\d{1,2}:\d{2}/.test(String(timeStr).trim())) ? timeStr.trim() : '00:00';
+        return dateKey + ' ' + t;
+      }
+
+      function lsHasKickedOff(dateStr, timeStr) {
+        var key = lsFixtureDateTimeKey(dateStr, timeStr);
+        return !!key && lsZurichNowKey() >= key;
+      }
+
+      function lsFindNextMatch(fixtures) {
+        var todayKey = lsZurichNowKey().slice(0, 10);
+        var upcoming = (fixtures || [])
+          .filter(function (f) { return /\buzwil\b/i.test(f.home) || /\buzwil\b/i.test(f.away); })
+          .map(function (f) { return { f: f, key: lsFixtureDateKey(f.date) }; })
+          .filter(function (x) { return x.key && x.key >= todayKey; });
+        upcoming.sort(function (a, b) { return a.key < b.key ? -1 : (a.key > b.key ? 1 : 0); });
+        return upcoming.length ? upcoming[0].f : null;
+      }
+
+      function lsLoadSavedSquads() {
+        return fetch('data/live_squad.json')
+          .then(function (r) { return r.ok ? r.json() : { matches: {} }; })
+          .catch(function () { return { matches: {} }; })
+          .then(function (data) { return (data && data.matches) || {}; });
+      }
+
+      /* Strikers stand closer together than a full back/mid line, and a
+         back three (3-5-2) stands a bit closer than a back four — a
+         narrower left/right band keeps them from spreading out to the
+         touchlines. Keyed by line + player count, since DEF is 4-wide
+         in 4-4-2 but only 3-wide (with wing-backs covering the flanks
+         in MID instead) in 3-5-2. */
+      var LINE_SPREAD = {
+        GK: { 1: [50, 50] },
+        DEF: { 3: [18, 82], 4: [12, 88] },
+        MID: { 4: [12, 88], 5: [12, 88] },
+        ATT: { 2: [34, 66] }
+      };
+
+      function lsRenderToken(name, line, index, total) {
+        var spread = (LINE_SPREAD[line] && LINE_SPREAD[line][total]) || [12, 88];
+        var x = total <= 1 ? 50 : spread[0] + index * ((spread[1] - spread[0]) / (total - 1));
+        var slug = PHOTO_SLUG.hasOwnProperty(name) ? PHOTO_SLUG[name] : undefined;
+        var visual = slug
+          ? '<img src="players/squad/' + slug + '.png" alt="' + lsEsc(name) + '" />'
+          : JERSEY_SVG;
+        return '<div class="lsp-token" style="left:' + x + '%; top:' + LINE_Y[line] + '%;">' +
+          '<div class="lsp-visual">' + visual + '</div>' +
+          '<span class="lsp-name">' + lsEsc(name) + '</span></div>';
+      }
+
+      function lsRenderPitch(entry, pitchId, emptyId) {
+        var pitch = document.getElementById(pitchId || 'liveSquadPitch');
+        var empty = document.getElementById(emptyId || 'liveSquadEmpty');
+        var formation = FORMATIONS[entry && entry.formation] ? entry.formation : '4-4-2';
+        var slots = FORMATIONS[formation];
+        var lineup = (entry && entry.lineup) || {};
+        var html = '';
+        var hasAny = false;
+
+        ['GK', 'DEF', 'MID', 'ATT'].forEach(function (line) {
+          var lineSlots = slots[line];
+          lineSlots.forEach(function (slot, i) {
+            var name = lineup[slot];
+            if (!name) return;
+            hasAny = true;
+            html += lsRenderToken(name, line, i, lineSlots.length);
+          });
+        });
+
+        if (hasAny) {
+          pitch.innerHTML = html;
+          pitch.classList.remove('hidden');
+          empty.classList.remove('show');
+        } else {
+          pitch.innerHTML = '';
+          pitch.classList.add('hidden');
+          empty.classList.add('show');
+        }
+      }
+
+      function lsRenderCard(fixture, entry, ids) {
+        ids = ids || {};
+        var badgeId = ids.badge || 'lsqBadge';
+        var dateId = ids.date || 'lsqDate';
+        var onelineId = ids.oneline || 'lsqOneline';
+        var footId = ids.foot || 'lsqFoot';
+        var scorersId = ids.scorers || 'liveSquadScorers';
+
+        document.getElementById(badgeId).textContent = fixture.league || '';
+        document.getElementById(dateId).textContent = fixture.date || '';
+
+        var goals = (entry && entry.goals) || [];
+        var hasScore = lsHasKickedOff(fixture.date, fixture.time) ||
+          (entry && (entry.homeScore !== undefined || entry.awayScore !== undefined));
+        var scoreOrTime = hasScore
+          ? (lsEsc((entry && entry.homeScore) || 0) + ' – ' + lsEsc((entry && entry.awayScore) || 0))
+          : lsEsc(fixture.time || '–');
+
+        document.getElementById(onelineId).innerHTML =
+          lsTeamHtml(fixture.home, false) +
+          '<span class="mol-score">' + scoreOrTime + '</span>' +
+          lsTeamHtml(fixture.away, true);
+
+        var foot = document.getElementById(footId);
+        foot.innerHTML = fixture.venue ? '<span>📍 ' + lsEsc(fixture.venue) + '</span>' : '';
+
+        var usIsHome = lsIsUs(fixture.home);
+        var sorted = goals.slice().sort(function (a, b) { return (a.minute || 0) - (b.minute || 0); });
+        var runningHome = 0;
+        var runningAway = 0;
+        document.getElementById(scorersId).innerHTML = sorted.map(function (g) {
+          var isUsGoal = (g.side === 'home') === usIsHome;
+          if (g.side === 'home') { runningHome++; } else { runningAway++; }
+          var crestTeam = g.side === 'home' ? fixture.home : fixture.away;
+          return '<div class="lsc-row' + (isUsGoal ? '' : ' lsc-opp') + '">' +
+            '<span class="lsc-minute">' + lsEsc(g.minute) + '\'</span>' +
+            '<span class="lsc-ball">⚽</span>' +
+            '<img class="lsc-crest" src="' + lsTeamLogoSrc(crestTeam) + '" alt="" onerror="this.style.display=\'none\'" />' +
+            '<span class="lsc-name">' + lsEsc(g.scorer) + '</span>' +
+            '<span class="lsc-result">(' + runningHome + ' – ' + runningAway + ')</span>' +
+            '</div>';
+        }).join('');
+      }
+
+      function lsOpenOverlay() {
+        var overlay = document.getElementById('liveSquadOverlay');
+
+        fetch('data/spiele.json')
+          .then(function (r) { return r.ok ? r.json() : { fixtures: [] }; })
+          .then(function (data) {
+            var next = lsFindNextMatch(data.fixtures);
+            if (!next) {
+              document.getElementById('liveSquadCard').classList.add('hidden');
+              document.getElementById('liveSquadScorers').innerHTML = '';
+              document.getElementById('liveSquadPitch').classList.add('hidden');
+              document.getElementById('liveSquadEmpty').classList.add('show');
+              return;
+            }
+            document.getElementById('liveSquadCard').classList.remove('hidden');
+            return lsLoadSavedSquads().then(function (saved) {
+              var entry = saved[lsMatchId(next)];
+              lsRenderCard(next, entry);
+              lsRenderPitch(entry);
+            });
+          });
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open');
+      }
+
+      function lsCloseOverlay() {
+        var overlay = document.getElementById('liveSquadOverlay');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        document.body.classList.remove('modal-open');
+      }
+
+      /* ── Live state: drives the bottom banner (mobile + desktop) and the
+         hero "Live Spiele" button. Only visible while a match is toggled
+         live in the admin tool. ── */
+      var lastLiveState = { isLive: false, fixture: null };
+
+      function setLiveUI(isLive, fixture) {
+        lastLiveState = { isLive: isLive, fixture: fixture };
+
+        var banner = document.getElementById('liveSquadBanner');
+        var bannerText = document.getElementById('liveSquadBannerText');
+        var heroBtn = document.getElementById('heroPrimaryBtn');
+        var heroLabel = document.getElementById('heroPrimaryLabel');
+        var heroDot = document.getElementById('heroLiveDot');
+        var lang = document.documentElement.getAttribute('data-lang') || 'de';
+        if (!banner || !bannerText || !heroBtn || !heroLabel || !heroDot) return;
+
+        if (isLive && fixture) {
+          bannerText.textContent = (lang === 'hr' ? 'UŽIVO' : 'LIVE') + ' · ' + lsDisplayName(fixture.home) + ' – ' + lsDisplayName(fixture.away);
+          banner.classList.add('show');
+
+          heroLabel.textContent = lang === 'hr' ? 'Uživo utakmica' : 'Live Spiele';
+          heroBtn.dataset.liveActive = 'true';
+          heroDot.hidden = false;
+
+          document.body.classList.add('has-live-banner');
+          requestAnimationFrame(function () {
+            document.documentElement.style.setProperty('--live-banner-h', banner.offsetHeight + 'px');
+          });
+        } else {
+          banner.classList.remove('show');
+          bannerText.textContent = '';
+
+          heroLabel.textContent = heroLabel.getAttribute('data-' + lang) || 'News & Spiele';
+          heroBtn.dataset.liveActive = 'false';
+          heroDot.hidden = true;
+
+          document.body.classList.remove('has-live-banner');
+          document.documentElement.style.removeProperty('--live-banner-h');
+        }
+      }
+
+      function applyLiveState() {
+        fetch('data/spiele.json')
+          .then(function (r) { return r.ok ? r.json() : { fixtures: [] }; })
+          .then(function (data) {
+            var next = lsFindNextMatch(data.fixtures);
+            if (!next) { setLiveUI(false, null); return; }
+            return lsLoadSavedSquads().then(function (saved) {
+              var entry = saved[lsMatchId(next)];
+              setLiveUI(!!(entry && entry.live), next);
+            });
+          })
+          .catch(function () { setLiveUI(false, null); });
+      }
+
+      var banner = document.getElementById('liveSquadBanner');
+      var closeBtn = document.getElementById('liveSquadClose');
+      var overlayEl = document.getElementById('liveSquadOverlay');
+      var heroBtnEl = document.getElementById('heroPrimaryBtn');
+      if (banner) banner.addEventListener('click', lsOpenOverlay);
+      if (closeBtn) closeBtn.addEventListener('click', lsCloseOverlay);
+      if (overlayEl) overlayEl.addEventListener('click', function (e) { if (e.target === overlayEl) lsCloseOverlay(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lsCloseOverlay(); });
+      if (heroBtnEl) {
+        heroBtnEl.addEventListener('click', function (e) {
+          if (heroBtnEl.dataset.liveActive === 'true') {
+            e.preventDefault();
+            lsOpenOverlay();
+          }
+        });
+      }
+
+      applyLiveState();
+
+      // Exposed so the "Nächstes Spiel" Details link can check whether this
+      // match has been flipped live and, if so, reuse this same overlay —
+      // and so the language switcher can refresh the live labels in place.
+      window.lsMatchId = lsMatchId;
+      window.lsLoadSavedSquads = lsLoadSavedSquads;
+      window.lsOpenOverlay = lsOpenOverlay;
+      window.lsRenderPitch = lsRenderPitch;
+      window.lsRenderCard = lsRenderCard;
+      window.lsRefreshLiveLabels = function () { setLiveUI(lastLiveState.isLive, lastLiveState.fixture); };
+    })();
   </script>
 
   <script>
