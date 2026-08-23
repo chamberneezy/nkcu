@@ -1106,7 +1106,10 @@
         fetch('data/live_squad.json').then(function (r) { return r.ok ? r.json() : { matches: {} }; }).catch(function () { return { matches: {} }; })
       ]).then(function (results) {
         state.fixtures = results[0].fixtures || [];
-        state.savedSquads = (results[1] && results[1].matches) || {};
+        var savedMatches = (results[1] && results[1].matches) || {};
+        // A PHP-encoded empty associative array serializes as JSON "[]"
+        // instead of "{}" — treat that the same as no saved matches.
+        state.savedSquads = Array.isArray(savedMatches) ? {} : savedMatches;
         renderMatchGrid();
         window.addEventListener('hashchange', routeFromHash);
         routeFromHash();

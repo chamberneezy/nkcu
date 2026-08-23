@@ -79,6 +79,13 @@ $entry['updated'] = gmdate('Y-m-d\TH:i:s\Z');
 
 $data['matches'][$matchId] = $entry;
 
+// json_encode() can't tell an empty associative array from an empty
+// list, so an empty $data['matches'] would otherwise serialize as "[]"
+// instead of "{}" and break every saved[matchId] lookup on the front end.
+if (empty($data['matches'])) {
+    $data['matches'] = new stdClass();
+}
+
 $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 ftruncate($fh, 0);

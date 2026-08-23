@@ -2152,7 +2152,12 @@
         return fetch('data/live_squad.json')
           .then(function (r) { return r.ok ? r.json() : { matches: {} }; })
           .catch(function () { return { matches: {} }; })
-          .then(function (data) { return (data && data.matches) || {}; });
+          .then(function (data) {
+            var matches = (data && data.matches) || {};
+            // A PHP-encoded empty associative array serializes as JSON "[]"
+            // instead of "{}" — treat that the same as no saved matches.
+            return Array.isArray(matches) ? {} : matches;
+          });
       }
 
       /* Strikers stand closer together than a full back/mid line, and a
