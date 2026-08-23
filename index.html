@@ -1729,7 +1729,7 @@
         }
       }
 
-      fetch('./data/uzwil4.json')
+      fetch('./data/uzwil4.json?_=' + Date.now())
         .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
         .then(function (data) {
           tsRenderStandings(data.standings);
@@ -1744,7 +1744,7 @@
          nach dem Spieltag auf das nächste Spiel weiter (siehe tsFindNextMatch).
          Die Spieltag-Nummer ist die 1-basierte Position des Spiels in dieser
          (Uzwil-eigenen) Fixture-Liste. */
-      fetch('./data/spiele.json')
+      fetch('./data/spiele.json?_=' + Date.now())
         .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
         .then(function (data) {
           var tsNextMatch = tsFindNextMatch(data.fixtures);
@@ -2149,7 +2149,7 @@
       }
 
       function lsLoadSavedSquads() {
-        return fetch('data/live_squad.json')
+        return fetch('data/live_squad.json?_=' + Date.now())
           .then(function (r) { return r.ok ? r.json() : { matches: {} }; })
           .catch(function () { return { matches: {} }; })
           .then(function (data) {
@@ -2262,7 +2262,7 @@
       function lsOpenOverlay() {
         var overlay = document.getElementById('liveSquadOverlay');
 
-        fetch('data/spiele.json')
+        fetch('data/spiele.json?_=' + Date.now())
           .then(function (r) { return r.ok ? r.json() : { fixtures: [] }; })
           .then(function (data) {
             var next = lsFindNextMatch(data.fixtures);
@@ -2335,7 +2335,7 @@
       }
 
       function applyLiveState() {
-        fetch('data/spiele.json')
+        fetch('data/spiele.json?_=' + Date.now())
           .then(function (r) { return r.ok ? r.json() : { fixtures: [] }; })
           .then(function (data) {
             var next = lsFindNextMatch(data.fixtures);

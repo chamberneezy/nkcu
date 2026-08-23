@@ -1102,8 +1102,8 @@
     /* ── Init: load fixtures + existing saved squads ─────── */
     function initAdmin() {
       Promise.all([
-        fetch('data/spiele.json').then(function (r) { return r.ok ? r.json() : { fixtures: [] }; }),
-        fetch('data/live_squad.json').then(function (r) { return r.ok ? r.json() : { matches: {} }; }).catch(function () { return { matches: {} }; })
+        fetch('data/spiele.json?_=' + Date.now()).then(function (r) { return r.ok ? r.json() : { fixtures: [] }; }),
+        fetch('data/live_squad.json?_=' + Date.now()).then(function (r) { return r.ok ? r.json() : { matches: {} }; }).catch(function () { return { matches: {} }; })
       ]).then(function (results) {
         state.fixtures = results[0].fixtures || [];
         var savedMatches = (results[1] && results[1].matches) || {};
