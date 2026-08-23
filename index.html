@@ -1615,8 +1615,12 @@
 
         var homeIsUs = tsIsUs(next.home);
         var awayIsUs = tsIsUs(next.away);
+        // Score only replaces the kickoff-time/date-boxes view once the match
+        // has actually started — by schedule, or because the admin flipped it
+        // live, or a goal was logged. A lingering homeScore:0 left over from
+        // adding-then-deleting a test goal must NOT trigger this early.
         var hasScore = tsHasKickedOff(next.date, next.time) ||
-          (entry && (entry.homeScore !== undefined || entry.awayScore !== undefined));
+          (entry && (entry.live || (entry.goals && entry.goals.length > 0)));
         var scoreOrTime = hasScore
           ? (tsEscape((entry && entry.homeScore) || 0) + ' – ' + tsEscape((entry && entry.awayScore) || 0))
           : tsEscape(next.time || '–');
@@ -2227,8 +2231,11 @@
         document.getElementById(dateId).textContent = fixture.date || '';
 
         var goals = (entry && entry.goals) || [];
+        // Same rule as the homepage next-match card: only show the score
+        // once the match has actually started, not just because a stale
+        // homeScore:0 is still sitting on the entry.
         var hasScore = lsHasKickedOff(fixture.date, fixture.time) ||
-          (entry && (entry.homeScore !== undefined || entry.awayScore !== undefined));
+          (entry && (entry.live || goals.length > 0));
         var scoreOrTime = hasScore
           ? (lsEsc((entry && entry.homeScore) || 0) + ' – ' + lsEsc((entry && entry.awayScore) || 0))
           : lsEsc(fixture.time || '–');
