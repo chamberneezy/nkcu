@@ -1,27 +1,78 @@
 {
     "matches": {
-        "20-08-2026-FC-Uzwil-4-HNK-Hajduk": {
-            "matchId": "20-08-2026-FC-Uzwil-4-HNK-Hajduk",
-            "date": "20.08.2026",
+        "23-08-2026-FC-Uzwil-4-FC-Flawil-2": {
+            "matchId": "23-08-2026-FC-Uzwil-4-FC-Flawil-2",
+            "date": "23.08.2026",
             "home": "FC Uzwil 4",
-            "away": "HNK Hajduk",
+            "away": "FC Flawil 2",
             "formation": "4-4-2",
             "lineup": {
                 "GK": "A. Specchia",
-                "LB": "L. Gojević",
+                "LB": "A. Bahorić",
                 "CB1": "G. Jozić",
-                "CB2": "K. Katičić",
-                "RB": "M. Breljak",
-                "LM": "M. Gojević",
-                "CM1": "M. Matić",
-                "CM2": "A. Bahorić",
-                "RM": "J. Baumann",
-                "ST1": "D. Radoš",
-                "ST2": "S. Ivanković"
+                "CB2": "B. Pelivani",
+                "RB": "A. Rozajac",
+                "LM": "N. Gonzalez",
+                "CM1": "S. Culanić",
+                "CM2": "D. Jozić",
+                "RM": "X. Hasallari",
+                "ST1": "R. Bulić",
+                "ST2": "D. Radoš"
             },
-            "updated": "2026-08-20T16:44:21Z",
-            "goals": [],
-            "live": true
+            "updated": "2026-08-23T13:08:44Z",
+            "goals": [
+                {
+                    "id": "g_6a8ad6be06d302.09042679",
+                    "minute": 7,
+                    "scorer": "Gegner",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a8ad74a7bd958.08794220",
+                    "minute": 9,
+                    "scorer": "S. Culanić",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6a8ad94c9137a2.91740271",
+                    "minute": 17,
+                    "scorer": "Gegner",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a8adb68d27a70.38013086",
+                    "minute": 26,
+                    "scorer": "Gegner",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a8adf8f8a7441.68607363",
+                    "minute": 31,
+                    "scorer": "Gegner",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a8adf95421806.59726694",
+                    "minute": 44,
+                    "scorer": "Gegner",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a8ae699e120c4.80445643",
+                    "minute": 57,
+                    "scorer": "R. Bulić",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6a8ae9e0a96b18.26101363",
+                    "minute": 71,
+                    "scorer": "A. Marić",
+                    "side": "home"
+                }
+            ],
+            "homeScore": 3,
+            "awayScore": 5,
+            "live": false
         }
     }
 }

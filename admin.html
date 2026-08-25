@@ -911,6 +911,8 @@
     <!-- View A: Match Selection -->
     <div id="viewMatches">
       <div id="matchGrid" class="match-grid"></div>
+      <button class="back-btn" id="pastGamesToggle" style="margin-top:22px;margin-bottom:0;" hidden></button>
+      <div id="pastGamesGrid" class="match-grid" style="margin-top:16px;" hidden></div>
     </div>
 
     <!-- View B: Squad Builder -->
@@ -1138,46 +1140,94 @@
 
     function pad2(n) { n = String(n); return n.length < 2 ? '0' + n : n; }
 
-    function parseSwissDate(dateStr, timeStr) {
+    /* Day-granularity date key (YYYY-MM-DD), same convention as the
+       homepage's tsFixtureDateKey/tsZurichNowKey: a match counts as
+       "upcoming" through its own match day and only becomes "past" the
+       day after — independent of whether a score has been entered yet
+       (spiele.json's homeScore is never filled in; live_squad.json is the
+       real source of truth for results). */
+    function fixtureDateKey(dateStr) {
       var m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})/.exec(String(dateStr || '').trim());
       if (!m) return null;
-      var t = (timeStr && /^\d{1,2}:\d{2}/.test(String(timeStr).trim())) ? timeStr.trim() : '00:00';
-      var dt = new Date(m[3] + '-' + pad2(m[2]) + '-' + pad2(m[1]) + 'T' + t + ':00');
-      return isNaN(dt.getTime()) ? null : dt;
+      return m[3] + '-' + pad2(m[2]) + '-' + pad2(m[1]);
+    }
+
+    function todayKey() {
+      var d = new Date();
+      return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
     }
 
     function upcomingFixtures(limit) {
+      var today = todayKey();
       var upcoming = state.fixtures
-        .filter(function (f) { return f.homeScore === null || f.homeScore === undefined; })
-        .map(function (f) { return { f: f, dt: parseSwissDate(f.date, f.time) }; });
-      upcoming.sort(function (a, b) { return (a.dt ? a.dt.getTime() : Infinity) - (b.dt ? b.dt.getTime() : Infinity); });
+        .map(function (f) { return { f: f, key: fixtureDateKey(f.date) }; })
+        .filter(function (x) { return x.key && x.key >= today; });
+      upcoming.sort(function (a, b) { return a.key < b.key ? -1 : (a.key > b.key ? 1 : 0); });
       return upcoming.slice(0, limit).map(function (x) { return x.f; });
     }
 
-    function renderMatchGrid() {
-      var grid = document.getElementById('matchGrid');
-      var visible = upcomingFixtures(VISIBLE_MATCH_COUNT);
-      if (!visible.length) {
-        grid.innerHTML = '<p style="font-family:var(--ff-body);color:var(--gray-600);">Keine Spiele gefunden.</p>';
+    /* Most recent first. */
+    function pastFixtures() {
+      var today = todayKey();
+      var past = state.fixtures
+        .map(function (f) { return { f: f, key: fixtureDateKey(f.date) }; })
+        .filter(function (x) { return x.key && x.key < today; });
+      past.sort(function (a, b) { return a.key > b.key ? -1 : (a.key < b.key ? 1 : 0); });
+      return past.map(function (x) { return x.f; });
+    }
+
+    function matchCardHtml(f) {
+      var id = matchId(f);
+      var hasSaved = !!state.savedSquads[id];
+      return (hasSaved ? '<span class="m-card-saved">Kader gespeichert</span>' : '') +
+        (f.dummy ? '<span class="m-card-saved" style="background:var(--gray-500);' + (hasSaved ? 'top:38px;' : '') + '">Testspiel</span>' : '') +
+        '<div class="m-card-top"><span>' + esc(f.league || '') + '</span><span>' + esc(f.date || '') + '</span></div>' +
+        '<div class="m-card-body">' +
+        '<div class="m-card-teams">' + esc(f.home) + '<small>vs</small>' + esc(f.away) + '</div>' +
+        '<div class="m-card-venue">📍 ' + esc(f.venue || '–') + (f.time ? ' · ' + esc(f.time) : '') + '</div>' +
+        '</div>';
+    }
+
+    function renderCardsInto(grid, fixtures, emptyText) {
+      if (!fixtures.length) {
+        grid.innerHTML = '<p style="font-family:var(--ff-body);color:var(--gray-600);">' + esc(emptyText) + '</p>';
         return;
       }
       grid.innerHTML = '';
-      visible.forEach(function (f) {
-        var id = matchId(f);
-        var hasSaved = !!state.savedSquads[id];
+      fixtures.forEach(function (f) {
         var card = document.createElement('button');
         card.className = 'm-card';
-        card.innerHTML =
-          (hasSaved ? '<span class="m-card-saved">Kader gespeichert</span>' : '') +
-          (f.dummy ? '<span class="m-card-saved" style="background:var(--gray-500);' + (hasSaved ? 'top:38px;' : '') + '">Testspiel</span>' : '') +
-          '<div class="m-card-top"><span>' + esc(f.league || '') + '</span><span>' + esc(f.date || '') + '</span></div>' +
-          '<div class="m-card-body">' +
-          '<div class="m-card-teams">' + esc(f.home) + '<small>vs</small>' + esc(f.away) + '</div>' +
-          '<div class="m-card-venue">📍 ' + esc(f.venue || '–') + (f.time ? ' · ' + esc(f.time) : '') + '</div>' +
-          '</div>';
+        card.innerHTML = matchCardHtml(f);
         card.addEventListener('click', function () { navigateToMatch(f); });
         grid.appendChild(card);
       });
+    }
+
+    var pastGamesOpen = false;
+
+    function renderPastGamesToggle() {
+      var past = pastFixtures();
+      var toggle = document.getElementById('pastGamesToggle');
+      var grid = document.getElementById('pastGamesGrid');
+      if (!past.length) {
+        toggle.hidden = true;
+        grid.hidden = true;
+        return;
+      }
+      toggle.hidden = false;
+      toggle.textContent = (pastGamesOpen ? '▲ ' : '▼ ') + 'Bisherige Spiele (' + past.length + ')';
+      grid.hidden = !pastGamesOpen;
+      if (pastGamesOpen) renderCardsInto(grid, past, 'Keine bisherigen Spiele gefunden.');
+    }
+
+    document.getElementById('pastGamesToggle').addEventListener('click', function () {
+      pastGamesOpen = !pastGamesOpen;
+      renderPastGamesToggle();
+    });
+
+    function renderMatchGrid() {
+      renderCardsInto(document.getElementById('matchGrid'), upcomingFixtures(VISIBLE_MATCH_COUNT), 'Keine Spiele gefunden.');
+      renderPastGamesToggle();
     }
 
     /* ── View B: squad builder ────────────────────────────── */
