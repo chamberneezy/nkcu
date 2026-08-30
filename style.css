@@ -4403,17 +4403,16 @@ body.has-live-banner {
     box-shadow: 0 -2px 16px rgba(0, 0, 0, .25) !important;
   }
 
-  /* Items 1,3,5 (News, Verein, Shop) → rot */
+  /* Items 1,3,5 (Saison, Team, Kontakt) → rot */
   .bn-item:nth-child(1),
   .bn-item:nth-child(3),
   .bn-item:nth-child(5) {
     color: #CC0000;
   }
 
-  /* Items 2,4,6 (Team, Sponsor, Kontakt) → weiss */
+  /* Items 2,4 (News, Shop) → weiss */
   .bn-item:nth-child(2),
-  .bn-item:nth-child(4),
-  .bn-item:nth-child(6) {
+  .bn-item:nth-child(4) {
     color: #FFFFFF;
   }
 
@@ -4425,8 +4424,7 @@ body.has-live-banner {
   }
 
   .bn-item:nth-child(2).active,
-  .bn-item:nth-child(4).active,
-  .bn-item:nth-child(6).active {
+  .bn-item:nth-child(4).active {
     color: #FFFFFF;
     opacity: 0.75;
   }
