@@ -275,7 +275,7 @@ ul {
 }
 
 .header.scrolled .logo-name {
-  color: var(--black);
+  color: var(--blue);
 }
 
 /* Nav */
@@ -317,11 +317,11 @@ ul {
 }
 
 .header.scrolled .nav-link {
-  color: var(--gray-700);
+  color: var(--blue);
 }
 
 .header.scrolled .nav-link:hover {
-  color: var(--black);
+  color: var(--blue-dark);
   background: var(--gray-50);
 }
 
@@ -336,7 +336,7 @@ ul {
   align-items: center;
   gap: 2px;
   background: rgba(255, 255, 255, .12);
-  border: 1.5px solid rgba(255, 255, 255, .3);
+  border: 1.5px solid rgba(0, 53, 128, .5);
   border-radius: 6px;
   padding: 6px 12px;
   cursor: pointer;
@@ -345,12 +345,12 @@ ul {
 
 .lang-toggle:hover {
   background: rgba(255, 255, 255, .2);
-  border-color: rgba(255, 255, 255, .55);
+  border-color: rgba(0, 53, 128, .8);
 }
 
 .header.scrolled .lang-toggle {
   background: var(--gray-50);
-  border-color: var(--gray-200);
+  border-color: var(--blue);
 }
 
 .lang-opt {
