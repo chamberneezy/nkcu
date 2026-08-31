@@ -4782,24 +4782,26 @@ body.has-live-banner .cookie-banner {
   height: 80px;
   margin-right: 16px;
   background: var(--white);
-  border: 1.5px solid var(--gray-100);
+  border: 1.5px solid var(--gray-200);
   border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 16px;
+  padding: 10px 14px;
   text-decoration: none;
-  transition: border-color .2s, box-shadow .2s;
+  box-shadow: var(--shadow-sm);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
 }
 
 .spc-item--logo:hover {
   border-color: var(--gray-300);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .spc-logo {
-  max-width: 120px;
-  max-height: 52px;
+  max-width: 132px;
+  max-height: 60px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -4810,9 +4812,16 @@ body.has-live-banner .cookie-banner {
   background: #000;
 }
 
+/* For pale/low-contrast logos that wash out on plain white */
+.spc-item--tint {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
 .spc-item--empty {
   border-style: dashed;
   border-color: var(--gray-200);
+  box-shadow: none;
 }
 
 .spc-item--empty span {
@@ -4821,10 +4830,15 @@ body.has-live-banner .cookie-banner {
   text-align: center;
 }
 
-/* Gold items are slightly larger */
+/* Gold items are slightly larger — logos scale up to fill the extra room */
 .spc-tier--gold+.sponsor-carousel .spc-item {
-  width: 180px;
-  height: 90px;
+  width: 200px;
+  height: 100px;
+}
+
+.spc-tier--gold+.sponsor-carousel .spc-logo {
+  max-width: 168px;
+  max-height: 76px;
 }
 
 /* ══════════════════════════════════════════════════════
@@ -4939,23 +4953,23 @@ body.has-live-banner .cookie-banner {
 /* Sponsor-Logos Grössen: Gold > Silver > Bronze */
 /* Gold: bestehendes 180x90 bleibt */
 .spc-item--silver {
-  width: 150px;
-  height: 72px;
+  width: 160px;
+  height: 78px;
 }
 
 .spc-item--bronze {
-  width: 126px;
-  height: 60px;
+  width: 140px;
+  height: 68px;
 }
 
 .spc-item--silver .spc-logo {
-  max-width: 110px;
-  max-height: 44px;
+  max-width: 124px;
+  max-height: 52px;
 }
 
 .spc-item--bronze .spc-logo {
-  max-width: 90px;
-  max-height: 36px;
+  max-width: 108px;
+  max-height: 44px;
 }
 
 /* Bronze Tier Label */
