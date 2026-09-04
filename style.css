@@ -1251,6 +1251,14 @@ ul {
   font-weight: 700;
 }
 
+.standings-table tbody tr.standings-row--promotion {
+  border-bottom: 2px solid var(--gonner);
+}
+
+.standings-table tbody tr.standings-row--relegation {
+  border-top: 2px solid var(--red-light);
+}
+
 .table-widget-note {
   margin-top: 28px;
   font-size: .82rem;

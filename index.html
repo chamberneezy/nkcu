@@ -1459,9 +1459,15 @@
         if (!standings || !standings.length) { wrap.style.display = 'none'; empty.style.display = ''; return; }
         var tbody = document.getElementById('standingsBody');
         tbody.innerHTML = '';
+        var maxRank = standings.reduce(function (m, r) { return Math.max(m, r.rank); }, 0);
+        var hasMultiple = standings.length > 1;
         standings.forEach(function (r) {
           var tr = document.createElement('tr');
-          if (tsIsUs(r.team)) tr.className = 'standings-row--us';
+          var classes = [];
+          if (tsIsUs(r.team)) classes.push('standings-row--us');
+          if (hasMultiple && r.rank === 1) classes.push('standings-row--promotion');
+          if (hasMultiple && r.rank === maxRank) classes.push('standings-row--relegation');
+          if (classes.length) tr.className = classes.join(' ');
           var diff = r.goalDifference !== undefined ? r.goalDifference : (r.goalsFor - r.goalsAgainst);
           tr.innerHTML =
             '<td>' + tsEscape(r.rank) + '</td>' +

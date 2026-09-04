@@ -641,6 +641,38 @@
       background: var(--red-dark);
     }
 
+    .goal-btn-row {
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .goal-btn-row .goal-btn--add {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .goal-btn--og {
+      flex: 0 0 auto;
+      width: 44px;
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      color: var(--gray-700);
+      font-family: var(--ff-head);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .goal-btn--og:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
     /* ── Tor-Modal ─────────────────────────────────────── */
     .goal-modal-overlay {
       display: none;
@@ -955,7 +987,10 @@
           <span id="goalScoreOpp">0</span>
         </div>
 
-        <button class="goal-btn goal-btn--add" id="btnAddGoal">⚽ Tor</button>
+        <div class="goal-btn-row">
+          <button class="goal-btn goal-btn--add" id="btnAddGoal">⚽ Tor</button>
+          <button class="goal-btn goal-btn--og" id="btnAddOwnGoal" title="Eigentor erfassen" aria-label="Eigentor erfassen">OG</button>
+        </div>
 
         <div class="scorers-list" id="scorersList"></div>
       </div>
@@ -991,10 +1026,10 @@
       <div class="goal-modal-overlay" id="goalModalOverlay">
         <div class="goal-modal">
           <button class="goal-modal-close" id="goalModalClose" aria-label="Schliessen">×</button>
-          <h3 class="goal-modal-title">Tor erfassen</h3>
+          <h3 class="goal-modal-title" id="goalModalTitle">Tor erfassen</h3>
 
           <div id="goalModalStepSide">
-            <p class="goal-modal-hint">Für wen fiel das Tor?</p>
+            <p class="goal-modal-hint" id="goalModalSideHint">Für wen fiel das Tor?</p>
             <div class="goal-side-buttons">
               <button class="goal-side-btn" id="goalSideHomeBtn"></button>
               <button class="goal-side-btn" id="goalSideAwayBtn"></button>
@@ -1419,9 +1454,13 @@
     }
 
     var goalModalSide = null;
+    var goalModalOwnGoal = false;
 
     function resetGoalForms() {
       goalModalSide = null;
+      goalModalOwnGoal = false;
+      document.getElementById('goalModalTitle').textContent = 'Tor erfassen';
+      document.getElementById('goalModalSideHint').textContent = 'Für wen fiel das Tor?';
       document.getElementById('goalModalStepSide').hidden = false;
       document.getElementById('goalModalStepDetails').hidden = true;
       document.getElementById('goalMinuteInput').value = '';
@@ -1625,20 +1664,47 @@
       document.getElementById('goalModalOverlay').classList.add('open');
     }
 
+    function openOwnGoalModal() {
+      var fixture = state.currentMatch;
+      if (!fixture) return;
+      resetGoalForms();
+      goalModalOwnGoal = true;
+      document.getElementById('goalModalTitle').textContent = 'Eigentor erfassen';
+      document.getElementById('goalModalSideHint').textContent = 'Für wen zählt das Eigentor?';
+      document.getElementById('goalSideHomeBtn').textContent = fixture.home;
+      document.getElementById('goalSideAwayBtn').textContent = fixture.away;
+      document.getElementById('goalModalOverlay').classList.add('open');
+    }
+
     function closeGoalModal() {
       document.getElementById('goalModalOverlay').classList.remove('open');
     }
 
+    // NOTE: for an own goal, `side` is the team the goal counts FOR (the
+    // beneficiary) — same click semantics as the normal Tor flow, so an
+    // admin used to "click team X = X's score goes up" can't get this
+    // backwards. The team that actually put it in their own net is the
+    // *other* side, shown only for context in the confirmation label.
     function chooseGoalSide(side) {
       var fixture = state.currentMatch;
       goalModalSide = side;
-      var sideIsUs = (side === 'home') === isUsHome(fixture);
       var teamName = side === 'home' ? fixture.home : fixture.away;
 
       document.getElementById('goalModalStepSide').hidden = true;
       document.getElementById('goalModalStepDetails').hidden = false;
-      document.getElementById('goalModalSideLabel').textContent = 'Tor für: ' + teamName;
 
+      if (goalModalOwnGoal) {
+        var scoringTeamName = side === 'home' ? fixture.away : fixture.home;
+        document.getElementById('goalModalSideLabel').textContent =
+          'Eigentor ' + scoringTeamName + ' → Tor für ' + teamName;
+        document.getElementById('scorerSelect').hidden = true;
+        document.getElementById('goalScorerText').hidden = false;
+        document.getElementById('goalScorerText').value = 'Eigentor';
+        return;
+      }
+
+      var sideIsUs = (side === 'home') === isUsHome(fixture);
+      document.getElementById('goalModalSideLabel').textContent = 'Tor für: ' + teamName;
       document.getElementById('scorerSelect').hidden = !sideIsUs;
       document.getElementById('goalScorerText').hidden = sideIsUs;
       if (!sideIsUs) {
@@ -1647,6 +1713,7 @@
     }
 
     document.getElementById('btnAddGoal').addEventListener('click', openGoalModal);
+    document.getElementById('btnAddOwnGoal').addEventListener('click', openOwnGoalModal);
     document.getElementById('goalModalClose').addEventListener('click', closeGoalModal);
     document.getElementById('goalModalOverlay').addEventListener('click', function (e) {
       if (e.target === this) closeGoalModal();
@@ -1659,13 +1726,27 @@
     document.getElementById('goalSideAwayBtn').addEventListener('click', function () { chooseGoalSide('away'); });
 
     document.getElementById('goalModalBack').addEventListener('click', function () {
+      var wasOwnGoal = goalModalOwnGoal;
       resetGoalForms();
+      if (wasOwnGoal) {
+        goalModalOwnGoal = true;
+        document.getElementById('goalModalTitle').textContent = 'Eigentor erfassen';
+        document.getElementById('goalModalSideHint').textContent = 'Für wen zählt das Eigentor?';
+      }
     });
 
     document.getElementById('goalModalSave').addEventListener('click', function () {
       var fixture = state.currentMatch;
-      var sideIsUs = (goalModalSide === 'home') === isUsHome(fixture);
       var minute = parseInt(document.getElementById('goalMinuteInput').value, 10);
+
+      if (goalModalOwnGoal) {
+        // goalModalSide is already the beneficiary here (see chooseGoalSide).
+        var ogScorer = document.getElementById('goalScorerText').value.trim() || 'Eigentor';
+        saveGoal(goalModalSide, minute, ogScorer, closeGoalModal);
+        return;
+      }
+
+      var sideIsUs = (goalModalSide === 'home') === isUsHome(fixture);
       var scorer = sideIsUs
         ? document.getElementById('scorerSelect').value
         : (document.getElementById('goalScorerText').value.trim() || 'Gegner');
