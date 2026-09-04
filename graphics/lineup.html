@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1198px; height:880px; overflow:hidden; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; }
+
+  .pitch {
+    position:relative;
+    width:1198px;
+    height:880px;
+    background: url('pitch_grass.jpeg') center/cover no-repeat;
+  }
+
+  .pitch::after {
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 18%, rgba(0,0,0,0) 78%, rgba(0,0,0,0.22) 100%);
+    pointer-events:none;
+  }
+
+  .player {
+    position:absolute;
+    transform: translate(-50%, -50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    z-index:2;
+  }
+
+  .photo-ring {
+    width:187px;
+    height:165px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+  }
+
+  .photo-inner {
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+  }
+
+  .photo-inner img {
+    width:100%;
+    height:auto;
+    display:block;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+  }
+
+  .jersey-wrap {
+    width:56%;
+    height:100%;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding-bottom:10px;
+  }
+
+  .jersey-wrap svg { width:100%; height:auto; max-height:80%; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5)); }
+
+  .name-tag {
+    margin-top:9px;
+    background:#003580;
+    color:#ffffff;
+    font-weight:800;
+    font-size:20px;
+    letter-spacing:0.3px;
+    padding:5px 14px;
+    border-radius:5px;
+    white-space:nowrap;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+    text-transform:uppercase;
+  }
+
+  .name-tag .cap {
+    color:#ffd400;
+    margin-left:4px;
+  }
+
+  .badge {
+    position:absolute;
+    top:26px;
+    left:28px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    z-index:3;
+  }
+
+  .badge img { height:56px; }
+
+  .badge-text {
+    color:#ffffff;
+    font-weight:800;
+    font-size:22px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    line-height:1.15;
+  }
+
+  .badge-text small {
+    display:block;
+    font-weight:600;
+    font-size:14px;
+    opacity:0.9;
+  }
+
+  .formation-tag {
+    position:absolute;
+    top:26px;
+    right:32px;
+    color:#ffffff;
+    font-weight:800;
+    font-size:20px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    z-index:3;
+    background: rgba(204,0,0,0.85);
+    padding:6px 16px;
+    border-radius:5px;
+  }
+</style>
+</head>
+<body>
+  <div class="pitch">
+
+    <div class="badge">
+      <img src="../logo.png" alt="logo">
+      <div class="badge-text">NK Croatia Uzwil<small>Aufstellung</small></div>
+    </div>
+    <div class="formation-tag">4-4-2</div>
+
+    <!-- Sturm -->
+    <div class="player" style="left:33%; top:14%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <img src="../players/squad/robertino-bulic.png" alt="Robertino Bulić">
+      </div></div>
+      <div class="name-tag">R. Bulić</div>
+    </div>
+
+    <div class="player" style="left:67%; top:14%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <div class="jersey-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Blue & Black Checkered Pattern -->
+    <pattern id="checkers" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#0055d4"/>
+      <rect width="10" height="10" fill="#111111"/>
+      <rect x="10" y="10" width="10" height="10" fill="#111111"/>
+    </pattern>
+
+    <!-- Jersey Clip Mask for Sleeves -->
+    <clipPath id="jersey-clip">
+      <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Jersey Drop Shadow -->
+  <path d="M 30,20 Q 40,28 50,28 Q 60,28 70,20 L 87,29 L 79,45 L 73,41 L 73,83 Q 73,86 69,86 L 31,86 Q 27,86 27,83 L 27,41 L 21,45 L 13,29 Z" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- Jersey Body with Checkered Pattern -->
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z" fill="url(#checkers)"/>
+
+  <!-- Solid Black Sleeves Over Pattern -->
+  <g clip-path="url(#jersey-clip)">
+    <!-- Left Sleeve -->
+    <path d="M 30,18 L 14,28 L 22,44 L 32,36 Z" fill="#111111"/>
+    <!-- Right Sleeve -->
+    <path d="M 70,18 L 86,28 L 78,44 L 68,36 Z" fill="#111111"/>
+  </g>
+
+  <!-- Blue Crew Collar -->
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 Q 60,22 50,22 Q 40,22 30,18 Z" fill="#0055d4"/>
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18" fill="none" stroke="#003db3" stroke-width="1.5"/>
+</svg></div>
+      </div></div>
+      <div class="name-tag">D. Radoš</div>
+    </div>
+
+    <!-- Mittelfeld -->
+    <div class="player" style="left:14%; top:40%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <img src="../players/squad/noel-gonzalez.png" alt="Noel Gonzalez">
+      </div></div>
+      <div class="name-tag">N. Gonzalez</div>
+    </div>
+
+    <div class="player" style="left:38%; top:40%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <div class="jersey-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Blue & Black Checkered Pattern -->
+    <pattern id="checkers" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#0055d4"/>
+      <rect width="10" height="10" fill="#111111"/>
+      <rect x="10" y="10" width="10" height="10" fill="#111111"/>
+    </pattern>
+
+    <!-- Jersey Clip Mask for Sleeves -->
+    <clipPath id="jersey-clip">
+      <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Jersey Drop Shadow -->
+  <path d="M 30,20 Q 40,28 50,28 Q 60,28 70,20 L 87,29 L 79,45 L 73,41 L 73,83 Q 73,86 69,86 L 31,86 Q 27,86 27,83 L 27,41 L 21,45 L 13,29 Z" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- Jersey Body with Checkered Pattern -->
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z" fill="url(#checkers)"/>
+
+  <!-- Solid Black Sleeves Over Pattern -->
+  <g clip-path="url(#jersey-clip)">
+    <!-- Left Sleeve -->
+    <path d="M 30,18 L 14,28 L 22,44 L 32,36 Z" fill="#111111"/>
+    <!-- Right Sleeve -->
+    <path d="M 70,18 L 86,28 L 78,44 L 68,36 Z" fill="#111111"/>
+  </g>
+
+  <!-- Blue Crew Collar -->
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 Q 60,22 50,22 Q 40,22 30,18 Z" fill="#0055d4"/>
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18" fill="none" stroke="#003db3" stroke-width="1.5"/>
+</svg></div>
+      </div></div>
+      <div class="name-tag">I. Beka</div>
+    </div>
+
+    <div class="player" style="left:62%; top:40%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <img src="../players/squad/danijel-jozic.png" alt="Danijel Jozić">
+      </div></div>
+      <div class="name-tag">D. Jozić</div>
+    </div>
+
+    <div class="player" style="left:86%; top:40%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <div class="jersey-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Blue & Black Checkered Pattern -->
+    <pattern id="checkers" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#0055d4"/>
+      <rect width="10" height="10" fill="#111111"/>
+      <rect x="10" y="10" width="10" height="10" fill="#111111"/>
+    </pattern>
+
+    <!-- Jersey Clip Mask for Sleeves -->
+    <clipPath id="jersey-clip">
+      <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Jersey Drop Shadow -->
+  <path d="M 30,20 Q 40,28 50,28 Q 60,28 70,20 L 87,29 L 79,45 L 73,41 L 73,83 Q 73,86 69,86 L 31,86 Q 27,86 27,83 L 27,41 L 21,45 L 13,29 Z" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- Jersey Body with Checkered Pattern -->
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z" fill="url(#checkers)"/>
+
+  <!-- Solid Black Sleeves Over Pattern -->
+  <g clip-path="url(#jersey-clip)">
+    <!-- Left Sleeve -->
+    <path d="M 30,18 L 14,28 L 22,44 L 32,36 Z" fill="#111111"/>
+    <!-- Right Sleeve -->
+    <path d="M 70,18 L 86,28 L 78,44 L 68,36 Z" fill="#111111"/>
+  </g>
+
+  <!-- Blue Crew Collar -->
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 Q 60,22 50,22 Q 40,22 30,18 Z" fill="#0055d4"/>
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18" fill="none" stroke="#003db3" stroke-width="1.5"/>
+</svg></div>
+      </div></div>
+      <div class="name-tag">X. Hasallari</div>
+    </div>
+
+    <!-- Abwehr -->
+    <div class="player" style="left:14%; top:65%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <img src="../players/squad/silvio-bahoric.png" alt="Silvio Bahorić">
+      </div></div>
+      <div class="name-tag">S. Bahorić<span class="cap">(C)</span></div>
+    </div>
+
+    <div class="player" style="left:38%; top:65%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <img src="../players/squad/gabrijel-jozic.png" alt="Gabrijel Jozić">
+      </div></div>
+      <div class="name-tag">G. Jozić</div>
+    </div>
+
+    <div class="player" style="left:62%; top:65%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <img src="../players/squad/kristijan-katicic.png" alt="Kristijan Katičić">
+      </div></div>
+      <div class="name-tag">K. Katičić</div>
+    </div>
+
+    <div class="player" style="left:86%; top:65%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <div class="jersey-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Blue & Black Checkered Pattern -->
+    <pattern id="checkers" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#0055d4"/>
+      <rect width="10" height="10" fill="#111111"/>
+      <rect x="10" y="10" width="10" height="10" fill="#111111"/>
+    </pattern>
+
+    <!-- Jersey Clip Mask for Sleeves -->
+    <clipPath id="jersey-clip">
+      <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Jersey Drop Shadow -->
+  <path d="M 30,20 Q 40,28 50,28 Q 60,28 70,20 L 87,29 L 79,45 L 73,41 L 73,83 Q 73,86 69,86 L 31,86 Q 27,86 27,83 L 27,41 L 21,45 L 13,29 Z" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- Jersey Body with Checkered Pattern -->
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z" fill="url(#checkers)"/>
+
+  <!-- Solid Black Sleeves Over Pattern -->
+  <g clip-path="url(#jersey-clip)">
+    <!-- Left Sleeve -->
+    <path d="M 30,18 L 14,28 L 22,44 L 32,36 Z" fill="#111111"/>
+    <!-- Right Sleeve -->
+    <path d="M 70,18 L 86,28 L 78,44 L 68,36 Z" fill="#111111"/>
+  </g>
+
+  <!-- Blue Crew Collar -->
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 Q 60,22 50,22 Q 40,22 30,18 Z" fill="#0055d4"/>
+  <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18" fill="none" stroke="#003db3" stroke-width="1.5"/>
+</svg></div>
+      </div></div>
+      <div class="name-tag">A. Rozajac</div>
+    </div>
+
+    <!-- Tor -->
+    <div class="player" style="left:50%; top:88%;">
+      <div class="photo-ring"><div class="photo-inner">
+        <img src="../players/squad/alessio-specchia.png" alt="Alessio Specchia">
+      </div></div>
+      <div class="name-tag">A. Specchia</div>
+    </div>
+
+  </div>
+</body>
+</html>
