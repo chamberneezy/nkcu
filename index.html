@@ -2171,10 +2171,30 @@
           DEF: ['CB1', 'CB2', 'CB3'],
           MID: ['LWB', 'DM', 'CM1', 'CM2', 'RWB'],
           ATT: ['ST1', 'ST2']
+        },
+        '4-3-3': {
+          GK: ['GK'],
+          DEF: ['LB', 'CB1', 'CB2', 'RB'],
+          MID: ['CM1', 'CM2', 'CM3'],
+          ATT: ['LW', 'ST', 'RW']
         }
       };
 
-      var LINE_Y = { ATT: 14, MID: 40, DEF: 65, GK: 88 };
+      var LINE_Y = { ATT: 14, MID: 40, WB: 54, DEF: 65, GK: 88 };
+
+      /* 3-5-2's midfield five isn't one flat line on the pitch — the
+         wing-backs sit a little higher than the back three, with the
+         central three further forward still. Slots are still stored
+         under MID (admin.html's slot picker doesn't need to know about
+         this), but rendering splits them onto their own "WB" row. */
+      var SUBLINES = {
+        '3-5-2': { MID: { LWB: 'WB', RWB: 'WB' } }
+      };
+
+      function lsEffectiveLine(formation, line, slot) {
+        var map = SUBLINES[formation] && SUBLINES[formation][line];
+        return (map && map[slot]) || line;
+      }
 
       /* Short-name ("N. Surname") → transparent squad photo. null = no photo yet. */
       var PHOTO_SLUG = {
@@ -2292,8 +2312,9 @@
       var LINE_SPREAD = {
         GK: { 1: [50, 50] },
         DEF: { 3: [18, 82], 4: [12, 88] },
-        MID: { 4: [12, 88], 5: [12, 88] },
-        ATT: { 2: [34, 66] }
+        WB: { 2: [8, 92] },
+        MID: { 3: [22, 78], 4: [12, 88] },
+        ATT: { 2: [34, 66], 3: [14, 86] }
       };
 
       function lsRenderToken(name, line, index, total) {
@@ -2319,11 +2340,21 @@
 
         ['GK', 'DEF', 'MID', 'ATT'].forEach(function (line) {
           var lineSlots = slots[line];
-          lineSlots.forEach(function (slot, i) {
-            var name = lineup[slot];
-            if (!name) return;
-            hasAny = true;
-            html += lsRenderToken(name, line, i, lineSlots.length);
+          var groups = {};
+          var order = [];
+          lineSlots.forEach(function (slot) {
+            var eff = lsEffectiveLine(formation, line, slot);
+            if (!groups[eff]) { groups[eff] = []; order.push(eff); }
+            groups[eff].push(slot);
+          });
+          order.forEach(function (eff) {
+            var group = groups[eff];
+            group.forEach(function (slot, i) {
+              var name = lineup[slot];
+              if (!name) return;
+              hasAny = true;
+              html += lsRenderToken(name, eff, i, group.length);
+            });
           });
         });
 

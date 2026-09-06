@@ -1004,6 +1004,7 @@
         <div class="formation-toggle" id="formationToggle">
           <button class="formation-btn" data-formation="4-4-2">4-4-2</button>
           <button class="formation-btn" data-formation="3-5-2">3-5-2</button>
+          <button class="formation-btn" data-formation="4-3-3">4-3-3</button>
         </div>
 
         <div class="line-counter" id="lineCounter"></div>
@@ -1089,6 +1090,12 @@
         DEF: ['CB1', 'CB2', 'CB3'],
         MID: ['LWB', 'DM', 'CM1', 'CM2', 'RWB'],
         ATT: ['ST1', 'ST2']
+      },
+      '4-3-3': {
+        GK: ['GK'],
+        DEF: ['LB', 'CB1', 'CB2', 'RB'],
+        MID: ['CM1', 'CM2', 'CM3'],
+        ATT: ['LW', 'ST', 'RW']
       }
     };
 
@@ -1274,10 +1281,15 @@
       var id = matchId(fixture);
       var saved = state.savedSquads[id];
       if (saved && saved.lineup) {
-        state.formation = saved.formation && FORMATIONS[saved.formation] ? saved.formation : '4-4-2';
+        var formation = saved.formation && FORMATIONS[saved.formation] ? saved.formation : '4-4-2';
+        state.formation = formation;
         Object.keys(saved.lineup).forEach(function (slot) {
           var name = saved.lineup[slot];
-          var line = slot === 'GK' ? 'GK' : (/^ST/.test(slot) ? 'ATT' : (/^(CB|LB|RB|LWB|RWB)/.test(slot) ? 'DEF' : 'MID'));
+          var line = null;
+          ['GK', 'DEF', 'MID', 'ATT'].forEach(function (l) {
+            if (FORMATIONS[formation][l].indexOf(slot) !== -1) line = l;
+          });
+          if (!line) return;
           var pool = line === 'GK' ? ROSTER.GK : OUTFIELD_ROSTER;
           if (name && pool.indexOf(name) !== -1 && state.selected[line].indexOf(name) === -1) {
             state.selected[line].push(name);
