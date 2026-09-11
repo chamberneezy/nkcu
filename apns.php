@@ -22,7 +22,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) === basename(__FILE__)) {
 require_once __DIR__ . '/auth-lib.php';
 
 // ── Fill these in once you have the APNs key ──────────────────────────
-define('APNS_KEY_ID', '83SU543NSV');
+define('APNS_KEY_ID', 'N79F8DM35N');
 define('APNS_TEAM_ID', 'GRZRJ88LA9');
 define('APNS_KEY_PATH', __DIR__ . '/private/AuthKey.p8');    // uploaded here, outside any public web path if possible
 define('APNS_BUNDLE_ID', 'chamberneezy.nkcu-ios');           // must match PRODUCT_BUNDLE_IDENTIFIER in the Xcode project
