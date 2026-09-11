@@ -7,6 +7,8 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/apns.php';
+
 define('ADMIN_PASSWORD', 'croatia1971');
 define('DATA_FILE', __DIR__ . '/data/live_squad.json');
 
@@ -28,6 +30,8 @@ if (!is_array($body)) {
 if (!isset($body['password']) || !hash_equals(ADMIN_PASSWORD, (string) $body['password'])) {
     respond(401, ['ok' => false, 'error' => 'Falsches Passwort']);
 }
+
+$actingUsername = isset($body['token']) ? nkcu_verify_session((string) $body['token']) : null;
 
 $matchId = isset($body['matchId']) ? trim((string) $body['matchId']) : '';
 if ($matchId === '') {
@@ -55,6 +59,8 @@ if (!is_array($data) || !isset($data['matches']) || !is_array($data['matches']))
     $data = ['matches' => []];
 }
 
+$existing = isset($data['matches'][$matchId]) && is_array($data['matches'][$matchId]) ? $data['matches'][$matchId] : null;
+
 unset($data['matches'][$matchId]);
 
 // json_encode() can't tell an empty associative array from an empty
@@ -72,5 +78,8 @@ fwrite($fh, $json);
 fflush($fh);
 flock($fh, LOCK_UN);
 fclose($fh);
+
+$matchLabel = $existing ? "{$existing['home']} vs {$existing['away']}" : $matchId;
+nkcu_notify_admin_of_change($actingUsername, 'Match Reset', $matchLabel);
 
 respond(200, ['ok' => true]);

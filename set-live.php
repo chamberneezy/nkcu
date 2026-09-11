@@ -7,6 +7,8 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/apns.php';
+
 define('ADMIN_PASSWORD', 'croatia1971');
 define('DATA_FILE', __DIR__ . '/data/live_squad.json');
 
@@ -28,6 +30,8 @@ if (!is_array($body)) {
 if (!isset($body['password']) || !hash_equals(ADMIN_PASSWORD, (string) $body['password'])) {
     respond(401, ['ok' => false, 'error' => 'Falsches Passwort']);
 }
+
+$actingUsername = isset($body['token']) ? nkcu_verify_session((string) $body['token']) : null;
 
 $matchId = isset($body['matchId']) ? trim((string) $body['matchId']) : '';
 $date = isset($body['date']) ? (string) $body['date'] : '';
@@ -92,5 +96,11 @@ fwrite($fh, $json);
 fflush($fh);
 flock($fh, LOCK_UN);
 fclose($fh);
+
+nkcu_notify_admin_of_change(
+    $actingUsername,
+    $live ? 'Match Now Live' : 'Match No Longer Live',
+    "$home vs $away"
+);
 
 respond(200, ['ok' => true, 'entry' => $entry]);
