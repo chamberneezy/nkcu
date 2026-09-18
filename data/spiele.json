@@ -1,6 +1,17 @@
 {
     "fixtures": [
         {
+            "date": "20.08.2026",
+            "time": "19:00",
+            "home": "FC Uzwil 4",
+            "away": "HNK Hajduk",
+            "homeScore": null,
+            "awayScore": null,
+            "venue": "Flawilerstrasse, Niederuzwil",
+            "league": "4. Liga · Gruppe 8",
+            "dummy": true
+        },
+        {
             "date": "23.08.2026",
             "time": "13:00",
             "home": "FC Uzwil 4",

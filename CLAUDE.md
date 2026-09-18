@@ -76,5 +76,6 @@ Croatian flag palette: red / white / blue only. Avoid introducing other accent c
 - `data/nkcu_spiele.json` — fixtures only for the NK Croatia Uzwil
 - `hero-video.mp4` / `hero-team.png` — hero background (video with image fallback)
 - `manifest.json`, `sw.js`, `apple-touch-icon.png`, `favicon.ico` — PWA manifest/icons + service worker
+- 'Notest Webpage_2.pdf' - is a pdf file that contains the instructions for web fixes, but do not upload this anywhere! Keep it locally only
 
 - Fonts loaded from `https://api.fontshare.com` — requires internet access to render correctly

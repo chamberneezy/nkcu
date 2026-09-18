@@ -1,0 +1,13 @@
+.env
+
+# Runtime auth data (password hashes / live session tokens) — must exist
+# on the server but should never sit in git history.
+data/users.json
+data/sessions.json
+
+# Local-only iOS build prompt/notes — not part of the website.
+ios.txt
+
+# APNs push notification private key — never commit, this repo is public.
+private/
+*.p8
