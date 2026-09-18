@@ -271,8 +271,8 @@
     }
     .kp-card--coach .kp-back {
       inset: auto 0 0 0;
-      height: 60%;
-      background: linear-gradient(to bottom, rgba(0, 53, 128, 0) 0%, rgba(0, 53, 128, 0.85) 28%, #003580 52%);
+      height: 40%;
+      background: linear-gradient(to bottom, rgba(0, 53, 128, 0) 0%, rgba(0, 53, 128, 0.85) 35%, #003580 65%);
       border: none;
       opacity: 1;
       visibility: visible;
@@ -280,22 +280,30 @@
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       justify-content: flex-end;
       z-index: 3;
+      cursor: default;
     }
     .kp-card--coach.is-flipped .kp-back {
       transform: translateY(0);
     }
     .kp-card--coach .kp-back-header {
       background: transparent;
-      padding-top: 16px;
+      padding: 6px 14px 2px;
+    }
+    .kp-card--coach .kp-info-grid {
+      padding: 4px 12px 8px;
+      gap: 4px;
     }
     .kp-card--coach .kp-info-box {
       background: rgba(255, 255, 255, 0.14);
+      padding: 5px 9px;
     }
     .kp-card--coach .kp-info-label {
       color: rgba(255, 255, 255, 0.65);
+      font-weight: 500;
     }
     .kp-card--coach .kp-info-value {
       color: #fff;
+      font-weight: 500;
     }
 
     /* Team photo */
@@ -1122,6 +1130,13 @@
       e.stopPropagation();
       var card = closeBtn.closest('.kp-card');
       if (card) card.classList.remove('is-flipped');
+      return;
+    }
+    // Coach cards: the whole photo is tappable, not just the small button
+    var coachFront = e.target.closest('.kp-card--coach .kp-front');
+    if (coachFront) {
+      var card = coachFront.closest('.kp-card');
+      if (card) card.classList.add('is-flipped');
       return;
     }
   });
