@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#CC0000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sponsoring — NK Croatia Uzwil</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .header .nav-link { color: var(--black, #0A0A0A) !important; }
+    .header .nav-link:hover { color: var(--red, #CC0000) !important; }
+    .logo-name { color: var(--black, #0A0A0A) !important; }
+
+    /* Font consistency */
+    h1, h2, h3, .pkg-name, .sp-stat-num {
+      font-family: 'Clash Display', sans-serif !important;
+    }
+    p, li, .pkg-description, .pkg-desc-text, .pkg-feature, .pkg-features li, .sp-stat-label, .sp-contact-label {
+      font-family: 'Satoshi', sans-serif !important;
+    }
+    .pkg-price {
+      font-family: 'Clash Display', sans-serif !important;
+    }
+
+    /* Stats row */
+    .sp-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin: 40px 0 0; }
+    .sp-stat { text-align: center; }
+    .sp-stat-num { font-family: 'Clash Display', sans-serif; font-size: 2.2rem; font-weight: 700; color: #CC0000; }
+    .sp-stat-label { font-family: 'Satoshi', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 4px; }
+
+    /* Kader patronat grid */
+    .patronat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .pat-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .pat-photo {
+      height: 140px;
+      background: #003580;
+      position: relative;
+      overflow: hidden;
+    }
+    .pat-photo::after { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:#CC0000; }
+    .pat-photo img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+    .pat-photo svg { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:60px; height:90px; opacity:0.2; }
+    .pat-info { padding: 10px 12px 12px; flex:1; display:flex; flex-direction:column; gap:3px; }
+    .pat-name { font-family: 'Clash Display', sans-serif; font-size:0.88rem; font-weight:700; color:#0A0A0A; }
+    .pat-pos { font-family: 'Satoshi', sans-serif; font-size:0.72rem; color:#aaa; text-transform:uppercase; letter-spacing:0.05em; }
+    .pat-slot {
+      margin-top:8px;
+      border: 1.5px dashed #ddd;
+      border-radius:6px;
+      padding:8px;
+      display:flex; align-items:center; justify-content:center;
+      min-height:36px;
+      cursor:pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration:none;
+    }
+    .pat-slot:hover { border-color:#CC0000; background:rgba(204,0,0,0.04); }
+    .pat-slot span { font-family:'Satoshi',sans-serif; font-size:0.72rem; color:#bbb; font-weight:500; text-align:center; }
+    .pat-slot:hover span { color:#CC0000; }
+
+    @media (max-width: 640px) {
+      .sp-stats { grid-template-columns: repeat(2,1fr); }
+      .patronat-grid { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="NK Croatia Uzwil" class="logo-img" />
+        <div class="logo-text-block"><span class="logo-name">NK <span class="logo-name-break">Croatia Uzwil</span></span></div>
+      </a>
+      <nav class="nav" aria-label="Navigation">
+        <ul role="list">
+          <li><a href="saison.html" class="nav-link" data-de="Saison" data-hr="Sezona">Saison</a></li>
+          <li><a href="news.html" class="nav-link" data-de="News" data-hr="Novosti">News</a></li>
+          <li><a href="kader.html" class="nav-link" data-de="Kader" data-hr="Momčad">Kader</a></li>
+          <li><a href="index.html#verein" class="nav-link" data-de="Verein" data-hr="Klub">Verein</a></li>
+          <li><a href="sponsoring.html" class="nav-link" aria-current="page" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
+          <li><a href="shop.html" class="nav-link" data-de="Shop" data-hr="Shop">Shop</a></li>
+          <li><a href="#kontakt" class="nav-link nav-cta" data-de="Kontakt" data-hr="Kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <button class="lang-toggle" id="langToggle"><span class="lang-opt" id="langDe">DE</span><span class="lang-sep">/</span><span class="lang-opt" id="langHr">HR</span></button>
+      <button class="burger" id="burger" aria-expanded="false" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul role="list">
+        <li><a href="saison.html" class="mm-link">Saison</a></li>
+        <li><a href="news.html" class="mm-link">News</a></li>
+        <li><a href="kader.html" class="mm-link">Kader</a></li>
+        <li><a href="index.html#verein" class="mm-link">Verein</a></li>
+        <li><a href="sponsoring.html" class="mm-link">Sponsoren</a></li>
+        <li><a href="shop.html" class="mm-link">Shop</a></li>
+        <li><a href="#kontakt" class="mm-link">Kontakt</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <div style="background:#003580;padding:80px 0 44px;margin-top:72px;">
+      <div class="container">
+        <h1 style="color:#fff;font-family:'Clash Display',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin:0 0 8px;" data-de="Sponsoring &amp; Partner" data-hr="Sponzorstvo &amp; Partneri">Sponsoring &amp; Partner</h1>
+        <p style="color:rgba(255,255,255,0.75);font-family:'Satoshi',sans-serif;font-size:1.05rem;max-width:560px;line-height:1.6;margin:0;" data-de="Werde Teil von NK Croatia Uzwil — als Sponsor, Gönner oder Spielerpate." data-hr="Postani dio NK Croatia Uzwil — kao sponzor, donator ili pokrovitelj igrača.">Werde Teil von NK Croatia Uzwil — als Sponsor, Gönner oder Spielerpate.</p>
+        <div class="sp-stats">
+          <div class="sp-stat"><div class="sp-stat-num">28+</div><div class="sp-stat-label" data-de="Spieler im Kader" data-hr="Igrača u momčadi">Spieler im Kader</div></div>
+          <div class="sp-stat"><div class="sp-stat-num">2.</div><div class="sp-stat-label" data-de="Rang letzte Saison" data-hr="Rang prošle sezone">Rang letzte Saison</div></div>
+          <div class="sp-stat"><div class="sp-stat-num">18</div><div class="sp-stat-label" data-de="Ligaspiele pro Saison" data-hr="Ligaških utakmica">Ligaspiele pro Saison</div></div>
+          <div class="sp-stat"><div class="sp-stat-num">4.</div><div class="sp-stat-label" data-de="Liga OFV" data-hr="Liga OFV">Liga OFV</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPONSORING PAKETE -->
+    <section class="section">
+      <div class="container">
+        <h2 style="margin:0 0 8px;" data-de="Sponsoring-Pakete" data-hr="Sponzorski paketi">Sponsoring-Pakete</h2>
+        <p style="color:#666;margin:0 0 32px;" data-de="Wähle das passende Paket für dein Engagement." data-hr="Odaberi odgovarajući paket za tvoje angažiranje.">Wähle das passende Paket für dein Engagement.</p>
+<div class="sponsor-packages">
+          <div class="pkg pkg--gold">
+            <div class="pkg-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg><span data-de="Gold" data-hr="Zlato">Gold</span></div>
+            <div class="pkg-price" data-de="ab CHF 2'000 / Jahr" data-hr="od CHF 2'000 / god.">ab CHF 2'000 / Jahr</div>
+            <ul class="pkg-list">
+              <li data-de="Trikotdruck " data-hr="Tisak dresa sprijeda i straga">Trikotdruck vorne &amp; hinten</li>
+              <li data-de="Hallenturnier Sponsor" data-hr="Premium sponzor">Hallenturnier Premiumsponsor</li>
+              <li data-de="Social Media Präsenz" data-hr="Prisutnost na društvenim mrežama">Social Media Präsenz</li>
+              <li data-de="Logo auf Website (gross)" data-hr="Logo na web stranici (veliko)">Logo auf Website (gross)
+              </li>
+              <li class="pkg-addon" data-de="Matchkleidung mit Logo: Preis auf Anfrage"
+                data-hr="Logo na dresu: Cijena na upit">Preis auf Anfrage</li>
+            </ul>
+          </div>
+          <div class="pkg pkg--silver">
+            <div class="pkg-header"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg><span data-de="Silver" data-hr="Srebro">Silver</span></div>
+            <div class="pkg-price" data-de="ab CHF 1'000 / Jahr" data-hr="od CHF 1'000 / god.">ab CHF 1'000 / Jahr</div>
+            <ul class="pkg-list">
+              <li data-de="Banner-/Bandenpräsenz" data-hr="Prisutnost vašeg branda">Banner-/Bandenpräsenz</li>
+              <li data-de="Hallenturnier Partner" data-hr="Partner dvoranskog turnira">Hallenturnier Partner</li>
+              <li data-de="Social Media Präsenz" data-hr="Prisutnost na društvenim mrežama">Social Media Präsenz</li>
+              <li data-de="Logo auf Website (mittel)" data-hr="Logo na web stranici (sredina)">Logo auf Website (mittel)
+              </li>
+              <li class="pkg-addon" data-de="Matchkleidung mit Logo: Preis auf Anfrage"
+                data-hr="Logo na dresu: Cijena na upit">Preis auf Anfrage</li>
+            </ul>
+          </div>
+          <div class="pkg pkg--bronze">
+            <div class="pkg-header"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg><span data-de="Bronze" data-hr="Bronca">Bronze</span></div>
+            <div class="pkg-price" data-de="ab CHF 500 / Jahr" data-hr="od CHF 500 / god.">ab CHF 500 / Jahr</div>
+            <ul class="pkg-list">
+              <li data-de="Social Media Präsenz" data-hr="Prisutnost na društvenim mrežama">Social Media Präsenz</li>
+              <li data-de="Logo auf Website (klein)" data-hr="Logo na web stranici (malo)">Logo auf Website (klein)</li>
+            </ul>
+          </div>
+          <div class="pkg pkg--gonner">
+            <div class="pkg-header"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg><span data-de="Gönner" data-hr="Donator">Gönner</span></div>
+            <div class="pkg-price" data-de="ab CHF 50 / Jahr" data-hr="od CHF 50 / god.">ab CHF 50 / Jahr</div>
+            <ul class="pkg-list">
+              <li data-de="Unterstütze deinen Verein" data-hr="Podržite svoj klub">Unterstütze deinen Verein</li>
+              <li class="pkg-addon pkg-addon--gift" data-de="🎁 Kleines Dankeschön inklusive"
+                data-hr="🎁 Mali poklon uključen">🎁 Kleines Dankeschön inklusive</li>
+            </ul>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:36px;">
+          <a href="#kontakt" class="btn btn--red" data-de="Jetzt anfragen →" data-hr="Upitaj sada →">Jetzt anfragen →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AKTUELLE SPONSOREN -->
+    <section class="section section--gray">
+      <div class="container">
+        <h2 style="margin:0 0 32px;" data-de="Unsere aktuellen Partner" data-hr="Naši trenutni partneri">Unsere aktuellen Partner</h2>
+        <!-- Gold Sponsoren -->
+        <div style="margin-bottom:32px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="font-family:'Satoshi',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#B8860B;background:rgba(184,134,11,0.1);padding:4px 12px;border-radius:20px;">Gold</span>
+            <div style="flex:1;height:1px;background:rgba(184,134,11,0.25);"></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+            <div style="background:#fff;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(184,134,11,0.2);">
+              <img src="sponsors/kristal-fenster.jpg" alt="Kristal Fenster" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+            </div>
+            <div style="background:#1a1a1a;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(184,134,11,0.2);">
+              <img src="sponsors/sfk-new.png" alt="SFK" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+            </div>
+            <div style="background:#1a1a1a;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(184,134,11,0.2);">
+              <img src="sponsors/AkkordTech.png" alt="AkkordTech" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(184,134,11,0.2);">
+              <img src="sponsors/kollermorger-new.svg" alt="Koller + Morger" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bronze Sponsoren -->
+        <div style="margin-bottom:36px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <span style="font-family:'Satoshi',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#A05020;background:rgba(160,80,32,0.09);padding:4px 12px;border-radius:20px;">Bronze</span>
+            <div style="flex:1;height:1px;background:rgba(160,80,32,0.2);"></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+            <div style="background:#fff;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(160,80,32,0.15);">
+              <img src="sponsors/smt-automotive.jpg" alt="SMT Automotive" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ KONTAKT ═══════ -->
+    <section class="section section--blue" id="kontakt">
+      <div class="container">
+        <div class="contact-layout">
+          <div class="contact-left">
+            <span class="label-tag label-tag--white" data-de="Kontakt" data-hr="Kontakt">Kontakt</span>
+            <h2 data-de="Schreib uns." data-hr="Kontaktiraj nas.">Schreib uns.</h2>
+            <p data-de="Fragen zum Verein, Sponsoring, Training oder Spielertransfer — wir melden uns."
+              data-hr="Pitanja o klubu, sponzorstvu, treningu ili transferu igrača — javit ćemo se.">Fragen zum Verein,
+              Sponsoring, Training oder Spielertransfer — wir melden uns.</p>
+            <div class="contact-details">
+              <a href="mailto:info@croatia-uzwil.ch" class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg></div>
+                <span>info@croatia-uzwil.ch</span>
+              </a>
+              <div class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg></div>
+                <span>Rüti / Flawilerstrasse, Uzwil SG</span>
+              </div>
+              <a href="https://www.facebook.com/NKCroatiaUzwil/" target="_blank" rel="noopener" class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg></div>
+                <span>NK Croatia Uzwil</span>
+              </a>
+              <a href="https://www.instagram.com/nkcroatiauzwil" target="_blank" rel="noopener" class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg></div>
+                <span>@nkcroatiauzwil</span>
+              </a>
+              <a href="https://whatsapp.com/channel/0029Vb8hbEXIHph8coczaj0A" target="_blank" rel="noopener" class="contact-item">
+                <div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg></div>
+                <span data-de="WhatsApp Kanal" data-hr="WhatsApp kanal">WhatsApp Kanal</span>
+              </a>
+            </div>
+          </div>
+          <form class="contact-form" id="contact-form">
+            <div class="cf-row">
+              <div class="cf-group">
+                <label for="cf-name" data-de="Name" data-hr="Ime">Name</label>
+                <input id="cf-name" type="text" name="name" placeholder="Dein Name" required autocomplete="name" />
+              </div>
+              <div class="cf-group">
+                <label for="cf-email" data-de="E-Mail" data-hr="E-pošta">E-Mail</label>
+                <input id="cf-email" type="email" name="email" placeholder="deine@email.ch" required
+                  autocomplete="email" />
+              </div>
+            </div>
+            <div class="cf-row">
+              <div class="cf-group">
+                <label for="cf-strasse" data-de="Strasse &amp; Nr." data-hr="Ulica i br.">Strasse &amp; Nr.</label>
+                <input id="cf-strasse" type="text" name="strasse" placeholder="Musterstrasse 12" autocomplete="street-address" />
+              </div>
+              <div class="cf-group">
+                <label for="cf-plz" data-de="PLZ / Ort" data-hr="Poštanski br. / Mjesto">PLZ / Ort</label>
+                <input id="cf-plz" type="text" name="plz_ort" placeholder="9240 Uzwil" autocomplete="postal-code" />
+              </div>
+            </div>
+            <div class="cf-row">
+              <div class="cf-group">
+                <label for="cf-company" data-de="Firmenname (optional)" data-hr="Naziv tvrtke (neobavezno)">Firmenname
+                  (optional)</label>
+                <input id="cf-company" type="text" name="company" placeholder="Dein Unternehmen"
+                  autocomplete="organization" />
+              </div>
+              <div class="cf-group">
+                <label for="cf-reason" data-de="Grund der Kontaktaufnahme" data-hr="Razlog kontakta">Grund der
+                  Kontaktaufnahme</label>
+                <select id="cf-reason" name="reason" required>
+                  <option value="" disabled selected>Bitte wählen...</option>
+                  <option value="Allgemein">Allgemein</option>
+                  <option value="Sponsoring">Sponsoring</option>
+                  <option value="Gönner">Gönner</option>
+                  <option value="Webshop">Webshop</option>
+                </select>
+              </div>
+            </div>
+            <div class="cf-group">
+              <label for="cf-msg" data-de="Nachricht" data-hr="Poruka">Nachricht</label>
+              <textarea id="cf-msg" name="body" rows="4"
+                placeholder="Deine Nachricht..."></textarea>
+            </div>
+            <button type="submit" class="btn btn--red btn--full" data-de="Senden →" data-hr="Pošalji →">Senden
+              →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-checkerboard" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="12" preserveAspectRatio="none"><defs><pattern id="chk" x="0" y="0" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="6" fill="#CC0000"/><rect x="12" width="12" height="6" fill="#FFFFFF"/><rect y="6" width="12" height="6" fill="#FFFFFF"/><rect x="12" y="6" width="12" height="6" fill="#CC0000"/></pattern></defs><rect width="100%" height="12" fill="url(#chk)"/></svg></div>
+    <div class="container footer-inner">
+      <div class="footer-brand"><img src="logo.png" alt="NK Croatia Uzwil" class="footer-logo-img footer-logo-img--transparent"/><div><span class="footer-name">NK Croatia Uzwil</span><span class="footer-sub">Untersektion FC Uzwil · 4. Liga · OFV</span></div></div>
+      <nav class="footer-nav"><a href="saison.html">Saison</a><a href="news.html">News</a><a href="kader.html">Kader</a><a href="index.html#verein">Verein</a><a href="sponsoring.html">Sponsoren</a><a href="shop.html">Shop</a><a href="#kontakt">Kontakt</a></nav>
+      <p class="footer-copy"><a href="#impressum" class="datenschutz-link">Impressum</a> · <a href="#datenschutz" class="datenschutz-link">Datenschutz</a> · © 2026 NK Croatia Uzwil · <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
+    </div>
+  </footer>
+
+  <!-- ═══════ DATENSCHUTZ MODAL ═══════ -->
+  <div id="datenschutz-modal" class="ds-modal" role="dialog" aria-modal="true" aria-labelledby="ds-title" hidden>
+    <div class="ds-overlay"></div>
+    <div class="ds-content">
+      <button class="ds-close" aria-label="Schliessen">✕</button>
+      <h2 id="ds-title" data-de="Datenschutzerklärung" data-hr="Izjava o zaštiti podataka">Datenschutzerklärung</h2>
+      <div class="ds-body">
+        <p>Gestützt auf das revidierte Schweizer Datenschutzgesetz (revDSG) sowie die europäische
+          Datenschutzgrundverordnung (DSGVO), soweit anwendbar, ist jede Person berechtigt, Auskunft über die
+          Verarbeitung ihrer Personendaten zu verlangen.</p>
+
+        <h3>1. Verantwortliche Stelle</h3>
+        <p>NK Croatia Uzwil<br />Untersektion FC Uzwil<br />Sportanlage Rüti, 9240 Uzwil, Schweiz<br />E-Mail:
+          info@croatia-uzwil.ch</p>
+
+        <h3>2. Allgemeines zur Datenbearbeitung</h3>
+        <p>Wir bearbeiten Personendaten in Übereinstimmung mit dem Schweizer Datenschutzrecht. Wir bearbeiten
+          Personendaten nur, soweit dies erforderlich ist, um unsere Vereinstätigkeit auszuführen und unsere Webseite zu
+          betreiben.</p>
+
+        <h3>3. Server-Logfiles</h3>
+        <p>Beim Aufruf unserer Website werden automatisch Informationen erfasst (Browsertyp, Betriebssystem, Zeitpunkt
+          des Zugriffs, IP-Adresse). Diese Daten werden ausschliesslich zum Zweck der technischen Bereitstellung und
+          Sicherheit unserer Website verarbeitet.</p>
+
+        <h3>4. Cookies</h3>
+        <p>Unsere Webseite verwendet nur technisch notwendige Cookies sowie lokal gespeicherte Einstellungen (z. B. die
+          gewählte Sprache). Es werden keine Marketing- oder Tracking-Cookies eingesetzt.</p>
+
+        <h3>5. Kontaktaufnahme</h3>
+        <p>Wenn Sie uns per E-Mail oder über das Kontaktformular kontaktieren, werden Ihre Angaben zur Bearbeitung der
+          Anfrage verarbeitet. Die Daten werden nicht ohne Ihre Einwilligung weitergegeben.</p>
+
+        <h3>6. Rechte der betroffenen Person</h3>
+        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten Personendaten sowie auf
+          Berichtigung, Sperrung oder Löschung dieser Daten. Bitte wenden Sie sich an: info@croatia-uzwil.ch</p>
+
+        <h3>7. Änderungen</h3>
+        <p>Wir können diese Datenschutzerklärung jederzeit anpassen. Es gilt die jeweils aktuelle Version auf unserer
+          Website.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ IMPRESSUM MODAL ═══════ -->
+  <div id="impressum-modal" class="ds-modal" role="dialog" aria-modal="true" aria-labelledby="imp-title" hidden>
+    <div class="ds-overlay"></div>
+    <div class="ds-content">
+      <button class="ds-close" aria-label="Schliessen">✕</button>
+      <h2 id="imp-title">Impressum</h2>
+      <div class="ds-body">
+        <h3>Verantwortlich für den Inhalt</h3>
+        <p>NK Croatia Uzwil<br />Untersektion FC Uzwil<br />Sportanlage Rüti<br />9240 Uzwil, Schweiz</p>
+
+        <h3>Kontakt</h3>
+        <p>E-Mail: <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
+
+        <h3>Haftungsausschluss</h3>
+        <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität,
+          Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden
+          materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der
+          veröffentlichten Informationen entstanden sind, werden ausgeschlossen.</p>
+
+        <h3>Haftung für Links</h3>
+        <p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche
+          Verantwortung für solche Webseiten abgelehnt.</p>
+
+        <h3>Urheberrechte</h3>
+        <p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf dieser Website
+          gehören ausschliesslich NK Croatia Uzwil oder den speziell genannten Rechteinhabern. Für die Reproduktion
+          jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ COOKIE BANNER ═══════ -->
+  <div id="cookie-banner" class="cookie-banner" role="region" aria-label="Cookie-Hinweis">
+    <p class="ck-text" data-de="Diese Website verwendet ausschliesslich technisch notwendige Cookies."
+      data-hr="Ova web-stranica koristi samo tehnički neophodne kolači&#263;e.">Diese Website verwendet ausschliesslich
+      technisch notwendige Cookies.</p>
+    <button id="cookie-accept" class="btn btn--red ck-btn" data-de="Akzeptieren" data-hr="Prihvati">Akzeptieren</button>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Mobile Navigation">
+    <a href="saison.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Saison</span></a>
+    <a href="news.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>News</span></a>
+    <a href="kader.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Kader</span></a>
+    <a href="shop.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Shop</span></a>
+    <a href="#kontakt" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Kontakt</span></a>
+  </nav>
+
+  <script>
+  (function(){
+    var currentLang='de';
+    function applyLang(lang){
+      currentLang=lang;
+      document.documentElement.setAttribute('data-lang',lang);
+      document.getElementById('langDe').classList.toggle('active',lang==='de');
+      document.getElementById('langHr').classList.toggle('active',lang==='hr');
+      document.querySelectorAll('[data-de][data-hr]').forEach(function(el){
+        var txt=el.getAttribute('data-'+lang);
+        if(txt===null)return;
+        if(el.children.length===0){el.textContent=txt;}
+        else if(el.tagName==='A'&&el.querySelectorAll('svg').length===0){el.textContent=txt;}
+      });
+      var cfMsg=document.getElementById('cf-msg');
+      if(cfMsg) cfMsg.placeholder = lang==='hr' ? 'Tvoja poruka...' : 'Deine Nachricht...';
+      var cfCompany=document.getElementById('cf-company');
+      if(cfCompany) cfCompany.placeholder = lang==='hr' ? 'Vaša tvrtka' : 'Dein Unternehmen';
+      var cfReason=document.getElementById('cf-reason');
+      if(cfReason && cfReason.options.length>=5){
+        if(lang==='hr'){
+          cfReason.options[0].text='Molimo odaberite...';
+          cfReason.options[1].text='Općenito'; cfReason.options[1].value='Općenito';
+          cfReason.options[2].text='Sponzorstvo'; cfReason.options[2].value='Sponzorstvo';
+          cfReason.options[3].text='Donatori'; cfReason.options[3].value='Donatori';
+          cfReason.options[4].text='Webshop'; cfReason.options[4].value='Webshop';
+        } else {
+          cfReason.options[0].text='Bitte wählen...';
+          cfReason.options[1].text='Allgemein'; cfReason.options[1].value='Allgemein';
+          cfReason.options[2].text='Sponsoring'; cfReason.options[2].value='Sponsoring';
+          cfReason.options[3].text='Gönner'; cfReason.options[3].value='Gönner';
+          cfReason.options[4].text='Webshop'; cfReason.options[4].value='Webshop';
+        }
+      }
+    }
+    document.getElementById('langToggle').addEventListener('click',function(){applyLang(currentLang==='de'?'hr':'de');});
+    applyLang('de');
+    var burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+    burger.addEventListener('click',function(){var open=mm.classList.toggle('open');burger.classList.toggle('open',open);burger.setAttribute('aria-expanded',String(open));});
+    document.querySelectorAll('.mm-link').forEach(function(l){l.addEventListener('click',function(){mm.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false');});});
+    window.addEventListener('scroll',function(){document.getElementById('header').classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+
+    /* Datenschutz / Impressum Modals */
+    var dsModal=document.getElementById('datenschutz-modal');
+    var dsOverlay=dsModal?dsModal.querySelector('.ds-overlay'):null;
+    var dsClose=dsModal?dsModal.querySelector('.ds-close'):null;
+    function openDS(){if(dsModal){dsModal.hidden=false;document.body.style.overflow='hidden';}}
+    function closeDS(){if(dsModal){dsModal.hidden=true;document.body.style.overflow='';}}
+    document.querySelectorAll('a[href="#datenschutz"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();openDS();});});
+    if(dsClose)dsClose.addEventListener('click',closeDS);
+    if(dsOverlay)dsOverlay.addEventListener('click',closeDS);
+    var impModal=document.getElementById('impressum-modal');
+    var impOverlay=impModal?impModal.querySelector('.ds-overlay'):null;
+    var impClose=impModal?impModal.querySelector('.ds-close'):null;
+    function openImp(){if(impModal){impModal.hidden=false;document.body.style.overflow='hidden';}}
+    function closeImp(){if(impModal){impModal.hidden=true;document.body.style.overflow='';}}
+    document.querySelectorAll('a[href="#impressum"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();openImp();});});
+    if(impClose)impClose.addEventListener('click',closeImp);
+    if(impOverlay)impOverlay.addEventListener('click',closeImp);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeDS();closeImp();}});
+
+    /* Cookie Banner — persisted via localStorage */
+    var ck=document.getElementById('cookie-banner');
+    if(ck && !localStorage.getItem('ck_ok')) ck.classList.add('visible');
+    var ckBtn=document.getElementById('cookie-accept');
+    if(ckBtn){ckBtn.addEventListener('click',function(){localStorage.setItem('ck_ok','1');if(ck)ck.classList.remove('visible');});}
+
+    /* Contact form — mailto:, no third-party form service */
+    var contactForm=document.getElementById('contact-form');
+    if(contactForm){
+      contactForm.addEventListener('submit',function(e){
+        e.preventDefault();
+        var name=document.getElementById('cf-name').value.trim();
+        var email=document.getElementById('cf-email').value.trim();
+        var company=document.getElementById('cf-company')?document.getElementById('cf-company').value.trim():'';
+        var reason=document.getElementById('cf-reason').value||'Sponsoring';
+        var msg=document.getElementById('cf-msg').value.trim();
+        var subject=encodeURIComponent('[NK Croatia Uzwil] '+reason);
+        var bodyLines=['Name: '+name,'E-Mail: '+email];
+        if(company) bodyLines.push('Firma: '+company);
+        bodyLines.push('Grund: '+reason,'',msg);
+        var body=encodeURIComponent(bodyLines.join('\n'));
+        window.location.href='mailto:info@croatia-uzwil.ch?subject='+subject+'&body='+body;
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

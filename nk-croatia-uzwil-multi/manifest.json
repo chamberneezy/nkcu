@@ -1,0 +1,23 @@
+{
+  "name": "NK Croatia Uzwil",
+  "short_name": "NK Croatia",
+  "description": "Offizieller Webauftritt von NK Croatia Uzwil — 4. Liga, St. Gallen",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#CC0000",
+  "theme_color": "#CC0000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
