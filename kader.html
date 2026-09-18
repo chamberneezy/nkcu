@@ -262,6 +262,42 @@
       grid-template-columns: repeat(4, 1fr);
     }
 
+    /* Coach cards (Trainerstab): tapping the photo reveals the info as a
+       panel sliding up from the bottom, over the photo, instead of a full
+       front/back flip — the photo stays visible the whole time. */
+    .kp-card--coach.is-flipped .kp-front {
+      opacity: 1;
+      visibility: visible;
+    }
+    .kp-card--coach .kp-back {
+      inset: auto 0 0 0;
+      height: 60%;
+      background: linear-gradient(to bottom, rgba(0, 53, 128, 0) 0%, rgba(0, 53, 128, 0.85) 28%, #003580 52%);
+      border: none;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      justify-content: flex-end;
+      z-index: 3;
+    }
+    .kp-card--coach.is-flipped .kp-back {
+      transform: translateY(0);
+    }
+    .kp-card--coach .kp-back-header {
+      background: transparent;
+      padding-top: 16px;
+    }
+    .kp-card--coach .kp-info-box {
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .kp-card--coach .kp-info-label {
+      color: rgba(255, 255, 255, 0.65);
+    }
+    .kp-card--coach .kp-info-value {
+      color: #fff;
+    }
+
     /* Team photo */
     .team-photo-wrap { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     .team-photo-img { width: 100%; display: block; }
@@ -332,7 +368,7 @@
           <div class="kader-grid kader-grid--trainerstab">
 
             <!-- Ivan Čaić -->
-            <div class="kp-card">
+            <div class="kp-card kp-card--coach">
               <div class="kp-card-inner">
                 <div class="kp-front">
                   <img src="players/ivan-caic.jpg" alt="Ivan Čaić" class="kp-photo"/>
@@ -357,7 +393,7 @@
             </div>
 
             <!-- Dario Martić -->
-            <div class="kp-card">
+            <div class="kp-card kp-card--coach">
               <div class="kp-card-inner">
                 <div class="kp-front">
                   <img src="players/dario-martic.jpg" alt="Dario Martić" class="kp-photo"/>
@@ -384,7 +420,7 @@
             </div>
 
             <!-- Tomislav Mišura -->
-            <div class="kp-card">
+            <div class="kp-card kp-card--coach">
               <div class="kp-card-inner">
                 <div class="kp-front">
                   <img src="players/tomislav-misura.jpg" alt="Tomislav Mišura" class="kp-photo"/>
