@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#CC0000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kader 2026/27 — NK Croatia Uzwil</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Subpage nav fix */
+    .header .nav-link { color: var(--black, #0A0A0A) !important; }
+    .header .nav-link:hover { color: var(--red, #CC0000) !important; }
+    .logo-name { color: var(--black, #0A0A0A) !important; }
+
+    /* ── Kader Grid — Editorial Portrait Style ── */
+    .kader-pos-section { padding: 0 0 40px; }
+    .kader-pos-title {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0A0A0A;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #CC0000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .kader-pos-title span {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #999;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .kader-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    /* Card wrapper (new) */
+    /* Card */
+    .kp-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      perspective: 1000px;
+      -webkit-perspective: 1000px;
+    }
+    .kp-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* FRONT / BACK — 2D crossfade, no 3D transforms, works on all mobile browsers */
+    .kp-front, .kp-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    .kp-front { background: #f0f0f0; opacity: 1; visibility: visible; }
+    .kp-back  { opacity: 0; visibility: hidden; }
+    .kp-card.is-flipped .kp-front { opacity: 0; visibility: hidden; }
+    .kp-card.is-flipped .kp-back  { opacity: 1; visibility: visible; }
+    .kp-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    /* gradient overlay bottom */
+    .kp-front::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 62%;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 55%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    /* name overlay on photo — Kombination A+B */
+    .kp-front-name {
+      position: absolute;
+      bottom: 14px;
+      left: 0; right: 0;
+      padding: 0 10px;
+      z-index: 3;
+      text-align: center;
+    }
+    .kp-front-name .fn-first {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.68rem; font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      display: block; line-height: 1.3;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      text-transform: uppercase; letter-spacing: 0.07em;
+    }
+    .kp-front-name .fn-last {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: #fff;
+      display: block; line-height: 1.1;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+    }
+    /* flip button top-right */
+    .kp-flip-btn {
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 28px; height: 28px;
+      background: rgba(0,0,0,0.45);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 4;
+      transition: background 0.15s;
+    }
+    .kp-flip-btn:hover { background: rgba(204,0,0,0.8); }
+    .kp-flip-btn svg { width: 14px; height: 14px; }
+    .kp-card.is-flipped .kp-flip-btn { display: none; }
+
+    /* Pate section (below photo, outside card flip area) */
+    .kp-pate-section {
+      padding: 9px 14px;
+      border-top: 1px solid #f0f0f0;
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none;
+      min-height: 50px;
+      background: #fff;
+    }
+    .kp-pate-col { display: flex; flex-direction: column; gap: 2px; }
+    .kp-pate-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.55rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #bbb;
+    }
+    .kp-pate-label--gesucht { color: #CC0000; }
+    .kp-pate-name {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 0.92rem; font-weight: 700;
+      color: #CC0000; line-height: 1.1;
+    }
+    .kp-pate-cta {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.76rem; font-weight: 700;
+      color: #CC0000;
+    }
+    /* Legacy: hide old absolute banner */
+    .kp-patronat-front { display: none !important; }
+
+    /* BACK */
+    .kp-back {
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      justify-content: flex-start;
+    }
+    .kp-back-header {
+      background: #003580;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .kp-back-name {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .kp-back-close {
+      width: 24px; height: 24px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .kp-back-close:hover { background: rgba(255,255,255,0.3); }
+    .kp-back-close svg { width: 10px; height: 10px; }
+
+    .kp-info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 12px;
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+    }
+    .kp-info-box {
+      background: #f7f7f7;
+      border-radius: 6px;
+      padding: 7px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .kp-info-label {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #aaa;
+      flex-shrink: 0;
+    }
+    .kp-info-value {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #0A0A0A;
+      text-align: right;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .kp-patronat-back {
+      padding: 10px 14px;
+      border-top: 1px solid #f0f0f0;
+      flex-shrink: 0;
+    }
+    .kp-patronat-back a {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #CC0000;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    /* Trainerstab: same grid as players */
+    .kader-grid--trainerstab {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Team photo */
+    .team-photo-wrap { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .team-photo-img { width: 100%; display: block; }
+
+    @media (max-width: 1100px) { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 800px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(1, 1fr); gap: 12px; } }
+  </style>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="NK Croatia Uzwil" class="logo-img" />
+        <div class="logo-text-block"><span class="logo-name">NK <span class="logo-name-break">Croatia Uzwil</span></span></div>
+      </a>
+      <nav class="nav" aria-label="Navigation">
+        <ul role="list">
+          <li><a href="saison.html" class="nav-link" data-de="Saison" data-hr="Sezona">Saison</a></li>
+          <li><a href="news.html" class="nav-link" data-de="News" data-hr="Novosti">News</a></li>
+          <li><a href="kader.html" class="nav-link nav-link--active" aria-current="page" data-de="Kader" data-hr="Momčad">Kader</a></li>
+          <li><a href="index.html#verein" class="nav-link" data-de="Verein" data-hr="Klub">Verein</a></li>
+          <li><a href="sponsoring.html" class="nav-link" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
+          <li><a href="shop.html" class="nav-link" data-de="Shop" data-hr="Shop">Shop</a></li>
+          <li><a href="index.html#kontakt" class="nav-link nav-cta" data-de="Kontakt" data-hr="Kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <button class="lang-toggle" id="langToggle" aria-label="Sprache wechseln">
+        <span class="lang-opt" id="langDe">DE</span><span class="lang-sep">/</span><span class="lang-opt" id="langHr">HR</span>
+      </button>
+      <button class="burger" id="burger" aria-expanded="false" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul role="list">
+        <li><a href="saison.html" class="mm-link" data-de="Saison" data-hr="Sezona">Saison</a></li>
+        <li><a href="news.html" class="mm-link" data-de="News" data-hr="Novosti">News</a></li>
+        <li><a href="kader.html" class="mm-link" data-de="Kader" data-hr="Momčad">Kader</a></li>
+        <li><a href="index.html#verein" class="mm-link" data-de="Verein" data-hr="Klub">Verein</a></li>
+        <li><a href="sponsoring.html" class="mm-link" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
+        <li><a href="shop.html" class="mm-link" data-de="Shop" data-hr="Shop">Shop</a></li>
+        <li><a href="index.html#kontakt" class="mm-link" data-de="Kontakt" data-hr="Kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div style="background:#003580;padding:80px 0 40px;margin-top:72px;">
+      <div class="container">
+        <h1 style="color:#fff;font-family:'Clash Display',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin:0;" data-de="Kader 2026/27" data-hr="Momčad 2026./27.">Kader 2026/27</h1>
+      </div>
+    </div>
+
+    <!-- Team photo -->
+    <section class="section" style="padding-top:40px;padding-bottom:0;">
+      <div class="container">
+        <div class="team-photo-wrap">
+          <img src="players/mannschaftsfoto.jpg" alt="NK Croatia Uzwil Mannschaft 2026/27" class="team-photo-img" />
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAINERSTAB -->
+    <section class="section" style="padding-top:40px;padding-bottom:0;">
+      <div class="container">
+        <div class="kader-pos-section">
+          <div class="kader-pos-title" data-de="Trainerstab" data-hr="Trenerski stožer">Trainerstab</div>
+          <div class="kader-grid kader-grid--trainerstab">
+
+            <!-- Ivan Čaić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/ivan-caic.jpg" alt="Ivan Čaić" class="kp-photo"/>
+                  <div class="kp-front-name"><span class="fn-first">Ivan</span><span class="fn-last">Čaić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header">
+                    <div class="kp-back-name">Ivan Čaić</div>
+                    <button class="kp-back-close kp-close-trigger" aria-label="Schliessen">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                  <div class="kp-info-grid">
+                    <div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div>
+                    <div class="kp-info-box"><div class="kp-info-label">Rolle</div><div class="kp-info-value">Präsident</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dario Martić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/dario-martic.jpg" alt="Dario Martić" class="kp-photo"/>
+                  <div class="kp-front-name"><span class="fn-first">Dario</span><span class="fn-last">Martić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header">
+                    <div class="kp-back-name">Dario Martić</div>
+                    <button class="kp-back-close kp-close-trigger" aria-label="Schliessen">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                  <div class="kp-info-grid">
+                    <div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div>
+                    <div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1996</div></div>
+                    <div class="kp-info-box"><div class="kp-info-label">Rolle</div><div class="kp-info-value">Trainer / Spieler</div></div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+            <!-- Tomislav Mišura -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/tomislav-misura.jpg" alt="Tomislav Mišura" class="kp-photo"/>
+                  <div class="kp-front-name"><span class="fn-first">Tomislav</span><span class="fn-last">Mišura</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header">
+                    <div class="kp-back-name">Tomislav Mišura</div>
+                    <button class="kp-back-close kp-close-trigger" aria-label="Schliessen">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                  <div class="kp-info-grid">
+                    <div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div>
+                    <div class="kp-info-box"><div class="kp-info-label">Rolle</div><div class="kp-info-value">Co-Trainer</div></div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TORWART -->
+    <section class="section" style="padding-top:8px;padding-bottom:0;">
+      <div class="container">
+        <div class="kader-pos-section">
+          <div class="kader-pos-title" data-de="Torwart" data-hr="Vratar">Torwart</div>
+          <div class="kader-grid">
+
+            <!-- Alessio Specchia -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/alessio-specchia.jpg" alt="Alessio Specchia" class="kp-photo"/>
+                  <div class="kp-front-name"><span class="fn-first">Alessio</span><span class="fn-last">Specchia</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Alessio Specchia</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat" data-de="Spielerpatronat übernehmen →" data-hr="Preuzmi pokroviteljstvo →">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Robert Vičić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/robert-vicic.jpg" alt="Robert Vičić" class="kp-photo"/>
+                  <div class="kp-front-name"><span class="fn-first">Robert</span><span class="fn-last">Vičić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Robert Vičić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Damijan Brkljača -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/damjan-brkljaca.jpg" alt="Damijan Brkljača" class="kp-photo"/>
+                  <div class="kp-front-name"><span class="fn-first">Damijan</span><span class="fn-last">Brkljača</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Damijan Brkljača</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">—</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABWEHR -->
+    <section class="section" style="padding-top:8px;padding-bottom:0;">
+      <div class="container">
+        <div class="kader-pos-section">
+          <div class="kader-pos-title" data-de="Abwehr" data-hr="Obrana">Abwehr</div>
+          <div class="kader-grid">
+
+            <!-- Antonio Marić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/antonio-maric.jpg" alt="Antonio Marić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Antonio</span><span class="fn-last">Marić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Antonio Marić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bruno Pelivani -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/bruno-pelivani.jpg" alt="Bruno Pelivani" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Bruno</span><span class="fn-last">Pelivani</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Bruno Pelivani</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2004</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Adel Rozajac -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/adel-rozajac.jpg" alt="Adel Rozajac" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Adel</span><span class="fn-last">Rozajac</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Adel Rozajac</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Anis Din Ramdedović -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/anis-din-ramdedovic.jpg" alt="Anis Din Ramdedović" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Anis Din</span><span class="fn-last">Ramdedović</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Anis Din Ramdedović</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2007</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Luka Gojević -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/luka-gojevic.jpg" alt="Luka Gojević" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Luka</span><span class="fn-last">Gojević</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Luka Gojević</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kristijan Katičić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/kristijan-katicic.jpg" alt="Kristijan Katičić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Kristijan</span><span class="fn-last">Katičić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Kristijan Katičić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Martin Breljak -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/martin-breljak.jpg" alt="Martin Breljak" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Martin</span><span class="fn-last">Breljak</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Martin Breljak</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Kroatien</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1991</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ivan Begić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/ivan-begic.jpg" alt="Ivan Begić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Ivan</span><span class="fn-last">Begić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Ivan Begić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Kroatien</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2004</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Denis Ajrizi -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/denis-ajrizi.jpg" alt="Denis Ajrizi" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Denis</span><span class="fn-last">Ajrizi</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Denis Ajrizi</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1999</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Silvio Bahorić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/silvio-bahoric.jpg" alt="Silvio Bahorić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Silvio</span><span class="fn-last">Bahorić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Silvio Bahorić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ivan Martić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/ivan-martic.jpg" alt="Ivan Martić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Ivan</span><span class="fn-last">Martić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Ivan Martić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1990</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MITTELFELD -->
+    <section class="section" style="padding-top:8px;padding-bottom:0;">
+      <div class="container">
+        <div class="kader-pos-section">
+          <div class="kader-pos-title" data-de="Mittelfeld" data-hr="Veznjaci">Mittelfeld</div>
+          <div class="kader-grid">
+
+            <!-- Danijel Jozić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/danijel-jozic.jpg" alt="Danijel Jozić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Danijel</span><span class="fn-last">Jozić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Danijel Jozić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Xhevat Hasallari -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/xhevat-hasallari.jpg" alt="Xhevat Hasallari" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Xhevat</span><span class="fn-last">Hasallari</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Xhevat Hasallari</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1991</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Noel Gonzalez -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/noel-gonzalez.jpg" alt="Noel Gonzalez" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Noel</span><span class="fn-last">Gonzalez</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Noel Gonzalez</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Henok Haileselassie -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/henok-haileselassie.jpg" alt="Henok Haileselassie" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Henok</span><span class="fn-last">Haileselassie</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Henok Haileselassie</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2005</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Matej Gojević -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/matej-gojevic.jpg" alt="Matej Gojević" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Matej</span><span class="fn-last">Gojević</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Matej Gojević</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Saverio Cucinelli -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/saverio-cucinelli.jpg" alt="Saverio Cucinelli" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Saverio</span><span class="fn-last">Cucinelli</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Saverio Cucinelli</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2002</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Adrian Bahorić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/adrian-bahoric.jpg" alt="Adrian Bahorić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Adrian</span><span class="fn-last">Bahorić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Adrian Bahorić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stanko Culanić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/stanko-culanic.jpg" alt="Stanko Culanić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Stanko</span><span class="fn-last">Culanić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Stanko Culanić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1996</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mateo Matić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/placeholder.jpg" alt="Mateo Matić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Mateo</span><span class="fn-last">Matić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Mateo Matić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2005</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ivan Schwab -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/placeholder.jpg" alt="Ivan Schwab" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Ivan</span><span class="fn-last">Schwab</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Ivan Schwab</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1999</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Isak Beka -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/placeholder.jpg" alt="Isak Beka" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Isak</span><span class="fn-last">Beka</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Isak Beka</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2001</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STURM -->
+    <section class="section" style="padding-top:8px;padding-bottom:40px;">
+      <div class="container">
+        <div class="kader-pos-section">
+          <div class="kader-pos-title" data-de="Sturm" data-hr="Napad">Sturm</div>
+          <div class="kader-grid">
+
+            <!-- Robertino Bulić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/robertino-bulic.jpg" alt="Robertino Bulić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Robertino</span><span class="fn-last">Bulić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Robertino Bulić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1995</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dionis Uka -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/dionis-uka.jpg" alt="Dionis Uka" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Dionis</span><span class="fn-last">Uka</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Dionis Uka</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1995</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Davor Radoš -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/davor-rados.jpg" alt="Davor Radoš" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Davor</span><span class="fn-last">Radoš</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Davor Radoš</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2001</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hazir Hysenaj -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/hazir-hysenaj.jpg" alt="Hazir Hysenaj" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Hazir</span><span class="fn-last">Hysenaj</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Hazir Hysenaj</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kristijan Perić -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/kristijan-peric.jpg" alt="Kristijan Perić" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Kristijan</span><span class="fn-last">Perić</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Kristijan Perić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stefan Ivanković -->
+            <div class="kp-card">
+              <div class="kp-card-inner">
+                <div class="kp-front">
+                  <img src="players/stefan-ivankovic.jpg" alt="Stefan Ivanković" class="kp-photo" onerror="this.src='players/placeholder.jpg'"/>
+                  <div class="kp-front-name"><span class="fn-first">Stefan</span><span class="fn-last">Ivanković</span></div>
+                  <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <a class="kp-patronat-front" href="sponsoring.html#patronat"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="kp-patronat-front-text">Pate gesucht</span></a>
+                </div>
+                <div class="kp-back">
+                  <div class="kp-back-header"><div class="kp-back-name">Stefan Ivanković</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1996</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-checkerboard" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="12" preserveAspectRatio="none"><defs><pattern id="chk" x="0" y="0" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="6" fill="#CC0000"/><rect x="12" width="12" height="6" fill="#FFFFFF"/><rect y="6" width="12" height="6" fill="#FFFFFF"/><rect x="12" y="6" width="12" height="6" fill="#CC0000"/></pattern></defs><rect width="100%" height="12" fill="url(#chk)"/></svg></div>
+    <div class="container footer-inner">
+      <div class="footer-brand"><img src="logo.png" alt="NK Croatia Uzwil" class="footer-logo-img footer-logo-img--transparent"/><div><span class="footer-name">NK Croatia Uzwil</span><span class="footer-sub">Untersektion FC Uzwil · 4. Liga · OFV</span></div></div>
+      <nav class="footer-nav"><a href="saison.html">Saison</a><a href="news.html">News</a><a href="kader.html">Kader</a><a href="index.html#verein">Verein</a><a href="sponsoring.html">Sponsoren</a><a href="shop.html">Shop</a><a href="index.html#kontakt">Kontakt</a></nav>
+      <p class="footer-copy"><a href="#impressum" class="datenschutz-link">Impressum</a> · <a href="#datenschutz" class="datenschutz-link">Datenschutz</a> · © 2026 NK Croatia Uzwil · <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
+    </div>
+  </footer>
+
+  <!-- ═══════ DATENSCHUTZ MODAL ═══════ -->
+  <div id="datenschutz-modal" class="ds-modal" role="dialog" aria-modal="true" aria-labelledby="ds-title" hidden>
+    <div class="ds-overlay"></div>
+    <div class="ds-content">
+      <button class="ds-close" aria-label="Schliessen">✕</button>
+      <h2 id="ds-title" data-de="Datenschutzerklärung" data-hr="Izjava o zaštiti podataka">Datenschutzerklärung</h2>
+      <div class="ds-body">
+        <p>Gestützt auf das revidierte Schweizer Datenschutzgesetz (revDSG) sowie die europäische
+          Datenschutzgrundverordnung (DSGVO), soweit anwendbar, ist jede Person berechtigt, Auskunft über die
+          Verarbeitung ihrer Personendaten zu verlangen.</p>
+
+        <h3>1. Verantwortliche Stelle</h3>
+        <p>NK Croatia Uzwil<br />Untersektion FC Uzwil<br />Sportanlage Rüti, 9240 Uzwil, Schweiz<br />E-Mail:
+          info@croatia-uzwil.ch</p>
+
+        <h3>2. Allgemeines zur Datenbearbeitung</h3>
+        <p>Wir bearbeiten Personendaten in Übereinstimmung mit dem Schweizer Datenschutzrecht. Wir bearbeiten
+          Personendaten nur, soweit dies erforderlich ist, um unsere Vereinstätigkeit auszuführen und unsere Webseite zu
+          betreiben.</p>
+
+        <h3>3. Server-Logfiles</h3>
+        <p>Beim Aufruf unserer Website werden automatisch Informationen erfasst (Browsertyp, Betriebssystem, Zeitpunkt
+          des Zugriffs, IP-Adresse). Diese Daten werden ausschliesslich zum Zweck der technischen Bereitstellung und
+          Sicherheit unserer Website verarbeitet.</p>
+
+        <h3>4. Cookies</h3>
+        <p>Unsere Webseite verwendet nur technisch notwendige Cookies sowie lokal gespeicherte Einstellungen (z. B. die
+          gewählte Sprache). Es werden keine Marketing- oder Tracking-Cookies eingesetzt.</p>
+
+        <h3>5. Kontaktaufnahme</h3>
+        <p>Wenn Sie uns per E-Mail oder über das Kontaktformular kontaktieren, werden Ihre Angaben zur Bearbeitung der
+          Anfrage verarbeitet. Die Daten werden nicht ohne Ihre Einwilligung weitergegeben.</p>
+
+        <h3>6. Rechte der betroffenen Person</h3>
+        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten Personendaten sowie auf
+          Berichtigung, Sperrung oder Löschung dieser Daten. Bitte wenden Sie sich an: info@croatia-uzwil.ch</p>
+
+        <h3>7. Änderungen</h3>
+        <p>Wir können diese Datenschutzerklärung jederzeit anpassen. Es gilt die jeweils aktuelle Version auf unserer
+          Website.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ IMPRESSUM MODAL ═══════ -->
+  <div id="impressum-modal" class="ds-modal" role="dialog" aria-modal="true" aria-labelledby="imp-title" hidden>
+    <div class="ds-overlay"></div>
+    <div class="ds-content">
+      <button class="ds-close" aria-label="Schliessen">✕</button>
+      <h2 id="imp-title">Impressum</h2>
+      <div class="ds-body">
+        <h3>Verantwortlich für den Inhalt</h3>
+        <p>NK Croatia Uzwil<br />Untersektion FC Uzwil<br />Sportanlage Rüti<br />9240 Uzwil, Schweiz</p>
+
+        <h3>Kontakt</h3>
+        <p>E-Mail: <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
+
+        <h3>Haftungsausschluss</h3>
+        <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität,
+          Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden
+          materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der
+          veröffentlichten Informationen entstanden sind, werden ausgeschlossen.</p>
+
+        <h3>Haftung für Links</h3>
+        <p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche
+          Verantwortung für solche Webseiten abgelehnt.</p>
+
+        <h3>Urheberrechte</h3>
+        <p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf dieser Website
+          gehören ausschliesslich NK Croatia Uzwil oder den speziell genannten Rechteinhabern. Für die Reproduktion
+          jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ COOKIE BANNER ═══════ -->
+  <div id="cookie-banner" class="cookie-banner" role="region" aria-label="Cookie-Hinweis">
+    <p class="ck-text" data-de="Diese Website verwendet ausschliesslich technisch notwendige Cookies."
+      data-hr="Ova web-stranica koristi samo tehnički neophodne kolači&#263;e.">Diese Website verwendet ausschliesslich
+      technisch notwendige Cookies.</p>
+    <button id="cookie-accept" class="btn btn--red ck-btn" data-de="Akzeptieren" data-hr="Prihvati">Akzeptieren</button>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Mobile Navigation">
+    <a href="saison.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Saison</span></a>
+    <a href="news.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>News</span></a>
+    <a href="kader.html" class="bn-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Kader</span></a>
+    <a href="shop.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Shop</span></a>
+    <a href="index.html#kontakt" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Kontakt</span></a>
+  </nav>
+
+  <script>
+  (function(){
+    var currentLang='de';
+    function applyLang(lang){currentLang=lang;document.documentElement.setAttribute('data-lang',lang);document.getElementById('langDe').classList.toggle('active',lang==='de');document.getElementById('langHr').classList.toggle('active',lang==='hr');document.querySelectorAll('[data-de][data-hr]').forEach(function(el){var txt=el.getAttribute('data-'+lang);if(txt===null)return;if(el.children.length===0){el.textContent=txt;}else if(el.tagName==='A'&&el.querySelectorAll('svg').length===0){el.textContent=txt;}});}
+    document.getElementById('langToggle').addEventListener('click',function(){applyLang(currentLang==='de'?'hr':'de');});
+    applyLang('de');
+    var burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+    burger.addEventListener('click',function(){var open=mm.classList.toggle('open');burger.classList.toggle('open',open);burger.setAttribute('aria-expanded',String(open));});
+    document.querySelectorAll('.mm-link').forEach(function(l){l.addEventListener('click',function(){mm.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false');});});
+    window.addEventListener('scroll',function(){document.getElementById('header').classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+  })();
+
+  // Flip cards — event delegation, bulletproof
+  document.addEventListener('click', function(e) {
+    // Flip forward
+    var flipBtn = e.target.closest('.kp-flip-trigger');
+    if (flipBtn) {
+      e.stopPropagation();
+      var card = flipBtn.closest('.kp-card');
+      if (card) card.classList.add('is-flipped');
+      return;
+    }
+    // Close / flip back
+    var closeBtn = e.target.closest('.kp-close-trigger');
+    if (closeBtn) {
+      e.stopPropagation();
+      var card = closeBtn.closest('.kp-card');
+      if (card) card.classList.remove('is-flipped');
+      return;
+    }
+  });
+  </script>
+  <script>
+    /* Datenschutz + Impressum + Cookie — runs after modals are in DOM */
+    (function () {
+      /* DS Modal */
+      var dsModal = document.getElementById('datenschutz-modal');
+      var dsOverlay = dsModal ? dsModal.querySelector('.ds-overlay') : null;
+      var dsClose = dsModal ? dsModal.querySelector('.ds-close') : null;
+      function openDS() { if (dsModal) { dsModal.hidden = false; document.body.style.overflow = 'hidden'; } }
+      function closeDS() { if (dsModal) { dsModal.hidden = true; document.body.style.overflow = ''; } }
+      document.querySelectorAll('a[href="#datenschutz"]').forEach(function (a) {
+        a.addEventListener('click', function (e) { e.preventDefault(); openDS(); });
+      });
+      if (dsClose) dsClose.addEventListener('click', closeDS);
+      if (dsOverlay) dsOverlay.addEventListener('click', closeDS);
+
+      /* Impressum Modal */
+      var impModal = document.getElementById('impressum-modal');
+      var impOverlay = impModal ? impModal.querySelector('.ds-overlay') : null;
+      var impClose = impModal ? impModal.querySelector('.ds-close') : null;
+      function openImp() { if (impModal) { impModal.hidden = false; document.body.style.overflow = 'hidden'; } }
+      function closeImp() { if (impModal) { impModal.hidden = true; document.body.style.overflow = ''; } }
+      document.querySelectorAll('a[href="#impressum"]').forEach(function (a) {
+        a.addEventListener('click', function (e) { e.preventDefault(); openImp(); });
+      });
+      if (impClose) impClose.addEventListener('click', closeImp);
+      if (impOverlay) impOverlay.addEventListener('click', closeImp);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { closeDS(); closeImp(); }
+      });
+
+      /* Cookie Banner — persisted via localStorage so it doesn't reappear
+         on every page in this multi-page site once accepted. */
+      var cookieBanner = document.getElementById('cookie-banner');
+      if (cookieBanner && !localStorage.getItem('ck_ok')) {
+        cookieBanner.classList.add('visible');
+      }
+      var ckBtn = document.getElementById('cookie-accept');
+      if (ckBtn) {
+        ckBtn.addEventListener('click', function () {
+          localStorage.setItem('ck_ok', '1');
+          if (cookieBanner) cookieBanner.classList.remove('visible');
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

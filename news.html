@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#CC0000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News — NK Croatia Uzwil</title>
+  <meta name="description" content="Alle News und Anlässe von NK Croatia Uzwil." />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .header { background: var(--white, #fff) !important; box-shadow: 0 2px 12px rgba(0,0,0,.08) !important; }
+    .header .nav-link { color: var(--black, #0A0A0A) !important; }
+    .header .nav-link:hover { color: var(--red, #CC0000) !important; }
+    .logo-name { color: var(--black, #0A0A0A) !important; }
+    /* Portrait news cards grid */
+    .news-card-v {
+      background: #fff;
+      border: 1.5px solid #ebebeb;
+      border-radius: 14px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-height: 260px;
+    }
+    .news-card-v:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+    }
+    .ncv-top {
+      padding: 18px 18px 0;
+    }
+    .ncv-body {
+      padding: 12px 18px;
+      flex: 1;
+    }
+    .ncv-title {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0A0A0A !important;
+      line-height: 1.3;
+      margin: 0 0 8px;
+    }
+    .ncv-excerpt {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.82rem;
+      color: #777;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .ncv-footer {
+      padding: 12px 18px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #f0f0f0;
+      color: #999;
+    }
+    .news-date {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #aaa;
+    }
+    @media (max-width: 900px) {
+      .news-card-v { min-height: 220px; }
+    }
+    @media (max-width: 640px) {
+      .news-cards-v-grid { grid-template-columns: 1fr 1fr !important; }
+    }
+    .news-show-more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: fit-content;
+      margin: 24px auto 0;
+      padding: 10px 20px;
+      background: var(--gray-50);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      font-family: var(--ff-head);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s;
+    }
+    .news-show-more:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+    .news-show-more-chevron {
+      transition: transform .2s;
+    }
+    .news-show-more--expanded .news-show-more-chevron {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NEWS MODAL -->
+  <div class="news-modal-overlay" id="newsModalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="news-modal" id="newsModal">
+      <button class="news-modal-close" id="newsModalClose" aria-label="Schliessen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="news-modal-body">
+        <div class="news-modal-content">
+          <div class="news-modal-meta" id="modalMeta"></div>
+          <h2 class="news-modal-title" id="modalTitle"></h2>
+          <div class="news-modal-text" id="modalText"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="NK Croatia Uzwil" class="logo-img" />
+        <div class="logo-text-block">
+          <span class="logo-name">NK <span class="logo-name-break">Croatia Uzwil</span></span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Navigation">
+        <ul role="list">
+          <li><a href="saison.html" class="nav-link" data-de="Saison" data-hr="Sezona">Saison</a></li>
+          <li><a href="news.html" class="nav-link" aria-current="page" data-de="News" data-hr="Novosti">News</a></li>
+          <li><a href="kader.html" class="nav-link" data-de="Kader" data-hr="Momčad">Kader</a></li>
+          <li><a href="index.html#verein" class="nav-link" data-de="Verein" data-hr="Klub">Verein</a></li>
+          <li><a href="sponsoring.html" class="nav-link" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
+          <li><a href="shop.html" class="nav-link" data-de="Shop" data-hr="Shop">Shop</a></li>
+          <li><a href="index.html#kontakt" class="nav-link nav-cta" data-de="Kontakt" data-hr="Kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <button class="lang-toggle" id="langToggle" aria-label="Sprache wechseln / Promijeni jezik">
+        <span class="lang-opt" id="langDe">DE</span><span class="lang-sep">/</span><span class="lang-opt" id="langHr">HR</span>
+      </button>
+      <button class="burger" id="burger" aria-expanded="false" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul role="list">
+        <li><a href="saison.html" class="mm-link" data-de="Saison" data-hr="Sezona">Saison</a></li>
+        <li><a href="news.html" class="mm-link" data-de="News" data-hr="Novosti">News</a></li>
+        <li><a href="kader.html" class="mm-link" data-de="Kader" data-hr="Momčad">Kader</a></li>
+        <li><a href="index.html#verein" class="mm-link" data-de="Verein" data-hr="Klub">Verein</a></li>
+        <li><a href="sponsoring.html" class="mm-link" data-de="Sponsoren" data-hr="Sponzori">Sponsoren</a></li>
+        <li><a href="shop.html" class="mm-link" data-de="Shop" data-hr="Shop">Shop</a></li>
+        <li><a href="index.html#kontakt" class="mm-link" data-de="Kontakt" data-hr="Kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <div style="background:#003580;padding:80px 0 40px;margin-top:72px;">
+      <div class="container">
+        <h1 style="color:#fff !important;font-family:'Clash Display',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin:10px 0 0;" data-de="News &amp; Anlässe" data-hr="Novosti &amp; Događaji">News &amp; Anlässe</h1>
+      </div>
+    </div>
+
+    <section class="section" id="news">
+      <div class="container">
+
+        <!-- Angepinnte News: dynamisch aus dem einen Eintrag in data/news.json
+             mit "pinned": true, siehe renderPinnedBanner() weiter unten.
+             Bewusst nicht klickbar — hidden entirely when nothing is pinned. -->
+        <div class="news-upcoming" id="newsUpcoming" style="display:none;margin-bottom:32px;">
+          <div class="upcoming-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="upcoming-content">
+            <span class="upcoming-tag" id="upcomingTag"></span>
+            <div class="upcoming-title" id="upcomingTitle"></div>
+            <div class="upcoming-desc" id="upcomingDesc"></div>
+          </div>
+          <div class="upcoming-date" id="upcomingDate"></div>
+        </div>
+
+        <!-- Dynamisch aus data/news.json gefüllt (ohne den angepinnten
+             Eintrag, der oben im Banner läuft), siehe renderNewsCards()
+             weiter unten. News werden über die nkcu_ios Admin-App verwaltet
+             (oder von Hand in data/news.json editiert) — nicht hier im HTML. -->
+        <div class="news-cards-v-grid" id="newsCardsGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;"></div>
+        <div id="newsEmpty" style="text-align:center;padding:32px;color:#888;font-family:'Satoshi',sans-serif;" data-de="Noch keine News vorhanden." data-hr="Još nema novosti.">Noch keine News vorhanden.</div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-checkerboard" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="12" preserveAspectRatio="none"><defs><pattern id="chk" x="0" y="0" width="24" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="6" fill="#CC0000"/><rect x="12" width="12" height="6" fill="#FFFFFF"/><rect y="6" width="12" height="6" fill="#FFFFFF"/><rect x="12" y="6" width="12" height="6" fill="#CC0000"/></pattern></defs><rect width="100%" height="12" fill="url(#chk)"/></svg></div>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="logo.png" alt="NK Croatia Uzwil" class="footer-logo-img footer-logo-img--transparent"/>
+        <div><span class="footer-name">NK Croatia Uzwil</span><span class="footer-sub" data-de="Untersektion FC Uzwil · 4. Liga · OFV" data-hr="Podsekcija FC Uzwil · 4. Liga · OFV">Untersektion FC Uzwil · 4. Liga · OFV</span></div>
+      </div>
+      <nav class="footer-nav">
+        <a href="saison.html">Saison</a><a href="news.html">News</a><a href="kader.html">Kader</a>
+        <a href="index.html#verein">Verein</a><a href="sponsoring.html">Sponsoren</a>
+        <a href="shop.html">Shop</a><a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <p class="footer-copy"><a href="#impressum" class="datenschutz-link">Impressum</a> · <a href="#datenschutz" class="datenschutz-link">Datenschutz</a> · © 2026 NK Croatia Uzwil · <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
+    </div>
+  </footer>
+
+  <!-- ═══════ DATENSCHUTZ MODAL ═══════ -->
+  <div id="datenschutz-modal" class="ds-modal" role="dialog" aria-modal="true" aria-labelledby="ds-title" hidden>
+    <div class="ds-overlay"></div>
+    <div class="ds-content">
+      <button class="ds-close" aria-label="Schliessen">✕</button>
+      <h2 id="ds-title" data-de="Datenschutzerklärung" data-hr="Izjava o zaštiti podataka">Datenschutzerklärung</h2>
+      <div class="ds-body">
+        <p>Gestützt auf das revidierte Schweizer Datenschutzgesetz (revDSG) sowie die europäische
+          Datenschutzgrundverordnung (DSGVO), soweit anwendbar, ist jede Person berechtigt, Auskunft über die
+          Verarbeitung ihrer Personendaten zu verlangen.</p>
+
+        <h3>1. Verantwortliche Stelle</h3>
+        <p>NK Croatia Uzwil<br />Untersektion FC Uzwil<br />Sportanlage Rüti, 9240 Uzwil, Schweiz<br />E-Mail:
+          info@croatia-uzwil.ch</p>
+
+        <h3>2. Allgemeines zur Datenbearbeitung</h3>
+        <p>Wir bearbeiten Personendaten in Übereinstimmung mit dem Schweizer Datenschutzrecht. Wir bearbeiten
+          Personendaten nur, soweit dies erforderlich ist, um unsere Vereinstätigkeit auszuführen und unsere Webseite zu
+          betreiben.</p>
+
+        <h3>3. Server-Logfiles</h3>
+        <p>Beim Aufruf unserer Website werden automatisch Informationen erfasst (Browsertyp, Betriebssystem, Zeitpunkt
+          des Zugriffs, IP-Adresse). Diese Daten werden ausschliesslich zum Zweck der technischen Bereitstellung und
+          Sicherheit unserer Website verarbeitet.</p>
+
+        <h3>4. Cookies</h3>
+        <p>Unsere Webseite verwendet nur technisch notwendige Cookies sowie lokal gespeicherte Einstellungen (z. B. die
+          gewählte Sprache). Es werden keine Marketing- oder Tracking-Cookies eingesetzt.</p>
+
+        <h3>5. Kontaktaufnahme</h3>
+        <p>Wenn Sie uns per E-Mail oder über das Kontaktformular kontaktieren, werden Ihre Angaben zur Bearbeitung der
+          Anfrage verarbeitet. Die Daten werden nicht ohne Ihre Einwilligung weitergegeben.</p>
+
+        <h3>6. Rechte der betroffenen Person</h3>
+        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten Personendaten sowie auf
+          Berichtigung, Sperrung oder Löschung dieser Daten. Bitte wenden Sie sich an: info@croatia-uzwil.ch</p>
+
+        <h3>7. Änderungen</h3>
+        <p>Wir können diese Datenschutzerklärung jederzeit anpassen. Es gilt die jeweils aktuelle Version auf unserer
+          Website.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ IMPRESSUM MODAL ═══════ -->
+  <div id="impressum-modal" class="ds-modal" role="dialog" aria-modal="true" aria-labelledby="imp-title" hidden>
+    <div class="ds-overlay"></div>
+    <div class="ds-content">
+      <button class="ds-close" aria-label="Schliessen">✕</button>
+      <h2 id="imp-title">Impressum</h2>
+      <div class="ds-body">
+        <h3>Verantwortlich für den Inhalt</h3>
+        <p>NK Croatia Uzwil<br />Untersektion FC Uzwil<br />Sportanlage Rüti<br />9240 Uzwil, Schweiz</p>
+
+        <h3>Kontakt</h3>
+        <p>E-Mail: <a href="mailto:info@croatia-uzwil.ch">info@croatia-uzwil.ch</a></p>
+
+        <h3>Haftungsausschluss</h3>
+        <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität,
+          Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden
+          materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der
+          veröffentlichten Informationen entstanden sind, werden ausgeschlossen.</p>
+
+        <h3>Haftung für Links</h3>
+        <p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche
+          Verantwortung für solche Webseiten abgelehnt.</p>
+
+        <h3>Urheberrechte</h3>
+        <p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf dieser Website
+          gehören ausschliesslich NK Croatia Uzwil oder den speziell genannten Rechteinhabern. Für die Reproduktion
+          jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ COOKIE BANNER ═══════ -->
+  <div id="cookie-banner" class="cookie-banner" role="region" aria-label="Cookie-Hinweis">
+    <p class="ck-text" data-de="Diese Website verwendet ausschliesslich technisch notwendige Cookies."
+      data-hr="Ova web-stranica koristi samo tehnički neophodne kolači&#263;e.">Diese Website verwendet ausschliesslich
+      technisch notwendige Cookies.</p>
+    <button id="cookie-accept" class="btn btn--red ck-btn" data-de="Akzeptieren" data-hr="Prihvati">Akzeptieren</button>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav" aria-label="Mobile Navigation">
+    <a href="saison.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Saison</span></a>
+    <a href="news.html" class="bn-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>News</span></a>
+    <a href="kader.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Kader</span></a>
+    <a href="shop.html" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Shop</span></a>
+    <a href="index.html#kontakt" class="bn-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Kontakt</span></a>
+  </nav>
+
+  <script>
+  (function(){
+    var currentLang='de';
+    function applyLang(lang){
+      currentLang=lang;
+      document.documentElement.setAttribute('data-lang',lang);
+      document.getElementById('langDe').classList.toggle('active',lang==='de');
+      document.getElementById('langHr').classList.toggle('active',lang==='hr');
+      document.querySelectorAll('[data-de][data-hr]').forEach(function(el){
+        var txt=el.getAttribute('data-'+lang);
+        if(txt===null)return;
+        if(el.children.length===0){el.textContent=txt;}
+        else if(el.tagName==='A'&&el.querySelectorAll('svg').length===0){el.textContent=txt;}
+      });
+      if (typeof refreshNewsShowMoreLabel === 'function') refreshNewsShowMoreLabel();
+    }
+    document.getElementById('langToggle').addEventListener('click',function(){applyLang(currentLang==='de'?'hr':'de');});
+    applyLang('de');
+
+    var burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+    burger.addEventListener('click',function(){var open=mm.classList.toggle('open');burger.classList.toggle('open',open);burger.setAttribute('aria-expanded',String(open));});
+    document.querySelectorAll('.mm-link').forEach(function(l){l.addEventListener('click',function(){mm.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false');});});
+    window.addEventListener('scroll',function(){document.getElementById('header').classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+
+    // News Modal
+    var overlay=document.getElementById('newsModalOverlay');
+    var modalClose=document.getElementById('newsModalClose');
+    var modalMeta=document.getElementById('modalMeta');
+    var modalTitle=document.getElementById('modalTitle');
+    var modalText=document.getElementById('modalText');
+    function openModal(card){
+      var lang=currentLang;
+      var tag=card.getAttribute('data-'+lang+'-tag')||'';
+      var title=card.getAttribute('data-'+lang+'-title')||'';
+      var date=card.getAttribute('data-date')||'';
+      var text=card.getAttribute('data-'+lang+'-text')||'';
+      modalMeta.innerHTML='<span class="nm-tag">'+tag+'</span><span class="nm-date">'+date+'</span>';
+      modalTitle.textContent=title;
+      modalText.innerHTML=text;
+      overlay.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';}
+    modalClose.addEventListener('click',closeModal);
+    overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+    // News feed (data/news.json) — items are added/edited via the nkcu_ios
+    // admin app's News tab (save-news.php / delete-news.php) or by hand in
+    // the JSON file, never hard-coded here, see CLAUDE.md.
+    var newsCardsGrid = document.getElementById('newsCardsGrid');
+    var newsEmptyEl = document.getElementById('newsEmpty');
+    var NEWS_VISIBLE_COUNT = 4;
+    var newsUnpinnedItems = [];
+    var newsShowAll = false;
+
+    function renderUpcomingBanner(item) {
+      var banner = document.getElementById('newsUpcoming');
+      if (!item) { banner.style.display = 'none'; return; }
+      var de = item.de || {}, hr = item.hr || {};
+      var tagEl = document.getElementById('upcomingTag');
+      tagEl.setAttribute('data-de', de.tag || '');
+      tagEl.setAttribute('data-hr', hr.tag || '');
+      tagEl.textContent = currentLang === 'hr' ? (hr.tag || '') : (de.tag || '');
+      var titleEl = document.getElementById('upcomingTitle');
+      titleEl.setAttribute('data-de', de.title || '');
+      titleEl.setAttribute('data-hr', hr.title || '');
+      titleEl.textContent = currentLang === 'hr' ? (hr.title || '') : (de.title || '');
+      var descEl = document.getElementById('upcomingDesc');
+      descEl.setAttribute('data-de', de.excerpt || '');
+      descEl.setAttribute('data-hr', hr.excerpt || '');
+      descEl.textContent = currentLang === 'hr' ? (hr.excerpt || '') : (de.excerpt || '');
+      document.getElementById('upcomingDate').textContent = item.date || '';
+      banner.style.display = 'flex';
+    }
+
+    function renderNewsShowMoreButton() {
+      var existing = document.getElementById('newsShowMoreBtn');
+      if (existing) existing.remove();
+      var hiddenCount = newsUnpinnedItems.length - NEWS_VISIBLE_COUNT;
+      if (hiddenCount <= 0) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.id = 'newsShowMoreBtn';
+      btn.className = 'news-show-more';
+      btn.innerHTML = '<span class="news-show-more-label"></span>' +
+        '<svg class="news-show-more-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9" /></svg>';
+      btn.addEventListener('click', function () { newsShowAll = !newsShowAll; renderNewsSection(); });
+      newsCardsGrid.insertAdjacentElement('afterend', btn);
+      refreshNewsShowMoreLabel();
+    }
+
+    function refreshNewsShowMoreLabel() {
+      var btn = document.getElementById('newsShowMoreBtn');
+      if (!btn) return;
+      btn.classList.toggle('news-show-more--expanded', newsShowAll);
+      var hiddenCount = Math.max(0, newsUnpinnedItems.length - NEWS_VISIBLE_COUNT);
+      var label = btn.querySelector('.news-show-more-label');
+      label.textContent = newsShowAll
+        ? (currentLang === 'hr' ? 'Manje novosti' : 'Weniger News')
+        : (currentLang === 'hr' ? 'Više novosti (' + hiddenCount + ')' : 'Mehr News (' + hiddenCount + ')');
+    }
+
+    function renderNewsSection() {
+      var visible = newsShowAll ? newsUnpinnedItems : newsUnpinnedItems.slice(0, NEWS_VISIBLE_COUNT);
+      renderNewsCards(visible);
+      renderNewsShowMoreButton();
+    }
+
+    function renderNewsCards(items) {
+      newsCardsGrid.innerHTML = '';
+      newsEmptyEl.style.display = items.length ? 'none' : '';
+      items.forEach(function (item) {
+        var de = item.de || {}, hr = item.hr || {};
+        var card = document.createElement('button');
+        card.className = 'news-card-v';
+        card.setAttribute('data-id', item.id || '');
+        card.setAttribute('data-de-tag', de.tag || '');
+        card.setAttribute('data-hr-tag', hr.tag || '');
+        card.setAttribute('data-de-title', de.title || '');
+        card.setAttribute('data-hr-title', hr.title || '');
+        card.setAttribute('data-date', item.date || '');
+        card.setAttribute('data-de-text', de.text || '');
+        card.setAttribute('data-hr-text', hr.text || '');
+        card.innerHTML =
+          '<div class="ncv-top"><span class="news-tag" style="color:#CC0000;background:rgba(204,0,0,0.08);"></span></div>' +
+          '<div class="ncv-body"><h4 class="ncv-title"></h4><p class="ncv-excerpt"></p></div>' +
+          '<div class="ncv-footer"><span class="news-date"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>';
+        var tagEl = card.querySelector('.news-tag');
+        tagEl.setAttribute('data-de', de.tag || '');
+        tagEl.setAttribute('data-hr', hr.tag || '');
+        tagEl.textContent = currentLang === 'hr' ? (hr.tag || '') : (de.tag || '');
+        var titleEl = card.querySelector('.ncv-title');
+        titleEl.setAttribute('data-de', de.title || '');
+        titleEl.setAttribute('data-hr', hr.title || '');
+        titleEl.textContent = currentLang === 'hr' ? (hr.title || '') : (de.title || '');
+        var excerptEl = card.querySelector('.ncv-excerpt');
+        excerptEl.setAttribute('data-de', de.excerpt || '');
+        excerptEl.setAttribute('data-hr', hr.excerpt || '');
+        excerptEl.textContent = currentLang === 'hr' ? (hr.excerpt || '') : (de.excerpt || '');
+        card.querySelector('.news-date').textContent = item.date || '';
+        card.addEventListener('click', function () { openModal(card); });
+        newsCardsGrid.appendChild(card);
+      });
+    }
+
+    function fetchNews() {
+      fetch('data/news.json?_=' + Date.now())
+        .then(function (r) { return r.ok ? r.json() : { items: [] }; })
+        .then(function (data) {
+          var items = Array.isArray(data.items) ? data.items.slice() : [];
+          items.sort(function (a, b) { return (b.createdAt || '').localeCompare(a.createdAt || ''); });
+          var pinned = items.find(function (item) { return !!item.pinned; }) || null;
+          renderUpcomingBanner(pinned);
+          newsUnpinnedItems = items.filter(function (item) { return item !== pinned; });
+          newsShowAll = false;
+          renderNewsSection();
+        })
+        .catch(function () { /* keep whatever was last rendered */ });
+    }
+
+    fetchNews();
+
+    // DS/Impressum/Cookie
+    var dsModal=document.getElementById('datenschutz-modal');
+    var dsClose=dsModal?dsModal.querySelector('.ds-close'):null;
+    var dsOverlay=dsModal?dsModal.querySelector('.ds-overlay'):null;
+    function openDS(){if(dsModal){dsModal.hidden=false;document.body.style.overflow='hidden';}}
+    function closeDS(){if(dsModal){dsModal.hidden=true;document.body.style.overflow='';}}
+    document.querySelectorAll('a[href="#datenschutz"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();openDS();});});
+    if(dsClose)dsClose.addEventListener('click',closeDS);
+    if(dsOverlay)dsOverlay.addEventListener('click',closeDS);
+    var impModal=document.getElementById('impressum-modal');
+    var impClose=impModal?impModal.querySelector('.ds-close'):null;
+    var impOverlay=impModal?impModal.querySelector('.ds-overlay'):null;
+    function openImp(){if(impModal){impModal.hidden=false;document.body.style.overflow='hidden';}}
+    function closeImp(){if(impModal){impModal.hidden=true;document.body.style.overflow='';}}
+    document.querySelectorAll('a[href="#impressum"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();openImp();});});
+    if(impClose)impClose.addEventListener('click',closeImp);
+    if(impOverlay)impOverlay.addEventListener('click',closeImp);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeDS();closeImp();}});
+    var cookieBanner=document.getElementById('cookie-banner');
+    if(cookieBanner&&!localStorage.getItem('ck_ok')){cookieBanner.classList.add('visible');}
+    var ckBtn=document.getElementById('cookie-accept');
+    if(ckBtn){ckBtn.addEventListener('click',function(){localStorage.setItem('ck_ok','1');if(cookieBanner)cookieBanner.classList.remove('visible');});}
+  })();
+  </script>
+</body>
+</html>
