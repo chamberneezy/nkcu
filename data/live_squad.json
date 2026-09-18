@@ -73,6 +73,190 @@
             "homeScore": 3,
             "awayScore": 5,
             "live": false
+        },
+        "30-08-2026-FC-Uzwil-4-FC-Zuzwil-2": {
+            "matchId": "30-08-2026-FC-Uzwil-4-FC-Zuzwil-2",
+            "date": "30.08.2026",
+            "home": "FC Uzwil 4",
+            "away": "FC Zuzwil 2",
+            "formation": "3-5-2",
+            "lineup": {
+                "GK": "A. Specchia",
+                "CB1": "G. Jozić",
+                "CB2": "I. Martić",
+                "CB3": "D. Ajrizi",
+                "LWB": "D. Martić",
+                "DM": "X. Hasallari",
+                "CM1": "N. Gonzalez",
+                "CM2": "I. Beka",
+                "RWB": "A. Rozajac",
+                "ST1": "R. Bulić",
+                "ST2": "S. Cucinelli"
+            },
+            "updated": "2026-08-30T12:48:33Z",
+            "live": false,
+            "goals": [
+                {
+                    "id": "g_6a940e5bdbf811.80628791",
+                    "minute": 3,
+                    "scorer": "R. Bulić",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6a94160abc15b2.66296594",
+                    "minute": 36,
+                    "scorer": "D. Jozić",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6a941baae0d0e1.29922197",
+                    "minute": 49,
+                    "scorer": "Gegner",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a94208f603372.22837404",
+                    "minute": 69,
+                    "scorer": "I. Martić",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6a942235daba85.78469456",
+                    "minute": 77,
+                    "scorer": "Gegner",
+                    "side": "away"
+                }
+            ],
+            "homeScore": 3,
+            "awayScore": 2
+        },
+        "05-09-2026-FC-Pfyn-1b-FC-Uzwil-4": {
+            "matchId": "05-09-2026-FC-Pfyn-1b-FC-Uzwil-4",
+            "date": "05.09.2026",
+            "home": "FC Pfyn 1b",
+            "away": "FC Uzwil 4",
+            "formation": "4-4-2",
+            "lineup": {
+                "GK": "A. Specchia",
+                "LB": "D. Martić",
+                "CB1": "G. Jozić",
+                "CB2": "D. Ajrizi",
+                "RB": "A. Rozajac",
+                "LM": "N. Gonzalez",
+                "CM1": "D. Jozić",
+                "CM2": "K. Katičić",
+                "RM": "S. Cucinelli",
+                "ST1": "A. Bahorić",
+                "ST2": "X. Hasallari"
+            },
+            "updated": "2026-09-05T19:20:13Z",
+            "goals": [
+                {
+                    "id": "g_6a9c3a5d2e5bf7.27436900",
+                    "minute": 18,
+                    "scorer": "S. Cucinelli",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a9c3efb64d1f5.54764883",
+                    "minute": 34,
+                    "scorer": "Gegner",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6a9c3f14a256e3.09944069",
+                    "minute": 38,
+                    "scorer": "N. Gonzalez",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a9c45c1ef70e2.83352933",
+                    "minute": 50,
+                    "scorer": "Gegner",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6a9c4c8e941053.98299350",
+                    "minute": 78,
+                    "scorer": "D. Ajrizi",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6a9c500b552730.84965643",
+                    "minute": 80,
+                    "scorer": "D. Radoš",
+                    "side": "away"
+                }
+            ],
+            "homeScore": 2,
+            "awayScore": 4,
+            "live": false
+        },
+        "13-09-2026-FC-Uzwil-4-FC-Bazenheid-2": {
+            "matchId": "13-09-2026-FC-Uzwil-4-FC-Bazenheid-2",
+            "date": "13.09.2026",
+            "home": "FC Uzwil 4",
+            "away": "FC Bazenheid 2",
+            "formation": "4-3-3",
+            "lineup": {
+                "LB": "D. Martić",
+                "CB1": "G. Jozić",
+                "CM3": "X. Hasallari",
+                "RW": "S. Cucinelli",
+                "RB": "A. Rozajac",
+                "CM2": "M. Gojević",
+                "GK": "D. Fizer",
+                "CM1": "D. Jozić",
+                "ST": "R. Bulić",
+                "LW": "N. Gonzalez",
+                "CB2": "K. Katičić"
+            },
+            "updated": "2026-09-13T13:09:33Z",
+            "goals": [
+                {
+                    "id": "g_6aa6859c8548a8.06507278",
+                    "minute": 8,
+                    "scorer": "Gegner",
+                    "side": "away"
+                },
+                {
+                    "id": "g_6aa685ac011310.24490418",
+                    "minute": 10,
+                    "scorer": "R. Bulić",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6aa688d1d97e13.55636172",
+                    "minute": 22,
+                    "scorer": "N. Gonzalez",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6aa688e5b260b8.74334392",
+                    "minute": 24,
+                    "scorer": "R. Bulić",
+                    "side": "home"
+                },
+                {
+                    "id": "g_6aa69abdd65449.97962264",
+                    "minute": 79,
+                    "scorer": "I. Begić",
+                    "side": "home"
+                }
+            ],
+            "homeScore": 4,
+            "awayScore": 1,
+            "live": false
+        },
+        "17-10-2026-FC-Niederstetten-1-FC-Uzwil-4": {
+            "matchId": "17-10-2026-FC-Niederstetten-1-FC-Uzwil-4",
+            "date": "17.10.2026",
+            "home": "FC Niederstetten 1",
+            "away": "FC Uzwil 4",
+            "formation": "4-4-2",
+            "lineup": [],
+            "updated": "2026-09-14T05:10:01Z",
+            "live": false
         }
     }
 }
