@@ -22,9 +22,15 @@ All user-visible text is duplicated into `data-de="..."` and `data-hr="..."` att
 
 Consequence: **never hard-code visible text** — always add both `data-de` and `data-hr` attributes. Form placeholder strings are handled separately in `applyLang` because you can't use data attributes on input placeholders directly.
 
-### News modal
+### News feed & modal
 
-News cards are `<button class="news-card">` elements. All modal content lives in data attributes on the button (`data-de-title`, `data-hr-title`, `data-de-text`, `data-hr-text`, `data-date`, `data-de-tag`, `data-hr-tag`). The `openModal(card)` function reads these and populates `#newsModal`. HTML markup is allowed inside `data-*-text` attributes and is injected via `innerHTML`.
+News is data-driven from `data/news.json` (`{"items": [...]}`, each item has `id`, `createdAt`, `date`, `pinned`, and a `de`/`hr` object with `tag`/`title`/`excerpt`/`text`). `fetchNews()`/`renderNewsCards()` in `index.html` (next to the news modal JS) fetch the file client-side, sort by `createdAt` descending, and build one `<button class="news-card">` per item with the same `data-de-title`/`data-hr-title`/`data-de-text`/`data-hr-text`/`data-date`/`data-de-tag`/`data-hr-tag` attributes the modal expects. `openModal(card)` reads those attributes and populates `#newsModal`; `data-*-text` is HTML and is injected via `innerHTML`.
+
+**At most one item can have `"pinned": true`** — `save-news.php` enforces this by clearing `pinned` on every other item whenever one is saved with it set. The pinned item is rendered by `renderPinnedBanner()` into `#newsFeaturedBanner` (the "Vorankündigung"-style highlighted banner above the grid, deliberately not clickable) instead of appearing as a card — `fetchNews()` filters it out of the card list so it's never shown twice. No pinned item → the banner stays `hidden`.
+
+**The card grid is paginated**, `NEWS_VISIBLE_COUNT = 4` unpinned items shown by default; the rest sit behind a "▼ Mehr News (n)" / "▼ Više novosti (n)" button (`renderNewsShowMoreButton()`/`renderNewsSection()`) that toggles to show all.
+
+**News is authored from the nkcu_ios admin app's News tab** (`save-news.php` to create/edit, `delete-news.php` to remove) — not from a web UI. Both endpoints take the shared admin password (plus an optional per-user session token, same pattern as `save-goal.php`), and `save-news.php` runs all HTML through a small DOMDocument-based allow-list sanitizer (`p`, `br`, `strong`/`b`, `em`/`i` only — matching the app's bold/italic-only editor) before writing it, since `data-*-text` goes straight into `innerHTML` on the public site. You can still hand-edit `data/news.json` directly for one-off fixes; just keep the same shape (and unset any other item's `pinned` yourself if you set one by hand).
 
 ### Fan item order form
 
@@ -59,7 +65,7 @@ Croatian flag palette: red / white / blue only. Avoid introducing other accent c
 ## Content updates
 
 - **Match results / next match**: edit the `.match-card` blocks in the `#news` section of `index.html`
-- **News cards**: add/edit `<button class="news-card">` elements with the full set of data attributes
+- **News cards**: publish/edit/delete from the nkcu_ios admin app's News tab (preferred), or hand-edit `data/news.json` directly — don't add `<button class="news-card">` markup to `index.html` by hand, it's rendered from the JSON at runtime
 - **Player roster**: add `.player-card` divs in the appropriate `.team-block`; place photo in `players/`; use `.player-photo--placeholder` SVG when no photo is available
 - **Sponsors**: edit `.active-sponsors` rows and `.sponsor-packages` cards; logos live in `sponsors/`
 - **Tabelle / Spielplan**: edit `data/uzwil4.json` by hand after each matchday (see above) — no code changes needed
@@ -74,6 +80,7 @@ Croatian flag palette: red / white / blue only. Avoid introducing other accent c
 - `sponsors/` — sponsor logos, referenced from the sponsors section
 - `data/uzwil4.json` — standings + fixtures, manually updated (see Tabelle & Spielplan above)
 - `data/nkcu_spiele.json` — fixtures only for the NK Croatia Uzwil
+- `data/news.json` — News & Anlässe feed, written by `save-news.php`/`delete-news.php` (called from the nkcu_ios admin app's News tab) or by hand (see News feed & modal above)
 - `hero-video.mp4` / `hero-team.png` — hero background (video with image fallback)
 - `manifest.json`, `sw.js`, `apple-touch-icon.png`, `favicon.ico` — PWA manifest/icons + service worker
 - 'Notest Webpage_2.pdf' - is a pdf file that contains the instructions for web fixes, but do not upload this anywhere! Keep it locally only
