@@ -306,6 +306,20 @@
       font-weight: 500;
     }
 
+    /* Gentle "tap me" pulse on a couple of coach names, so users notice
+       the photo is tappable. Stops permanently once that card has been
+       opened once (JS removes .kp-pulse), and is off entirely for anyone
+       who prefers reduced motion. */
+    @media (prefers-reduced-motion: no-preference) {
+      .kp-front-name.kp-pulse {
+        animation: kpNamePulse 1.8s ease-in-out infinite;
+      }
+    }
+    @keyframes kpNamePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
     /* Team photo */
     .team-photo-wrap { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     .team-photo-img { width: 100%; display: block; }
@@ -380,7 +394,7 @@
               <div class="kp-card-inner">
                 <div class="kp-front">
                   <img src="players/ivan-caic.jpg" alt="Ivan Čaić" class="kp-photo"/>
-                  <div class="kp-front-name"><span class="fn-first">Ivan</span><span class="fn-last">Čaić</span></div>
+                  <div class="kp-front-name kp-pulse"><span class="fn-first">Ivan</span><span class="fn-last">Čaić</span></div>
                   <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo">
                     <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
                   </button>
@@ -432,7 +446,7 @@
               <div class="kp-card-inner">
                 <div class="kp-front">
                   <img src="players/tomislav-misura.jpg" alt="Tomislav Mišura" class="kp-photo"/>
-                  <div class="kp-front-name"><span class="fn-first">Tomislav</span><span class="fn-last">Mišura</span></div>
+                  <div class="kp-front-name kp-pulse"><span class="fn-first">Tomislav</span><span class="fn-last">Mišura</span></div>
                   <button class="kp-flip-btn kp-flip-trigger" aria-label="Spielerinfo">
                     <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
                   </button>
@@ -1115,13 +1129,19 @@
   })();
 
   // Flip cards — event delegation, bulletproof
+  function kpOpenCard(card) {
+    if (!card) return;
+    card.classList.add('is-flipped');
+    // Tap-me pulse has done its job once the card's been opened — stop it.
+    var pulsingName = card.querySelector('.kp-pulse');
+    if (pulsingName) pulsingName.classList.remove('kp-pulse');
+  }
   document.addEventListener('click', function(e) {
     // Flip forward
     var flipBtn = e.target.closest('.kp-flip-trigger');
     if (flipBtn) {
       e.stopPropagation();
-      var card = flipBtn.closest('.kp-card');
-      if (card) card.classList.add('is-flipped');
+      kpOpenCard(flipBtn.closest('.kp-card'));
       return;
     }
     // Close / flip back
@@ -1135,8 +1155,7 @@
     // Coach cards: the whole photo is tappable, not just the small button
     var coachFront = e.target.closest('.kp-card--coach .kp-front');
     if (coachFront) {
-      var card = coachFront.closest('.kp-card');
-      if (card) card.classList.add('is-flipped');
+      kpOpenCard(coachFront.closest('.kp-card'));
       return;
     }
   });
