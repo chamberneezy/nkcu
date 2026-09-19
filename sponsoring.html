@@ -79,6 +79,10 @@
       .sp-stats { grid-template-columns: repeat(2,1fr); }
       .patronat-grid { grid-template-columns: repeat(2,1fr); }
     }
+      .gold-tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
+    .gold-tile { background:#fff; border:1.5px solid rgba(184,134,11,0.2); border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); height:130px; padding:14px 20px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .gold-tile--dark { background:#000; }
+    .gold-tile img { max-width:100%; max-height:100%; object-fit:contain; }
   </style>
 </head>
 <body>
@@ -209,18 +213,18 @@
             <span style="font-family:'Satoshi',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#B8860B;background:rgba(184,134,11,0.1);padding:4px 12px;border-radius:20px;">Gold</span>
             <div style="flex:1;height:1px;background:rgba(184,134,11,0.25);"></div>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
-            <div style="background:#fff;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(184,134,11,0.2);">
-              <img src="sponsors/kristal-fenster.jpg" alt="Kristal Fenster" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+          <div class="gold-tiles">
+            <div class="gold-tile">
+              <img src="sponsors/kristal-fenster.jpg" alt="Kristal Fenster"/>
             </div>
-            <div style="background:#1a1a1a;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(184,134,11,0.2);">
-              <img src="sponsors/sfk-new.png" alt="SFK" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+            <div class="gold-tile gold-tile--dark">
+              <img src="sponsors/sfk-new.png" alt="SFK"/>
             </div>
-            <div style="background:#1a1a1a;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(184,134,11,0.2);">
-              <img src="sponsors/AkkordTech.png" alt="AkkordTech" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+            <div class="gold-tile gold-tile--dark">
+              <img src="sponsors/AkkordTech.png" alt="AkkordTech"/>
             </div>
-            <div style="background:#fff;border-radius:10px;padding:20px 28px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:140px;min-height:80px;border:1.5px solid rgba(184,134,11,0.2);">
-              <img src="sponsors/kollermorger-new.svg" alt="Koller + Morger" style="max-height:50px;max-width:120px;object-fit:contain;"/>
+            <div class="gold-tile">
+              <img src="sponsors/kollermorger-new.svg" alt="Koller + Morger"/>
             </div>
           </div>
         </div>

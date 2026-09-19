@@ -54,6 +54,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    /* reset the old single-box list styling from style.css so each card stands alone */
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
   }
   @media (max-width: 640px) {
     .news-cards { grid-template-columns: 1fr; }
