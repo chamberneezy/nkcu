@@ -285,6 +285,37 @@
     .kp-card--coach.is-flipped .kp-back {
       transform: translateY(0);
     }
+    /* On open, the two-row name (first name over surname) slides up from the
+       bottom of the photo onto the info panel's header and re-lays itself out
+       as one centred row: first name left, surname right. The panel's own
+       copy of the name is hidden so it is never shown twice. */
+    .kp-card--coach .kp-front-name {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .kp-card--coach.is-flipped .kp-front-name {
+      bottom: calc(40% - 30px);
+      z-index: 5;
+      flex-direction: row;
+      justify-content: center;
+      align-items: baseline;
+      gap: 8px;
+      padding: 0 40px;
+      pointer-events: none;
+    }
+    .kp-card--coach.is-flipped .kp-front-name .fn-first {
+      font-size: 0.78rem;
+      color: #fff;
+    }
+    .kp-card--coach.is-flipped .kp-front-name .fn-last {
+      font-size: 0.95rem;
+    }
+    .kp-card--coach .kp-back-name { display: none; }
+    .kp-card--coach .kp-back-header {
+      justify-content: flex-end;
+    }
     .kp-card--coach .kp-back-header {
       background: transparent;
       padding: 6px 14px 2px;
