@@ -18,66 +18,6 @@
     .header .nav-link { color: var(--black, #0A0A0A) !important; }
     .header .nav-link:hover { color: var(--red, #CC0000) !important; }
     .logo-name { color: var(--black, #0A0A0A) !important; }
-    /* Portrait news cards grid */
-    .news-card-v {
-      background: #fff;
-      border: 1.5px solid #ebebeb;
-      border-radius: 14px;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      cursor: pointer;
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-      min-height: 260px;
-    }
-    .news-card-v:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
-    }
-    .ncv-top {
-      padding: 18px 18px 0;
-    }
-    .ncv-body {
-      padding: 12px 18px;
-      flex: 1;
-    }
-    .ncv-title {
-      font-family: 'Clash Display', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #0A0A0A !important;
-      line-height: 1.3;
-      margin: 0 0 8px;
-    }
-    .ncv-excerpt {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 0.82rem;
-      color: #777;
-      line-height: 1.5;
-      margin: 0;
-    }
-    .ncv-footer {
-      padding: 12px 18px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid #f0f0f0;
-      color: #999;
-    }
-    .news-date {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #aaa;
-    }
-    @media (max-width: 900px) {
-      .news-card-v { min-height: 220px; }
-    }
-    @media (max-width: 640px) {
-      .news-cards-v-grid { grid-template-columns: 1fr 1fr !important; }
-    }
     .news-show-more {
       display: flex;
       align-items: center;
@@ -197,7 +137,7 @@
              Eintrag, der oben im Banner läuft), siehe renderNewsCards()
              weiter unten. News werden über die nkcu_ios Admin-App verwaltet
              (oder von Hand in data/news.json editiert) — nicht hier im HTML. -->
-        <div class="news-cards-v-grid" id="newsCardsGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;"></div>
+        <div class="news-cards" id="newsCardsGrid"></div>
         <div id="newsEmpty" style="text-align:center;padding:32px;color:#888;font-family:'Satoshi',sans-serif;" data-de="Noch keine News vorhanden." data-hr="Još nema novosti.">Noch keine News vorhanden.</div>
 
       </div>
@@ -428,7 +368,7 @@
       items.forEach(function (item) {
         var de = item.de || {}, hr = item.hr || {};
         var card = document.createElement('button');
-        card.className = 'news-card-v';
+        card.className = 'news-card';
         card.setAttribute('data-id', item.id || '');
         card.setAttribute('data-de-tag', de.tag || '');
         card.setAttribute('data-hr-tag', hr.tag || '');
@@ -437,23 +377,36 @@
         card.setAttribute('data-date', item.date || '');
         card.setAttribute('data-de-text', de.text || '');
         card.setAttribute('data-hr-text', hr.text || '');
-        card.innerHTML =
-          '<div class="ncv-top"><span class="news-tag" style="color:#CC0000;background:rgba(204,0,0,0.08);"></span></div>' +
-          '<div class="ncv-body"><h4 class="ncv-title"></h4><p class="ncv-excerpt"></p></div>' +
-          '<div class="ncv-footer"><span class="news-date"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>';
-        var tagEl = card.querySelector('.news-tag');
+        var left = document.createElement('div');
+        left.className = 'nc-left';
+        var tagEl = document.createElement('span');
+        tagEl.className = 'news-tag';
         tagEl.setAttribute('data-de', de.tag || '');
         tagEl.setAttribute('data-hr', hr.tag || '');
         tagEl.textContent = currentLang === 'hr' ? (hr.tag || '') : (de.tag || '');
-        var titleEl = card.querySelector('.ncv-title');
+        left.appendChild(tagEl);
+        var titleEl = document.createElement('h4');
+        titleEl.className = 'nc-title';
         titleEl.setAttribute('data-de', de.title || '');
         titleEl.setAttribute('data-hr', hr.title || '');
         titleEl.textContent = currentLang === 'hr' ? (hr.title || '') : (de.title || '');
-        var excerptEl = card.querySelector('.ncv-excerpt');
+        left.appendChild(titleEl);
+        var excerptEl = document.createElement('p');
+        excerptEl.className = 'nc-excerpt';
         excerptEl.setAttribute('data-de', de.excerpt || '');
         excerptEl.setAttribute('data-hr', hr.excerpt || '');
         excerptEl.textContent = currentLang === 'hr' ? (hr.excerpt || '') : (de.excerpt || '');
-        card.querySelector('.news-date').textContent = item.date || '';
+        left.appendChild(excerptEl);
+        card.appendChild(left);
+        var right = document.createElement('div');
+        right.className = 'nc-right';
+        var dateEl = document.createElement('span');
+        dateEl.className = 'news-date';
+        dateEl.textContent = item.date || '';
+        right.appendChild(dateEl);
+        right.insertAdjacentHTML('beforeend',
+          '<svg class="nc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>');
+        card.appendChild(right);
         card.addEventListener('click', function () { openModal(card); });
         newsCardsGrid.appendChild(card);
       });
