@@ -6600,3 +6600,19 @@ body.modal-open .bottom-nav {
   .news-cards > .news-card { transition: none; }
   .news-cards > .news-card:hover { transform: none; }
 }
+
+/* ══════════════════════════════════════════════════════
+   MODALS ON PHONES — use (almost) the full screen width
+   Shared by the news modal and the match modal. Placed last so it wins
+   over the older 24px overlay padding / 12px margin / 18–24px content padding.
+══════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .news-modal-overlay { padding: 8px; }
+  .news-modal {
+    margin: 0;
+    width: 100%;
+    max-width: none;
+    max-height: calc(100svh - 16px);
+  }
+  .news-modal-content { padding: 20px 14px 24px; }
+}
