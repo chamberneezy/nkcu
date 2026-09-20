@@ -1,4 +1,4 @@
-const CACHE = 'nk-croatia-v11';
+const CACHE = 'nk-croatia-v12';
 const ASSETS = [
   '/',
   '/index.html',
@@ -7,11 +7,11 @@ const ASSETS = [
   '/kader.html',
   '/sponsoring.html',
   '/shop.html',
-  '/style.css',
+  '/assets/css/style.css',
   '/logo.png',
   '/favicon.ico',
   '/apple-touch-icon.png',
-  '/hero-video.mp4'
+  '/assets/video/hero-video.mp4'
 ];
 
 self.addEventListener('install', e => {

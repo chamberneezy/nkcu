@@ -6,8 +6,11 @@ data/users.json
 data/sessions.json
 
 # Local-only iOS build prompt/notes — not part of the website.
-ios.txt
+docs/ios.txt
 
 # APNs push notification private key — never commit, this repo is public.
 private/
 *.p8
+
+# Local table updater (scraper + FTP credentials + logs) — local only, never commit
+local-table-updater/

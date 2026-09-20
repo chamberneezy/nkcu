@@ -6387,7 +6387,7 @@ body.has-live-banner {
   aspect-ratio: 1198 / 880;
   border-radius: var(--radius);
   overflow: hidden;
-  background-image: url('graphics/pitch_desktop.jpeg');
+  background-image: url('../img/graphics/pitch_desktop.jpeg');
   background-size: cover;
   background-position: center;
   border: 1.5px solid var(--gray-100);
@@ -6396,7 +6396,7 @@ body.has-live-banner {
 @media (max-width: 480px) {
   .live-squad-pitch {
     aspect-ratio: 768 / 1221;
-    background-image: url('graphics/pitch_mobile.jpeg');
+    background-image: url('../img/graphics/pitch_mobile.jpeg');
   }
 }
 

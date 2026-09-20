@@ -8,7 +8,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 define('ADMIN_PASSWORD', 'croatia1971');
-define('DATA_FILE', __DIR__ . '/data/live_squad.json');
+define('DATA_FILE', dirname(__DIR__) . '/data/live_squad.json');
 
 function respond($status, $payload) {
     http_response_code($status);

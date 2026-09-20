@@ -1,16 +1,14 @@
 <?php
 /**
- * Wipes a match's entry from data/live_squad.json entirely — squad,
- * formation, goals, score, live flag — so the admin can start over.
- * Called by the "Zurücksetzen" button in admin.html.
+ * Removes one goal event from a match's entry in data/live_squad.json and
+ * recomputes homeScore/awayScore from the remaining goals. Called by the
+ * bin icon next to each scorer row in admin.html.
  */
 
 header('Content-Type: application/json; charset=utf-8');
 
-require_once __DIR__ . '/apns.php';
-
 define('ADMIN_PASSWORD', 'croatia1971');
-define('DATA_FILE', __DIR__ . '/data/live_squad.json');
+define('DATA_FILE', dirname(__DIR__) . '/data/live_squad.json');
 
 function respond($status, $payload) {
     http_response_code($status);
@@ -31,15 +29,15 @@ if (!isset($body['password']) || !hash_equals(ADMIN_PASSWORD, (string) $body['pa
     respond(401, ['ok' => false, 'error' => 'Falsches Passwort']);
 }
 
-$actingUsername = isset($body['token']) ? nkcu_verify_session((string) $body['token']) : null;
-
 $matchId = isset($body['matchId']) ? trim((string) $body['matchId']) : '';
-if ($matchId === '') {
-    respond(400, ['ok' => false, 'error' => 'Missing matchId']);
+$goalId = isset($body['goalId']) ? trim((string) $body['goalId']) : '';
+
+if ($matchId === '' || $goalId === '') {
+    respond(400, ['ok' => false, 'error' => 'Missing matchId or goalId']);
 }
 
 if (!is_file(DATA_FILE)) {
-    respond(200, ['ok' => true]);
+    respond(404, ['ok' => false, 'error' => 'No data file yet']);
 }
 
 $fh = fopen(DATA_FILE, 'c+');
@@ -55,13 +53,31 @@ if (!flock($fh, LOCK_EX)) {
 $size = filesize(DATA_FILE);
 $contents = $size > 0 ? fread($fh, $size) : '';
 $data = json_decode($contents, true);
-if (!is_array($data) || !isset($data['matches']) || !is_array($data['matches'])) {
-    $data = ['matches' => []];
+if (!is_array($data) || !isset($data['matches'][$matchId]) || !is_array($data['matches'][$matchId])) {
+    flock($fh, LOCK_UN);
+    fclose($fh);
+    respond(404, ['ok' => false, 'error' => 'Match not found']);
 }
 
-$existing = isset($data['matches'][$matchId]) && is_array($data['matches'][$matchId]) ? $data['matches'][$matchId] : null;
+$entry = $data['matches'][$matchId];
+$goals = isset($entry['goals']) && is_array($entry['goals']) ? $entry['goals'] : [];
 
-unset($data['matches'][$matchId]);
+$goals = array_values(array_filter($goals, function ($g) use ($goalId) {
+    return !isset($g['id']) || $g['id'] !== $goalId;
+}));
+
+$homeScore = 0;
+$awayScore = 0;
+foreach ($goals as $g) {
+    if ($g['side'] === 'home') { $homeScore++; } else { $awayScore++; }
+}
+
+$entry['goals'] = $goals;
+$entry['homeScore'] = $homeScore;
+$entry['awayScore'] = $awayScore;
+$entry['updated'] = gmdate('Y-m-d\TH:i:s\Z');
+
+$data['matches'][$matchId] = $entry;
 
 // json_encode() can't tell an empty associative array from an empty
 // list, so an empty $data['matches'] would otherwise serialize as "[]"
@@ -79,7 +95,4 @@ fflush($fh);
 flock($fh, LOCK_UN);
 fclose($fh);
 
-$matchLabel = $existing ? "{$existing['home']} vs {$existing['away']}" : $matchId;
-nkcu_notify_admin_of_change($actingUsername, 'Match Reset', $matchLabel);
-
-respond(200, ['ok' => true]);
+respond(200, ['ok' => true, 'entry' => $entry]);
