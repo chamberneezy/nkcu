@@ -188,6 +188,20 @@ function nkcu_fan_content_state($entry, $lastEvent) {
     ];
 }
 
+/**
+ * Notification body: both clubs on the first line, then extra lines.
+ * iOS shows the title on a single line (long club names got cut off),
+ * while the body wraps — so the clubs and details live here.
+ */
+function nkcu_fan_body($home, $away, array $extraLines = []) {
+    return implode("\n", array_merge(["$home – $away"], array_filter($extraLines, 'strlen')));
+}
+
+function nkcu_fan_formation_line($entry, $lang) {
+    $f = trim((string) ($entry['formation'] ?? ''));
+    return $f === '' ? '' : (($lang === 'hr' ? 'Formacija ' : 'Formation ') . $f);
+}
+
 /** Alert pushes to every device that has $pref on, in its own language. */
 function nkcu_fan_alert_jobs(array $store, $pref, callable $textFor, array $skipTokens = []) {
     $jobs = [];
@@ -227,15 +241,18 @@ function nkcu_fan_on_live_changed($matchId, $entry, $live) {
                     ],
                     'content-state' => nkcu_fan_content_state($entry, nkcu_fan_last_event($entry)),
                     'alert' => [
-                        'title' => $hr ? 'Uživo' : 'Live',
-                        'body' => "$home – $away",
+                        'title' => $hr ? '🔴 Utakmica je uživo' : '🔴 Das Spiel ist live',
+                        'body' => nkcu_fan_body($home, $away, [nkcu_fan_formation_line($entry, $hr ? 'hr' : 'de')]),
                     ],
                     'sound' => 'default',
                 ]], 'liveactivity'];
                 $started[] = $token;
             }
-            $jobs = array_merge($jobs, nkcu_fan_alert_jobs($store, 'live', function ($l) use ($home, $away) {
-                return [$l === 'hr' ? 'Utakmica je uživo' : 'Das Spiel ist live', "$home – $away"];
+            $jobs = array_merge($jobs, nkcu_fan_alert_jobs($store, 'live', function ($l) use ($home, $away, $entry) {
+                return [
+                    $l === 'hr' ? '🔴 Utakmica je uživo' : '🔴 Das Spiel ist live',
+                    nkcu_fan_body($home, $away, [nkcu_fan_formation_line($entry, $l)]),
+                ];
             }, $started));
         } else {
             foreach ($store['activities'][$matchId] ?? [] as $t) {
@@ -265,9 +282,9 @@ function nkcu_fan_on_goal($matchId, $entry, $goal) {
         $event = nkcu_fan_last_event($entry);
 
         $jobs = nkcu_fan_alert_jobs($store, 'goals', function ($l) use ($home, $away, $score, $minute, $scorer, $team, $isOpponent) {
-            $title = ($l === 'hr' ? 'GOL! ' : 'TOR! ') . "$home $score $away";
-            $who = $isOpponent ? $team : "$scorer ($team)";
-            return [$title, "$minute' – $who"];
+            $title = '⚽ ' . ($l === 'hr' ? 'GOL' : 'TOR') . " – $score";
+            $who = $isOpponent ? $team : $scorer;
+            return [$title, nkcu_fan_body($home, $away, ["$minute' $who"])];
         });
         foreach ($store['activities'][$matchId] ?? [] as $t) {
             $jobs[] = [$t, ['aps' => [
@@ -314,10 +331,9 @@ function nkcu_fan_on_lineup_saved($matchId, $entry) {
         $store = nkcu_fan_read_store();
         $home = nkcu_fan_team_name($entry['home'] ?? '');
         $away = nkcu_fan_team_name($entry['away'] ?? '');
-        $formation = (string) ($entry['formation'] ?? '');
-        $jobs = nkcu_fan_alert_jobs($store, 'lineup', function ($l) use ($home, $away, $formation) {
-            $title = $l === 'hr' ? 'Postava je objavljena' : 'Aufstellung ist da';
-            return [$title, "$home – $away" . ($formation !== '' ? " · $formation" : '')];
+        $jobs = nkcu_fan_alert_jobs($store, 'lineup', function ($l) use ($home, $away, $entry) {
+            $title = $l === 'hr' ? '📋 Postava je objavljena' : '📋 Aufstellung ist da';
+            return [$title, nkcu_fan_body($home, $away, [nkcu_fan_formation_line($entry, $l)])];
         });
         nkcu_fan_prune(nkcu_fan_send_batch($jobs));
     });
