@@ -8,6 +8,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/apns.php';
+require_once __DIR__ . '/fan-push.php';
 
 define('ADMIN_PASSWORD', 'croatia1971');
 define('DATA_FILE', dirname(__DIR__) . '/data/live_squad.json');
@@ -77,6 +78,7 @@ if (!isset($data['matches'][$matchId]) || !is_array($data['matches'][$matchId]))
 }
 
 $entry = $data['matches'][$matchId];
+$wasLive = !empty($entry['live']);
 $entry['live'] = $live;
 $entry['updated'] = gmdate('Y-m-d\TH:i:s\Z');
 $data['matches'][$matchId] = $entry;
@@ -96,6 +98,11 @@ fwrite($fh, $json);
 fflush($fh);
 flock($fh, LOCK_UN);
 fclose($fh);
+
+// Fans only hear about an actual change, not a repeated toggle.
+if ($live !== $wasLive) {
+    nkcu_fan_on_live_changed($matchId, $entry, $live);
+}
 
 nkcu_notify_admin_of_change(
     $actingUsername,

@@ -7,6 +7,8 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/fan-push.php';
+
 define('ADMIN_PASSWORD', 'croatia1971');
 define('DATA_FILE', dirname(__DIR__) . '/data/live_squad.json');
 
@@ -94,5 +96,7 @@ fwrite($fh, $json);
 fflush($fh);
 flock($fh, LOCK_UN);
 fclose($fh);
+
+nkcu_fan_on_score_corrected($matchId, $entry);
 
 respond(200, ['ok' => true, 'entry' => $entry]);

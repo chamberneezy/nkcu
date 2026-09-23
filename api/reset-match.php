@@ -8,6 +8,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/apns.php';
+require_once __DIR__ . '/fan-push.php';
 
 define('ADMIN_PASSWORD', 'croatia1971');
 define('DATA_FILE', dirname(__DIR__) . '/data/live_squad.json');
@@ -78,6 +79,8 @@ fwrite($fh, $json);
 fflush($fh);
 flock($fh, LOCK_UN);
 fclose($fh);
+
+nkcu_fan_on_match_reset($matchId);
 
 $matchLabel = $existing ? "{$existing['home']} vs {$existing['away']}" : $matchId;
 nkcu_notify_admin_of_change($actingUsername, 'Match Reset', $matchLabel);

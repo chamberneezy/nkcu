@@ -7,6 +7,9 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/apns.php';
+require_once __DIR__ . '/fan-push.php';
+
 define('ADMIN_PASSWORD', 'croatia1971');
 define('DATA_FILE', dirname(__DIR__) . '/data/live_squad.json');
 
@@ -28,6 +31,12 @@ if (!is_array($body)) {
 if (!isset($body['password']) || !hash_equals(ADMIN_PASSWORD, (string) $body['password'])) {
     respond(401, ['ok' => false, 'error' => 'Falsches Passwort']);
 }
+
+// Optional: the iOS app also sends its own per-user session token
+// alongside the shared password, purely so we know WHO made this
+// change (admin.html has no per-user login, so it never sends one —
+// treated as "unknown actor" by nkcu_notify_admin_of_change).
+$actingUsername = isset($body['token']) ? nkcu_verify_session((string) $body['token']) : null;
 
 $matchId = isset($body['matchId']) ? trim((string) $body['matchId']) : '';
 $date = isset($body['date']) ? (string) $body['date'] : '';
@@ -85,7 +94,8 @@ if (!isset($data['matches'][$matchId]) || !is_array($data['matches'][$matchId]))
 
 $entry = $data['matches'][$matchId];
 $goals = isset($entry['goals']) && is_array($entry['goals']) ? $entry['goals'] : [];
-$goals[] = ['id' => uniqid('g_', true), 'minute' => $minute, 'scorer' => $scorer, 'side' => $side];
+$newGoal = ['id' => uniqid('g_', true), 'minute' => $minute, 'scorer' => $scorer, 'side' => $side];
+$goals[] = $newGoal;
 usort($goals, function ($a, $b) { return $a['minute'] <=> $b['minute']; });
 
 $homeScore = 0;
@@ -116,5 +126,14 @@ fwrite($fh, $json);
 fflush($fh);
 flock($fh, LOCK_UN);
 fclose($fh);
+
+nkcu_fan_on_goal($matchId, $entry, $newGoal);
+
+$isUs = (bool) preg_match('/\buzwil\b/i', $side === 'home' ? $home : $away);
+nkcu_notify_admin_of_change(
+    $actingUsername,
+    'Goal Scored ⚽',
+    ($isUs ? "$scorer scored" : "$scorer scored for the opponent") . " in minute $minute ($home vs $away)."
+);
 
 respond(200, ['ok' => true, 'entry' => $entry]);
