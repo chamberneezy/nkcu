@@ -14,3 +14,7 @@ private/
 
 # Local table updater (scraper + FTP credentials + logs) — local only, never commit
 local-table-updater/
+
+# macOS / editor clutter
+.DS_Store
+.vscode/
