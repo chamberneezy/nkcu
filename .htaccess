@@ -18,6 +18,10 @@
 <Files "fan_devices.json">
     Require all denied
 </Files>
+# Retired web admin (replaced by the admin iOS app) - kept, not reachable.
+<Files "admin.html">
+    Require all denied
+</Files>
 <Files ".env">
     Require all denied
 </Files>

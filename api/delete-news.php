@@ -6,9 +6,10 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/auth-lib.php';
+
 require_once __DIR__ . '/apns.php';
 
-define('ADMIN_PASSWORD', 'croatia1971');
 define('DATA_FILE', dirname(__DIR__) . '/data/news.json');
 
 function respond($status, $payload) {
@@ -26,11 +27,9 @@ if (!is_array($body)) {
     respond(400, ['ok' => false, 'error' => 'Invalid JSON body']);
 }
 
-if (!isset($body['password']) || !hash_equals(ADMIN_PASSWORD, (string) $body['password'])) {
-    respond(401, ['ok' => false, 'error' => 'Falsches Passwort']);
-}
-
-$actingUsername = isset($body['token']) ? nkcu_verify_session((string) $body['token']) : null;
+// Only a logged-in admin-app user (their own session token); there is
+// no shared password any more. See nkcu_require_session in auth-lib.php.
+$actingUsername = nkcu_require_session($body['token'] ?? null);
 
 $id = isset($body['id']) ? trim((string) $body['id']) : '';
 if ($id === '') {

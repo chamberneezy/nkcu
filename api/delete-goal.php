@@ -7,9 +7,10 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/auth-lib.php';
+
 require_once __DIR__ . '/fan-push.php';
 
-define('ADMIN_PASSWORD', 'croatia1971');
 define('DATA_FILE', dirname(__DIR__) . '/data/live_squad.json');
 
 function respond($status, $payload) {
@@ -27,9 +28,9 @@ if (!is_array($body)) {
     respond(400, ['ok' => false, 'error' => 'Invalid JSON body']);
 }
 
-if (!isset($body['password']) || !hash_equals(ADMIN_PASSWORD, (string) $body['password'])) {
-    respond(401, ['ok' => false, 'error' => 'Falsches Passwort']);
-}
+// Only a logged-in admin-app user (their own session token); there is
+// no shared password any more. See nkcu_require_session in auth-lib.php.
+$actingUsername = nkcu_require_session($body['token'] ?? null);
 
 $matchId = isset($body['matchId']) ? trim((string) $body['matchId']) : '';
 $goalId = isset($body['goalId']) ? trim((string) $body['goalId']) : '';

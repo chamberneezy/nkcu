@@ -1,9 +1,8 @@
 <?php
 /**
- * Shared helpers for the per-user auth system used by future endpoints
- * (login.php, create-user.php, and eventually the iOS app's write
- * requests). Not wired into any of the existing admin.html endpoints —
- * those still use the single shared ADMIN_PASSWORD exactly as before.
+ * Per-user auth for the admin iOS app: login, sessions, and the gate
+ * every write endpoint uses (nkcu_require_session / nkcu_require_admin).
+ * There is no shared admin password; admin.html is retired.
  *
  * Not a public endpoint: including this file does nothing by itself,
  * but guard against it being requested directly anyway.
@@ -169,6 +168,52 @@ function nkcu_verify_session($token) {
         return null;
     }
     return $session['username'];
+}
+
+/**
+ * Accounts allowed to manage other accounts (create-user.php,
+ * set-user-blocked.php). Everyone else can only run the match console
+ * and write news.
+ */
+define('NKCU_ADMIN_USERNAMES', ['mbreljak']);
+
+/**
+ * The only gate for every write endpoint: the caller's own session token
+ * from the admin iOS app (sent as "token" in the JSON body). There is no
+ * shared password any more. Responds 401 (no/expired session) or 403
+ * (blocked account) and exits; on success returns the username and
+ * slides the session's expiry forward, so an account in regular use is
+ * never logged out mid-match; only a login unused for the full TTL expires.
+ */
+function nkcu_require_session($token) {
+    $username = nkcu_verify_session($token);
+    if ($username === null) {
+        nkcu_auth_respond(401, ['ok' => false, 'error' => 'Session expired. Please log in again.']);
+    }
+    $user = nkcu_find_user($username);
+    if ($user === null) {
+        nkcu_auth_respond(401, ['ok' => false, 'error' => 'Session expired. Please log in again.']);
+    }
+    if (!empty($user['isBlocked'])) {
+        nkcu_auth_respond(403, ['ok' => false, 'error' => 'This account is blocked.']);
+    }
+    $expiresAt = gmdate('Y-m-d\TH:i:s\Z', time() + NKCU_SESSION_TTL_SECONDS);
+    nkcu_json_update(NKCU_SESSIONS_FILE, ['sessions' => new stdClass()], function ($data) use ($token, $expiresAt) {
+        if (isset($data['sessions'][$token])) {
+            $data['sessions'][$token]['expiresAt'] = $expiresAt;
+        }
+        return $data;
+    });
+    return $username;
+}
+
+/** nkcu_require_session() plus: must be one of NKCU_ADMIN_USERNAMES. */
+function nkcu_require_admin($token) {
+    $username = nkcu_require_session($token);
+    if (!in_array($username, NKCU_ADMIN_USERNAMES, true)) {
+        nkcu_auth_respond(403, ['ok' => false, 'error' => 'Only an admin can do this.']);
+    }
+    return $username;
 }
 
 /**
