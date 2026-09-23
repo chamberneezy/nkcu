@@ -6616,3 +6616,58 @@ body.modal-open .bottom-nav {
   }
   .news-modal-content { padding: 20px 14px 24px; }
 }
+
+/* ══════════════════════════════════════════════════════
+   HERO HEIGHT — the video fills the whole first screen
+   Desktop: full viewport. Phones/tablets: everything above the fixed
+   bottom nav, so no strip of the next section peeks in. The white
+   diagonal scales with the screen width (it used to be a fixed 180px,
+   which covered a fifth of the video on phones). A small chevron
+   hints that the page continues. Placed last so it wins over the older
+   85svh / 90svh rules.
+══════════════════════════════════════════════════════ */
+.hero {
+  --hero-cut: clamp(56px, 9vw, 140px);
+  min-height: 100vh;
+  min-height: 100svh;
+}
+.hero-diagonal { height: var(--hero-cut); }
+.hero-content { padding-bottom: calc(var(--hero-cut) + 40px); }
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: calc(100vh - 64px);
+    min-height: calc(100svh - 64px - env(safe-area-inset-bottom));
+  }
+}
+
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  /* sits just above the diagonal, which is ~70% of its height at the centre */
+  bottom: calc(var(--hero-cut) * 0.7 + 14px);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, .85);
+  border-radius: 50%;
+  transition: color .2s, background .2s;
+}
+.hero-scroll:hover,
+.hero-scroll:focus-visible { color: var(--white); background: rgba(255, 255, 255, .12); }
+.hero-scroll svg { width: 26px; height: 26px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-scroll svg { animation: hero-scroll-bob 2.2s ease-in-out infinite; }
+}
+@keyframes hero-scroll-bob {
+  0%, 100% { transform: translateY(0); opacity: .85; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+/* Very short screens (landscape phones): no room for the hint */
+@media (max-height: 520px) {
+  .hero-scroll { display: none; }
+}

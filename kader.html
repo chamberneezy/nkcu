@@ -271,10 +271,11 @@
       opacity: 1;
       visibility: visible;
     }
+    .kp-card--coach { --coach-panel: 64%; }
     .kp-card--coach .kp-back {
       inset: auto 0 0 0;
-      height: 40%;
-      background: linear-gradient(to bottom, rgba(0, 53, 128, 0) 0%, rgba(0, 53, 128, 0.85) 35%, #003580 65%);
+      height: var(--coach-panel);
+      background: linear-gradient(to bottom, rgba(0, 53, 128, 0) 0%, rgba(0, 53, 128, 0.88) 22%, #003580 42%);
       border: none;
       opacity: 1;
       visibility: visible;
@@ -298,7 +299,7 @@
       transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .kp-card--coach.is-flipped .kp-front-name {
-      bottom: calc(40% - 30px);
+      bottom: calc(var(--coach-panel) - 42px);
       z-index: 5;
       flex-direction: row;
       justify-content: center;
@@ -320,24 +321,31 @@
     }
     .kp-card--coach .kp-back-header {
       background: transparent;
-      padding: 6px 14px 2px;
+      padding: 14px 12px 0;
     }
     .kp-card--coach .kp-info-grid {
-      padding: 4px 12px 8px;
-      gap: 4px;
+      flex: 0 0 auto;
+      padding: 12px 14px 14px;
+      gap: 7px;
     }
     .kp-card--coach .kp-info-box {
       background: rgba(255, 255, 255, 0.14);
-      padding: 5px 9px;
+      padding: 9px 12px;
     }
     .kp-card--coach .kp-info-label {
-      color: rgba(255, 255, 255, 0.65);
-      font-weight: 500;
+      font-size: 0.64rem;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 600;
     }
     .kp-card--coach .kp-info-value {
+      font-size: 0.86rem;
       color: #fff;
-      font-weight: 500;
+      font-weight: 600;
     }
+    /* A long value (club + fan-group crests) wraps onto its own line
+       instead of being clipped on narrow cards. */
+    .kp-card--coach .kp-info-box { flex-wrap: wrap; row-gap: 4px; }
+    .kp-card--coach .kp-info-value--club { flex-shrink: 0; margin-left: auto; }
 
     /* Gentle "tap me" pulse on a couple of coach names, so users notice
        the photo is tappable. Stops permanently once that card has been
@@ -358,8 +366,8 @@
     .team-photo-img { width: 100%; display: block; }
 
     @media (max-width: 1100px) { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 800px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(1, 1fr); gap: 12px; } }
+    @media (max-width: 800px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(2, 1fr); } .kp-card--coach { --coach-panel: 50%; } }
+    @media (max-width: 560px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(1, 1fr); gap: 12px; } .kp-card--coach { --coach-panel: 46%; } }
   </style>
 </head>
 

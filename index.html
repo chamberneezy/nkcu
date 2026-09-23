@@ -214,6 +214,9 @@
         </div>
       </div>
       <div class="hero-cut" aria-hidden="true"></div>
+      <a href="#saison" class="hero-scroll" aria-label="Weiter nach unten" data-de-aria="Weiter nach unten" data-hr-aria="Dalje prema dolje">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
     </section>
 
     <!-- ═══════ NEWS & RESULTATE ═══════ -->
@@ -688,6 +691,11 @@
           } else if (el.tagName === 'A' && el.querySelectorAll('svg').length === 0) {
             el.textContent = txt;
           }
+        });
+
+        // Screen-reader labels on icon-only controls
+        document.querySelectorAll('[data-de-aria][data-hr-aria]').forEach(function (el) {
+          el.setAttribute('aria-label', el.getAttribute('data-' + lang + '-aria'));
         });
 
         // Placeholders
