@@ -1,6 +1,10 @@
 // GA4 tracking — shared across every page of this site so there's one place to update the
 // Measurement ID or the default parameters, instead of duplicating the snippet per page.
 //
+// Named site.js, not analytics.js: many ad-block filter lists block ANY file literally named
+// analytics.js by filename alone, regardless of domain — confirmed on the live testing branch
+// (window.dataLayer never even got created for blocked visitors). Renaming is the actual fix.
+//
 // This is the `redesign` branch — not yet published to the live site. Same GA4 property/
 // Measurement ID as the current live site (this is the same "website" surface, just its next
 // version), so once this branch goes live it picks up right where the current site's data left
