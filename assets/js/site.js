@@ -1,6 +1,14 @@
 // GA4 tracking — shared across every page of this site so there's one place to update the
 // Measurement ID or the default parameters, instead of duplicating the snippet per page.
 //
+// Named site.js, not analytics.js: many ad-block filter lists block ANY file literally named
+// analytics.js by filename alone, regardless of domain — that's a first-party, same-origin file
+// under this site's own path, not googletagmanager.com, and it was still getting blocked outright
+// (window.dataLayer never even got created). Renaming it is the actual fix; the external
+// googletagmanager.com/gtag/js load below is still blocked by most ad blockers as designed (that
+// part is a universal GA4 limitation, not something fixable from this side) — but this file's own
+// dataLayer bootstrap now survives that.
+//
 // Part of the same GA4 property as the club's iOS/Android apps (see the internal
 // "GA4 Tracking Proposal — NKCU" doc, gitignored at docs/tracking-proposal.html) — app_name and
 // platform are what keeps this site's events distinguishable from those apps in reports.
