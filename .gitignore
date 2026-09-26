@@ -8,6 +8,9 @@ data/sessions.json
 # Local-only iOS build prompt/notes — not part of the website.
 docs/ios.txt
 
+# Internal GA4 tracking proposal — local reference only, never deployed.
+docs/tracking-proposal.html
+
 # APNs push notification private key — never commit, this repo is public.
 private/
 *.p8

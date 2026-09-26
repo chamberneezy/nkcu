@@ -1,4 +1,4 @@
-const CACHE = 'nk-croatia-v13';
+const CACHE = 'nk-croatia-v14';
 const ASSETS = [
   '/',
   '/index.html',

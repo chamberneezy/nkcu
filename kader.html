@@ -2,6 +2,7 @@
 <html lang="de" data-lang="de">
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/js/analytics.js"></script>
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
@@ -1162,7 +1163,7 @@
   (function(){
     var currentLang='de';
     function applyLang(lang){currentLang=lang;document.documentElement.setAttribute('data-lang',lang);document.getElementById('langDe').classList.toggle('active',lang==='de');document.getElementById('langHr').classList.toggle('active',lang==='hr');document.querySelectorAll('[data-de][data-hr]').forEach(function(el){var txt=el.getAttribute('data-'+lang);if(txt===null)return;if(el.children.length===0){el.textContent=txt;}else if(el.tagName==='A'&&el.querySelectorAll('svg').length===0){el.textContent=txt;}});}
-    document.getElementById('langToggle').addEventListener('click',function(){applyLang(currentLang==='de'?'hr':'de');});
+    document.getElementById('langToggle').addEventListener('click',function(){var newLang=currentLang==='de'?'hr':'de';gtag('event','language_switch',{language:newLang});applyLang(newLang);});
     applyLang('de');
     var burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
     burger.addEventListener('click',function(){var open=mm.classList.toggle('open');burger.classList.toggle('open',open);burger.setAttribute('aria-expanded',String(open));});
@@ -1173,6 +1174,13 @@
   // Flip cards — event delegation, bulletproof
   function kpOpenCard(card) {
     if (!card) return;
+    var nameEl = card.querySelector('.kp-front-name');
+    if (nameEl) {
+      var first = nameEl.querySelector('.fn-first');
+      var last = nameEl.querySelector('.fn-last');
+      var playerId = ((first ? first.textContent : '') + ' ' + (last ? last.textContent : '')).trim();
+      if (playerId) gtag('event', 'view_squad_player', { player_id: playerId });
+    }
     card.classList.add('is-flipped');
     // Tap-me pulse has done its job once the card's been opened — stop it.
     var pulsingName = card.querySelector('.kp-pulse');

@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/js/analytics.js"></script>
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
 
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -768,7 +769,9 @@
       });
 
       document.getElementById('langToggle').addEventListener('click', function () {
-        applyLang(currentLang === 'de' ? 'hr' : 'de');
+        var newLang = currentLang === 'de' ? 'hr' : 'de';
+        gtag('event', 'language_switch', { language: newLang });
+        applyLang(newLang);
       });
 
       /* ── Burger ────────────────────────────────────────── */
@@ -805,6 +808,8 @@
         var title = card.getAttribute('data-' + lang + '-title') || '';
         var date = card.getAttribute('data-date') || '';
         var text = card.getAttribute('data-' + lang + '-text') || '';
+
+        gtag('event', 'view_news_article', { news_id: card.getAttribute('data-id') || '' });
 
         modalMeta.innerHTML = '<span class="nm-tag">' + tag + '</span><span class="nm-date">' + date + '</span>';
         modalTitle.textContent = title;
@@ -959,6 +964,7 @@
           if (company) bodyLines.push('Firma: ' + company);
           bodyLines.push('Grund: ' + reason, '', msg);
           var body = encodeURIComponent(bodyLines.join('\n'));
+          gtag('event', 'generate_lead', { reason: reason });
           window.location.href = 'mailto:info@croatia-uzwil.ch?subject=' + subject + '&body=' + body;
         });
       }
@@ -1038,6 +1044,13 @@
       function tsOpenNextMatchModal(next, entry, label) {
         var overlay = document.getElementById('nextMatchModalOverlay');
         if (!overlay || !next) return;
+
+        gtag('event', 'view_match', {
+          match_id: (next.date + '__' + next.home + '__' + next.away).replace(/[^a-zA-Z0-9]+/g, '-'),
+          home_team: next.home,
+          away_team: next.away,
+          is_live: !!(entry && entry.live),
+        });
 
         var labelEl = document.getElementById('nextMatchModalLabel');
         if (labelEl) {
@@ -1789,6 +1802,12 @@
               var entry = saved[lsMatchId(next)];
               lsRenderCard(next, entry);
               lsRenderPitch(entry);
+              gtag('event', 'view_match', {
+                match_id: lsMatchId(next),
+                home_team: next.home,
+                away_team: next.away,
+                is_live: true,
+              });
             });
           });
 
