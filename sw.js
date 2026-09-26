@@ -1,12 +1,17 @@
-const CACHE = 'nk-croatia-v3';
+const CACHE = 'nk-croatia-v15';
 const ASSETS = [
   '/',
   '/index.html',
-  '/style.css',
+  '/saison.html',
+  '/news.html',
+  '/kader.html',
+  '/sponsoring.html',
+  '/shop.html',
+  '/assets/css/style.css',
   '/logo.png',
   '/favicon.ico',
   '/apple-touch-icon.png',
-  '/hero-video.mp4'
+  '/assets/video/hero-video.mp4'
 ];
 
 self.addEventListener('install', e => {
@@ -25,12 +30,6 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    fetch(e.request).then(res => {
-      if (res && res.ok && e.request.method === 'GET') {
-        var resClone = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, resClone));
-      }
-      return res;
-    }).catch(() => caches.match(e.request).then(cached => cached || caches.match('/index.html')))
+    caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => caches.match('/index.html')))
   );
 });

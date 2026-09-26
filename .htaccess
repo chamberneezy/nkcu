@@ -1,0 +1,54 @@
+# ── Security hardening ──────────────────────────────────────────────
+# Added 2026-09-14: this file didn't exist before, so data/users.json
+# and data/sessions.json (usernames, bcrypt password hashes, and live
+# per-user session tokens) were publicly downloadable by anyone who
+# knew the URL. Everything below blocks direct access to files that
+# should only ever be read server-side by PHP, or shouldn't be in a
+# web-servable directory at all. It does NOT touch the public data
+# files the site itself fetches client-side (data/news.json,
+# data/spiele.json, data/uzwil4.json, data/live_squad.json) — those
+# stay exactly as accessible as before.
+
+<Files "users.json">
+    Require all denied
+</Files>
+<Files "sessions.json">
+    Require all denied
+</Files>
+<Files "fan_devices.json">
+    Require all denied
+</Files>
+# Retired web admin (replaced by the admin iOS app) - kept, not reachable.
+<Files "admin.html">
+    Require all denied
+</Files>
+<Files ".env">
+    Require all denied
+</Files>
+<FilesMatch "\.p8$">
+    Require all denied
+</FilesMatch>
+<Files "ios.txt">
+    Require all denied
+</Files>
+<FilesMatch "\.zip$">
+    Require all denied
+</FilesMatch>
+
+# No browsing folder contents anywhere on this site.
+Options -Indexes
+
+# Block any .git metadata that ends up inside the web root.
+RedirectMatch 404 ^/\.git/
+
+# ── Project layout (2026-09) ────────────────────────────────────────
+# All PHP now lives in /api. The public URLs that the website admin page
+# and the iOS/Android apps already call (e.g. /save-news.php) are kept
+# working by rewriting them to /api/<name>.php. Do NOT add a new endpoint
+# only in /api without also adding it to this list if apps need the old
+# root-style URL. apns.php / auth-lib.php are libraries and stay unreachable.
+RewriteEngine On
+RewriteRule ^(save-news|delete-news|save-goal|delete-goal|save-squad|set-live|reset-match|login|change-password|create-user|mark-welcome-seen|register-device|session-status|set-user-blocked|register-fan-device)\.php$ api/$1.php [L]
+
+# Internal docs / local tooling must never be served.
+RedirectMatch 404 ^/(docs|local-table-updater)/
