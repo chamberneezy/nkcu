@@ -16,7 +16,11 @@ var GA_MEASUREMENT_ID = 'G-SBLCLYPJ1C';
 var appName = window.NKCU_APP_NAME || 'website';
 
 window.dataLayer = window.dataLayer || [];
-function gtag() { dataLayer.push(arguments); }
+// Google's own base gtag.js snippet does `dataLayer.push(arguments)` — functionally fine (gtag.js
+// reads it positionally either way), but an `arguments` object serializes to `{"0":...,"1":...}`
+// instead of a real array, which looks broken when someone inspects `dataLayer` directly. Pushing
+// a real array instead keeps identical behavior and reads as `["event","view_match",{...}]`.
+function gtag() { dataLayer.push(Array.prototype.slice.call(arguments)); }
 
 gtag('js', new Date());
 gtag('set', 'app_name', appName);
