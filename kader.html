@@ -78,8 +78,6 @@
     }
     .kp-front { background: #f0f0f0; opacity: 1; visibility: visible; }
     .kp-back  { opacity: 0; visibility: hidden; }
-    .kp-card.is-flipped .kp-front { opacity: 0; visibility: hidden; }
-    .kp-card.is-flipped .kp-back  { opacity: 1; visibility: visible; }
     .kp-photo {
       width: 100%;
       height: 100%;
@@ -243,16 +241,17 @@
     }
     .kp-info-value--club { display: inline-flex; align-items: center; gap: 5px; }
     .kp-club-icon { height: 16px; width: auto; flex-shrink: 0; display: block; }
+    .kp-card--patronat { --panel-extra: 40px; }
     .kp-patronat-back {
-      padding: 10px 14px;
-      border-top: 1px solid #f0f0f0;
+      padding: 10px 14px 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
       flex-shrink: 0;
     }
     .kp-patronat-back a {
       font-family: 'Satoshi', sans-serif;
       font-size: 0.68rem;
       font-weight: 700;
-      color: #CC0000;
+      color: #fff;
       text-decoration: none;
       display: block;
       text-align: center;
@@ -263,17 +262,18 @@
       grid-template-columns: repeat(4, 1fr);
     }
 
-    /* Coach cards (Trainerstab): tapping the photo reveals the info as a
-       panel sliding up from the bottom, over the photo, instead of a full
-       front/back flip — the photo stays visible the whole time. */
-    .kp-card--coach.is-flipped .kp-front {
+    /* Every card (players and Trainerstab): tapping the photo reveals the
+       info as a panel sliding up from the bottom, over the photo, instead of
+       a full front/back flip — the photo stays visible the whole time. Same
+       panel as the fan apps. */
+    .kp-card.is-flipped .kp-front {
       opacity: 1;
       visibility: visible;
     }
-    .kp-card--coach { --coach-panel: 64%; }
-    .kp-card--coach .kp-back {
+    .kp-card { --panel: 64%; }
+    .kp-card .kp-back {
       inset: auto 0 0 0;
-      height: var(--coach-panel);
+      height: calc(var(--panel) + var(--panel-extra, 0px));
       background: linear-gradient(to bottom, rgba(0, 53, 128, 0) 0%, rgba(0, 53, 128, 0.88) 22%, #003580 42%);
       border: none;
       opacity: 1;
@@ -284,21 +284,21 @@
       z-index: 3;
       cursor: default;
     }
-    .kp-card--coach.is-flipped .kp-back {
+    .kp-card.is-flipped .kp-back {
       transform: translateY(0);
     }
     /* On open, the two-row name (first name over surname) slides up from the
        bottom of the photo onto the info panel's header and re-lays itself out
        as one centred row: first name left, surname right. The panel's own
        copy of the name is hidden so it is never shown twice. */
-    .kp-card--coach .kp-front-name {
+    .kp-card .kp-front-name {
       display: flex;
       flex-direction: column;
       align-items: center;
       transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .kp-card--coach.is-flipped .kp-front-name {
-      bottom: calc(var(--coach-panel) - 42px);
+    .kp-card.is-flipped .kp-front-name {
+      bottom: calc(var(--panel) + var(--panel-extra, 0px) - 42px);
       z-index: 5;
       flex-direction: row;
       justify-content: center;
@@ -307,44 +307,44 @@
       padding: 0 40px;
       pointer-events: none;
     }
-    .kp-card--coach.is-flipped .kp-front-name .fn-first {
+    .kp-card.is-flipped .kp-front-name .fn-first {
       font-size: 0.78rem;
       color: #fff;
     }
-    .kp-card--coach.is-flipped .kp-front-name .fn-last {
+    .kp-card.is-flipped .kp-front-name .fn-last {
       font-size: 0.95rem;
     }
-    .kp-card--coach .kp-back-name { display: none; }
-    .kp-card--coach .kp-back-header {
+    .kp-card .kp-back-name { display: none; }
+    .kp-card .kp-back-header {
       justify-content: flex-end;
     }
-    .kp-card--coach .kp-back-header {
+    .kp-card .kp-back-header {
       background: transparent;
       padding: 14px 12px 0;
     }
-    .kp-card--coach .kp-info-grid {
+    .kp-card .kp-info-grid {
       flex: 0 0 auto;
       padding: 12px 14px 14px;
       gap: 7px;
     }
-    .kp-card--coach .kp-info-box {
+    .kp-card .kp-info-box {
       background: rgba(255, 255, 255, 0.14);
       padding: 9px 12px;
     }
-    .kp-card--coach .kp-info-label {
+    .kp-card .kp-info-label {
       font-size: 0.64rem;
       color: rgba(255, 255, 255, 0.75);
       font-weight: 600;
     }
-    .kp-card--coach .kp-info-value {
+    .kp-card .kp-info-value {
       font-size: 0.86rem;
       color: #fff;
       font-weight: 600;
     }
     /* A long value (club + fan-group crests) wraps onto its own line
        instead of being clipped on narrow cards. */
-    .kp-card--coach .kp-info-box { flex-wrap: wrap; row-gap: 4px; }
-    .kp-card--coach .kp-info-value--club { flex-shrink: 0; margin-left: auto; }
+    .kp-card .kp-info-box { flex-wrap: wrap; row-gap: 4px; }
+    .kp-card .kp-info-value--club { flex-shrink: 0; margin-left: auto; }
 
     /* Gentle "tap me" pulse on a couple of coach names, so users notice
        the photo is tappable. Stops permanently once that card has been
@@ -365,8 +365,8 @@
     .team-photo-img { width: 100%; display: block; }
 
     @media (max-width: 1100px) { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 800px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(2, 1fr); } .kp-card--coach { --coach-panel: 50%; } }
-    @media (max-width: 560px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(1, 1fr); gap: 12px; } .kp-card--coach { --coach-panel: 46%; } }
+    @media (max-width: 800px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(2, 1fr); } .kp-card { --panel: 50%; } }
+    @media (max-width: 560px)  { .kader-grid, .kader-grid--trainerstab { grid-template-columns: repeat(1, 1fr); gap: 12px; } .kp-card { --panel: 46%; } }
   </style>
 </head>
 
@@ -530,7 +530,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Alessio Specchia</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat" data-de="Spielerpatronat übernehmen →" data-hr="Preuzmi pokroviteljstvo →">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -545,7 +545,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Robert Vičić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -560,7 +560,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Damijan Brkljača</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">—</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">—</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -587,7 +587,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Antonio Marić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -602,7 +602,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Bruno Pelivani</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2004</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2004</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -617,7 +617,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Adel Rozajac</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -632,7 +632,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Anis Din Ramdedović</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2007</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2007</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -647,7 +647,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Luka Gojević</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -662,7 +662,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Kristijan Katičić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -677,7 +677,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Martin Breljak</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Kroatien</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1991</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Kroatien</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1991</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -692,7 +692,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Ivan Begić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Kroatien</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2004</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Kroatien</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2004</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -707,7 +707,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Denis Ajrizi</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1999</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1999</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -722,7 +722,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Silvio Bahorić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -737,7 +737,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Ivan Martić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1990</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1990</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -763,7 +763,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Danijel Jozić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -778,7 +778,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Xhevat Hasallari</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1991</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1991</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -793,7 +793,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Noel Gonzalez</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -808,7 +808,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Henok Haileselassie</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2005</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2005</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -823,7 +823,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Matej Gojević</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -838,7 +838,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Saverio Cucinelli</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2002</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2002</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -853,7 +853,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Adrian Bahorić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1997</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -868,7 +868,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Stanko Culanić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1996</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1996</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -883,7 +883,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Mateo Matić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2005</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2005</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -898,7 +898,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Ivan Schwab</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1999</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1999</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -913,7 +913,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Isak Beka</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2001</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2001</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -939,7 +939,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Robertino Bulić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1995</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1995</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -954,7 +954,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Dionis Uka</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1995</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1995</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -969,7 +969,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Davor Radoš</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2001</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2001</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -984,7 +984,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Hazir Hysenaj</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2000</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -999,7 +999,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Kristijan Perić</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">2003</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -1014,7 +1014,7 @@
                 </div>
                 <div class="kp-back">
                   <div class="kp-back-header"><div class="kp-back-name">Stefan Ivanković</div><button class="kp-back-close kp-close-trigger" aria-label="Schliessen"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1996</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div><div class="kp-patronat-back"><a href="sponsoring.html#patronat">Spielerpatronat übernehmen →</a></div>
+                  <div class="kp-info-grid"><div class="kp-info-box"><div class="kp-info-label">Nationalität</div><div class="kp-info-value">Schweiz</div></div><div class="kp-info-box"><div class="kp-info-label">Jahrgang</div><div class="kp-info-value">1996</div></div><div class="kp-info-box"><div class="kp-info-label">Lieblingsverein</div><div class="kp-info-value">—</div></div></div>
                 </div>
               </div>
             </div>
@@ -1131,7 +1131,7 @@
     // Spielerpatronat row on player cards (not coaches) — off for now; set to true to bring it back.
     // Same switch in the fan apps: PlayerCardView.showsPatronage (iOS), SHOW_PLAYER_PATRONAGE (Android).
     var SHOW_PATRONAT=false;
-    if(SHOW_PATRONAT){document.querySelectorAll('.kp-card:not(.kp-card--coach) .kp-back').forEach(function(back){var row=document.createElement('div');row.className='kp-patronat-back';row.innerHTML='<a href="sponsoring.html#kontakt" data-de="Spielerpatronat übernehmen →" data-hr="Preuzmi pokroviteljstvo →">Spielerpatronat übernehmen →</a>';back.appendChild(row);});}
+    if(SHOW_PATRONAT){document.querySelectorAll('.kp-card:not(.kp-card--coach) .kp-back').forEach(function(back){back.closest('.kp-card').classList.add('kp-card--patronat');var row=document.createElement('div');row.className='kp-patronat-back';row.innerHTML='<a href="sponsoring.html#kontakt" data-de="Spielerpatronat übernehmen →" data-hr="Preuzmi pokroviteljstvo →">Spielerpatronat übernehmen →</a>';back.appendChild(row);});}
     var currentLang='de';
     function applyLang(lang){currentLang=lang;document.documentElement.setAttribute('data-lang',lang);document.getElementById('langDe').classList.toggle('active',lang==='de');document.getElementById('langHr').classList.toggle('active',lang==='hr');document.querySelectorAll('[data-de][data-hr]').forEach(function(el){var txt=el.getAttribute('data-'+lang);if(txt===null)return;if(el.children.length===0){el.textContent=txt;}else if(el.tagName==='A'&&el.querySelectorAll('svg').length===0){el.textContent=txt;}});}
     document.getElementById('langToggle').addEventListener('click',function(){var newLang=currentLang==='de'?'hr':'de';gtag('event','language_switch',{language:newLang});applyLang(newLang);});
@@ -1174,9 +1174,9 @@
       return;
     }
     // Coach cards: the whole photo is tappable, not just the small button
-    var coachFront = e.target.closest('.kp-card--coach .kp-front');
-    if (coachFront) {
-      kpOpenCard(coachFront.closest('.kp-card'));
+    var front = e.target.closest('.kp-card .kp-front');
+    if (front) {
+      kpOpenCard(front.closest('.kp-card'));
       return;
     }
   });
