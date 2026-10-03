@@ -14,6 +14,15 @@
 // platform are what keeps this site's events distinguishable from those apps in reports.
 //
 // Web data stream for this property (GA4 Admin -> Data Streams -> Web -> NK Croatia Uzwil).
+// Where the pages read data/*.json from. On the live site that's its own data/ folder; anywhere
+// else (GitHub Pages preview, localhost) it's the live site's, so previews always show the real
+// results, table and news instead of the copies committed to git. Goes through data-feed.php,
+// which adds the CORS header (nginx serves data/*.json directly and ignores .htaccess).
+// admin.html keeps reading its local data/ on purpose.
+window.NKCU_DATA = /(^|\.)croatia-uzwil\.ch$/.test(location.hostname)
+  ? 'data/'
+  : 'https://www.croatia-uzwil.ch/data-feed.php/';
+
 var GA_MEASUREMENT_ID = 'G-SBLCLYPJ1C';
 
 // A page sets this before loading this script to override the default app_name, e.g. admin.html:

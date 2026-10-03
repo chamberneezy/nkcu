@@ -415,7 +415,7 @@
     }
 
     function fetchNews() {
-      fetch('data/news.json?_=' + Date.now())
+      fetch(window.NKCU_DATA + 'news.json?_=' + Date.now())
         .then(function (r) { return r.ok ? r.json() : { items: [] }; })
         .then(function (data) {
           var items = Array.isArray(data.items) ? data.items.slice() : [];

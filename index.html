@@ -63,6 +63,8 @@
   .mc-team { display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; }
   .mc-team-logo { width:52px; height:52px; object-fit:contain; border-radius:10px; padding:4px; }
   .mc-team-name { font-family:'Clash Display',sans-serif; font-size:0.75rem; font-weight:700; line-height:1.2; max-width:90px; }
+  .mc-live-pulse { animation: mcLivePulse 1.6s ease-in-out infinite; }
+  @keyframes mcLivePulse { 50% { opacity: 0.3; } }
   .mc-score-box { font-family:'Clash Display',sans-serif; font-size:2.2rem; font-weight:700; line-height:1; color:#0A0A0A; display:flex; align-items:center; gap:6px; }
   .mc-result-pill { display:inline-flex; align-items:center; gap:4px; font-family:'Satoshi',sans-serif; font-size:0.65rem; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:3px 9px; border-radius:4px; background:rgba(22,160,80,0.1); color:#16a050; }
   .mc-card-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 20px 16px; flex-wrap:wrap; }
@@ -236,8 +238,8 @@
         <div class="mc-matches-row" id="mcMatchesRow">
           <div class="mc-card" id="mcNextCard" style="background:#fff8f8;border:1.5px solid #f5c0c0;display:none;">
             <div class="mc-card-header" style="background:transparent;">
-              <span class="mc-card-header-dot" style="background:#CC0000;"></span>
-              <span class="mc-card-header-label" style="color:#CC0000;" data-de="Nächstes Spiel" data-hr="Sljedeća utakmica">Nächstes Spiel</span>
+              <span class="mc-card-header-dot" id="mcNextDot" style="background:#CC0000;"></span>
+              <span class="mc-card-header-label" id="mcNextLabel" style="color:#CC0000;" data-de="Nächstes Spiel" data-hr="Sljedeća utakmica">Nächstes Spiel</span>
               <span class="mc-card-header-meta" id="mcNextMeta"></span>
             </div>
             <div class="mc-teams">
@@ -929,7 +931,7 @@
       }
 
       function fetchNews() {
-        fetch('data/news.json?_=' + Date.now())
+        fetch(window.NKCU_DATA + 'news.json?_=' + Date.now())
           .then(function (r) { return r.ok ? r.json() : { items: [] }; })
           .then(function (data) {
             var items = Array.isArray(data.items) ? data.items.slice() : [];
@@ -1041,9 +1043,14 @@
         return '<div class="mol-team' + (isRight ? ' mol-team--right' : '') + '">' + inner + '</div>';
       }
 
+      /* What the "Nächstes Spiel" modal shows, so the live refresh
+         (lsTick) can re-render it with fresh goals while it's open. */
+      var tsNmmFixture = null;
+
       function tsOpenNextMatchModal(next, entry, label) {
         var overlay = document.getElementById('nextMatchModalOverlay');
         if (!overlay || !next) return;
+        tsNmmFixture = next;
 
         gtag('event', 'view_match', {
           match_id: (next.date + '__' + next.home + '__' + next.away).replace(/[^a-zA-Z0-9]+/g, '-'),
@@ -1061,6 +1068,14 @@
           labelEl.textContent = currentLang === 'hr' ? hr : de;
         }
 
+        tsRenderNextMatchModal(next, entry);
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open');
+      }
+
+      function tsRenderNextMatchModal(next, entry) {
         if (window.lsRenderCard) {
           window.lsRenderCard(next, entry, {
             badge: 'nmmBadge', date: 'nmmDate', oneline: 'nmmOneline', foot: 'nmmFoot', scorers: 'nmmScorers'
@@ -1082,11 +1097,14 @@
         if (window.lsRenderPitch) {
           window.lsRenderPitch(entry, 'nmmPitch', 'nmmEmpty');
         }
-
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        document.body.classList.add('modal-open');
       }
+
+      /* Called by lsTick: re-render the modal if it's still open. */
+      window.tsRefreshNextMatchModal = function (saved) {
+        var overlay = document.getElementById('nextMatchModalOverlay');
+        if (!overlay || !overlay.classList.contains('open') || !tsNmmFixture) return;
+        tsRenderNextMatchModal(tsNmmFixture, saved[mcMatchId(tsNmmFixture)]);
+      };
 
       function tsCloseNextMatchModal() {
         var overlay = document.getElementById('nextMatchModalOverlay');
@@ -1130,9 +1148,29 @@
         return past.length ? past[0].f : null;
       }
 
-      function mcRenderNext(f) {
+      /* Kick-off time until the match starts, then the running score
+         (0:0 until the console records a goal). Without a recorded score
+         only for ~2 h from kick-off, so a finished match nobody entered
+         doesn't read "0:0" for the rest of the day. Same rule as the app. */
+      function mcShowsLiveScore(f, entry) {
+        if ((entry && entry.live) || (f.homeScore !== null && f.homeScore !== undefined && String(f.homeScore) !== '')) return true;
+        var start = tsFixtureDateTimeKey(f.date, f.time);
+        if (!start) return false;
+        var endHour = Math.min(parseInt(start.slice(11, 13), 10) + 2, 23);
+        var end = start.slice(0, 11) + tsPad(endHour) + start.slice(13);
+        var now = tsZurichNowKey();
+        return now >= start && now <= end;
+      }
+
+      function mcRenderNext(f, entry) {
         var card = document.getElementById('mcNextCard');
         if (!card || !f) return;
+        var isLive = !!(entry && entry.live);
+        var labelEl = document.getElementById('mcNextLabel');
+        labelEl.setAttribute('data-de', isLive ? 'Live' : 'Nächstes Spiel');
+        labelEl.setAttribute('data-hr', isLive ? 'Uživo' : 'Sljedeća utakmica');
+        labelEl.textContent = labelEl.getAttribute(currentLang === 'hr' ? 'data-hr' : 'data-de');
+        document.getElementById('mcNextDot').classList.toggle('mc-live-pulse', isLive);
         document.getElementById('mcNextMeta').textContent = '· ' + (f.league || '') + ' · ' + mcFmtDate(f.date);
         document.getElementById('mcNextHomeLogo').src = tsTeamLogoSrc(f.home);
         document.getElementById('mcNextHomeName').textContent = tsDisplayName(f.home);
@@ -1140,7 +1178,14 @@
         document.getElementById('mcNextAwayLogo').src = tsTeamLogoSrc(f.away);
         document.getElementById('mcNextAwayName').textContent = tsDisplayName(f.away);
         document.getElementById('mcNextAwayName').style.color = tsIsUs(f.away) ? '#CC0000' : '#0A0A0A';
-        document.getElementById('mcNextCenter').textContent = f.time || '–';
+        var center = document.getElementById('mcNextCenter');
+        if (mcShowsLiveScore(f, entry)) {
+          center.innerHTML = tsEscape(parseInt(f.homeScore, 10) || 0) +
+            '<span style="color:rgba(204,0,0,0.35);margin:0 4px;">:</span>' +
+            tsEscape(parseInt(f.awayScore, 10) || 0);
+        } else {
+          center.textContent = f.time || '–';
+        }
         var venueEl = document.getElementById('mcNextVenue');
         venueEl.textContent = f.venue ? '📍 ' + f.venue : '';
         card.style.display = '';
@@ -1195,56 +1240,67 @@
         });
       }
 
+      /* Loaded on page load and again by lsTick (live refresh), so the
+         Details buttons read these instead of capturing one load. */
+      var mcNext = null;
+      var mcLast = null;
+      var mcSaved = {};
+
+      var nextBtn = document.getElementById('nextMatchDetailsLink');
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+          var next = mcNext;
+          if (!next) return;
+          if (window.lsMatchId && window.lsLoadSavedSquads && window.lsOpenOverlay) {
+            window.lsLoadSavedSquads().then(function (saved) {
+              var entry = saved[window.lsMatchId(next)];
+              if (entry && entry.live) { window.lsOpenOverlay(); }
+              else { tsOpenNextMatchModal(next, entry); }
+            }).catch(function () { tsOpenNextMatchModal(next); });
+          } else {
+            tsOpenNextMatchModal(next);
+          }
+        });
+      }
+      var lastBtn = document.getElementById('lastMatchDetailsLink');
+      if (lastBtn) {
+        lastBtn.addEventListener('click', function () {
+          if (!mcLast) return;
+          tsOpenNextMatchModal(mcLast, mcSaved[mcMatchId(mcLast)], { de: 'Letztes Spiel', hr: 'Posljednja utakmica' });
+        });
+      }
+
       /* Nächstes & letztes Spiel: Spielplan aus data/spiele.json (Uzwils
          eigener Spielplan), Resultate/Aufstellung aus data/live_squad.json
          (Kader-Tool) — dieselben Dateien wie das LIVE SQUAD Skript weiter
          unten für Formation/Live-Banner verwendet. data/uzwil4.json führt
          aktuell keine fixtures, nur die Tabelle (siehe saison.html). */
-      Promise.all([
-        fetch('./data/spiele.json?_=' + Date.now()).then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); }),
-        fetch('./data/live_squad.json?_=' + Date.now()).then(function (res) { return res.ok ? res.json() : { matches: {} }; }).catch(function () { return { matches: {} }; })
-      ])
-        .then(function (results) {
-          var rawFixtures = (results[0] && results[0].fixtures) || [];
-          var savedMatches = (results[1] && results[1].matches) || {};
-          if (Array.isArray(savedMatches)) savedMatches = {}; // PHP "[]" for an empty assoc array
+      function mcLoad() {
+        return Promise.all([
+          fetch(window.NKCU_DATA + 'spiele.json?_=' + Date.now()).then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); }),
+          fetch(window.NKCU_DATA + 'live_squad.json?_=' + Date.now()).then(function (res) { return res.ok ? res.json() : { matches: {} }; }).catch(function () { return { matches: {} }; })
+        ])
+          .then(function (results) {
+            var rawFixtures = (results[0] && results[0].fixtures) || [];
+            var savedMatches = (results[1] && results[1].matches) || {};
+            if (Array.isArray(savedMatches)) savedMatches = {}; // PHP "[]" for an empty assoc array
 
-          var fixtures = mcMergeLiveScores(rawFixtures, savedMatches);
-          var next = tsFindNextMatch(fixtures);
-          var last = mcFindLastWithScore(fixtures);
+            var fixtures = mcMergeLiveScores(rawFixtures, savedMatches);
+            mcNext = tsFindNextMatch(fixtures);
+            mcLast = mcFindLastWithScore(fixtures);
+            mcSaved = savedMatches;
 
-          function wireDetailsButtons() {
-            var nextBtn = document.getElementById('nextMatchDetailsLink');
-            if (nextBtn && next) {
-              nextBtn.addEventListener('click', function () {
-                if (window.lsMatchId && window.lsLoadSavedSquads && window.lsOpenOverlay) {
-                  window.lsLoadSavedSquads().then(function (saved) {
-                    var entry = saved[window.lsMatchId(next)];
-                    if (entry && entry.live) { window.lsOpenOverlay(); }
-                    else { tsOpenNextMatchModal(next, entry); }
-                  }).catch(function () { tsOpenNextMatchModal(next); });
-                } else {
-                  tsOpenNextMatchModal(next);
-                }
-              });
-            }
-            var lastBtn = document.getElementById('lastMatchDetailsLink');
-            if (lastBtn && last) {
-              lastBtn.addEventListener('click', function () {
-                var entry = savedMatches[mcMatchId(last)];
-                tsOpenNextMatchModal(last, entry, { de: 'Letztes Spiel', hr: 'Posljednja utakmica' });
-              });
-            }
-          }
-
-          if (next) mcRenderNext(next);
-          if (last) mcRenderLast(last);
-          document.getElementById('mcMatchesEmpty').style.display = (next || last) ? 'none' : '';
-          wireDetailsButtons();
-        })
-        .catch(function (err) {
-          console.error('Spiele konnten nicht geladen werden:', err);
-        });
+            if (mcNext) mcRenderNext(mcNext, savedMatches[mcMatchId(mcNext)]);
+            if (mcLast) mcRenderLast(mcLast);
+            document.getElementById('mcMatchesEmpty').style.display = (mcNext || mcLast) ? 'none' : '';
+            if (window.tsRefreshNextMatchModal) window.tsRefreshNextMatchModal(savedMatches);
+          })
+          .catch(function (err) {
+            console.error('Spiele konnten nicht geladen werden:', err);
+          });
+      }
+      window.mcLoad = mcLoad;
+      mcLoad();
 
       applyLang('de');
     })();
@@ -1659,7 +1715,7 @@
       }
 
       function lsLoadSavedSquads() {
-        return fetch('data/live_squad.json?_=' + Date.now())
+        return fetch(window.NKCU_DATA + 'live_squad.json?_=' + Date.now())
           .then(function (r) { return r.ok ? r.json() : { matches: {} }; })
           .catch(function () { return { matches: {} }; })
           .then(function (data) {
@@ -1786,7 +1842,17 @@
       function lsOpenOverlay() {
         var overlay = document.getElementById('liveSquadOverlay');
 
-        fetch('data/spiele.json?_=' + Date.now())
+        lsRenderOverlay(true);
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open');
+      }
+
+      /* Fills the live overlay; lsTick calls it again (without the
+         view_match event) while it's open, so new goals show up. */
+      function lsRenderOverlay(track) {
+        return fetch(window.NKCU_DATA + 'spiele.json?_=' + Date.now())
           .then(function (r) { return r.ok ? r.json() : { fixtures: [] }; })
           .then(function (data) {
             var next = lsFindNextMatch(data.fixtures);
@@ -1802,6 +1868,7 @@
               var entry = saved[lsMatchId(next)];
               lsRenderCard(next, entry);
               lsRenderPitch(entry);
+              if (!track) return;
               gtag('event', 'view_match', {
                 match_id: lsMatchId(next),
                 home_team: next.home,
@@ -1810,10 +1877,6 @@
               });
             });
           });
-
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        document.body.classList.add('modal-open');
       }
 
       function lsCloseOverlay() {
@@ -1865,7 +1928,7 @@
       }
 
       function applyLiveState() {
-        fetch('data/spiele.json?_=' + Date.now())
+        return fetch(window.NKCU_DATA + 'spiele.json?_=' + Date.now())
           .then(function (r) { return r.ok ? r.json() : { fixtures: [] }; })
           .then(function (data) {
             var next = lsFindNextMatch(data.fixtures);
@@ -1896,6 +1959,29 @@
       }
 
       applyLiveState();
+
+      /* The page used to read live state once on load, so the banner,
+         the score on the next-match card and an open match modal all
+         stayed frozen until a reload. Re-check every 15 s while a match
+         is live, otherwise once a minute, and right away when the tab
+         comes back into view. */
+      var lsTickTimer = null;
+      function lsTick() {
+        clearTimeout(lsTickTimer);
+        if (document.hidden) return; // resumed by visibilitychange
+        var overlay = document.getElementById('liveSquadOverlay');
+        Promise.all([
+          applyLiveState(),
+          window.mcLoad ? window.mcLoad() : null,
+          overlay && overlay.classList.contains('open') ? lsRenderOverlay(false) : null
+        ]).catch(function () {}).then(function () {
+          lsTickTimer = setTimeout(lsTick, lastLiveState.isLive ? 15000 : 60000);
+        });
+      }
+      lsTickTimer = setTimeout(lsTick, 15000);
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) lsTick();
+      });
 
       // Exposed so the "Nächstes Spiel" Details link can check whether this
       // match has been flipped live and, if so, reuse this same overlay —
