@@ -6501,6 +6501,10 @@ body.modal-open .bottom-nav {
 @media (min-width: 700px) {
   .news-cards { grid-template-columns: repeat(2, 1fr); }
 }
+/* Startseite: einspaltig (Handy) nur die neuste News, zweispaltig zwei */
+@media (max-width: 699px) {
+  .news-cards--teaser > .news-card:nth-child(n+2) { display: none; }
+}
 .news-cards > .news-card {
   display: flex;
   flex-direction: column;

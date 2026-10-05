@@ -326,12 +326,12 @@
           <span class="nfb-date" id="nfbDate"></span>
         </div>
 
-        <div class="news-cards" id="newsCards">
+        <div class="news-cards news-cards--teaser" id="newsCards">
           <!-- Dynamisch aus data/news.json gefüllt (ohne den angepinnten
                Eintrag, der oben im Banner läuft), siehe renderNewsCards()
                weiter unten. News werden über die nkcu_ios Admin-App verwaltet
                (oder von Hand in dieser Datei editiert) — nicht hier im HTML.
-               Zeigt nur den neusten Eintrag; die komplette, paginierte
+               Zeigt die 2 neusten Einträge (Handy: nur den neusten); die komplette, paginierte
                Liste lebt auf news.html. -->
         </div>
 
@@ -835,10 +835,10 @@
          Items are added/edited via the nkcu_ios admin app's News tab
          (save-news.php / delete-news.php) or by hand in the JSON file —
          never hard-coded here, see CLAUDE.md. Homepage shows a short
-         teaser (pinned banner + the newest item); the full paginated list
+         teaser (pinned banner + the 2 newest items, 1 on phones); the full paginated list
          lives on news.html. */
       var newsCardsEl = document.getElementById('newsCards');
-      var NEWS_VISIBLE_COUNT = 1; // Startseite: angepinnte Vorankündigung + neuste News; alles weitere auf news.html
+      var NEWS_VISIBLE_COUNT = 2; // Startseite: angepinnte Vorankündigung + 2 neuste News (Handy: 1, siehe .news-cards--teaser); alles weitere auf news.html
 
       function renderPinnedBanner(item) {
         var banner = document.getElementById('newsFeaturedBanner');
