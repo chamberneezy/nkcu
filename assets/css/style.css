@@ -6682,3 +6682,13 @@ body.modal-open .bottom-nav {
 .gold-tile--dark { background:#000; }
 .gold-tile--bronze { border-color:rgba(160,80,32,0.25); }
 .gold-tile img { max-width:100%; max-height:100%; object-fit:contain; }
+
+/* DE/HR toggle on pages without the dark homepage hero (saison, news,
+   kader, sponsoring, shop): the header starts on white there, so use the
+   same grey look as the scrolled header instead of white-on-transparent. */
+body:not(:has(.hero)) .header .lang-toggle {
+  background: var(--gray-50);
+  border-color: var(--gray-200);
+}
+body:not(:has(.hero)) .header .lang-opt { color: var(--gray-500); }
+body:not(:has(.hero)) .header .lang-sep { color: var(--gray-200); }
