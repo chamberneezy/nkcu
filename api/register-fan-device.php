@@ -1,15 +1,21 @@
 <?php
 /**
- * Called by the public fan app (no login). Two request shapes:
+ * Called by the public fan app (no login), iOS or Android. Two request
+ * shapes:
  *
- *   { deviceToken, lang: "de"|"hr", prefs: {live, goals, lineup},
- *     startToken? }                 — device + notification settings;
- *                                     startToken is the Live Activity
- *                                     push-to-start token
+ *   { deviceToken, platform: "ios"|"android", lang: "de"|"hr",
+ *     prefs: {live, goals, lineup, liveActivity?}, startToken? } — device + notification
+ *     settings; startToken is the Live Activity push-to-start token
+ *     (iOS only — Android ignores it, there's no Live Activity there)
  *   { activityToken, matchId }      — a running Live Activity's own
  *                                     update token, so goals reach it
+ *                                     (iOS only)
  *
- * Only APNs tokens and three booleans are stored — nothing personal.
+ * platform defaults to "ios" when omitted, so the existing iOS build
+ * (which never sends it) keeps working unchanged. Only a device token,
+ * platform and a few booleans are stored — nothing personal.
+ * liveActivity is the Live-Widget switch; older app versions don't send
+ * it, and fan-push.php then falls back to "live".
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -24,6 +30,15 @@ function respond($status, $payload) {
 
 function is_apns_token($t) {
     return is_string($t) && preg_match('/^[0-9a-fA-F]{32,256}$/', $t);
+}
+
+/** FCM registration tokens have no fixed alphabet. Reject only empty, tiny, or whitespace. */
+function is_fcm_token($t) {
+    return is_string($t) && strlen($t) >= 20 && strlen($t) <= 4096 && !preg_match('/\s/', $t);
+}
+
+function is_device_token($t, $platform) {
+    return $platform === 'android' ? is_fcm_token($t) : is_apns_token($t);
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -49,17 +64,29 @@ if (isset($body['activityToken'])) {
     respond(200, ['ok' => true]);
 }
 
-$deviceToken = strtolower((string) ($body['deviceToken'] ?? ''));
-if (!is_apns_token($deviceToken)) {
+// The installed Android build omits "platform" (serialization default).
+// An FCM token is not hex, so treat a non-APNs token as Android.
+$rawToken = (string) ($body['deviceToken'] ?? '');
+$stated = $body['platform'] ?? null;
+if ($stated === 'android' || ($stated === null && !is_apns_token($rawToken))) {
+    $platform = 'android';
+    $deviceToken = $rawToken;
+} else {
+    $platform = 'ios';
+    $deviceToken = strtolower($rawToken);
+}
+if (!is_device_token($deviceToken, $platform)) {
     respond(400, ['ok' => false, 'error' => 'Invalid device token']);
 }
-$startToken = isset($body['startToken']) ? strtolower((string) $body['startToken']) : null;
+// Live Activities are iOS-only; an Android device never has a meaningful startToken.
+$startToken = ($platform === 'ios' && isset($body['startToken'])) ? strtolower((string) $body['startToken']) : null;
 if ($startToken !== null && !is_apns_token($startToken)) {
     $startToken = null;
 }
 $prefs = is_array($body['prefs'] ?? null) ? $body['prefs'] : [];
 
 $device = [
+    'platform' => $platform,
     'lang' => ($body['lang'] ?? 'de') === 'hr' ? 'hr' : 'de',
     'prefs' => [
         'live' => !empty($prefs['live']),
@@ -68,6 +95,9 @@ $device = [
     ],
     'updated' => gmdate('Y-m-d\TH:i:s\Z'),
 ];
+if (array_key_exists('liveActivity', $prefs)) {
+    $device['prefs']['liveActivity'] = !empty($prefs['liveActivity']);
+}
 if ($startToken !== null) {
     $device['startToken'] = $startToken;
 }

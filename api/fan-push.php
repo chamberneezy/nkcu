@@ -1,13 +1,18 @@
 <?php
 /**
- * Push notifications + Live Activity updates for the public fan app
- * (ch.croatia-uzwil.app). Reuses apns.php's .p8 key and JWT signing —
- * the key belongs to the Apple team, so it works for every app in it.
+ * Push notifications + Live Activity updates for the public fan app, iOS
+ * (ch.croatia-uzwil.app, via apns.php) and Android (ch.croatiauzwil.nkcufan,
+ * via fcm.php). Live Activities stay iOS-only — Android has no equivalent,
+ * it only ever gets the plain alert.
  *
  * Storage: data/fan_devices.json (denied in .htaccess), shaped as
- *   devices:  { <apnsToken>: { lang, prefs: {live, goals, lineup},
- *               startToken?, updated } }
- *   activities: { <matchId>: [ <liveActivityPushToken>, ... ] }
+ *   devices:  { <token>: { platform: "ios"|"android", lang,
+ *               prefs: {live, goals, lineup, liveActivity?}, startToken?,
+ *               updated } }
+ *             (live/goals/lineup = notifications; liveActivity = the
+ *             Live-Widget switch. Apps older than that switch don't send
+ *             it — then the iOS widget follows "live", as it used to.)
+ *   activities: { <matchId>: [ <liveActivityPushToken>, ... ] }   iOS only
  *   sent:     { <matchId>: { lineup: true } }   — one-shot guards
  *
  * The admin endpoints call nkcu_fan_* helpers after their write. Sending
@@ -21,6 +26,7 @@ if (basename($_SERVER['SCRIPT_FILENAME']) === basename(__FILE__)) {
 }
 
 require_once __DIR__ . '/apns.php';
+require_once __DIR__ . '/fcm.php';
 
 define('FAN_APP_BUNDLE_ID', 'ch.croatia-uzwil.app');
 define('FAN_DEVICES_FILE', dirname(__DIR__) . '/data/fan_devices.json');
@@ -62,12 +68,28 @@ function nkcu_fan_read_store() {
 }
 
 /**
- * Sends a batch of pushes over one reused HTTP/2 connection.
- * $jobs: list of [token, payloadArray, pushType ('alert'|'liveactivity')].
- * Returns the tokens APNs reported as dead (410 / BadDeviceToken /
- * Unregistered) so the caller can prune them.
+ * Sends a batch of pushes, routed per job to APNs or FCM.
+ * $jobs: list of [token, payloadArray, kind] where kind is
+ * 'alert'|'liveactivity' (APNs, iOS) or 'fcm' (Android). Returns the
+ * tokens the respective service reported as dead, so the caller can
+ * prune them regardless of which platform they belonged to.
  */
 function nkcu_fan_send_batch(array $jobs) {
+    if (!$jobs) { return []; }
+    $fcmJobs = [];
+    $apnsJobs = [];
+    foreach ($jobs as $job) {
+        if ($job[2] === 'fcm') {
+            $fcmJobs[] = [$job[0], $job[1]];
+        } else {
+            $apnsJobs[] = $job;
+        }
+    }
+    return array_merge(nkcu_fan_send_apns_batch($apnsJobs), nkcu_fcm_send_batch($fcmJobs));
+}
+
+/** [token, payloadArray, pushType ('alert'|'liveactivity')] over one reused HTTP/2 connection. */
+function nkcu_fan_send_apns_batch(array $jobs) {
     if (!$jobs || !nkcu_apns_configured()) { return []; }
     $jwt = nkcu_apns_make_jwt();
     if ($jwt === null) { return []; }
@@ -202,16 +224,33 @@ function nkcu_fan_formation_line($entry, $lang) {
     return $f === '' ? '' : (($lang === 'hr' ? 'Formacija ' : 'Formation ') . $f);
 }
 
-/** Alert pushes to every device that has $pref on, in its own language. */
+/** Does this device want the iOS Live Activity (Live-Widget)? */
+function nkcu_fan_wants_activity(array $d) {
+    $p = $d['prefs'] ?? [];
+    return array_key_exists('liveActivity', $p) ? !empty($p['liveActivity']) : !empty($p['live']);
+}
+
+/**
+ * Alert pushes to every device that has $pref on, in its own language.
+ * iOS gets a native aps.alert (the OS shows it, no app code involved).
+ * Android gets a data-only FCM message instead — the app's own
+ * FirebaseMessagingService builds the notification from title/body/type,
+ * the same way MatchWatchWorker already does for its polling-based
+ * alerts, so styling/channels stay consistent either way it fires.
+ */
 function nkcu_fan_alert_jobs(array $store, $pref, callable $textFor, array $skipTokens = []) {
     $jobs = [];
     foreach ($store['devices'] as $token => $d) {
         if (in_array($token, $skipTokens, true)) { continue; }
         if (empty($d['prefs'][$pref])) { continue; }
         list($title, $body) = $textFor(($d['lang'] ?? 'de') === 'hr' ? 'hr' : 'de');
-        $jobs[] = [$token, [
-            'aps' => ['alert' => ['title' => $title, 'body' => $body], 'sound' => 'default'],
-        ], 'alert'];
+        if (($d['platform'] ?? 'ios') === 'android') {
+            $jobs[] = [$token, ['type' => $pref, 'title' => $title, 'body' => $body], 'fcm'];
+        } else {
+            $jobs[] = [$token, [
+                'aps' => ['alert' => ['title' => $title, 'body' => $body], 'sound' => 'default'],
+            ], 'alert'];
+        }
     }
     return $jobs;
 }
@@ -227,11 +266,13 @@ function nkcu_fan_on_live_changed($matchId, $entry, $live) {
         if ($live) {
             $started = [];
             foreach ($store['devices'] as $token => $d) {
-                if (empty($d['prefs']['live']) || empty($d['startToken'])) { continue; }
+                if (!nkcu_fan_wants_activity($d) || empty($d['startToken'])) { continue; }
                 $hr = ($d['lang'] ?? 'de') === 'hr';
                 // Push-to-start: the Live Activity's own alert is the
                 // notification, so this device gets no separate alert.
-                $jobs[] = [$d['startToken'], ['aps' => [
+                // Live-Widget on but "Anpfiff" notification off: the
+                // activity still appears, just without the sound.
+                $aps = [
                     'timestamp' => time(),
                     'event' => 'start',
                     'attributes-type' => FAN_ACTIVITY_ATTRIBUTES_TYPE,
@@ -244,8 +285,9 @@ function nkcu_fan_on_live_changed($matchId, $entry, $live) {
                         'title' => $hr ? '🔴 Utakmica je uživo' : '🔴 Das Spiel ist live',
                         'body' => nkcu_fan_body($home, $away, [nkcu_fan_formation_line($entry, $hr ? 'hr' : 'de')]),
                     ],
-                    'sound' => 'default',
-                ]], 'liveactivity'];
+                ];
+                if (!empty($d['prefs']['live'])) { $aps['sound'] = 'default'; }
+                $jobs[] = [$d['startToken'], ['aps' => $aps], 'liveactivity'];
                 $started[] = $token;
             }
             $jobs = array_merge($jobs, nkcu_fan_alert_jobs($store, 'live', function ($l) use ($home, $away, $entry) {
