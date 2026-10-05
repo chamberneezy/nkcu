@@ -27,16 +27,26 @@ var FORMATIONS = {
 
 var LINE_Y = { ATT: 14, MID: 40, WB: 54, DEF: 65, GK: 88 };
 
-/* 3-5-2 packs 5 rows (GK/DEF/WB/MID/ATT) into the same pitch height
-   as every other formation's 4, so its central three and back three
-   sit closer to the WB row than they'd like — nudge MID up and DEF
-   down a touch so the rows don't visually overlap. */
+/* 3-5-2 has five rows (GK/DEF/WB/MID/ATT).
+   Wide pitch (desktop, landscape): too little height for five rows, so
+   the five midfielders form one staggered line — central three at the
+   usual MID height, wing-backs a bit lower out wide — spaced like every
+   4-row formation (wing-backs used to sit on top of the centre-backs).
+   Tall pitch (phones, portrait, see .live-squad-pitch @media 480px):
+   enough height for five real rows, and too narrow for five across. */
 var LINE_Y_OVERRIDES = {
-  '3-5-2': { MID: 35, DEF: 70 }
+  '3-5-2': { MID: 40, WB: 46, DEF: 65 }
+};
+var LINE_Y_OVERRIDES_PORTRAIT = {
+  '3-5-2': { MID: 35, WB: 54, DEF: 70 }
 };
 
+function lsPortraitPitch() {
+  return !!(window.matchMedia && window.matchMedia('(max-width: 480px)').matches);
+}
+
 function lsLineY(formation, line) {
-  var o = LINE_Y_OVERRIDES[formation];
+  var o = (lsPortraitPitch() ? LINE_Y_OVERRIDES_PORTRAIT : LINE_Y_OVERRIDES)[formation];
   return (o && o[line] != null) ? o[line] : LINE_Y[line];
 }
 
@@ -175,8 +185,17 @@ var LINE_SPREAD = {
   ATT: { 2: [34, 66], 3: [22, 78] }
 };
 
+/* Per-formation spreads (wide pitch only): in 3-5-2 the central three
+   stay narrow so the wing-backs have the flanks, and the back three keep
+   clear of them. */
+var LINE_SPREAD_OVERRIDES = {
+  '3-5-2': { MID: { 3: [30, 70] }, WB: { 2: [9, 91] }, DEF: { 3: [27, 73] } }
+};
+
 function lsRenderToken(name, formation, line, index, total) {
-  var spread = (LINE_SPREAD[line] && LINE_SPREAD[line][total]) || [12, 88];
+  var o = lsPortraitPitch() ? null : LINE_SPREAD_OVERRIDES[formation];
+  var spread = (o && o[line] && o[line][total]) ||
+    (LINE_SPREAD[line] && LINE_SPREAD[line][total]) || [12, 88];
   var x = total <= 1 ? 50 : spread[0] + index * ((spread[1] - spread[0]) / (total - 1));
   var slug = PHOTO_SLUG.hasOwnProperty(name) ? PHOTO_SLUG[name] : undefined;
   var visual = slug
