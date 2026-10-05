@@ -122,16 +122,21 @@
         <!-- Angepinnte News: dynamisch aus dem einen Eintrag in data/news.json
              mit "pinned": true, siehe renderPinnedBanner() weiter unten.
              Bewusst nicht klickbar — hidden entirely when nothing is pinned. -->
-        <div class="news-upcoming" id="newsUpcoming" style="display:none;margin-bottom:32px;">
-          <div class="upcoming-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <div class="news-featured-banner" id="newsFeaturedBanner" hidden>
+          <div class="nfb-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
           </div>
-          <div class="upcoming-content">
-            <span class="upcoming-tag" id="upcomingTag"></span>
-            <div class="upcoming-title" id="upcomingTitle"></div>
-            <div class="upcoming-desc" id="upcomingDesc"></div>
+          <div class="nfb-body">
+            <span class="nfb-tag" id="nfbTag"></span>
+            <h4 class="nfb-title" id="nfbTitle"></h4>
+            <p class="nfb-sub" id="nfbSub"></p>
           </div>
-          <div class="upcoming-date" id="upcomingDate"></div>
+          <span class="nfb-date" id="nfbDate"></span>
         </div>
 
         <!-- Dynamisch aus data/news.json gefüllt (ohne den angepinnten
@@ -311,24 +316,25 @@
     var newsUnpinnedItems = [];
     var newsShowAll = false;
 
+    // Same banner + same fill logic as index.html's renderPinnedBanner().
     function renderUpcomingBanner(item) {
-      var banner = document.getElementById('newsUpcoming');
-      if (!item) { banner.style.display = 'none'; return; }
+      var banner = document.getElementById('newsFeaturedBanner');
+      if (!item) { banner.hidden = true; return; }
       var de = item.de || {}, hr = item.hr || {};
-      var tagEl = document.getElementById('upcomingTag');
+      var tagEl = document.getElementById('nfbTag');
       tagEl.setAttribute('data-de', de.tag || '');
       tagEl.setAttribute('data-hr', hr.tag || '');
       tagEl.textContent = currentLang === 'hr' ? (hr.tag || '') : (de.tag || '');
-      var titleEl = document.getElementById('upcomingTitle');
+      var titleEl = document.getElementById('nfbTitle');
       titleEl.setAttribute('data-de', de.title || '');
       titleEl.setAttribute('data-hr', hr.title || '');
       titleEl.textContent = currentLang === 'hr' ? (hr.title || '') : (de.title || '');
-      var descEl = document.getElementById('upcomingDesc');
-      descEl.setAttribute('data-de', de.excerpt || '');
-      descEl.setAttribute('data-hr', hr.excerpt || '');
-      descEl.textContent = currentLang === 'hr' ? (hr.excerpt || '') : (de.excerpt || '');
-      document.getElementById('upcomingDate').textContent = item.date || '';
-      banner.style.display = 'flex';
+      var subEl = document.getElementById('nfbSub');
+      subEl.setAttribute('data-de', de.excerpt || '');
+      subEl.setAttribute('data-hr', hr.excerpt || '');
+      subEl.textContent = currentLang === 'hr' ? (hr.excerpt || '') : (de.excerpt || '');
+      document.getElementById('nfbDate').textContent = item.date || '';
+      banner.hidden = false;
     }
 
     function renderNewsShowMoreButton() {

@@ -6692,3 +6692,35 @@ body:not(:has(.hero)) .header .lang-toggle {
 }
 body:not(:has(.hero)) .header .lang-opt { color: var(--gray-500); }
 body:not(:has(.hero)) .header .lang-sep { color: var(--gray-200); }
+
+/* ── Angepinnte News: navy banner, identisch auf index.html + news.html ── */
+.news-featured-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #003580;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,53,128,0.18);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.news-featured-banner .nfb-icon {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+.news-featured-banner .nfb-tag {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+.news-featured-banner .nfb-title {
+  color: #fff;
+  text-transform: none;
+  font-size: 1rem;
+}
+.news-featured-banner .nfb-sub {
+  color: rgba(255,255,255,0.72);
+}
+.news-featured-banner .nfb-date {
+  color: rgba(255,255,255,0.55);
+}
