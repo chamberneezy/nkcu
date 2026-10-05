@@ -331,7 +331,7 @@
                Eintrag, der oben im Banner läuft), siehe renderNewsCards()
                weiter unten. News werden über die nkcu_ios Admin-App verwaltet
                (oder von Hand in dieser Datei editiert) — nicht hier im HTML.
-               Zeigt bis zu 4 aktuelle Einträge; die komplette, paginierte
+               Zeigt nur den neusten Eintrag; die komplette, paginierte
                Liste lebt auf news.html. -->
         </div>
 
@@ -456,41 +456,40 @@
           <a href="sponsoring.html" class="btn btn--red section-btn-inline" style="font-size:0.9rem;padding:8px 20px;" data-de="Sponsor werden →" data-hr="Postani sponzor →">Sponsor werden →</a>
         </div>
 
-        <!-- Gold -->
+        <!-- Gold Sponsoren -->
         <div style="margin-bottom:32px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
             <span style="font-family:'Satoshi',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#B8860B;background:rgba(184,134,11,0.1);padding:4px 12px;border-radius:20px;">Gold</span>
             <div style="flex:1;height:1px;background:rgba(184,134,11,0.25);"></div>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
-            <div style="background:#fff;border-radius:10px;padding:18px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:130px;min-height:72px;border:1.5px solid rgba(184,134,11,0.2);">
-              <img src="assets/img/sponsors/kristal-fenster.jpg" alt="Kristal Fenster" style="max-height:44px;max-width:110px;object-fit:contain;"/>
+          <div class="gold-tiles">
+            <div class="gold-tile">
+              <img src="assets/img/sponsors/kristal-fenster.jpg" alt="Kristal Fenster"/>
             </div>
-            <div style="background:#1a1a1a;border-radius:10px;padding:18px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:130px;min-height:72px;border:1.5px solid rgba(184,134,11,0.2);">
-              <img src="assets/img/sponsors/sfk-new.png" alt="SFK" style="max-height:44px;max-width:110px;object-fit:contain;"/>
+            <div class="gold-tile gold-tile--dark">
+              <img src="assets/img/sponsors/sfk-new.png" alt="SFK"/>
             </div>
-            <div style="background:#1a1a1a;border-radius:10px;padding:18px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:130px;min-height:72px;border:1.5px solid rgba(184,134,11,0.2);">
-              <img src="assets/img/sponsors/AkkordTech.png" alt="AkkordTech" style="max-height:44px;max-width:110px;object-fit:contain;"/>
+            <div class="gold-tile gold-tile--dark">
+              <img src="assets/img/sponsors/AkkordTech.png" alt="AkkordTech"/>
             </div>
-            <div style="background:#fff;border-radius:10px;padding:18px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:130px;min-height:72px;border:1.5px solid rgba(184,134,11,0.2);">
-              <img src="assets/img/sponsors/kollermorger-new.svg" alt="Koller + Morger" style="max-height:44px;max-width:110px;object-fit:contain;"/>
+            <div class="gold-tile">
+              <img src="assets/img/sponsors/kollermorger-new.svg" alt="Koller + Morger"/>
             </div>
           </div>
         </div>
 
-        <!-- Bronze -->
+        <!-- Bronze Sponsoren -->
         <div style="margin-bottom:36px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
             <span style="font-family:'Satoshi',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#A05020;background:rgba(160,80,32,0.09);padding:4px 12px;border-radius:20px;">Bronze</span>
             <div style="flex:1;height:1px;background:rgba(160,80,32,0.2);"></div>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
-            <div style="background:#fff;border-radius:10px;padding:18px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;min-width:130px;min-height:72px;border:1.5px solid rgba(160,80,32,0.15);">
-              <img src="assets/img/sponsors/smt-automotive.jpg" alt="SMT Automotive" style="max-height:44px;max-width:110px;object-fit:contain;"/>
+          <div class="gold-tiles">
+            <div class="gold-tile gold-tile--dark gold-tile--bronze">
+              <img src="assets/img/sponsors/smt-automotive.jpg" alt="SMT Automotive"/>
             </div>
           </div>
         </div>
-
 
       <div class="section-btn-block" style="display:none;">
           <a href="sponsoring.html" class="btn btn--red" style="font-size:0.9rem;padding:10px 28px;" data-de="Sponsor werden →" data-hr="Postani sponzor →">Sponsor werden →</a>
@@ -836,10 +835,10 @@
          Items are added/edited via the nkcu_ios admin app's News tab
          (save-news.php / delete-news.php) or by hand in the JSON file —
          never hard-coded here, see CLAUDE.md. Homepage shows a short
-         teaser (pinned banner + up to 4 items); the full paginated list
+         teaser (pinned banner + the newest item); the full paginated list
          lives on news.html. */
       var newsCardsEl = document.getElementById('newsCards');
-      var NEWS_VISIBLE_COUNT = 4;
+      var NEWS_VISIBLE_COUNT = 1; // Startseite: angepinnte Vorankündigung + neuste News; alles weitere auf news.html
 
       function renderPinnedBanner(item) {
         var banner = document.getElementById('newsFeaturedBanner');
