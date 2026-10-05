@@ -1152,6 +1152,10 @@
       var playerId = ((first ? first.textContent : '') + ' ' + (last ? last.textContent : '')).trim();
       if (playerId) gtag('event', 'view_squad_player', { player_id: playerId });
     }
+    // Only one info panel open at a time: opening a card closes any other.
+    document.querySelectorAll('.kp-card.is-flipped').forEach(function (other) {
+      if (other !== card) other.classList.remove('is-flipped');
+    });
     card.classList.add('is-flipped');
     // Tap-me pulse has done its job once the card's been opened — stop it.
     var pulsingName = card.querySelector('.kp-pulse');
