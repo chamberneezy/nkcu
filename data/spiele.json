@@ -1,6 +1,16 @@
 {
     "fixtures": [
         {
+            "date": "17.08.2026",
+            "time": "20:00",
+            "home": "FC Frauenfeld 2b",
+            "away": "FC Uzwil 4",
+            "homeScore": 1,
+            "awayScore": 4,
+            "venue": "Kleine Allmend, Frauenfeld",
+            "league": "4. Liga · Gruppe 8"
+        },
+        {
             "date": "20.08.2026",
             "time": "19:00",
             "home": "FC Uzwil 4",

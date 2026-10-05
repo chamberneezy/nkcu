@@ -814,11 +814,14 @@
           // gehören nicht zum offiziellen Liga-Spielplan.
           var leagueFix = allFix.filter(function (f) { return !f.dummy; });
 
-          // spiele.json trägt kein spieltag-Feld, ist aber bereits
-          // chronologisch sortiert — Positions-Teilung in zwei Hälften.
-          var half = Math.ceil(leagueFix.length / 2);
-          spRenderList(leagueFix.slice(0, half), 'spListVorrunde');
-          spRenderList(leagueFix.slice(half), 'spListRueckrunde');
+          // spiele.json trägt kein spieltag-Feld — Teilung nach Datum an
+          // der Winterpause: Juli–Dezember = Vorrunde, Januar–Juni = Rückrunde.
+          function spIsVorrunde(f) {
+            var month = parseInt(String(f.date).split('.')[1], 10);
+            return month >= 7;
+          }
+          spRenderList(leagueFix.filter(spIsVorrunde), 'spListVorrunde');
+          spRenderList(leagueFix.filter(function (f) { return !spIsVorrunde(f); }), 'spListRueckrunde');
 
           var next = mcFindNext(allFix);
           var last = mcFindLast(allFix);
