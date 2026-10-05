@@ -244,8 +244,15 @@ function lsRenderCard(fixture, entry, ids) {
   // homeScore:0 is still sitting on the entry.
   var hasScore = lsHasKickedOff(fixture.date, fixture.time) ||
     (entry && (entry.live || goals.length > 0));
+  // Score from the live entry; a match the admin app never tracked keeps
+  // its result in spiele.json (fixture.homeScore), so fall back to that.
+  function lsScore(side) {
+    var v = entry && entry[side];
+    if (v === null || v === undefined) v = fixture[side];
+    return (v === null || v === undefined || v === '') ? 0 : v;
+  }
   var scoreOrTime = hasScore
-    ? (lsEsc((entry && entry.homeScore) || 0) + ' – ' + lsEsc((entry && entry.awayScore) || 0))
+    ? (lsEsc(lsScore('homeScore')) + ' – ' + lsEsc(lsScore('awayScore')))
     : lsEsc(fixture.time || '–');
 
   document.getElementById(onelineId).innerHTML =
