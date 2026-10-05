@@ -2017,10 +2017,9 @@ ul {
     padding-bottom: 120px;
   }
 
-  /* Ensure content is not hidden behind bottom nav */
-  main, footer.site-footer {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom));
-  }
+  /* Platz für die Bottom-Nav reserviert body (padding-bottom weiter
+     unten) — <main> bekommt keinen eigenen, sonst bleibt ein weisser
+     Streifen zwischen letzter Section und Footer. */
 
   .news-split {
     grid-template-columns: 1fr 1fr;
@@ -3555,7 +3554,7 @@ ul {
 
   /* Footer */
   .footer {
-    padding: 32px 0 24px;
+    padding: 0 0 24px;
   }
 
   .footer-logo-img {
