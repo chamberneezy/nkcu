@@ -6743,4 +6743,4 @@ body:not(:has(.hero)) .header .lang-sep { color: var(--gray-200); }
 .mc-result-pill { display:inline-flex; align-items:center; gap:4px; font-family:'Satoshi',sans-serif; font-size:0.65rem; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:3px 9px; border-radius:4px; background:rgba(22,160,80,0.1); color:#16a050; }
 .mc-card-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 20px 16px; flex-wrap:wrap; }
 .mc-footer-info { font-family:'Satoshi',sans-serif; font-size:0.72rem; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-.mc-footer-link { font-family:'Satoshi',sans-serif; font-size:0.78rem; font-weight:700; text-decoration:none; white-space:nowrap; cursor:pointer; background:none; border:none; padding:0; }
+.mc-footer-link { font-family:'Satoshi',sans-serif; font-size:0.78rem; font-weight:700; text-decoration:none; white-space:nowrap; text-transform:uppercase; letter-spacing:0.04em; cursor:pointer; background:none; border:none; padding:0; }
