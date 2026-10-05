@@ -6479,7 +6479,7 @@ body.has-live-banner .cookie-banner {
 }
 
 body.modal-open .bottom-nav {
-  display: none;
+  display: none !important; /* beats the mobile "display: grid !important" */
 }
 
 /* ══════════════════════════════════════════════════════

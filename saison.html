@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <script src="assets/js/site.js"></script>
+  <script src="assets/js/match-render.js"></script>
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
@@ -118,6 +119,42 @@
   </style>
 </head>
 <body>
+  <!-- ═══════ MATCH MODAL (gleich wie index.html) ═══════ -->
+  <div class="news-modal-overlay" id="nextMatchModalOverlay" role="dialog" aria-modal="true"
+    aria-labelledby="nextMatchModalLabel">
+    <div class="news-modal" id="nextMatchModal">
+      <button class="news-modal-close" id="nextMatchModalClose" aria-label="Schliessen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="news-modal-body">
+        <div class="news-modal-content">
+          <div class="news-modal-meta" style="margin-bottom:18px;">
+            <span class="nm-tag" id="nextMatchModalLabel" data-de="Nächstes Spiel" data-hr="Sljedeća utakmica">Nächstes
+              Spiel</span>
+          </div>
+          <div class="match-card" id="nextMatchModalCard" style="margin-bottom:0;">
+            <div class="match-card-top">
+              <span class="match-badge" id="nmmBadge"></span>
+              <span class="match-date" id="nmmDate"></span>
+            </div>
+            <div class="match-oneline" id="nmmOneline"></div>
+            <div class="match-foot" id="nmmFoot"></div>
+          </div>
+          <div class="live-squad-scorers" id="nmmScorers"></div>
+          <h3 class="col-title live-squad-section-title" data-de="Aufstellung" data-hr="Sastav">Aufstellung</h3>
+          <div class="live-squad-pitch" id="nmmPitch"></div>
+          <div class="live-squad-empty" id="nmmEmpty">
+            <p data-de="Die Aufstellung wurde noch nicht veröffentlicht." data-hr="Sastav još nije objavljen.">Die
+              Aufstellung wurde noch nicht veröffentlicht.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- HEADER -->
   <header class="header" id="header">
@@ -204,7 +241,7 @@
               <div class="mc-footer-info" style="color:#c08080;">
                 <span id="mcNextVenue"></span>
               </div>
-              <a href="#tabelle-spiele" class="mc-footer-link" style="color:#CC0000;" data-de="Details →" data-hr="Detalji →">Details →</a>
+              <button type="button" class="mc-footer-link" id="spNextDetails" style="color:#CC0000;" data-de="Details →" data-hr="Detalji →">Details →</button>
             </div>
           </div>
           <!-- Letztes Spiel -->
@@ -232,7 +269,7 @@
                 <span id="mcLastResultPill" class="mc-result-pill"></span>
                 <span id="mcLastVenue"></span>
               </div>
-              <a href="#tabelle-spiele" class="mc-footer-link" style="color:#CC0000;" data-de="Details →" data-hr="Detalji →">Details →</a>
+              <button type="button" class="mc-footer-link" id="spLastDetails" style="color:#CC0000;" data-de="Details →" data-hr="Detalji →">Details →</button>
             </div>
           </div>
         </div>
@@ -797,6 +834,64 @@
        score on the next-match card follows the match-day console. */
     var spLiveTimer = null;
     var spIsLive = false;
+
+    /* Details → opens the same match modal as on index.html (score card,
+       scorers, lineup on the pitch), rendered by assets/js/match-render.js. */
+    var spNext = null, spLast = null, spSaved = {}, spModalFixture = null, spModalLabel = null;
+
+    function spRenderModal() {
+      if (!spModalFixture || !window.lsRenderCard) return;
+      var entry = spSaved[lsMatchId(spModalFixture)];
+      window.lsRenderCard(spModalFixture, entry, {
+        badge: 'nmmBadge', date: 'nmmDate', oneline: 'nmmOneline', foot: 'nmmFoot', scorers: 'nmmScorers'
+      });
+      window.lsRenderPitch(entry, 'nmmPitch', 'nmmEmpty');
+    }
+
+    function spOpenMatchModal(f, label) {
+      var overlay = document.getElementById('nextMatchModalOverlay');
+      if (!overlay || !f) return;
+      spModalFixture = f;
+      spModalLabel = label;
+      var entry = spSaved[lsMatchId(f)];
+      gtag('event', 'view_match', {
+        match_id: lsMatchId(f), home_team: f.home, away_team: f.away, is_live: !!(entry && entry.live),
+      });
+      var labelEl = document.getElementById('nextMatchModalLabel');
+      labelEl.setAttribute('data-de', label.de);
+      labelEl.setAttribute('data-hr', label.hr);
+      labelEl.textContent = currentLang === 'hr' ? label.hr : label.de;
+      spRenderModal();
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
+    }
+
+    function spCloseMatchModal() {
+      var overlay = document.getElementById('nextMatchModalOverlay');
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
+      spModalFixture = null;
+    }
+
+    document.getElementById('spNextDetails').addEventListener('click', function () {
+      if (!spNext) return;
+      var entry = spSaved[lsMatchId(spNext)];
+      spOpenMatchModal(spNext, entry && entry.live
+        ? { de: 'Live', hr: 'Uživo' }
+        : { de: 'Nächstes Spiel', hr: 'Sljedeća utakmica' });
+    });
+    document.getElementById('spLastDetails').addEventListener('click', function () {
+      if (spLast) spOpenMatchModal(spLast, { de: 'Letztes Spiel', hr: 'Posljednja utakmica' });
+    });
+    (function () {
+      var overlay = document.getElementById('nextMatchModalOverlay');
+      document.getElementById('nextMatchModalClose').addEventListener('click', spCloseMatchModal);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) spCloseMatchModal(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') spCloseMatchModal(); });
+    })();
     function spLoadFixtures() {
       clearTimeout(spLiveTimer);
       if (document.hidden) return; // resumed by visibilitychange
@@ -825,6 +920,8 @@
 
           var next = mcFindNext(allFix);
           var last = mcFindLast(allFix);
+          spNext = next; spLast = last; spSaved = savedMatches;
+          spRenderModal(); // keeps an open modal current (live goals)
           var nextEntry = next ? savedMatches[lsMatchId(next)] : null;
           spIsLive = !!(nextEntry && nextEntry.live);
           if (next) mcRenderNext(next, nextEntry);
