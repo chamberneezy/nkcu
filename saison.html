@@ -74,10 +74,6 @@
     .fx-score--win { color:#16a050; }
     .fx-score--loss { color:#CC0000; }
     .fx-score--draw { color:#003580; }
-    .fx-result-label { font-size:0.58rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; margin-top:2px; display:block; }
-    .fx-result-label--win { color:#16a050; }
-    .fx-result-label--loss { color:#CC0000; }
-    .fx-result-label--draw { color:#003580; }
     .fx-time { font-family:'Clash Display',sans-serif; font-size:1.5rem; font-weight:700; color:#CC0000; }
     .fx-next-label { font-size:0.58rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#999; margin-top:3px; display:block; }
     .fx-footer { display:flex; align-items:center; justify-content:space-between; padding:8px 20px 10px; border-top:1px solid #f0f0f0; }
@@ -727,9 +723,9 @@
             var us = isHome ? parseInt(f.homeScore) : parseInt(f.awayScore);
             var them = isHome ? parseInt(f.awayScore) : parseInt(f.homeScore);
             var sc = f.homeScore + ' : ' + f.awayScore;
-            if (us > them) cHtml = '<div class="fx-score fx-score--win">'+sc+'</div><span class="fx-result-label fx-result-label--win">Sieg</span>';
-            else if (us < them) cHtml = '<div class="fx-score fx-score--loss">'+sc+'</div><span class="fx-result-label fx-result-label--loss">Niederlage</span>';
-            else cHtml = '<div class="fx-score fx-score--draw">'+sc+'</div><span class="fx-result-label fx-result-label--draw">Unentschieden</span>';
+            // The score's colour says the result (green win / red loss / blue draw), no label.
+            var res = us > them ? 'win' : (us < them ? 'loss' : 'draw');
+            cHtml = '<div class="fx-score fx-score--' + res + '">' + sc + '</div>';
           } else {
             var t = f.time || '–:––';
             cHtml = '<div class="fx-time">'+t+'</div>' + (isNext ? '<span class="fx-next-label">Nächstes Spiel</span>' : '');
