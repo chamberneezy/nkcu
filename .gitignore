@@ -1,0 +1,23 @@
+.env
+
+# Runtime auth data (password hashes / live session tokens) — must exist
+# on the server but should never sit in git history.
+data/users.json
+data/sessions.json
+
+# Local-only iOS build prompt/notes — not part of the website.
+docs/ios.txt
+
+# Internal GA4 tracking proposal — local reference only, never deployed.
+docs/tracking-proposal.html
+
+# APNs push notification private key — never commit, this repo is public.
+private/
+*.p8
+
+# Local table updater (scraper + FTP credentials + logs) — local only, never commit
+local-table-updater/
+
+# macOS / editor clutter
+.DS_Store
+.vscode/

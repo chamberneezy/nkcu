@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+    <defs>
+        <!-- Blue & Black Checkered Pattern -->
+        <pattern id="checkers" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect width="20" height="20" fill="#0055d4" />
+            <rect width="10" height="10" fill="#111111" />
+            <rect x="10" y="10" width="10" height="10" fill="#111111" />
+        </pattern>
+
+        <!-- Jersey Clip Mask for Sleeves -->
+        <clipPath id="jersey-clip">
+            <path
+                d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z" />
+        </clipPath>
+    </defs>
+
+    <!-- Jersey Drop Shadow -->
+    <path
+        d="M 30,20 Q 40,28 50,28 Q 60,28 70,20 L 87,29 L 79,45 L 73,41 L 73,83 Q 73,86 69,86 L 31,86 Q 27,86 27,83 L 27,41 L 21,45 L 13,29 Z"
+        fill="rgba(0,0,0,0.2)" />
+
+    <!-- Jersey Body with Checkered Pattern -->
+    <path
+        d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 L 86,28 L 78,44 L 72,40 L 72,82 Q 72,85 68,85 L 32,85 Q 28,85 28,82 L 28,40 L 22,44 L 14,28 Z"
+        fill="url(#checkers)" />
+
+    <!-- Solid Black Sleeves Over Pattern -->
+    <g clip-path="url(#jersey-clip)">
+        <!-- Left Sleeve -->
+        <path d="M 30,18 L 14,28 L 22,44 L 32,36 Z" fill="#111111" />
+        <!-- Right Sleeve -->
+        <path d="M 70,18 L 86,28 L 78,44 L 68,36 Z" fill="#111111" />
+    </g>
+
+    <!-- Blue Crew Collar -->
+    <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18 Q 60,22 50,22 Q 40,22 30,18 Z" fill="#0055d4" />
+    <path d="M 30,18 Q 40,26 50,26 Q 60,26 70,18" fill="none" stroke="#003db3" stroke-width="1.5" />
+</svg>
