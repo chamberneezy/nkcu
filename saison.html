@@ -74,7 +74,7 @@
     .fx-score--win { color:#16a050; }
     .fx-score--loss { color:#CC0000; }
     .fx-score--draw { color:#003580; }
-    .fx-time { font-family:'Clash Display',sans-serif; font-size:1.5rem; font-weight:700; color:#CC0000; }
+    .fx-time { font-family:'Clash Display',sans-serif; font-size:1.5rem; font-weight:700; color:#0A0A0A; }
     .fx-next-label { font-size:0.58rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#999; margin-top:3px; display:block; }
     .fx-footer { display:flex; align-items:center; justify-content:space-between; padding:8px 20px 10px; border-top:1px solid #f0f0f0; }
     .fx-venue { font-size:0.68rem; color:#aaa; }
@@ -606,10 +606,12 @@
       document.getElementById('mcNextAwayName').style.color = tsIsUs(f.away) ? '#CC0000' : '#0A0A0A';
       var center = document.getElementById('mcNextCenter');
       if (mcShowsLiveScore(f, entry)) {
+        center.style.color = '#CC0000'; // live score: red
         center.innerHTML = tsEscape(parseInt(f.homeScore, 10) || 0) +
           '<span style="color:rgba(204,0,0,0.35);margin:0 4px;">:</span>' +
           tsEscape(parseInt(f.awayScore, 10) || 0);
       } else {
+        center.style.color = '#0A0A0A'; // kick-off time: black (red/green are for results)
         center.textContent = f.time || '–';
       }
       var venueEl = document.getElementById('mcNextVenue');
