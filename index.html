@@ -235,7 +235,6 @@
             </div>
             <div class="mc-card-footer" style="border-top:1px solid #f0f0f0;">
               <div class="mc-footer-info" style="color:#999;">
-                <span id="mcLastResultPill" class="mc-result-pill"></span>
                 <span id="mcLastVenue"></span>
               </div>
               <button type="button" class="mc-footer-link" id="lastMatchDetailsLink" style="color:#CC0000;" data-de="Details →" data-hr="Detalji →">Details →</button>
@@ -1154,12 +1153,6 @@
         document.getElementById('mcLastAwayName').style.color = tsIsUs(f.away) ? '#CC0000' : '#0A0A0A';
         var hs = parseInt(f.homeScore, 10), as = parseInt(f.awayScore, 10);
         document.getElementById('mcLastScore').innerHTML = hs + '<span style="color:#ccc;margin:0 4px;">:</span>' + as;
-        var usIsHome = tsIsUs(f.home);
-        var us = usIsHome ? hs : as, them = usIsHome ? as : hs;
-        var pill = document.getElementById('mcLastResultPill');
-        if (us > them) { pill.textContent = 'Sieg ✓'; pill.style.background = 'rgba(22,160,80,0.1)'; pill.style.color = '#16a050'; }
-        else if (us < them) { pill.textContent = 'Niederlage'; pill.style.background = 'rgba(204,0,0,0.1)'; pill.style.color = '#CC0000'; }
-        else { pill.textContent = 'Unentschieden'; pill.style.background = 'rgba(0,0,0,0.06)'; pill.style.color = '#555'; }
         var venueEl = document.getElementById('mcLastVenue');
         venueEl.textContent = f.venue ? '📍 ' + f.venue : '';
         card.style.display = '';
